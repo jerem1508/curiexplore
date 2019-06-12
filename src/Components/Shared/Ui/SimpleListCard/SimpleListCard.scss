@@ -1,0 +1,38 @@
+@import '../../../../style.scss';
+
+.SimpleListCard {
+  background-color: white;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 150px;
+  padding: 8px;
+  margin: 2px;
+
+  .Logo {
+    color: $scanrgreyColor;
+  }
+
+  .Title {
+    color: $scanrgreyColor;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .Label {
+    padding-top: 16px;
+    color: $scanrdeepblueColor;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+}
+
+.Key {
+  color: $scanrgreyColor;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.Value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $textColor;
+}

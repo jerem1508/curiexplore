@@ -1,0 +1,44 @@
+@import '../../../style.scss';
+
+.HeaderTitle {
+  background-color: $bgHeaderTitle;
+  border-bottom: solid rgb(0, 33, 59);
+  padding-top: 55px;
+
+  .title {
+    font-size: $sizeHeaderTitle;
+    color: $colorHeaderTitle;
+    font-weight: bold ;
+    display: inline-block;
+    padding-bottom: 30px;
+    padding-left: 16px;
+  }
+
+  .BreadCrumb {
+    color: white;
+
+    a {
+      color: white;
+    }
+
+    .breadcrumb {
+      background-color: #ffffff00;
+    }
+
+    .breadcrumb > .active {
+      color: $colorBreadCrumbHeaderTitle;
+      font-weight: bold;
+
+    }
+
+    .breadcrumb > .active:before {
+      content: ">";
+      color: white;
+    }
+
+  }
+
+@media (max-width: 1520px) {
+  padding-top: 115px;
+}
+}

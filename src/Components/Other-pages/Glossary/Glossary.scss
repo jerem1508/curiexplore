@@ -1,0 +1,14 @@
+@import '../../../style.scss';
+
+.Glossary {
+  padding: 0;
+  margin: 0;
+
+  .Content {
+    padding-top: $otherPagesPaddingTop;
+    padding-bottom: $otherPagesPaddingBottom;
+  }
+  .ThreeCards{
+    padding:24px 16px 24px 16px;
+  }
+}

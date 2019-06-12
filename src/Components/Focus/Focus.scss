@@ -1,0 +1,30 @@
+@import '../../style.scss';
+
+.HomePage{
+  padding: 0;
+  background-color: #fff;
+}
+
+.HomePageLexiconTop{
+  top: 80px;
+}
+
+.Text {
+  margin-top: 10px;
+  font-family: "lato";
+  color: #003259;
+  font-weight: bold;
+  padding-left: 2%;
+}
+
+.Subtext {
+  font-size: 0.9em;
+  padding-left: 2%;
+}
+
+
+ .Button {
+   background-color: white;
+   border: none;
+   cursor: pointer;
+ }

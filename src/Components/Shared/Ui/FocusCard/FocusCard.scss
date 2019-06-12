@@ -1,0 +1,55 @@
+@import '../../../../style.scss';
+
+.FocusCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 15px 0;
+
+  .Img {
+    height: 300px;
+
+  }
+  .Title {
+    height: 70px;
+    color: $darkBlueColor;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-color: $blueColor;
+    line-height: 18px;
+  }
+
+  .TagsAndButton {
+
+    .Tag {
+      color: $blueColor;
+      font-size: 0.9em;
+    }
+    .Tag:after {
+      content: " ";
+    }
+
+    .Button {
+      font-size: 1.3em;
+    }
+  }
+
+
+  .Button {
+    background-color: $blueColor;
+    color: white;
+    border-radius: 5px;
+    height: 36px;
+  }
+  .Button:hover {
+    background-color: $lightBlueColor;
+    color: white;
+  }
+  .Button A {
+    color: white;
+  }
+  .Button A:hover, A:focus, {
+    color: white;
+    text-decoration: none;
+  }
+}

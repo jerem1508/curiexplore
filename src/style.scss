@@ -1,0 +1,122 @@
+@charset "utf-8";
+
+*, html {
+  font-family: 'Inter UI';
+}
+html, body{
+  height: 100%;
+}
+
+/* UI */
+$darkBlueColor: #093E6C;
+$blueColor: #006EC7;
+$lightBlueColor: #ACD4F5;
+$skyBlueColor: #EEF7FF;
+$magentaColor: #FF195A;
+$greyAColor: #647D94;
+$greyBColor: #9DB3C7;
+
+/* Fiche pays */
+$orangeColor: #FFB200;
+
+/* Graphiques */
+$femmeParPaysColor: #FFB200;
+$hommeColor: #9566B0;
+$paysComparaison1Color: #D13B8C;
+$paysComparaison2Color: #006EC7;
+$mondeColor: #25ACEB;
+$ocdeColor: #09CB66;
+$ueColor: #093E6C;
+
+/* Carto ESRI */
+$sixPalliersColor1: #062947;
+$sixPalliersColor2: #802A6B;
+$sixPalliersColor3: #C24074;
+$sixPalliersColor4: #F24F5D;
+$sixPalliersColor5: #F2B51B;
+$sixPalliersColor6: #F5CE3D;
+
+$cinqPalliersColor1: #062947;
+$cinqPalliersColor2: #A33662;
+$cinqPalliersColor3: #F24F5D;
+$cinqPalliersColor4: #F2B51B;
+$cinqPalliersColor5: #F5CE3D;
+
+$quatrePalliersColor1: #062947;
+$quatrePalliersColor2: #A33662;
+$quatrePalliersColor3: #F24F5D;
+$quatrePalliersColor4: #F2B51B;
+
+/* Classements */
+$yellowColor: #FFDE23;
+
+
+/* BANNIERES*/
+/* couleurs de bannières avec boutons */
+.BannerLight {
+  background-color: $skyBlueColor;
+  color: $darkBlueColor;
+  a {
+    color: $skyBlueColor;
+  }
+  .Button{
+    background-color: $blueColor;
+    color: $skyBlueColor;
+  }
+}
+.BannerDark {
+  background-color: $blueColor;
+  color: $skyBlueColor;
+  a {
+    color: $darkBlueColor;
+  }
+  .Button {
+    background-color: $skyBlueColor;
+    color: $darkBlueColor;
+  }
+}
+.BannerDeep {
+  background-color: $darkBlueColor;
+  color: $skyBlueColor;
+  a {
+    color: $darkBlueColor;
+  }
+  .Button {
+    background-color: $skyBlueColor;
+    color: $darkBlueColor;
+  }
+}
+
+/* Header */
+
+/* HomePage */
+$bgHomePageSearch: $blueColor;
+$bgDiscoverDataEsr: $blueColor;
+
+/* Lexique */
+$bgLexicon: $darkBlueColor;
+
+/* Footer */
+$bgFooter: $darkBlueColor;
+$footerHeight: 15%;
+
+/*HeaderTitle*/
+$bgHeaderTitle : $blueColor;
+$colorHeaderTitle: $skyBlueColor;
+$sizeHeaderTitle : 2em;
+$colorBreadCrumbHeaderTitle : $skyBlueColor;
+
+/*BreadCrumb*/
+$breadcrumb-divider: quote(">");
+
+$otherPagesPaddingTop: 90px;
+$otherPagesPaddingBottom: 90px;
+
+/*Medias*/
+$colormediaperiod:$blueColor;
+
+/*Ressources*/
+$bgcolormSmallCard: $blueColor;
+$ressourceColorDark: $darkBlueColor;
+$ressourceColorLight: $lightBlueColor;
+$ressourceUnderlineColor: $blueColor;
