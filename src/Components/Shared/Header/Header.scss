@@ -1,8 +1,7 @@
 @import '../../../style.scss';
 
 .Header {
-  background-color: white;
-  box-shadow: 0px 15px 15px 0px $lightBlueColor !important;
+  box-shadow: 0px 15px 15px 0px #062947 !important;
   z-index: 1010;
   position: fixed;
   width: 100%;
@@ -10,7 +9,7 @@
   .Colors {
     background-color: $blueColor;
     a{
-      color: $skyBlueColor;      
+      color: $skyBlueColor;
     }
   }
 

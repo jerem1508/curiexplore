@@ -120,3 +120,17 @@ $bgcolormSmallCard: $blueColor;
 $ressourceColorDark: $darkBlueColor;
 $ressourceColorLight: $lightBlueColor;
 $ressourceUnderlineColor: $blueColor;
+
+/* Boutons */
+.BtnBlue {
+  background-color: $blueColor;
+  color: $skyBlueColor;
+}
+.BtnBlue:hover, .BtnBlue:focus {
+  background-color:  $skyBlueColor;
+  color: $blueColor;
+}
+.BtnBlueSelected {
+  background-color:  $skyBlueColor;
+  color: $blueColor;
+}
