@@ -1,0 +1,21 @@
+@import '../../../style.scss';
+
+.SubTitle {
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-shadow: 0px 15px 25px 0px #ccc !important;
+  padding: 8px 16px;
+
+  DIV:first-child {
+    color: $blueColor;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    line-height: 24px;
+  }
+  DIV:last-child {
+    color: $darkBlueColor;
+    font-size: 1.6rem;
+    text-transform: none;
+  }
+}
