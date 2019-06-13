@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../Shared/Header/Header';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
+import GraphCurie from './GraphCurie/GraphCurie';
 
 import classes from './Fiche.scss';
 
@@ -37,21 +38,24 @@ class Fiche extends Component {
     </div>
   );
 
-  renderFiche = () => {
-    return (
-      <div className={classes.Fiche}>
-        <Header
-          language={this.props.language}
-          switchLanguage={this.props.switchLanguage}
-        />
-        <HeaderTitle
-          language={this.props.language}
-          switchLanguage={this.props.switchLanguage}
-          countryName={this.state.data.translations.fr}
-        />
-      </div>
-    );
-  }
+  renderFiche = () => (
+    <div className={classes.Fiche}>
+      <Header
+        language={this.props.language}
+        switchLanguage={this.props.switchLanguage}
+      />
+      <HeaderTitle
+        language={this.props.language}
+        switchLanguage={this.props.switchLanguage}
+        countryName={this.state.data.translations.fr}
+      />
+      <GraphCurie
+        graphType="aboutCountry"
+        countryCode={this.props.match.params.id}
+        // language={props.language}
+      />
+    </div>
+  );
 
   render() {
     if (!this.state.data) {
