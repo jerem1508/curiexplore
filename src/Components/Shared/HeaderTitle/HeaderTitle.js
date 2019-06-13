@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlProvider, FormattedHTMLMessage } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
 
 // import BreadCrumb from '../Ui/Breadcrumb/Breadcrumb';
@@ -24,30 +24,19 @@ const HeaderTitle = props => (
           <nav className={classes.BreadCrumb} aria-label="breadcrumb">
             <ol className={`breadcrumb ${classes.breadcrumb}`}>
               <li className={`breadcrumb-item ${classes.item}`}>
-                <a href={props.url1}>
-                  <FormattedHTMLMessage
-                    id="breadcrumb.first"
-                    defaultMessage="breadcrumb.first"
-                  />
+                <a href="/">
+                  Accueil
                 </a>
               </li>
               <li className={`breadcrumb-item active ${classes.active}`} aria-current="page">
-                <a href={props.url2}>
-                  <FormattedHTMLMessage
-                    id={`breadcrumb.second.${props.labelkey}`}
-                    defaultMessage={`breadcrumb.second.${props.labelkey}`}
-                  />
-                </a>
+                {`Fiche Curie - ${props.countryName}`}
               </li>
             </ol>
           </nav>
         </div>
         <div className="row">
           <div className={classes.title}>
-            <FormattedHTMLMessage
-              id={`Page.title.${props.labelkey}`}
-              defaultMessage={`Page.title.${props.labelkey}`}
-            />
+            {props.countryName}
           </div>
         </div>
       </div>
@@ -59,7 +48,5 @@ export default HeaderTitle;
 
 HeaderTitle.propTypes = {
   language: PropTypes.string.isRequired,
-  labelkey: PropTypes.string.isRequired,
-  url1: PropTypes.string,
-  url2: PropTypes.string,
+  countryName: PropTypes.string.isRequired,
 };

@@ -1,44 +1,39 @@
 @import '../../../style.scss';
 
 .HeaderTitle {
-  background-color: $bgHeaderTitle;
+  padding-bottom: 36px;
+  padding-left: 50px;
+  background-color: $darkBlueColor;
   border-bottom: solid rgb(0, 33, 59);
-  padding-top: 55px;
 
   .title {
-    font-size: $sizeHeaderTitle;
-    color: $colorHeaderTitle;
+    font-size: 2.5rem;
+    color: $skyBlueColor;
     font-weight: bold ;
-    display: inline-block;
-    padding-bottom: 30px;
-    padding-left: 16px;
+    font-family: 'Bitter', serif;
+    padding-left: 14px;
   }
 
   .BreadCrumb {
-    color: white;
-
+    padding-top: 12px;
+    font-style: 0.9rem;
     a {
-      color: white;
+      color: $lightBlueColor;
     }
-
     .breadcrumb {
       background-color: #ffffff00;
     }
-
     .breadcrumb > .active {
-      color: $colorBreadCrumbHeaderTitle;
+      color: $skyBlueColor;
       font-weight: bold;
-
     }
-
     .breadcrumb > .active:before {
       content: ">";
-      color: white;
+      color: $lightBlueColor;
     }
-
   }
 
-@media (max-width: 1520px) {
-  padding-top: 115px;
-}
+  @media (max-width: 1520px) {
+    padding-top: 56px;
+  }
 }
