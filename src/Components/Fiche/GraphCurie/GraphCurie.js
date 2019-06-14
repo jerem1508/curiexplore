@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
+
 import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
 
@@ -90,43 +92,11 @@ class GraphCurie extends Component {
         // On met l'appel de fonction à faire dans results (pour await toutes les réponses avant de continuer)
         results.push(this.getData(i, label, index, indic));
       }
-
-    // alert(params[label][0].unit[index].code);
-    // for (let i = 0; i < this.countryList.length; i += 1) {
-    //   tempData.push();
-    // }
     }
+    // On effectue toutes les requêtes nécessaires
     tempData = await Promise.all(results);
     this.setState({ filterData: tempData });
   }
-
-
-  // getGraphValues(label, index) {
-  //   this.graphIndex = index;
-  //   // alert('graph Index: ' + this.graphIndex);
-  //   if (params[label] == null) {
-  //     this.setState({ isMissing: true });
-  //     return;
-  //   }
-  //   // alert(params[label][0].unit[index].label);
-  //   this.setState({ data: null });
-  //   // for (let i = 0; i < this.countryList.length; i += 1) {
-  //   axios.get(url, {
-  //     params: {
-  //       where: `{"country_code":"${this.countryList[i]}","code":"${params[label][0].unit[index].code}"}`,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       this.data.push(res.data);
-  //       // alert(this.data);
-  //       this.setState({ data: res.data });
-  //     })
-  //     .catch(() => {
-  //       this.setState({ error: true });
-  //     });
-  //   // }
-  //   // this.setState({ data: this.data });
-  // }
 
   toggleCountry(id) {
     if (!this.countryList.includes(id)) {
@@ -155,22 +125,21 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginLeft: '31px', marginTop: '16px' }}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
               <div>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} />
-                <div style={{ width: '100%' }}>
-                  <div style={{ float: 'left', width: '97%' }}>Norvège</div>
-                  <div style={{ float: 'right', width: '3%', marginTop: '10px' }}><i className="fas fa-info-circle fa-lg" /></div>
-                </div>
-                <div>
-                  {'Welcome to my world ! I can see that you are from '}
-                  { this.country }
-                </div>
-                {this.state.filterData ? <HighChartsBar data={this.state.filterData} /> : null
-              }
+                <Row>
+                  <Col>
+                    <p>Je suis le pays</p>
+                  </Col>
+                  <Col>
+                    <i className="fal fa-info-circle" />
+                  </Col>
+                </Row>
+                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} data={this.state.filterData} /> : <div>Loading</div>}
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 0, this.indic)}>Monnaies locales</button>
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 1, this.indic)}>$PPA</button>
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
@@ -191,6 +160,7 @@ export default GraphCurie;
 GraphCurie.propTypes = {
   countryCode: PropTypes.string.isRequired,
   graphType: PropTypes.string.isRequired,
+  countryName: PropTypes.string.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,
 };
