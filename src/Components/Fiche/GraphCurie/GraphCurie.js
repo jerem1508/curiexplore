@@ -6,6 +6,8 @@ import { Row, Col } from 'react-bootstrap';
 import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
 
+import variables from './GraphCurie.scss';
+
 const params = require('./GraphCurie-data/indicateurs.json');
 const isoList = require('./GraphCurie-data/iso3.json');
 
@@ -31,6 +33,7 @@ class GraphCurie extends Component {
 
   componentDidMount() {
     let i = 0;
+    alert(variables.femmeParPaysColor);
     // On vérifie si le code iso 3 est valide
     this.country = this.props.countryCode.toUpperCase();
     for (i = 0; i < isoList.length; i += 1) {
@@ -160,13 +163,16 @@ class GraphCurie extends Component {
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
-                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} data={this.state.filterData} /> : <div>Loading</div>}
+                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={[]} data={this.state.filterData} /> : <div>Loading</div>}
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 0, this.indic)}>Monnaies locales</button>
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 1, this.indic)}>$PPA</button>
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
                   FRA
                 <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
                   CAN
+                <div style={{ height: '600px' }}>
+                  <p>Toto</p>
+                </div>
               </div>
             ),
           ]
