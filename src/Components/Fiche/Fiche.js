@@ -29,8 +29,6 @@ class Fiche extends Component {
     const url = `https://restcountries.eu/rest/v2/alpha/${this.props.match.params.id}`;
     Axios.get(url).then((response) => {
       this.setState({ data: response.data });
-    }).catch((error) => {
-      console.log('error =>', error);
     });
   }
 
@@ -71,10 +69,11 @@ class Fiche extends Component {
               </div>
               <div className={`row ${classes.AllContactsLink}`}>
                 <div className="col d-flex align-items-center justify-content-end">
-                  Retrouvez&nbsp;<strong>tous les contacts</strong>
+                  Retrouvez&nbsp;
+                  <strong>tous les contacts</strong>
                 </div>
                 <div className="col-1 d-flex align-items-center">
-                  <i class="fas fa-arrow-right" />
+                  <i className="fas fa-arrow-right" />
                 </div>
               </div>
             </div>
@@ -85,8 +84,16 @@ class Fiche extends Component {
             </div>
           </div>
         </div>
+        <div className={`row ${classes.MemberOf}`}>
+          <div className="col">
+            <div className={`row ${classes.Bloc}`}>
+              <div className="col">
+                bloc
+              </div>
+            </div>
+          </div>
+        </div>
         <GraphCurie
-          //language={props.language}
           graphType="aboutCountry"
           countryCode={this.props.match.params.id}
         />
