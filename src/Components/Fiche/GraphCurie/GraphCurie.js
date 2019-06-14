@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
 
-import variables from './GraphCurie.scss';
+import colorsVar from './GraphCurie.scss';
 
 const params = require('./GraphCurie-data/indicateurs.json');
 const isoList = require('./GraphCurie-data/iso3.json');
@@ -21,6 +21,7 @@ class GraphCurie extends Component {
     this.graphIndex = 0;
     this.allData = [];
     this.indic = 0;
+    this.colors = [];
     this.state = {
       isMissing: true,
       filterData: null,
@@ -33,7 +34,9 @@ class GraphCurie extends Component {
 
   componentDidMount() {
     let i = 0;
-    alert(variables.femmeParPaysColor);
+
+    this.getColors();
+
     // On vérifie si le code iso 3 est valide
     this.country = this.props.countryCode.toUpperCase();
     for (i = 0; i < isoList.length; i += 1) {
@@ -58,6 +61,20 @@ class GraphCurie extends Component {
       },
     });
     return (res.data);
+  }
+
+  // On recup les couleurs
+  getColors() {
+    Object.keys(colorsVar).forEach((key) => {
+      this.colors.push(colorsVar[key]);
+    });
+    for (let i = this.colors.length - 1; i >= 0; i -= 1) {
+      if (this.colors[i][0] !== '#') {
+        this.colors.pop();
+      } else {
+        break;
+      }
+    }
   }
 
   async getGraphValues(label, index, indic) {
@@ -90,11 +107,9 @@ class GraphCurie extends Component {
     }
 
     const results = [];
-    const tempCtry = [];
     for (let i = 0; i < tempData.length; i += 1) {
       if (tempData[i] === null) {
         // On met l'appel de fonction à faire dans results (pour await toutes les réponses avant de continuer)
-        tempCtry.push(this.countryList[i]);
         results.push(this.getData(i, label, index, indic));
       } else {
         results.push('');
@@ -163,7 +178,7 @@ class GraphCurie extends Component {
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
-                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={[]} data={this.state.filterData} /> : <div>Loading</div>}
+                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div>Loading</div>}
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 0, this.indic)}>Monnaies locales</button>
                 <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 1, this.indic)}>$PPA</button>
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
