@@ -1,8 +1,7 @@
 @import '../../../style.scss';
 
 .Maps {
-  padding-top: 120px;
-  padding-bottom: 36px;
+  padding: 120px 0 36px 0;
   background-color: $darkBlueColor;
 
   H1 {
@@ -47,3 +46,21 @@
     padding-right: 8px;
   }
 }
+.MapContainer {
+  margin-top: 16px;
+  .Map{
+    height: 710px;
+  }
+}
+/*
+.Map {
+  margin-top: 16px;
+  width: 100%;
+  text-align: center;
+
+  .MapSVG {
+    background-color: $orangeColor;
+    display: block;
+  }
+}
+*/

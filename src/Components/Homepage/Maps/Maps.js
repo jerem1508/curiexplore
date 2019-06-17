@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
+import {
+  Map, Marker, TileLayer, GeoJSON
+} from 'react-leaflet';
 
 import Button from '../../Shared/Ui/Buttons/Button';
+// import MapSVG from './mapSVG';
 
 /* Gestion des langues */
 import messagesFr from './translations/fr.json';
 import messagesEn from './translations/en.json';
+
+import worldGeoJSON from './custom.geo.json';
 
 /* SCSS */
 import classes from './Maps.scss';
@@ -23,6 +29,14 @@ class Maps extends Component {
 
   onClickHandler = (selected) => {
     this.setState({ selected });
+  }
+
+  onEachFeature = (feature, layer) => {
+    layer.on({
+      mouseover: () => { layer.setStyle({ fillColor: '#fff' }); },
+      mouseout: () => { layer.setStyle({ fillColor: '#ffeec9' }); },
+      click: () => { window.location.href = `/fiche/${feature.properties.iso_a3}`; },
+    });
   }
 
   render() {
@@ -107,6 +121,47 @@ class Maps extends Component {
               >
                 Océanie
               </Button>
+            </div>
+          </div>
+          <div className={classes.Map}>
+            {
+              /*
+              <MapSVG
+                fill="#ffeec9"
+                height="550"
+                width=""
+                className={classes.MapSVG}
+              />
+              */
+            }
+            <div className={classes.MapContainer}>
+              <Map
+                className={classes.Map}
+                center={[50, 10]}
+                zoom={2}
+                maxZoom={10}
+                attributionControl
+                zoomControl
+                doubleClickZoom
+                scrollWheelZoom={false}
+                dragging
+                animate
+                easeLinearity={0.35}
+                style={{
+                  backgroundColor: '#FFB200',
+                }}
+              >
+                <GeoJSON
+                  data={worldGeoJSON}
+                  style={() => ({
+                    color: '#777',
+                    fillColor: '#ffeec9',
+                    weight: 0.5,
+                    fillOpacity: 1,
+                  })}
+                  onEachFeature={this.onEachFeature}
+                />
+              </Map>
             </div>
           </div>
         </section>
