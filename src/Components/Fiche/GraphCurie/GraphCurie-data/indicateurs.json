@@ -2,7 +2,7 @@
   "aboutCountry": [
     { "name": "pib", "unit" :
       [
-        { "label": "monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
+        { "label": "Monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
         { "label" : "$ PPA courantes", "code" : "NY.GDP.MKTP.PP.CD"}
       ]
     }, {

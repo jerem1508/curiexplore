@@ -56,28 +56,31 @@ export default class HighChartsBar extends Component {
       series = [{
         name: 'Population',
         data: allData[0],
-        color: '#FFB200',
+        color: this.props.colors[0],
       }];
     } else if (dl === 2) {
       series = [{
         name: 'Population',
         data: allData[0],
-        color: '#FFB200',
+        color: this.props.colors[0],
       }, {
         name: 'Test',
         data: allData[1],
+        color: this.props.colors[1],
       }];
     } else {
       series = [{
         name: 'Population',
         data: allData[0],
-        color: '#FFB200',
+        color: this.props.colors[0],
       }, {
         name: 'Test',
         data: allData[1],
+        color: this.props.colors[1],
       }, {
         name: 'Test2',
         data: allData[2],
+        color: this.props.colors[2],
       }];
     }
 
@@ -106,9 +109,9 @@ export default class HighChartsBar extends Component {
       legend: {
         enabled: false,
       },
-      tooltip: {
-        pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>',
-      },
+      // tooltip: {
+      //   enabled: true,
+      // },
       series,
     };
     this.setState({ options });
@@ -151,4 +154,5 @@ export default class HighChartsBar extends Component {
 
 HighChartsBar.propTypes = {
   data: PropTypes.object.isRequired,
+  colors: PropTypes.object.isRequired,
 };

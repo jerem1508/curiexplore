@@ -1,0 +1,14 @@
+@import '../../../style.scss';
+
+.GraphCurie {
+  
+}
+
+:export {
+  firstCountry: $femmeParPaysColor;
+  secondCountry: $paysComparaison1Color;
+  thirdCountry: $paysComparaison2Color;
+  monde: $mondeColor;
+  ocde: $ocdeColor;
+  ue: $ueColor;
+}
