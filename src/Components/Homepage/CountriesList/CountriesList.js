@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -14,14 +15,54 @@ const messages = {
   en: messagesEn,
 };
 
-const CountriesList = props => (
-  <IntlProvider locale={props.language} messages={messages[props.language]}>
-    <section className={classes.CountriesList}>
-      CountriesList
-    </section>
-  </IntlProvider>
-);
+class CountriesList extends Component {
+  state = {
+    data: [],
+  };
 
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
+    Axios.get('https://restcountries.eu/rest/v2/all').then((response) => {
+      this.setState({ data: response.data });
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+
+  render() {
+    let a = null;
+    if (this.state.data.length > 0) {
+      a = this.state.data.map((country) => {
+        if (country.name.substr(0, 1) === 'E') {
+          return (
+            <div className="container">
+              <div>
+                {country.translations.fr}
+              </div>
+            </div>
+          );
+        }
+        return null;
+      });
+    }
+
+    const content = this.state.data.map(country => (
+      <div className="container">
+        <div>
+          {country.translations.fr}
+        </div>
+      </div>
+    ));
+    return (
+      <div className="container-fluid">
+        {a}
+      </div>
+    );
+  }
+}
 
 export default CountriesList;
 
