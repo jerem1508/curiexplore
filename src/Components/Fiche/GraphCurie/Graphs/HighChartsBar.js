@@ -109,9 +109,9 @@ export default class HighChartsBar extends Component {
       legend: {
         enabled: false,
       },
-      tooltip: {
-        pointFormat: 'Population in 2017: <b>{point.y:.1f} millions</b>',
-      },
+      // tooltip: {
+      //   enabled: true,
+      // },
       series,
     };
     this.setState({ options });

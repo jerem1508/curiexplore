@@ -30,6 +30,7 @@ class GraphCurie extends Component {
     this.toggleCountry = this.toggleCountry.bind(this);
     this.getData = this.getData.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
+    this.getButtons = this.getButtons.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,8 @@ class GraphCurie extends Component {
   }
 
   async getGraphValues(label, index, indic) {
+    // alert('Index => ' + index);
+    // alert('Indic => ' + indic);
     // On vérifie si le label existe pour la récupération des indicateurs et des codes
     if (params[label] == null) {
       this.setState({ isMissing: true });
@@ -159,7 +162,16 @@ class GraphCurie extends Component {
       i = 0;
     }
     this.indic = i;
+    this.graphIndex = 0;
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
+  }
+
+  getButtons() {
+    const btnList = [];
+    for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
+      btnList.push(<button type="button" onClick={() => this.getGraphValues(this.props.graphType, i, this.indic)}>{params[this.props.graphType][this.indic].unit[i].label}</button>);
+    }
+    return (<div>{btnList}</div>);
   }
 
   render() {
@@ -179,8 +191,7 @@ class GraphCurie extends Component {
                   </Col>
                 </Row>
                 {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div>Loading</div>}
-                <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 0, this.indic)}>Monnaies locales</button>
-                <button type="button" onClick={() => this.getGraphValues(this.props.graphType, 1, this.indic)}>$PPA</button>
+                {this.getButtons()}
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
                   FRA
                 <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
