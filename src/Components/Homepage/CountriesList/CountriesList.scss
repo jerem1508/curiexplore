@@ -1,1 +1,11 @@
 @import '../../../style.scss';
+
+.country {
+  list-style-type: none;
+  color : $darkBlueColor;
+}
+
+dt {
+  border-bottom: 1px solid $darkBlueColor;
+  color: $darkBlueColor;
+}

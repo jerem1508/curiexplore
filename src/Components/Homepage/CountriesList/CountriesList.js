@@ -33,32 +33,49 @@ class CountriesList extends Component {
   }
 
   render() {
-    let a = null;
+    let countryName = null;
+
+    const letterCol1 = ['A', 'B', 'C', 'D'];
+    const letterCol2 = ['E', 'F', 'G', 'H', 'I', 'J', 'K'];
+    const letterCol3 = ['L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+    const letterCol4 = ['S', 'T', 'U', 'V', 'Y', 'Z'];
+
     if (this.state.data.length > 0) {
-      a = this.state.data.map((country) => {
-        if (country.name.substr(0, 1) === 'E') {
+      countryName = this.state.data.map((country) => {
+        if (country.name.substr(0, 1) === letterCol1.map(letter => letter)) {
           return (
-            <div className="container">
-              <div>
-                {country.translations.fr}
-              </div>
-            </div>
+            <li className={classes.country}>
+              {country.translations.fr}
+            </li>
           );
         }
         return null;
       });
     }
 
-    const content = this.state.data.map(country => (
-      <div className="container">
-        <div>
-          {country.translations.fr}
-        </div>
-      </div>
-    ));
+    // const content = this.state.data.map(country => (
+    //   <div className="container">
+    //     <div>
+    //       {country.translations.fr}
+    //     </div>
+    //   </div>
+    // ));
+
     return (
       <div className="container-fluid">
-        {a}
+        <div className="container">
+          <div className="col-3">
+            <dl>
+              <dt>
+                A
+              </dt>
+              {countryName}
+            </dl>
+          </div>
+          <div className="col-3"></div>
+          <div className="col-3"></div>
+          <div className="col-3"></div>
+        </div>
       </div>
     );
   }
