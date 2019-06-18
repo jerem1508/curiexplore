@@ -15,6 +15,7 @@ import messagesEn from './translations/en.json';
 import worldGeoJSON from './custom.geo.json';
 
 /* SCSS */
+import variables from '../../../style.scss';
 import classes from './Maps.scss';
 
 const messages = {
@@ -33,10 +34,12 @@ class Maps extends Component {
 
   onEachFeature = (feature, layer) => {
     layer.on({
-      mouseover: () => { layer.setStyle({ fillColor: '#fff' }); },
-      mouseout: () => { layer.setStyle({ fillColor: '#ffeec9' }); },
+      mouseover: () => { layer.setStyle({ fillColor: `${variables.mapCountryHighlightColor}` }); },
+      mouseout: () => { layer.setStyle({ fillColor: `${variables.mapCountryColor}` }); },
       click: () => { window.location.href = `/fiche/${feature.properties.iso_a3}`; },
     });
+
+    layer.bindTooltip(feature.properties.name);
   }
 
   render() {
@@ -148,14 +151,14 @@ class Maps extends Component {
                 animate
                 easeLinearity={0.35}
                 style={{
-                  backgroundColor: '#FFB200',
+                  backgroundColor: `${variables.mapBgColor}`,
                 }}
               >
                 <GeoJSON
                   data={worldGeoJSON}
                   style={() => ({
-                    color: '#777',
-                    fillColor: '#ffeec9',
+                    color: `${variables.mapBorderCountryColor}`,
+                    fillColor: `${variables.mapCountryColor}`,
                     weight: 0.5,
                     fillOpacity: 1,
                   })}

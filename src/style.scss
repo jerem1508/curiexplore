@@ -16,6 +16,13 @@ $magentaColor: #FF195A;
 $greyAColor: #647D94;
 $greyBColor: #9DB3C7;
 
+
+/* hommePage map */
+$mapBgColor: #FFB200;
+$mapCountryColor: #ffeec9;
+$mapCountryHighlightColor: white;
+$mapBorderCountryColor: #777;
+
 /* Fiche pays */
 $orangeColor: #FFB200;
 
@@ -50,6 +57,44 @@ $quatrePalliersColor4: #F2B51B;
 /* Classements */
 $yellowColor: #FFDE23;
 
+:export {
+  darkBlueColor: $darkBlueColor ;
+  blueColor: $blueColor ;
+  lightBlueColor: $lightBlueColor ;
+  skyBlueColor: $skyBlueColor ;
+  magentaColor: $magentaColor ;
+  greyAColor: $greyAColor ;
+  greyBColor: $greyBColor ;
+
+  mapBgColor: $mapBgColor;
+  mapCountryColor: $mapCountryColor;
+  mapCountryHighlightColor: $mapCountryHighlightColor;
+  mapBorderCountryColor: $mapBorderCountryColor;
+
+  orangeColor: $orangeColor ;
+  femmeParPaysColor: $femmeParPaysColor ;
+  hommeColor: $hommeColor ;
+  paysComparaison1Color: $paysComparaison1Color ;
+  paysComparaison2Color: $paysComparaison2Color ;
+  mondeColor: $mondeColor ;
+  ocdeColor: $ocdeColor ;
+  ueColor: $ueColor ;
+  sixPalliersColor1: $sixPalliersColor1 ;
+  sixPalliersColor2: $sixPalliersColor2 ;
+  sixPalliersColor3: $sixPalliersColor3 ;
+  sixPalliersColor4: $sixPalliersColor4 ;
+  sixPalliersColor5: $sixPalliersColor5 ;
+  sixPalliersColor6: $sixPalliersColor6 ;
+  cinqPalliersColor1: $cinqPalliersColor1 ;
+  cinqPalliersColor2: $cinqPalliersColor2 ;
+  cinqPalliersColor3: $cinqPalliersColor3 ;
+  cinqPalliersColor4: $cinqPalliersColor4 ;
+  cinqPalliersColor5: $cinqPalliersColor5 ;
+  quatrePalliersColor1: $quatrePalliersColor1 ;
+  quatrePalliersColor2: $quatrePalliersColor2 ;
+  quatrePalliersColor3: $quatrePalliersColor3 ;
+  quatrePalliersColor4: $quatrePalliersColor4 ;
+}
 
 /* BANNIERES*/
 /* couleurs de bannières avec boutons */

@@ -98,6 +98,13 @@ class Fiche extends Component {
           countryCode={this.props.match.params.id}
         />
       </div>
+
+      <div className="container">
+        <Title
+          label="Connaitre le pays"
+          icon="fas fa-binoculars"
+        />
+      </div>
     </div>
   );
 
