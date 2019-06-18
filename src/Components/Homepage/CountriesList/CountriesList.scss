@@ -9,3 +9,17 @@ dt {
   border-bottom: 1px solid $darkBlueColor;
   color: $darkBlueColor;
 }
+
+ul {
+  padding-left: 0px;
+}
+
+a {
+  color: $darkBlueColor;
+}
+
+.countryList {
+  border-top: 2px solid $darkBlueColor;
+  padding-top: 5px;
+  margin-top: 10px;
+}
