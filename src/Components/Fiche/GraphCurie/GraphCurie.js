@@ -176,12 +176,12 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div style={{ marginLeft: '31px', marginTop: '16px' }}>
+      <div style={{ marginLeft: '31px', marginTop: '16px', height: '700px' }}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
               <div>
-                <GraphHeader handleIndic={this.handleIndic} value={this.state.label} />
+                <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} />
                 <Row>
                   <Col sm={11}>
                     <p>Dans la légende</p>
@@ -190,15 +190,12 @@ class GraphCurie extends Component {
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
-                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div>Loading</div>}
+                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                 {this.getButtons()}
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
                   FRA
                 <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
                   CAN
-                <div style={{ height: '600px' }}>
-                  <p>Toto</p>
-                </div>
               </div>
             ),
           ]

@@ -14,7 +14,7 @@ const GraphHeader = props => (
           <p style={{ fontSize: '1.7em', color: 'white' }}>Graphiques</p>
         </div>
         <div style={{ float: 'right', color: 'white' }}>
-          <p>12 indicateurs</p>
+          <p>{`${props.indicNb}  indicateurs`}</p>
           <p>Disponibes</p>
         </div>
       </Col>
@@ -33,6 +33,7 @@ export default GraphHeader;
 GraphHeader.propTypes = {
   handleIndic: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  indicNb: PropTypes.number.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,
 };
