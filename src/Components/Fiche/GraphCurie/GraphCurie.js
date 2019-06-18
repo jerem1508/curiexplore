@@ -30,7 +30,8 @@ class GraphCurie extends Component {
     this.toggleCountry = this.toggleCountry.bind(this);
     this.getData = this.getData.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
-    this.getButtons = this.getButtons.bind(this);
+    this.getInputs = this.getInputs.bind(this);
+    this.getLegend = this.getLegend.bind(this);
   }
 
   componentDidMount() {
@@ -66,16 +67,12 @@ class GraphCurie extends Component {
 
   // On recup les couleurs
   getColors() {
-    Object.keys(colorsVar).forEach((key) => {
-      this.colors.push(colorsVar[key]);
-    });
-    for (let i = this.colors.length - 1; i >= 0; i -= 1) {
-      if (this.colors[i][0] !== '#') {
-        this.colors.pop();
-      } else {
-        break;
-      }
-    }
+    this.colors.push(colorsVar.firstCountry);
+    this.colors.push(colorsVar.secondCountry);
+    this.colors.push(colorsVar.thirdCountry);
+    this.colors.push(colorsVar.mondeCountry);
+    this.colors.push(colorsVar.ocdeCountry);
+    this.colors.push(colorsVar.ueCountry);
   }
 
   async getGraphValues(label, index, indic) {
@@ -140,16 +137,34 @@ class GraphCurie extends Component {
     this.setState({ filterData: tempData });
   }
 
-  toggleCountry(id) {
-    if (!this.countryList.includes(id)) {
-      this.countryList.push(id);
-    } else {
-      const index = this.countryList.indexOf(id);
-      if (index > -1) {
-        this.countryList.splice(index, 1);
+  getLegend() {
+    const ctryList = [];
+    for (let i = 0; i < this.countryList.length; i += 1) {
+      ctryList.push(<p style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+    }
+    return (ctryList);
+  }
+
+  getInputs() {
+    const radioList = [];
+    for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
+      if (i === this.graphIndex) {
+        radioList.push(
+          <div>
+            <input type="radio" name="test" checked value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
+            {params[this.props.graphType][this.indic].unit[i].label}
+          </div>,
+        );
+      } else {
+        radioList.push(
+          <div>
+            <input type="radio" name="test" value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
+            {params[this.props.graphType][this.indic].unit[i].label}
+          </div>,
+        );
       }
     }
-    this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
+    return (<div>Afficher en : {radioList}</div>);
   }
 
   handleIndic(event) {
@@ -166,32 +181,36 @@ class GraphCurie extends Component {
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
-  getButtons() {
-    const btnList = [];
-    for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
-      btnList.push(<button type="button" onClick={() => this.getGraphValues(this.props.graphType, i, this.indic)}>{params[this.props.graphType][this.indic].unit[i].label}</button>);
-    }
-    return (<div>{btnList}</div>);
+  toggleCountry(id) {
+    if (!this.countryList.includes(id)) {
+      this.countryList.push(id);
+    } else {
+      const index = this.countryList.indexOf(id);
+      if (index > -1) {
+        this.countryList.splice(index, 1);
+      }
+    }{this.getLegend()}
+    this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
   render() {
     return (
-      <div style={{ marginLeft: '31px', marginTop: '16px', height: '700px' }}>
+      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '620px' }}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
               <div>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} />
                 <Row>
-                  <Col sm={11}>
-                    <p>Dans la légende</p>
+                  <Col sm={11} style={{ display: 'inline' }}>
+                    {this.getLegend()}
                   </Col>
                   <Col sm={1}>
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
                 {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
-                {this.getButtons()}
+                {this.getInputs()}
                 <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
                   FRA
                 <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
