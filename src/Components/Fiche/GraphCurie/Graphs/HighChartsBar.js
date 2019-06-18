@@ -113,6 +113,16 @@ export default class HighChartsBar extends Component {
       //   enabled: true,
       // },
       series,
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false,
+          },
+        },
+      },
+      credits: {
+        enabled: false,
+      },
     };
     this.setState({ options });
   }
