@@ -23,18 +23,6 @@ class CountriesList extends Component {
     data: countries,
   };
 
-  // componentDidMount() {
-  //   this.getData();
-  // }
-  //
-  // getData = () => {
-  //   Axios.get('https://restcountries.eu/rest/v2/all').then((response) => {
-  //     this.setState({ data: response.data });
-  //   }).catch((e) => {
-  //     console.log(e);
-  //   });
-  // }
-
   createColumn = (column) => {
     const col = [];
     let letter = '';
