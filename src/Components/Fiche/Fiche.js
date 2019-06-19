@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 
+import { ODS_API_KEY } from '../../config/config';
+
 import Header from '../Shared/Header/Header';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
 import GraphCurie from './GraphCurie/GraphCurie';
@@ -19,16 +21,35 @@ import classes from './Fiche.scss';
  * Tests unitaires : .
 */
 class Fiche extends Component {
-  state = {};
+  state = {
+    data: {
+      restCountries: [],
+      odsContacts: {},
+    },
+  };
 
   componentDidMount() {
     this.getData();
   }
 
   getData = () => {
-    const url = `https://restcountries.eu/rest/v2/alpha/${this.props.match.params.id}`;
+    let url = `https://restcountries.eu/rest/v2/alpha/${this.props.match.params.id}`;
     Axios.get(url).then((response) => {
-      this.setState({ data: response.data });
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.restCountries = response.data;
+        return { data };
+      });
+    });
+
+    // Données contacts
+    url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-information-generale&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.odsContacts = response.data.records[0].fields;
+        return { data };
+      });
     });
   }
 
@@ -47,7 +68,7 @@ class Fiche extends Component {
       <HeaderTitle
         language={this.props.language}
         switchLanguage={this.props.switchLanguage}
-        countryName={this.state.data.translations.fr}
+        countryName={this.state.data.restCountries.translations.fr}
       />
       <div className="container">
         <Title
@@ -101,18 +122,22 @@ class Fiche extends Component {
 
       <div className="container">
         <Title
-          label="Connaitre le pays"
-          icon="fas fa-binoculars"
+          label="Contacts - Ressources"
+          icon="fas fa-address-book"
         />
       </div>
     </div>
   );
 
   render() {
-    if (!this.state.data) {
-      return this.renderNoData();
+    if (this.state.data) {
+      if (this.state.data.restCountries) {
+        if (this.state.data.restCountries.length !== 0) {
+          return this.renderFiche();
+        }
+      }
     }
-    return this.renderFiche();
+    return this.renderNoData();
   }
 }
 
