@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
+import ReactTextCollapse from 'react-text-collapse';
 
 /* Gestion des langues */
 import messagesFr from './translations/fr.json';
@@ -16,6 +17,18 @@ import countries from './countriesList.json';
 const messages = {
   fr: messagesFr,
   en: messagesEn,
+};
+
+const TEXT_COLLAPSE_OPTIONS = {
+  collapse: false,
+  collapseText: 'Voir toute la liste',
+  expandText: 'Fermer la liste',
+  minHeight: 500,
+  maxHeight: 2350,
+  textStyle: {
+    color: 'blue',
+    fontSize: '20px',
+  },
 };
 
 class CountriesList extends Component {
@@ -73,28 +86,30 @@ class CountriesList extends Component {
           <div className="row">
             Recherchez un pays dans la liste suivante
           </div>
-          <div className={`row ${classes.countryList}`}>
-            <div className="col-3">
-              {
-                col1.map(letterList => letterList)
-              }
+          <ReactTextCollapse options={TEXT_COLLAPSE_OPTIONS}>
+            <div className={`row ${classes.countryList}`}>
+              <div className="col-3">
+                {
+                  col1.map(letterList => letterList)
+                }
+              </div>
+              <div className="col-3">
+                {
+                  col2.map(letterList => letterList)
+                }
+              </div>
+              <div className="col-3">
+                {
+                  col3.map(letterList => letterList)
+                }
+              </div>
+              <div className="col-3">
+                {
+                  col4.map(letterList => letterList)
+                }
+              </div>
             </div>
-            <div className="col-3">
-              {
-                col2.map(letterList => letterList)
-              }
-            </div>
-            <div className="col-3">
-              {
-                col3.map(letterList => letterList)
-              }
-            </div>
-            <div className="col-3">
-              {
-                col4.map(letterList => letterList)
-              }
-            </div>
-          </div>
+          </ReactTextCollapse>
         </div>
       </div>
     );
