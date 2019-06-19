@@ -11,9 +11,16 @@
         { "label": "Population active, total", "code" : "SL.TLF.TOTL.IN"}
       ]
     }, {
-      "name": "pop_act_toto", "label": "Population active toto total)", "unit" :
+      "name": "fictif", "label": "toto", "unit" :
       [
-        { "label": "Coucou les amis", "code" : "SL.TLF.TOTL.IN"}
+        { "label": "Unité", "code" : "SL.TLF.TOTL.IN"}
+      ]
+    }, {
+      "name": "fictif2", "label": "tata", "unit" :
+      [
+        { "label": "Unité 1", "code" : "SL.TLF.TOTL.IN"},
+        { "label": "Unité 2", "code" : "SL.TLF.TOTL.IN"},
+        { "label": "Unité 3", "code" : "dsfdsgfsfsfjudsf"}
       ]
     }
   ],

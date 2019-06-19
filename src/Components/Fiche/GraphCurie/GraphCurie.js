@@ -138,7 +138,11 @@ class GraphCurie extends Component {
   getLegend() {
     const ctryList = [];
     for (let i = 0; i < this.countryList.length; i += 1) {
-      ctryList.push(<p style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+      if (i === 0) {
+        ctryList.push(<p style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+      } else {
+        ctryList.push(<p onClick={() => this.toggleCountry(this.countryList[i])} style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+      }
     }
     return (ctryList);
   }
@@ -163,6 +167,23 @@ class GraphCurie extends Component {
       }
     }
     return (<div>Afficher en : {radioList}</div>);
+  }
+
+  getSource() {
+    const srcList = [];
+    for (let i = 0; i < this.state.filterData.length; i += 1) {
+      for (let j = 0; j < this.state.filterData[i].data.length; j += 1) {
+        if (!srcList.includes(this.state.filterData[i].data[j].source)) {
+          srcList.push(this.state.filterData[i].data[j].source);
+        } else if (srcList.length > 1) {
+          srcList.push(`, ${this.state.filterData[i].data[j].source}`);
+        }
+      }
+    }
+    if (srcList.length > 1) {
+      return(<div>Sources : {srcList}</div>);
+    }
+    return(<div>Source : {srcList}</div>);
   }
 
   handleIndic(event) {
@@ -195,7 +216,7 @@ class GraphCurie extends Component {
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
-              <div>
+              <div style={{ width: 'auto' }}>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
                   <Col sm={11} style={{ display: 'inline' }}>
@@ -211,6 +232,7 @@ class GraphCurie extends Component {
                   FRA
                 <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
                   CAN
+                {this.state.filterData ? this.getSource() : null}
               </div>
             ),
           ]
