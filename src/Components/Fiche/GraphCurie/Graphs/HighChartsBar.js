@@ -36,8 +36,6 @@ export default class HighChartsBar extends Component {
   }
 
   componentDidMount() {
-    // alert(this.data.data[0].year);
-    // alert(this.data.data[0].value);
     const allData = [];
     const dl = this.data.length;
     let series = [];

@@ -5,6 +5,21 @@ import {
 } from 'react-bootstrap';
 import classes from './GraphHeader.scss';
 
+const params = require('../GraphCurie-data/indicateurs.json');
+
+function getSelect(props) {
+  // On génère la liste en fonction du fichier de conf
+  const selectList = [];
+  for (let i = 0; i < params[props.graphType].length; i += 1) {
+    selectList.push(<option value={params[props.graphType][i].name}>{params[props.graphType][i].label}</option>);
+  }
+  return (
+    <select onChange={props.handleIndic} value={props.value}>
+      {selectList}
+    </select>
+  );
+}
+
 const GraphHeader = props => (
   <div>
     <Row>
@@ -19,10 +34,7 @@ const GraphHeader = props => (
         </div>
       </Col>
       <Col style={{ backgroundColor: '#ffb200' }} className={classes.arrowRight}>
-        <select onChange={props.handleIndic} value={props.value}>
-          <option value="pib">Produit intérieur brut</option>
-          <option value="pop_act">Population active (total)</option>
-        </select>
+        {getSelect(props)}
       </Col>
     </Row>
   </div>
@@ -30,9 +42,13 @@ const GraphHeader = props => (
 
 export default GraphHeader;
 
-GraphHeader.propTypes = {
+getSelect.propTypes = {
   handleIndic: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  graphType: PropTypes.string.isRequired,
+};
+
+GraphHeader.propTypes = {
   indicNb: PropTypes.number.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,
