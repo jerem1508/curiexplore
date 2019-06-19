@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
-import ReactTextCollapse from 'react-text-collapse';
 
 /* Gestion des langues */
 import messagesFr from './translations/fr.json';
@@ -19,22 +18,15 @@ const messages = {
   en: messagesEn,
 };
 
-const TEXT_COLLAPSE_OPTIONS = {
-  collapse: false,
-  collapseText: 'Voir toute la liste',
-  expandText: 'Fermer la liste',
-  minHeight: 500,
-  maxHeight: 2350,
-  textStyle: {
-    color: 'blue',
-    fontSize: '20px',
-  },
-};
-
 class CountriesList extends Component {
   state = {
     data: countries,
+    updatedList: [],
   };
+
+  filteredList = (arr,query) => {
+    return arr.filter(el =>  el.toLowerCase().search(query.toLowerCase()) !== -1);
+  }
 
   createColumn = (column) => {
     const col = [];
@@ -75,7 +67,7 @@ class CountriesList extends Component {
     const letterCol3 = ['L', 'M', 'N', 'O', 'P', 'Q', 'R'];
     const letterCol4 = ['S', 'T', 'U', 'V', 'Y', 'Z'];
 
-    const col1 = this.createColumn(letterCol1);
+    const col1 = this.createColumn(this.filteredList(letterCol1,'a'));
     const col2 = this.createColumn(letterCol2);
     const col3 = this.createColumn(letterCol3);
     const col4 = this.createColumn(letterCol4);
@@ -83,33 +75,46 @@ class CountriesList extends Component {
     return (
       <div className="container-fluid">
         <div className="container">
-          <div className="row">
-            Recherchez un pays dans la liste suivante
-          </div>
-          <ReactTextCollapse options={TEXT_COLLAPSE_OPTIONS}>
-            <div className={`row ${classes.countryList}`}>
-              <div className="col-3">
-                {
-                  col1.map(letterList => letterList)
-                }
-              </div>
-              <div className="col-3">
-                {
-                  col2.map(letterList => letterList)
-                }
-              </div>
-              <div className="col-3">
-                {
-                  col3.map(letterList => letterList)
-                }
-              </div>
-              <div className="col-3">
-                {
-                  col4.map(letterList => letterList)
-                }
-              </div>
+          <div className={`row col-md-8 offset-md-4 ${classes.searchRow}`}>
+            <div className={`col ${classes.searchText}`}>
+              Recherchez un pays dans la liste suivante
             </div>
-          </ReactTextCollapse>
+            <div className="col">
+              <form>
+                <fieldset className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    // value={value}
+                    placeholder="ex:Chine..."
+                    onChange={this.filteredList}
+                  />
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div className={`row ${classes.countryList}`}>
+            <div className="col-3">
+              {
+                col1.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col2.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col3.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col4.map(letterList => letterList)
+              }
+            </div>
+          </div>
         </div>
       </div>
     );
