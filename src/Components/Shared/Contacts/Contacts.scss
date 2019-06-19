@@ -1,0 +1,100 @@
+@import '../../../style.scss';
+
+.Contacts {
+  margin-bottom: 32px;
+
+  .Map {
+    box-shadow: 0px 15px 25px 0px #ccc !important;
+    height: 250px;
+    background-color: #a1dce2;
+  }
+  .Card {
+    box-shadow: 0px 15px 25px 0px #ccc !important;
+    height: 450px;
+    padding: 0;
+
+    .Container {
+      background-color: white;
+      height: 100%;
+    }
+
+    hr {
+      margin: 0 32px;
+    }
+
+    .TopBanner {
+      height: 10px;
+      border-top: 4px solid $darkBlueColor;
+    }
+
+    .Title {
+      font-family: 'Bitter', serif;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: $darkBlueColor;
+      padding: 16px 0 0 32px;
+      height: 100px;
+    }
+
+    .SubTitle {
+      font-size: 1rem;
+      font-weight: normal;
+      font-style: italic;
+      color: $darkBlueColor;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      SPAN {
+        display: inline-block;
+        width: 32px;
+        text-align: center;
+      }
+    }
+
+    .Address {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $darkBlueColor;
+      padding-left: 32px;
+    }
+
+    .Buttons {
+      padding-top: 16px;
+      padding-left: 32px;
+      padding-right: 32px;
+      .Button {
+        width: 80%;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 16px;
+        background-color: $blueColor;
+        color: white;
+        font-weight: bold;
+        span:first-child {
+          display: inline-block;
+          width: 80%;
+          padding-left: 16px;
+        }
+        span:last-child {
+          display: inline-block;
+          width: 20%;
+          text-align: center;
+        }
+      }
+    }
+
+    .Error {
+      color: grey;
+      height: 55px;
+      padding: 16px 32px;
+      span:first-child {
+        border: 1px solid grey;
+        padding: 5px;
+        border-radius: 16px;
+      }
+      span:last-child {
+        display: inline-block;
+        padding-left: 16px;
+      }
+    }
+  }
+}
