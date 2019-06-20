@@ -219,20 +219,24 @@ class GraphCurie extends Component {
               <div style={{ width: 'auto' }}>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
-                  <Col sm={11} style={{ display: 'inline' }}>
+                  <Col sm={11} className="pl-0 pr-0" style={{ display: 'inline' }}>
                     {this.getLegend()}
                   </Col>
-                  <Col sm={1}>
+                  <Col sm={1} className="pl-0 pr-0">
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
-                {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
-                {this.getInputs()}
-                <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
-                  FRA
-                <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
-                  CAN
-                {this.state.filterData ? this.getSource() : null}
+                <Row>
+                  <Col className="pl-0 pr-0">
+                    {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
+                    {this.getInputs()}
+                    <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
+                      FRA
+                    <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
+                      CAN
+                    {this.state.filterData ? this.getSource() : null}
+                  </Col>
+                </Row>
               </div>
             ),
           ]
