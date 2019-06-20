@@ -21,11 +21,13 @@ const messages = {
 class CountriesList extends Component {
   state = {
     data: countries,
-    updatedList: [],
   };
 
-  filteredList = (arr,query) => {
-    return arr.filter(el =>  el.toLowerCase().search(query.toLowerCase()) !== -1);
+  filteredList = (event) => {
+    const text = event.target.value;
+    const newData = countries.filter(el => el.Pays.toLowerCase().search(text.toLowerCase()) !== -1);
+    this.setState({ data: newData });
+    console.log(newData);
   }
 
   createColumn = (column) => {
@@ -58,19 +60,60 @@ class CountriesList extends Component {
   }
 
   render() {
-    if (this.state.data.length === 0) {
-      return null;
+    let content = null;
+    if (this.state.data.length !== 0) {
+      const letterCol1 = ['A', 'B', 'C', 'D'];
+      const letterCol2 = ['E', 'F', 'G', 'H', 'I', 'J', 'K'];
+      const letterCol3 = ['L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+      const letterCol4 = ['S', 'T', 'U', 'V', 'Y', 'Z'];
+
+      const col1 = this.createColumn(letterCol1);
+      const col2 = this.createColumn(letterCol2);
+      const col3 = this.createColumn(letterCol3);
+      const col4 = this.createColumn(letterCol4);
+
+      content = (
+        <div className={`row ${classes.countryList}`}>
+          <div className="col-3">
+            {
+              col1.map(letterList => letterList)
+            }
+          </div>
+          <div className="col-3">
+            {
+              col2.map(letterList => letterList)
+            }
+          </div>
+          <div className="col-3">
+            {
+              col3.map(letterList => letterList)
+            }
+          </div>
+          <div className="col-3">
+            {
+              col4.map(letterList => letterList)
+            }
+          </div>
+        </div>
+      );
     }
 
-    const letterCol1 = ['A', 'B', 'C', 'D'];
-    const letterCol2 = ['E', 'F', 'G', 'H', 'I', 'J', 'K'];
-    const letterCol3 = ['L', 'M', 'N', 'O', 'P', 'Q', 'R'];
-    const letterCol4 = ['S', 'T', 'U', 'V', 'Y', 'Z'];
-
-    const col1 = this.createColumn(this.filteredList(letterCol1,'a'));
-    const col2 = this.createColumn(letterCol2);
-    const col3 = this.createColumn(letterCol3);
-    const col4 = this.createColumn(letterCol4);
+    if (this.state.data.length < 250) {
+      content = (
+        <div>
+          <dt>
+            Résultat(s)
+          </dt>
+          <dd>
+            <ul className="list-group">
+              {
+                this.state.data.map(el => <li className={classes.country}><a href={`/fiche/${el.ISO_alpha3}`}>{el.Pays}</a></li>)
+              }
+            </ul>
+          </dd>
+        </div>
+      );
+    }
 
     return (
       <div className="container-fluid">
@@ -85,7 +128,6 @@ class CountriesList extends Component {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    // value={value}
                     placeholder="ex:Chine..."
                     onChange={this.filteredList}
                   />
@@ -93,28 +135,7 @@ class CountriesList extends Component {
               </form>
             </div>
           </div>
-          <div className={`row ${classes.countryList}`}>
-            <div className="col-3">
-              {
-                col1.map(letterList => letterList)
-              }
-            </div>
-            <div className="col-3">
-              {
-                col2.map(letterList => letterList)
-              }
-            </div>
-            <div className="col-3">
-              {
-                col3.map(letterList => letterList)
-              }
-            </div>
-            <div className="col-3">
-              {
-                col4.map(letterList => letterList)
-              }
-            </div>
-          </div>
+          {content}
         </div>
       </div>
     );
