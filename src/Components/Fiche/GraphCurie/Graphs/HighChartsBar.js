@@ -41,6 +41,7 @@ export default class HighChartsBar extends Component {
     let series = [];
     for (let i = 0; i < dl; i += 1) {
       const data = [];
+      this.data[i].data.sort((a, b) => (a.year - b.year));
       for (let j = 0; j < this.data[i].data.length; j += 1) {
         const tmp = [];
         tmp.push(this.data[i].data[j].year);

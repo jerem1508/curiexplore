@@ -20,17 +20,28 @@ function getSelect(props) {
   );
 }
 
+// const GraphHeader = props => (
+//   <Row>
+//     <Col style={{ backgroundColor: '#093e6c' }}>
+//       <div style={{ float: 'left' }}>
+//         <p style={{ color: '#6d99c0' }}>Connaître le pays</p>
+//         <p style={{ fontSize: '1.7em', color: 'white' }}>Graphiques</p>
+//       </div>
+//       <div style={{ float: 'right', color: 'white' }}>
+//         <p>{`${props.indicNb}  indicateurs`}</p>
+//         <p>Disponibes</p>
+//       </div>
+//     </Col>
+//     <Col style={{ backgroundColor: '#ffb200' }} className={classes.arrowRight}>
+//       {getSelect(props)}
+//     </Col>
+//   </Row>
+// );
+
 const GraphHeader = props => (
   <Row>
-    <Col style={{ backgroundColor: '#093e6c' }}>
-      <div style={{ float: 'left' }}>
-        <p style={{ color: '#6d99c0' }}>Connaître le pays</p>
-        <p style={{ fontSize: '1.7em', color: 'white' }}>Graphiques</p>
-      </div>
-      <div style={{ float: 'right', color: 'white' }}>
-        <p>{`${props.indicNb}  indicateurs`}</p>
-        <p>Disponibes</p>
-      </div>
+    <Col sm={6}>
+      <p> à droite</p>
     </Col>
     <Col style={{ backgroundColor: '#ffb200' }} className={classes.arrowRight}>
       {getSelect(props)}
