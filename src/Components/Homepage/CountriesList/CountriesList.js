@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -98,7 +97,7 @@ class CountriesList extends Component {
       );
     }
 
-    if (this.state.data.length < 250) {
+    if (this.state.data.length < countries.length) {
       content = (
         <div>
           <dt>
