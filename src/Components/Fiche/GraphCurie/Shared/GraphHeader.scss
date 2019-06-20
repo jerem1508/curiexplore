@@ -1,9 +1,19 @@
 @import '../../../../style.scss';
 
-.arrowRight {
+.ArrowRight {
   width: 0;
   height: 0;
-  border-top: 60px solid transparent;
-  border-bottom: 60px solid transparent;
-  border-left: 60px solid #093e6c;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 50px solid $darkBlueColor;
+}
+
+.LeftCol {
+  background-color: $darkBlueColor;
+}
+
+.IndicPart {
+  p {
+    color: white;
+  }
 }

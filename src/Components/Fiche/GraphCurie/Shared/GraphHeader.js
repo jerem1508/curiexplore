@@ -40,10 +40,27 @@ function getSelect(props) {
 
 const GraphHeader = props => (
   <Row>
-    <Col sm={6}>
-      <p> à droite</p>
+    <Col sm={6} className={classes.LeftCol}>
+      <Row>
+        <Col sm={9}>
+          <Row>
+            <p style={{ color: '#6d99c0' }}>Connaître le pays</p>
+          </Row>
+          <Row>
+            <p style={{ fontSize: '1.7em', color: 'white' }}>Graphiques</p>
+          </Row>
+        </Col>
+        <Col className={classes.IndicPart}>
+          <Row>
+            <p>{`${props.indicNb}  indicateurs`}</p>
+          </Row>
+          <Row>
+            <p>disponibes</p>
+          </Row>
+        </Col>
+      </Row>
     </Col>
-    <Col style={{ backgroundColor: '#ffb200' }} className={classes.arrowRight}>
+    <Col style={{ backgroundColor: '#ffb200' }} className={classes.ArrowRight}>
       {getSelect(props)}
     </Col>
   </Row>
