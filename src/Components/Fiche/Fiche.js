@@ -11,6 +11,7 @@ import GraphCurie from './GraphCurie/GraphCurie';
 import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
+import Actors from './Actors/Actors';
 
 import classes from './Fiche.scss';
 
@@ -124,6 +125,14 @@ class Fiche extends Component {
       </div>
 
       <div className="container">
+        <Title
+          label="Les acteurs de l'ESRI"
+          icon="fas fa-city"
+        />
+        <Actors />
+      </div>
+
+      <div className="container" id="example">
         <Title
           label="Contacts - Ressources"
           icon="fas fa-address-book"
