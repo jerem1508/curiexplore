@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 import { ODS_API_KEY } from '../../config/config';
 
 import Header from '../Shared/Header/Header';
+import Footer from '../Shared/Footer/Footer';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
 import GraphCurie from './GraphCurie/GraphCurie';
 import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
+import Contacts from '../Shared/Contacts/Contacts';
 
 import classes from './Fiche.scss';
 
@@ -125,7 +127,14 @@ class Fiche extends Component {
           label="Contacts - Ressources"
           icon="fas fa-address-book"
         />
+        <Contacts
+          language={this.props.language}
+          switchLanguage={this.props.switchLanguage}
+          data={this.state.data.odsContacts}
+        />
       </div>
+
+      <Footer language={this.props.language} />
     </div>
   );
 
