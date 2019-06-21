@@ -1,6 +1,6 @@
 {
   "aboutCountry": [
-    { "name": "pib", "label": "Produit intérieur brut", "type": "bar", "unit" :
+    { "name": "pib", "label": "Produit intérieur brut", "type": "column", "unit" :
       [
         { "label": "Monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
         { "label" : "$ PPA courantes", "code" : "NY.GDP.MKTP.PP.CD"}
@@ -16,7 +16,7 @@
         { "label": "Unité", "code" : "SL.TLF.TOTL.IN"}
       ]
     }, {
-      "name": "fictif2", "label": "tata", "type": "bar", "unit" :
+      "name": "fictif2", "label": "tata", "type": "column", "unit" :
       [
         { "label": "Unité 1", "code" : "SL.TLF.TOTL.IN"},
         { "label": "Unité 2", "code" : "SL.TLF.TOTL.IN"},

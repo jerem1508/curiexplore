@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import loadable from '@loadable/component';
 
-import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
+import HighChartsGraph from './Graphs/HighChartsGraph';
 
 import classes from './GraphCurie.scss';
 
@@ -28,13 +28,13 @@ class GraphCurie extends Component {
       isMissing: true,
       filterData: null,
     };
-    this.loadGraph = this.loadGraph.bind(this);
     this.getGraphValues = this.getGraphValues.bind(this);
     this.toggleCountry = this.toggleCountry.bind(this);
     this.getData = this.getData.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getLegend = this.getLegend.bind(this);
+    this.getMenu = this.getMenu.bind(this);
   }
 
   componentDidMount() {
@@ -209,21 +209,11 @@ class GraphCurie extends Component {
     return(<div>Source : {srcList}</div>);
   }
 
-  loadGraph() {
-    let GraphComponent = '';
-    switch (this.graphFormat) {
-      case 'bar':
-        GraphComponent = loadable(() => import('./Graphs/HighChartsBar'));
-        break;
-      case 'line':
-        GraphComponent = loadable(() => import('./Graphs/HighChartsLine'));
-        break;
-      default:
-        GraphComponent = () => (
-          <p>Une erreur est survenue</p>
-        );
-    }
-    return (<GraphComponent style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} />);
+  getMenu() {
+    return ( <span>                   <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
+                          FRA
+                        <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
+                          CAN </span>)
   }
 
   handleIndic(event) {
@@ -268,7 +258,7 @@ class GraphCurie extends Component {
                 </Row>
                 <Row>
                   <Col className={classes.Menu}>
-                    menu
+                    {this.getMenu()}
                   </Col>
                 </Row>
                 <Row>
@@ -276,7 +266,7 @@ class GraphCurie extends Component {
                     {this.getInputs()}
                   </Col>
                 </Row>
-                <Row>
+                <Row style={{ backgroundColor: 'white' }}>
                   <Col className="pl-0 pr-0">
                     {
                       // Ajouter switch bar ou courbe
@@ -284,12 +274,8 @@ class GraphCurie extends Component {
                       // Menu indépendant
                     }
                     {this.state.filterData
-                      ? this.loadGraph()
+                      ? <HighChartsGraph colors={this.colors} data={this.state.filterData} type={this.graphFormat} />
                       : <div style={{ backgroundColor: 'white' }}>Loading</div>}
-                    <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
-                      FRA
-                    <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
-                      CAN
                     {this.state.filterData ? this.getSource() : null}
                   </Col>
                 </Row>

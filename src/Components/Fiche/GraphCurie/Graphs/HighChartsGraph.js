@@ -27,6 +27,7 @@ export default class HighChartsBar extends Component {
     super(props);
     this.chart = React.createRef();
     this.data = this.props.data;
+    this.type = this.props.type;
     this.state = {
       options: null,
     };
@@ -85,7 +86,7 @@ export default class HighChartsBar extends Component {
 
     const options = {
       chart: {
-        type: 'column',
+        type: this.type,
       },
       title: {
         text: '',
@@ -143,16 +144,37 @@ export default class HighChartsBar extends Component {
   }
 
   render() {
+    const ShareComponent = () => (
+      <div style={{ overflow: 'hidden', paddingLeft: '2%' }}>
+        <hr />
+        <div style={{ float: 'left' }}>
+          <p>Partager</p>
+          <i className="fas fa-share-alt-square fa-lg" />
+          <p>Intégrer le code</p>
+          <i className="fas fa-code fa-lg" />
+        </div>
+        <div style={{ float: 'right' }}>
+          <p><b>Télécharger</b></p>
+          <button type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
+          <p>.png</p>
+          <button type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
+          <p>.csv</p>
+        </div>
+      </div>
+    );
     return (
       <div>
         {
           this.state.options !== null
             ? (
-              <HighchartsReact
-                highcharts={Highcharts}
-                options={this.state.options}
-                ref={this.chart}
-              />
+              <div>
+                <HighchartsReact
+                  highcharts={Highcharts}
+                  options={this.state.options}
+                  ref={this.chart}
+                />
+                <ShareComponent />
+              </div>
             )
             : <div>Loading...</div>
         }
@@ -162,6 +184,7 @@ export default class HighChartsBar extends Component {
 }
 
 HighChartsBar.propTypes = {
-  data: PropTypes.object.isRequired,
   colors: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
 };
