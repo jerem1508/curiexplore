@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import loadable from '@loadable/component';
 
 import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
@@ -17,6 +18,7 @@ class GraphCurie extends Component {
   constructor(props) {
     super(props);
     this.country = null;
+    this.graphFormat = null;
     this.countryList = [this.props.countryCode.toUpperCase()];
     this.graphIndex = 0;
     this.allData = [];
@@ -26,6 +28,7 @@ class GraphCurie extends Component {
       isMissing: true,
       filterData: null,
     };
+    this.loadGraph = this.loadGraph.bind(this);
     this.getGraphValues = this.getGraphValues.bind(this);
     this.toggleCountry = this.toggleCountry.bind(this);
     this.getData = this.getData.bind(this);
@@ -132,6 +135,7 @@ class GraphCurie extends Component {
         this.allData.push(tmpLbl);
       }
     }
+    this.graphFormat = params[label][indic].type;
     this.setState({ filterData: tempData });
   }
 
@@ -166,21 +170,26 @@ class GraphCurie extends Component {
     for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
       if (i === this.graphIndex) {
         radioList.push(
-          <div>
+          <span>
             <input type="radio" name="test" checked value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
             {params[this.props.graphType][this.indic].unit[i].label}
-          </div>,
+          </span>,
         );
       } else {
         radioList.push(
-          <div>
+          <span>
             <input type="radio" name="test" value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
             {params[this.props.graphType][this.indic].unit[i].label}
-          </div>,
+          </span>,
         );
       }
     }
-    return (<div>Afficher en : {radioList}</div>);
+    return (
+      <div className={classes.units}>
+        <span>Afficher en</span>
+        {radioList}
+      </div>
+    );
   }
 
   getSource() {
@@ -198,6 +207,23 @@ class GraphCurie extends Component {
       return(<div>Sources : {srcList}</div>);
     }
     return(<div>Source : {srcList}</div>);
+  }
+
+  loadGraph() {
+    let GraphComponent = '';
+    switch (this.graphFormat) {
+      case 'bar':
+        GraphComponent = loadable(() => import('./Graphs/HighChartsBar'));
+        break;
+      case 'line':
+        GraphComponent = loadable(() => import('./Graphs/HighChartsLine'));
+        break;
+      default:
+        GraphComponent = () => (
+          <p>Une erreur est survenue</p>
+        );
+    }
+    return (<GraphComponent style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} />);
   }
 
   handleIndic(event) {
@@ -246,9 +272,20 @@ class GraphCurie extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="pl-0 pr-0">
-                    {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
+                  <Col>
                     {this.getInputs()}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="pl-0 pr-0">
+                    {
+                      // Ajouter switch bar ou courbe
+                      // Regrouper filterData au meme endroit
+                      // Menu indépendant
+                    }
+                    {this.state.filterData
+                      ? this.loadGraph()
+                      : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                     <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
                       FRA
                     <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />

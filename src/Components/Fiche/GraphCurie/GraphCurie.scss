@@ -39,3 +39,15 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.units {
+  SPAN:not(:first-child) {
+    color: #295880;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+  span:first-child {
+    font-style: italic;
+    color: #295880;
+  }
+}

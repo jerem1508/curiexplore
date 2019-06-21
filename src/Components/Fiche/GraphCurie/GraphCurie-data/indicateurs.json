@@ -1,22 +1,22 @@
 {
   "aboutCountry": [
-    { "name": "pib", "label": "Produit intérieur brut", "unit" :
+    { "name": "pib", "label": "Produit intérieur brut", "type": "bar", "unit" :
       [
         { "label": "Monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
         { "label" : "$ PPA courantes", "code" : "NY.GDP.MKTP.PP.CD"}
       ]
     }, {
-      "name": "pop_act", "label": "Population active (total)", "unit" :
+      "name": "pop_act", "label": "Population active (total)", "type": "line", "unit" :
       [
         { "label": "Population active, total", "code" : "SL.TLF.TOTL.IN"}
       ]
     }, {
-      "name": "fictif", "label": "toto", "unit" :
+      "name": "fictif", "label": "toto", "type": "line", "unit" :
       [
         { "label": "Unité", "code" : "SL.TLF.TOTL.IN"}
       ]
     }, {
-      "name": "fictif2", "label": "tata", "unit" :
+      "name": "fictif2", "label": "tata", "type": "bar", "unit" :
       [
         { "label": "Unité 1", "code" : "SL.TLF.TOTL.IN"},
         { "label": "Unité 2", "code" : "SL.TLF.TOTL.IN"},
