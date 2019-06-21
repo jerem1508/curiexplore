@@ -59,7 +59,73 @@
     .Bloc {
       background-color: white;
       box-shadow: 0px 15px 25px 0px #ccc !important;
-      height: 120px;      
+      height: 120px;
     }
   }
+
+  .Actors {
+    margin-bottom: 32px;
+
+    .Map {
+      box-shadow: 0px 15px 25px 0px #ccc !important;
+      height: 250px;
+      background-color: #a1dce2;
+    }
+
+    .col {
+      padding-left: 5px;
+      padding-right: 0px;
+    }
+
+    .gridActors {
+      padding-left: 26px;
+    }
+
+    .CounterCard {
+      background-color: white;
+      margin-top: 5px;
+      text-align: center;
+      padding: 15px;
+      color: $darkBlueColor;
+      font-family: 'Bitter', serif;
+
+      span {
+        color: $blueColor;
+        font-weight: bold;
+      }
+
+      i {
+        color: $lightBlueColor;
+        padding: 10px;
+        border-bottom: 1.5px solid $lightBlueColor;
+      }
+
+      .Buttons {
+        padding-top: 16px;
+        padding-left: 32px;
+        padding-right: 32px;
+
+        .Button {
+          display: inline-block;
+          padding: 5px;
+          border-radius: 16px;
+          background-color: $blueColor;
+          color: white;
+          font-size: 0.9em;
+          font-weight: bold;
+          span:first-child {
+            display: inline-block;
+            width: 80%;
+            padding-left: 16px;
+          }
+          span:last-child {
+            display: inline-block;
+            width: 20%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
 }

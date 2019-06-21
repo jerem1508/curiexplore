@@ -11,8 +11,10 @@ import GraphCurie from './GraphCurie/GraphCurie';
 import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
-import Actors from './Actors/Actors';
+import CounterCard from './CounterCard';
+import SubTitleActors from './SubTitle/SubTitleActors';
 
+/* SCSS */
 import classes from './Fiche.scss';
 
 /**
@@ -23,11 +25,13 @@ import classes from './Fiche.scss';
  * Accessible : .
  * Tests unitaires : .
 */
+
 class Fiche extends Component {
   state = {
     data: {
       restCountries: [],
       odsContacts: {},
+      odsInstitutions: {},
     },
   };
 
@@ -51,6 +55,16 @@ class Fiche extends Component {
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsContacts = response.data.records[0].fields;
+        return { data };
+      });
+    });
+
+    // Données
+    url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-institutions&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.odsInstitutions = response.data.records[0].fields;
         return { data };
       });
     });
@@ -128,7 +142,71 @@ class Fiche extends Component {
           label="Les acteurs de l'ESRI"
           icon="fas fa-city"
         />
-        <Actors />
+        <div className={classes.Actors}>
+          <div className="row">
+            <div className={`col ${classes.Map}`}>
+              map
+            </div>
+          </div>
+          <div className={classes.gridActors}>
+            <div className="row">
+              <CounterCard
+                icon="fas fa-thumbtack fa-2x"
+                label="acteurs stratégiques"
+                anchor="#example" // link to anchor
+
+              />
+              <CounterCard
+                icon="fas fa-money-bill-wave fa-2x"
+                label="acteurs de financement"
+                anchor="#example"
+              />
+              <CounterCard
+                icon="fas fa-star fa-2x"
+                label="acteurs évaluations"
+                anchor="#example"
+              />
+            </div>
+            <div className="row">
+              <CounterCard
+                icon="fas fa-exchange-alt fa-2x"
+                label="acteurs mobilités"
+                anchor="#example" // link to anchor
+              />
+              <CounterCard
+                icon="fas fa-microscope fa-2x"
+                label="acteurs ES"
+                anchor="#example"
+              />
+              <CounterCard
+                icon="fas fa-lightbulb fa-2x"
+                label="acteurs RI"
+                anchor="#example"
+              />
+            </div>
+            <div className="row">
+              <CounterCard
+                icon="fas fa-square-root-alt fa-2x"
+                label="acteurs analyses"
+                anchor="#example" // link to anchor
+              />
+              <CounterCard
+                icon="fas fa-money-bill-wave fa-2x"
+                label="acteurs de financement"
+                anchor="#example"
+              />
+              <CounterCard
+                icon="fas fa-star fa-2x"
+                label="acteurs évaluations"
+                anchor="#example"
+              />
+            </div>
+          </div>
+        </div>
+        <SubTitleActors
+          icon="fas fa-thumbtack"
+          label="8 acteurs stratégiques"
+        />
       </div>
 
       <div className="container" id="example">
