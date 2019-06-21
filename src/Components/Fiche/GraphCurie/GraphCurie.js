@@ -6,10 +6,10 @@ import { Row, Col } from 'react-bootstrap';
 import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
 
-import colorsVar from './GraphCurie.scss';
+import classes from './GraphCurie.scss';
 
 const params = require('./GraphCurie-data/indicateurs.json');
-const isoList = require('./GraphCurie-data/iso3.json');
+const isoList = require('../../Homepage/CountriesList/countriesList.json');
 
 const url = 'http://10.243.98.74/datastore/curie';
 
@@ -42,7 +42,7 @@ class GraphCurie extends Component {
     // On vérifie si le code iso 3 est valide
     this.country = this.props.countryCode.toUpperCase();
     for (i = 0; i < isoList.length; i += 1) {
-      if (isoList[i]['alpha-3'] === this.country) {
+      if (isoList[i].ISO_alpha3 === this.country) {
         this.setState({ isMissing: false });
         break;
       }
@@ -67,12 +67,12 @@ class GraphCurie extends Component {
 
   // On recup les couleurs
   getColors() {
-    this.colors.push(colorsVar.firstCountry);
-    this.colors.push(colorsVar.secondCountry);
-    this.colors.push(colorsVar.thirdCountry);
-    this.colors.push(colorsVar.mondeCountry);
-    this.colors.push(colorsVar.ocdeCountry);
-    this.colors.push(colorsVar.ueCountry);
+    this.colors.push(classes.firstCountry);
+    this.colors.push(classes.secondCountry);
+    this.colors.push(classes.thirdCountry);
+    this.colors.push(classes.mondeCountry);
+    this.colors.push(classes.ocdeCountry);
+    this.colors.push(classes.ueCountry);
   }
 
   async getGraphValues(label, index, indic) {
@@ -138,10 +138,24 @@ class GraphCurie extends Component {
   getLegend() {
     const ctryList = [];
     for (let i = 0; i < this.countryList.length; i += 1) {
-      if (i === 0) {
-        ctryList.push(<p style={{ display: 'inline' }}>{this.countryList[i]}</p>);
-      } else {
-        ctryList.push(<p onClick={() => this.toggleCountry(this.countryList[i])} style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+      for (let j = 0; j < isoList.length; j += 1) {
+        if (this.countryList[i] === isoList[j].ISO_alpha3) {
+          if (i === 0) {
+            ctryList.push(
+              <span className={classes.btnDefaultCountry}>
+                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+                {isoList[j].Pays}
+              </span>,
+            );
+          } else {
+            ctryList.push(
+              <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
+                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+                {isoList[j].Pays}
+              </span>
+            );
+          }
+        }
       }
     }
     return (ctryList);
@@ -212,7 +226,7 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '650px' }}>
+      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '650px' }} className={classes.GraphCurie}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
@@ -224,6 +238,11 @@ class GraphCurie extends Component {
                   </Col>
                   <Col sm={1} className="pl-0 pr-0">
                     <i className="fas fa-info-circle" />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className={classes.Menu}>
+                    menu
                   </Col>
                 </Row>
                 <Row>

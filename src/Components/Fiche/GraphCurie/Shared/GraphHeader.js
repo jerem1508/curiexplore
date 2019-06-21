@@ -14,7 +14,7 @@ function getSelect(props) {
     selectList.push(<option value={params[props.graphType][i].name}>{params[props.graphType][i].label}</option>);
   }
   return (
-    <select onChange={props.handleIndic} value={props.value}>
+    <select onChange={props.handleIndic} value={props.value} className="form-control">
       {selectList}
     </select>
   );
@@ -43,20 +43,14 @@ const GraphHeader = props => (
     <Col sm={6} className={classes.LeftCol}>
       <Row>
         <Col sm={9}>
-          <Row>
-            <p style={{ color: '#6d99c0' }}>Connaître le pays</p>
-          </Row>
-          <Row>
-            <p style={{ fontSize: '1.7em', color: 'white' }}>Graphiques</p>
-          </Row>
+          <span>Connaître le pays</span>
+          <span>Graphiques</span>
         </Col>
-        <Col className={classes.IndicPart}>
-          <Row>
-            <p>{`${props.indicNb}  indicateurs`}</p>
-          </Row>
-          <Row>
-            <p>disponibes</p>
-          </Row>
+        <Col className={`${classes.IndicPart} text-right`}>
+          {props.indicNb}
+          &nbsp;indicateurs
+          <br />
+          disponibes
         </Col>
       </Row>
     </Col>

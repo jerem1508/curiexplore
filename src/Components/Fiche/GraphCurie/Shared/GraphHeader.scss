@@ -3,17 +3,28 @@
 .ArrowRight {
   width: 0;
   height: 0;
-  border-top: 50px solid transparent;
-  border-bottom: 50px solid transparent;
-  border-left: 50px solid $darkBlueColor;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 40px solid $darkBlueColor;
 }
 
 .LeftCol {
   background-color: $darkBlueColor;
-}
-
-.IndicPart {
-  p {
+  SPAN {
+    line-height: 22px;
+    display: block;
+  }
+  span:first-child {
+    padding-top: 15px;
+    color: $greyAColor;
+  }
+  span:last-child {
     color: white;
+    font-size: 1.7rem;
+  }
+  .IndicPart {
+    line-height: 20px;
+    color: white;
+    padding-top: 20px;
   }
 }
