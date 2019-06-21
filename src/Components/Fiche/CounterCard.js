@@ -2,24 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /* SCSS */
-import classes from './Actors.scss';
+import classes from './Fiche.scss';
 
 const CounterCard = (props) => {
   return (
-      <div className={`col-lg-4 ${classes.CounterCard}`}>
+    <div className={`col-lg-4 ${classes.col}`}>
+      <div className={classes.CounterCard}>
         <i className={props.icon} />
         <div>
+          <span>8</span>
+          &nbsp;
           {props.label}
         </div>
         <div className={classes.Buttons}>
           <a
-            href={props.href}
+            href={props.anchor}
+            className={classes.Button}
+            rel="noopener noreferrer"
           >
-            <span>Découvrir</span>
+            Découvrir
           </a>
         </div>
       </div>
-  )
+    </div>
+  );
 };
 
 export default CounterCard;
@@ -27,5 +33,5 @@ export default CounterCard;
 CounterCard.propTypes = {
   icon: PropTypes.string,
   label: PropTypes.string,
-  href: PropTypes.string,
+  anchor: PropTypes.string,
 };
