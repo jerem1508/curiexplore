@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import loadable from '@loadable/component';
 
 import GraphHeader from './Shared/GraphHeader';
 import HighChartsGraph from './Graphs/HighChartsGraph';
@@ -204,9 +203,19 @@ class GraphCurie extends Component {
       }
     }
     if (srcList.length > 1) {
-      return(<div>Sources : {srcList}</div>);
+      return (
+        <span>
+          Sources :&nbsp;
+          {srcList}
+        </span>
+      );
     }
-    return(<div>Source : {srcList}</div>);
+    return (
+      <span>
+        Source :&nbsp;
+        {srcList}
+      </span>
+    );
   }
 
   getMenu() {
@@ -274,9 +283,8 @@ class GraphCurie extends Component {
                       // Menu indépendant
                     }
                     {this.state.filterData
-                      ? <HighChartsGraph colors={this.colors} data={this.state.filterData} type={this.graphFormat} />
+                      ? <HighChartsGraph colors={this.colors} data={this.state.filterData} type={this.graphFormat} source={this.getSource()} />
                       : <div style={{ backgroundColor: 'white' }}>Loading</div>}
-                    {this.state.filterData ? this.getSource() : null}
                   </Col>
                 </Row>
               </div>

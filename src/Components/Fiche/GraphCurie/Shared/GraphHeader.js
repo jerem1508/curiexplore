@@ -42,11 +42,12 @@ const GraphHeader = props => (
   <Row>
     <Col sm={6} className={classes.LeftCol}>
       <Row>
-        <Col sm={9}>
+        <Col sm={5}>
           <span>Connaître le pays</span>
           <span>Graphiques</span>
         </Col>
-        <Col className={`${classes.IndicPart} text-right`}>
+        <Col />
+        <Col sm={3} className={`${classes.IndicPart} text-right`}>
           {props.indicNb}
           &nbsp;indicateurs
           <br />

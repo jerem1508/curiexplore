@@ -1,0 +1,24 @@
+@import '../../../../style.scss';
+
+.units {
+  div {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  span {
+    font-style: italic;
+    color: #295880;
+  }
+  button {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.dot {
+  height: 40px;
+  width: 40px;
+  // color: $blueColor;
+  background-color: $blueColor;
+  border-radius: 50%;
+}

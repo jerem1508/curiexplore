@@ -41,6 +41,10 @@
 }
 
 .units {
+  div {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
   SPAN:not(:first-child) {
     color: #295880;
     font-weight: bold;

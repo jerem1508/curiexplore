@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HCAccessibility from 'highcharts/modules/accessibility';
@@ -7,7 +8,7 @@ import HCExporting from 'highcharts/modules/exporting';
 import HCExportingData from 'highcharts/modules/export-data';
 import HCRounded from 'highcharts-rounded-corners';
 
-import classes from '../GraphCurie.scss';
+import classes from './HighChartsGraph.scss';
 
 HCAccessibility(Highcharts);
 HCExporting(Highcharts);
@@ -40,7 +41,7 @@ export default class HighChartsBar extends Component {
   componentDidMount() {
     const allData = [];
     const dl = this.data.length;
-    const series = [];
+    let series = [];
     let name = '';
     try {
       name = this.data[0].data[0].label_long;
@@ -59,8 +60,12 @@ export default class HighChartsBar extends Component {
       allData.push(data);
     }
 
-    for (let i = 0; i < dl; i += 1) {
-      series.push({ name: this.data[i].data[0].country_label, data: allData[i], color: this.props.colors[i] });
+    try {
+      for (let i = 0; i < dl; i += 1) {
+        series.push({ name: this.data[i].data[0].country_label, data: allData[i], color: this.props.colors[i] });
+      }
+    } catch (error) {
+      series = [];
     }
 
     const options = {
@@ -113,9 +118,6 @@ export default class HighChartsBar extends Component {
       legend: {
         enabled: false,
       },
-      // tooltip: {
-      //   enabled: true,
-      // },
       series,
       exporting: {
         buttons: {
@@ -149,21 +151,17 @@ export default class HighChartsBar extends Component {
 
   render() {
     const ShareComponent = () => (
-      <div style={{ overflow: 'hidden', paddingLeft: '2%' }}>
-        <hr />
-        <div style={{ float: 'left' }}>
-          <p>Partager</p>
-          <i className="fas fa-share-alt-square fa-lg" />
-          <p>Intégrer le code</p>
-          <i className="fas fa-code fa-lg" />
-        </div>
-        <div style={{ float: 'right' }}>
-          <p><b>Télécharger</b></p>
-          <button type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
-          <p>.png</p>
-          <button type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
-          <p>.csv</p>
-        </div>
+      <div className={classes.units}>
+        <span>Partager</span>
+        <button className={classes.dot} type="button"><i className="fas fa-share-alt-square fa-lg" /></button>
+        <span>Intégrer le code</span>
+        <button className={classes.dot} type="button"><i className="fas fa-code fa-lg" /></button>
+        <span>Télécharger</span>
+        <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
+        <span>.png</span>
+        <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
+        <span>.csv</span>
+        <span style={{ float: 'right', marginTop: '5px' }}>{this.props.source}</span>
       </div>
     );
     return (
@@ -190,5 +188,6 @@ export default class HighChartsBar extends Component {
 HighChartsBar.propTypes = {
   colors: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  source: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
 };
