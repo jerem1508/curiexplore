@@ -71,6 +71,16 @@ class Fiche extends Component {
         return { data };
       });
     });
+
+    // Données institutions
+    url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-institutions&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.odsInstitutions = response.data.records[0].fields;
+        return { data };
+      });
+    });
   }
 
   renderNoData = () => (
