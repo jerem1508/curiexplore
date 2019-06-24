@@ -13,6 +13,7 @@ import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
 import CounterCard from './CounterCard';
 import SubTitleActors from './SubTitle/SubTitleActors';
+import InstitutionCard from './InstitutionCard';
 
 /* SCSS */
 import classes from './Fiche.scss';
@@ -61,7 +62,7 @@ class Fiche extends Component {
       });
     });
 
-    // Données
+    // Données institutions
     url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-institutions&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
       this.setState((prevState) => {
@@ -144,19 +145,20 @@ class Fiche extends Component {
           label="Les acteurs de l'ESRI"
           icon="fas fa-city"
         />
+
         <div className={classes.Actors}>
           <div className="row">
             <div className={`col ${classes.Map}`}>
               map
             </div>
           </div>
+
           <div className={classes.gridActors}>
             <div className="row">
               <CounterCard
                 icon="fas fa-thumbtack fa-2x"
                 label="acteurs stratégiques"
                 anchor="#example" // link to anchor
-
               />
               <CounterCard
                 icon="fas fa-money-bill-wave fa-2x"
@@ -204,11 +206,33 @@ class Fiche extends Component {
               />
             </div>
           </div>
+
+          <div className={classes.ActorsList}>
+            <SubTitleActors
+              icon="fas fa-thumbtack"
+              label="8 acteurs stratégiques"
+            />
+            <div className={classes.gridActors}>
+              <div className="row">
+                {
+                  (this.state.data.odsInstitutions)
+                    ? (
+                      <InstitutionCard
+                        nomFr={(this.state.data.odsInstitutions.nominstitutionfr || null)}
+                        nom={(this.state.data.odsInstitutions.nominstitution || null)}
+                        sigleFr={(this.state.data.odsInstitutions.sigleInstitutionfr || null)}
+                        sigle={(this.state.data.odsInstitutions.sigleinstitution || null)}
+                        description={(this.state.data.odsInstitutions.descriptioninstitutionclean || null)}
+                        webSite={(this.state.data.odsInstitutions.siteinstitution || null)}
+                      />
+                    )
+                    : null
+                }
+              </div>
+            </div>
+          </div>
         </div>
-        <SubTitleActors
-          icon="fas fa-thumbtack"
-          label="8 acteurs stratégiques"
-        />
+
       </div>
 
       <div className="container" id="example">

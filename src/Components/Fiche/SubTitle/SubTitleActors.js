@@ -8,7 +8,7 @@ const SubTitleActors = props => (
   <div className={`row ${classes.SubTitleActors}`}>
     <div className="col">
       <i className={props.icon} />
-      &nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;
       {props.label}
     </div>
   </div>
