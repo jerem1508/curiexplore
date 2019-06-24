@@ -1,0 +1,80 @@
+@import '../../style.scss';
+
+.Annuaire {
+
+}
+
+.Letter {
+  display: inline-block;
+  padding: 5px 5px 0 5px;
+  cursor: pointer;
+  color: white;
+}
+
+
+.HeaderTitle {
+  padding-bottom: 36px;
+  padding-left: 50px;
+  background-color: $darkBlueColor;
+  border-bottom: solid rgb(0, 33, 59);
+
+  .Title {
+    font-size: 1.7rem;
+    color: White;
+    font-weight: bold ;
+    font-family: 'Bitter', serif;
+  }
+
+  .Label {
+    color: White;
+  }
+
+  .Search {
+    .Label {
+      color: $lightBlueColor;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+    .Input {
+      INPUT {
+        width: 180px;
+        padding: 4px 20px;
+        box-sizing: border-box;
+        border: 1px solid $lightBlueColor;
+        border-radius: 15px;
+      }
+      input[type=text] {
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+      }
+
+      input[type=text]:focus {
+        width: 100%;
+      }
+    }
+  }
+
+  .BreadCrumb {
+    height: 36px;
+    font-size: 0.8rem;
+    a {
+      color: $lightBlueColor;
+    }
+    .breadcrumb {
+      background-color: #ffffff00;
+    }
+    .breadcrumb > .active {
+      color: $skyBlueColor;
+      font-weight: bold;
+    }
+    .breadcrumb > .active:before {
+      content: ">";
+      color: $lightBlueColor;
+    }
+  }
+
+  @media (max-width: 1520px) {
+    padding-top: 60px;
+    padding-left: 220px;
+  }
+}

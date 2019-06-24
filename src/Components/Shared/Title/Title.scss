@@ -1,0 +1,19 @@
+@import '../../../style.scss';
+
+.Title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: $darkBlueColor;
+  padding-left: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  I {
+    display: inline-block;
+  }
+  SPAN {
+    font-family: 'Bitter', serif;
+    display: inline-block;
+    padding-left: 16px;
+  }
+}

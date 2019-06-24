@@ -26,7 +26,6 @@ class Fiche extends Component {
   state = {
     data: {
       restCountries: [],
-      odsContacts: {},
     },
   };
 
@@ -49,7 +48,9 @@ class Fiche extends Component {
     Axios.get(url).then((response) => {
       this.setState((prevState) => {
         const data = { ...prevState.data };
-        data.odsContacts = response.data.records[0].fields;
+        if (response.data.records[0]) {
+          data.odsContacts = response.data.records[0].fields;
+        }
         return { data };
       });
     });
@@ -127,11 +128,16 @@ class Fiche extends Component {
           label="Contacts - Ressources"
           icon="fas fa-address-book"
         />
-        <Contacts
-          language={this.props.language}
-          switchLanguage={this.props.switchLanguage}
-          data={this.state.data.odsContacts}
-        />
+        {
+          (this.state.data.odsContacts)
+            ? (
+              <Contacts
+                language={this.props.language}
+                switchLanguage={this.props.switchLanguage}
+                data={this.state.data.odsContacts}
+              />
+            ) : null
+        }
       </div>
 
       <Footer language={this.props.language} />
