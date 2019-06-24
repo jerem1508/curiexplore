@@ -127,16 +127,6 @@ class Maps extends Component {
             </div>
           </div>
           <div className={classes.Map}>
-            {
-              /*
-              <MapSVG
-                fill="#ffeec9"
-                height="550"
-                width=""
-                className={classes.MapSVG}
-              />
-              */
-            }
             <div className={classes.MapContainer}>
               <Map
                 className={classes.Map}
@@ -157,9 +147,9 @@ class Maps extends Component {
                 <GeoJSON
                   data={worldGeoJSON}
                   style={() => ({
-                    color: `${variables.mapBorderCountryColor}`,
+                    color: `${variables.mapBgColor}`,
                     fillColor: `${variables.mapCountryColor}`,
-                    weight: 0.5,
+                    weight: 0.7,
                     fillOpacity: 1,
                   })}
                   onEachFeature={this.onEachFeature}
