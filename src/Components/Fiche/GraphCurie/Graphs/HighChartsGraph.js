@@ -7,6 +7,7 @@ import HCExporting from 'highcharts/modules/exporting';
 import HCExportingData from 'highcharts/modules/export-data';
 import HCRounded from 'highcharts-rounded-corners';
 
+import classes from '../GraphCurie.scss';
 
 HCAccessibility(Highcharts);
 HCExporting(Highcharts);
@@ -39,7 +40,13 @@ export default class HighChartsBar extends Component {
   componentDidMount() {
     const allData = [];
     const dl = this.data.length;
-    let series = [];
+    const series = [];
+    let name = '';
+    try {
+      name = this.data[0].data[0].label_long;
+    } catch (error) {
+      name = '';
+    }
     for (let i = 0; i < dl; i += 1) {
       const data = [];
       this.data[i].data.sort((a, b) => (a.year - b.year));
@@ -52,36 +59,8 @@ export default class HighChartsBar extends Component {
       allData.push(data);
     }
 
-    if (dl === 1) {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }];
-    } else if (dl === 2) {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }, {
-        name: 'Test',
-        data: allData[1],
-        color: this.props.colors[1],
-      }];
-    } else {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }, {
-        name: 'Test',
-        data: allData[1],
-        color: this.props.colors[1],
-      }, {
-        name: 'Test2',
-        data: allData[2],
-        color: this.props.colors[2],
-      }];
+    for (let i = 0; i < dl; i += 1) {
+      series.push({ name: this.data[i].data[0].country_label, data: allData[i], color: this.props.colors[i] });
     }
 
     const options = {
@@ -93,17 +72,42 @@ export default class HighChartsBar extends Component {
       },
       xAxis: {
         type: 'category',
+        lineWidth: 3,
+        lineColor: classes.darkBlueColor,
         labels: {
           style: {
             fontSize: '13px',
             fontFamily: 'Verdana, sans-serif',
+            color: classes.darkBlueColor,
+            fontWeight: 'bold',
           },
         },
       },
       yAxis: {
         min: 0,
         title: {
-          text: 'Population (millions)',
+          text: name,
+        },
+        labels: {
+          formatter() {
+            if (this.value >= 1E9) {
+              // alert('toto');
+              return `${(this.value / 1E12)} Md`;
+            } if (this.value >= 1E6) {
+              return `${(this.value / 1E6)} M`;
+            }
+            return this.value;
+          },
+        },
+      },
+      tooltip: {
+        formatter() {
+          if (this.y >= 1E9) {
+            return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
+          } if (this.y >= 1E6) {
+            return `${this.x}<br />${this.series.name}<br />${(this.y / 1E6).toFixed(1)} M`;
+          }
+          return this.y.toFixed(1);
         },
       },
       legend: {
