@@ -1,9 +1,30 @@
 @import '../../../../style.scss';
 
-.arrowRight {
+.ArrowRight {
   width: 0;
   height: 0;
-  border-top: 60px solid transparent;
-  border-bottom: 60px solid transparent;
-  border-left: 60px solid #093e6c;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 40px solid $darkBlueColor;
+}
+
+.LeftCol {
+  background-color: $darkBlueColor;
+  SPAN {
+    line-height: 22px;
+    display: block;
+  }
+  span:first-child {
+    padding-top: 15px;
+    color: $greyBColor;
+  }
+  span:last-child {
+    color: white;
+    font-size: 1.7rem;
+  }
+  .IndicPart {
+    line-height: 20px;
+    color: white;
+    padding-top: 20px;
+  }
 }

@@ -1,14 +1,53 @@
 @import '../../../style.scss';
 
 .GraphCurie {
-  
+  .Menu {
+    height: 40px;
+    background-color: $darkBlueColor;
+  }
+}
+.btnDefaultCountry {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: $blueColor;
+  background-color: white;
+  border-radius: 15px;
+}
+.btnCountry {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: $blueColor;
+  background-color: white;
+  border-radius: 15px;
+}
+.btnCountry:after {
+  content: ' x';
+  font-weight: bold;
 }
 
-:export {
-  firstCountry: $femmeParPaysColor;
-  secondCountry: $paysComparaison1Color;
-  thirdCountry: $paysComparaison2Color;
-  monde: $mondeColor;
-  ocde: $ocdeColor;
-  ue: $ueColor;
+.dot {
+  margin-right: 5px;
+  height: 15px;
+  width: 15px;
+  border:1px solid black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.units {
+  SPAN:not(:first-child) {
+    color: #295880;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+  span:first-child {
+    font-style: italic;
+    color: #295880;
+  }
 }

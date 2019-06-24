@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import loadable from '@loadable/component';
 
-import HighChartsBar from './Graphs/HighChartsBar';
 import GraphHeader from './Shared/GraphHeader';
+import HighChartsGraph from './Graphs/HighChartsGraph';
 
-import colorsVar from './GraphCurie.scss';
+import classes from './GraphCurie.scss';
 
 const params = require('./GraphCurie-data/indicateurs.json');
-const isoList = require('./GraphCurie-data/iso3.json');
+const isoList = require('../../Homepage/CountriesList/countriesList.json');
 
 const url = 'http://10.243.98.74/datastore/curie';
 
@@ -17,6 +18,7 @@ class GraphCurie extends Component {
   constructor(props) {
     super(props);
     this.country = null;
+    this.graphFormat = null;
     this.countryList = [this.props.countryCode.toUpperCase()];
     this.graphIndex = 0;
     this.allData = [];
@@ -32,6 +34,7 @@ class GraphCurie extends Component {
     this.handleIndic = this.handleIndic.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getLegend = this.getLegend.bind(this);
+    this.getMenu = this.getMenu.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +45,7 @@ class GraphCurie extends Component {
     // On vérifie si le code iso 3 est valide
     this.country = this.props.countryCode.toUpperCase();
     for (i = 0; i < isoList.length; i += 1) {
-      if (isoList[i]['alpha-3'] === this.country) {
+      if (isoList[i].ISO_alpha3 === this.country) {
         this.setState({ isMissing: false });
         break;
       }
@@ -67,12 +70,12 @@ class GraphCurie extends Component {
 
   // On recup les couleurs
   getColors() {
-    this.colors.push(colorsVar.firstCountry);
-    this.colors.push(colorsVar.secondCountry);
-    this.colors.push(colorsVar.thirdCountry);
-    this.colors.push(colorsVar.mondeCountry);
-    this.colors.push(colorsVar.ocdeCountry);
-    this.colors.push(colorsVar.ueCountry);
+    this.colors.push(classes.firstCountry);
+    this.colors.push(classes.secondCountry);
+    this.colors.push(classes.thirdCountry);
+    this.colors.push(classes.mondeCountry);
+    this.colors.push(classes.ocdeCountry);
+    this.colors.push(classes.ueCountry);
   }
 
   async getGraphValues(label, index, indic) {
@@ -132,16 +135,31 @@ class GraphCurie extends Component {
         this.allData.push(tmpLbl);
       }
     }
+    this.graphFormat = params[label][indic].type;
     this.setState({ filterData: tempData });
   }
 
   getLegend() {
     const ctryList = [];
     for (let i = 0; i < this.countryList.length; i += 1) {
-      if (i === 0) {
-        ctryList.push(<p style={{ display: 'inline' }}>{this.countryList[i]}</p>);
-      } else {
-        ctryList.push(<p onClick={() => this.toggleCountry(this.countryList[i])} style={{ display: 'inline' }}>{this.countryList[i]}</p>);
+      for (let j = 0; j < isoList.length; j += 1) {
+        if (this.countryList[i] === isoList[j].ISO_alpha3) {
+          if (i === 0) {
+            ctryList.push(
+              <span className={classes.btnDefaultCountry}>
+                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+                {isoList[j].Pays}
+              </span>,
+            );
+          } else {
+            ctryList.push(
+              <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
+                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+                {isoList[j].Pays}
+              </span>
+            );
+          }
+        }
       }
     }
     return (ctryList);
@@ -152,21 +170,26 @@ class GraphCurie extends Component {
     for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
       if (i === this.graphIndex) {
         radioList.push(
-          <div>
+          <span>
             <input type="radio" name="test" checked value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
             {params[this.props.graphType][this.indic].unit[i].label}
-          </div>,
+          </span>,
         );
       } else {
         radioList.push(
-          <div>
+          <span>
             <input type="radio" name="test" value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
             {params[this.props.graphType][this.indic].unit[i].label}
-          </div>,
+          </span>,
         );
       }
     }
-    return (<div>Afficher en : {radioList}</div>);
+    return (
+      <div className={classes.units}>
+        <span>Afficher en</span>
+        {radioList}
+      </div>
+    );
   }
 
   getSource() {
@@ -184,6 +207,13 @@ class GraphCurie extends Component {
       return(<div>Sources : {srcList}</div>);
     }
     return(<div>Source : {srcList}</div>);
+  }
+
+  getMenu() {
+    return ( <span>                   <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
+                          FRA
+                        <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
+                          CAN </span>)
   }
 
   handleIndic(event) {
@@ -212,7 +242,7 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '650px' }}>
+      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '650px' }} className={classes.GraphCurie}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
@@ -227,13 +257,25 @@ class GraphCurie extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="pl-0 pr-0">
-                    {this.state.filterData ? <HighChartsBar style={{ backgroundColor: 'white' }} colors={this.colors} data={this.state.filterData} /> : <div style={{ backgroundColor: 'white' }}>Loading</div>}
+                  <Col className={classes.Menu}>
+                    {this.getMenu()}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
                     {this.getInputs()}
-                    <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
-                      FRA
-                    <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
-                      CAN
+                  </Col>
+                </Row>
+                <Row style={{ backgroundColor: 'white' }}>
+                  <Col className="pl-0 pr-0">
+                    {
+                      // Ajouter switch bar ou courbe
+                      // Regrouper filterData au meme endroit
+                      // Menu indépendant
+                    }
+                    {this.state.filterData
+                      ? <HighChartsGraph colors={this.colors} data={this.state.filterData} type={this.graphFormat} />
+                      : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                     {this.state.filterData ? this.getSource() : null}
                   </Col>
                 </Row>
