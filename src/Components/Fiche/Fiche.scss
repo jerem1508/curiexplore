@@ -70,6 +70,7 @@
       box-shadow: 0px 15px 25px 0px #ccc !important;
       height: 250px;
       background-color: #a1dce2;
+      margin-left: 17px;
     }
 
     .col {
@@ -77,8 +78,12 @@
       padding-right: 0px;
     }
 
+    .ActorsList {
+      margin-top: 30px;
+    }
+
     .gridActors {
-      padding-left: 26px;
+      padding-left: 16px;
     }
 
     .CounterCard {
@@ -127,5 +132,98 @@
       }
     }
   }
+
+    .InstitutionCard {
+      background-color: white;
+      margin-top: 15px;
+      padding: 20px;
+
+      .title {
+        color: $darkBlueColor;
+        font-family: 'Bitter',serif;
+        font-weight: bold;
+        padding-left: 15px;
+        padding-right: 40px;
+      }
+
+      .subtitle {
+        color: $darkBlueColor;
+        font-family: 'Bitter',serif;
+        font-style: italic;
+        padding-left: 15px;
+      }
+
+      .sigle {
+        margin: 15px;
+        border-top: $lightBlueColor solid 2px;
+        border-bottom: $lightBlueColor solid 2px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        DIV:first-child {
+          font-weight: bold;
+          color: $darkBlueColor;
+          font-family: 'Bitter',serif;
+        }
+
+        DIV:last-child {
+          font-style: italic;
+          color: $darkBlueColor;
+          font-family: 'Bitter',serif;
+        }
+      }
+
+      .description {
+        height: 250px;
+        overflow-y: scroll;
+
+        .descriptionTitle {
+          i {
+            color: $darkBlueColor;
+          }
+          font-style: italic;
+          color: $darkBlueColor;
+        }
+
+        .descriptionText {
+          padding-top: 5px;
+          color: $darkBlueColor;
+          font-family: 'Bitter',serif;
+          padding-left: 15px;
+        }
+
+      }
+
+      .Buttons {
+        padding-top: 16px;
+        padding-left: 15px;
+        padding-right: 32px;
+
+        a {
+          width: 70%;
+        }
+
+        .Button {
+          display: inline-block;
+          padding: 5px;
+          border-radius: 16px;
+          background-color: $blueColor;
+          color: white;
+          font-size: 0.9em;
+          font-weight: bold;
+          span:first-child {
+            display: inline-block;
+            width: 80%;
+            padding-left: 16px;
+          }
+          span:last-child {
+            display: inline-block;
+            width: 20%;
+            text-align: center;
+          }
+        }
+      }
+  }
+
 
 }
