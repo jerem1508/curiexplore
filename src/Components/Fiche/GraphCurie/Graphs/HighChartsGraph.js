@@ -175,13 +175,13 @@ export default class HighChartsBar extends Component {
     const ShareComponent = () => (
       <div className={classes.exportBtn}>
         <span>Partager</span>
-        <button className={classes.dot} type="button"><i className="fas fa-share-alt-square fa-lg" /></button>
+        <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
         <span>Intégrer le code</span>
-        <button className={classes.dot} type="button"><i className="fas fa-code fa-lg" /></button>
+        <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
         <span>Télécharger</span>
-        <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
+        <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
         <span>.png</span>
-        <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
+        <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
         <span>.csv</span>
         <span className={classes.src}>{this.props.source}</span>
       </div>

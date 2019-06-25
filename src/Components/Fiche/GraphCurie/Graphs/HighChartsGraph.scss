@@ -18,12 +18,14 @@
 .dot {
   height: 40px;
   width: 40px;
-  color: $blueColor;
+  // color: $blueColor;
+
+  border: 0;
   background-color: $blueColor;
   border-radius: 50%;
   i {
-    background-color: white;
-    color: $blueColor;
+    color: white;
+    // color: $blueColor;
   }
 }
 
