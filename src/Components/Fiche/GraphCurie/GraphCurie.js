@@ -13,6 +13,19 @@ const isoList = require('../../Homepage/CountriesList/countriesList.json');
 
 const url = 'http://10.243.98.74/datastore/curie';
 
+// CODE WORDL : WLD
+// CODE OCDE : OED
+// CODE EUROPE : EUU
+
+/**
+ * GraphCurie
+ * Url : <br/>
+ * Description : Gestions des données (appels API) + tri et appel du graph<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
 class GraphCurie extends Component {
   constructor(props) {
     super(props);
@@ -72,9 +85,9 @@ class GraphCurie extends Component {
     this.colors.push(classes.firstCountry);
     this.colors.push(classes.secondCountry);
     this.colors.push(classes.thirdCountry);
-    this.colors.push(classes.mondeCountry);
-    this.colors.push(classes.ocdeCountry);
-    this.colors.push(classes.ueCountry);
+    this.colors.push(classes.monde);
+    this.colors.push(classes.ocde);
+    this.colors.push(classes.ue);
   }
 
   async getGraphValues(label, index, indic) {
@@ -155,10 +168,18 @@ class GraphCurie extends Component {
               <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
                 <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
                 {isoList[j].Pays}
-              </span>
+              </span>,
             );
           }
         }
+      }
+      if (this.countryList[i] === 'WLD' || this.countryList[i] === 'OED' || this.countryList[i] === 'EUU') {
+        ctryList.push(
+          <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
+            <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+            {this.countryList[i]}
+          </span>,
+        );
       }
     }
     return (ctryList);
@@ -219,10 +240,20 @@ class GraphCurie extends Component {
   }
 
   getMenu() {
-    return ( <span>                   <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
-                          FRA
-                        <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
-                          CAN </span>)
+    return (
+      <span>
+        <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
+          FRA
+        <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
+          CAN
+        <input type="checkbox" name="love" value="love" id="WLD" onChange={e => this.toggleCountry(e.target.id)} />
+          WLD
+        <input type="checkbox" name="love" value="love" id="OED" onChange={e => this.toggleCountry(e.target.id)} />
+          OED
+        <input type="checkbox" name="love" value="love" id="EUU" onChange={e => this.toggleCountry(e.target.id)} />
+          EUU
+      </span>
+    );
   }
 
   handleIndic(event) {

@@ -2,7 +2,7 @@
 
 .exportBtn {
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 10px;
   margin-bottom: 15px;
   span {
     font-style: italic;
@@ -18,9 +18,13 @@
 .dot {
   height: 40px;
   width: 40px;
-  // color: $blueColor;
+  color: $blueColor;
   background-color: $blueColor;
   border-radius: 50%;
+  i {
+    background-color: white;
+    color: $blueColor;
+  }
 }
 
 .src {

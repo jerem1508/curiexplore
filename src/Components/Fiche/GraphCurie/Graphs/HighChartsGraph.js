@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HCAccessibility from 'highcharts/modules/accessibility';
@@ -15,14 +14,10 @@ HCExporting(Highcharts);
 HCExportingData(Highcharts);
 HCRounded(Highcharts);
 
-// CODE OCDE : OED
-// CODE WORDL : WLD
-// CODE EUROPE : EUU
-
 /**
- * HighChartsBar
+ * HighChartsGraphs
  * Url : <br/>
- * Description : Composant HighCharts qui rend les barres horizontales <br/>
+ * Description : Composant HighCharts qui rend les graphs (barres verticales + lignes) <br/>
  * Responsive : . <br/>
  * Accessible : . <br/>
  * Tests unitaires : . <br/>.
@@ -66,7 +61,13 @@ export default class HighChartsBar extends Component {
 
     try {
       for (let i = 0; i < dl; i += 1) {
-        series.push({ name: this.data[i].data[0].country_label, data: allData[i], color: this.props.colors[i] });
+        let ctryName = '';
+        if (this.data[i].data[0].country_label != null) {
+          ctryName = this.data[i].data[0].country_label;
+        } else {
+          ctryName = this.data[i].data[0].country_code;
+        }
+        series.push({ name: ctryName, data: allData[i], color: this.props.colors[i] });
       }
     } catch (error) {
       series = [];
