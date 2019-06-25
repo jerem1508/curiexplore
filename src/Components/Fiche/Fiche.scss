@@ -79,7 +79,7 @@
     }
 
     .ActorsList {
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .gridActors {
@@ -137,6 +137,7 @@
       background-color: white;
       margin-top: 15px;
       padding: 20px;
+      height: 510px;
 
       .title {
         color: $darkBlueColor;
@@ -144,6 +145,8 @@
         font-weight: bold;
         padding-left: 15px;
         padding-right: 40px;
+        height: 48px;
+        overflow: hidden;
       }
 
       .subtitle {
@@ -151,6 +154,7 @@
         font-family: 'Bitter',serif;
         font-style: italic;
         padding-left: 15px;
+        height: 48px;
       }
 
       .sigle {
@@ -164,17 +168,19 @@
           font-weight: bold;
           color: $darkBlueColor;
           font-family: 'Bitter',serif;
+          height: 24px;
         }
 
         DIV:last-child {
           font-style: italic;
           color: $darkBlueColor;
           font-family: 'Bitter',serif;
+          height: 24px;
         }
       }
 
       .description {
-        height: 250px;
+        height: 200px;
         overflow-y: scroll;
 
         .descriptionTitle {

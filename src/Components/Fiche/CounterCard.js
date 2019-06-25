@@ -10,7 +10,7 @@ const CounterCard = (props) => {
       <div className={classes.CounterCard}>
         <i className={props.icon} />
         <div>
-          <span>8</span>
+          <span>{props.count}</span>
           &nbsp;
           {props.label}
         </div>
@@ -31,6 +31,7 @@ const CounterCard = (props) => {
 export default CounterCard;
 
 CounterCard.propTypes = {
+  count: PropTypes.number,
   icon: PropTypes.string,
   label: PropTypes.string,
   anchor: PropTypes.string,
