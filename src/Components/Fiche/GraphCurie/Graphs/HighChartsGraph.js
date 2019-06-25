@@ -15,6 +15,10 @@ HCExporting(Highcharts);
 HCExportingData(Highcharts);
 HCRounded(Highcharts);
 
+// CODE OCDE : OED
+// CODE WORDL : WLD
+// CODE EUROPE : EUU
+
 /**
  * HighChartsBar
  * Url : <br/>
@@ -106,14 +110,31 @@ export default class HighChartsBar extends Component {
         },
       },
       tooltip: {
+        shared: true,
+        crosshairs: true,
         formatter() {
-          if (this.y >= 1E9) {
-            return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
-          } if (this.y >= 1E6) {
-            return `${this.x}<br />${this.series.name}<br />${(this.y / 1E6).toFixed(1)} M`;
+          const points = this.points;
+          const len = points.length;
+          const tooltipMarkup = [];
+
+          tooltipMarkup.push(`${points[0].x}<br />`);
+          for (let i = 0; i < len; i += 1) {
+            if (this.y >= 1E9) {
+              tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
+            } else if (this.y >= 1E6) {
+              tooltipMarkup.push(`<br />${points[i].series.name}<br />${(points[i].y / 1E6).toFixed(1)} M`);
+            }
           }
-          return this.y.toFixed(1);
+          return tooltipMarkup;
         },
+        // formatter() {
+        //   if (this.y >= 1E9) {
+        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
+        //   } if (this.y >= 1E6) {
+        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E6).toFixed(1)} M`;
+        //   }
+        //   return this.y.toFixed(1);
+        // },
       },
       legend: {
         enabled: false,
@@ -151,7 +172,7 @@ export default class HighChartsBar extends Component {
 
   render() {
     const ShareComponent = () => (
-      <div className={classes.units}>
+      <div className={classes.exportBtn}>
         <span>Partager</span>
         <button className={classes.dot} type="button"><i className="fas fa-share-alt-square fa-lg" /></button>
         <span>Intégrer le code</span>
@@ -161,7 +182,7 @@ export default class HighChartsBar extends Component {
         <span>.png</span>
         <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
         <span>.csv</span>
-        <span style={{ float: 'right', marginTop: '5px' }}>{this.props.source}</span>
+        <span className={classes.src}>{this.props.source}</span>
       </div>
     );
     return (
