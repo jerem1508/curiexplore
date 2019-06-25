@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HCAccessibility from 'highcharts/modules/accessibility';
@@ -7,11 +8,16 @@ import HCExporting from 'highcharts/modules/exporting';
 import HCExportingData from 'highcharts/modules/export-data';
 import HCRounded from 'highcharts-rounded-corners';
 
+import classes from './HighChartsGraph.scss';
 
 HCAccessibility(Highcharts);
 HCExporting(Highcharts);
 HCExportingData(Highcharts);
 HCRounded(Highcharts);
+
+// CODE OCDE : OED
+// CODE WORDL : WLD
+// CODE EUROPE : EUU
 
 /**
  * HighChartsBar
@@ -40,6 +46,12 @@ export default class HighChartsBar extends Component {
     const allData = [];
     const dl = this.data.length;
     let series = [];
+    let name = '';
+    try {
+      name = this.data[0].data[0].label_long;
+    } catch (error) {
+      name = '';
+    }
     for (let i = 0; i < dl; i += 1) {
       const data = [];
       this.data[i].data.sort((a, b) => (a.year - b.year));
@@ -52,36 +64,12 @@ export default class HighChartsBar extends Component {
       allData.push(data);
     }
 
-    if (dl === 1) {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }];
-    } else if (dl === 2) {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }, {
-        name: 'Test',
-        data: allData[1],
-        color: this.props.colors[1],
-      }];
-    } else {
-      series = [{
-        name: 'Population',
-        data: allData[0],
-        color: this.props.colors[0],
-      }, {
-        name: 'Test',
-        data: allData[1],
-        color: this.props.colors[1],
-      }, {
-        name: 'Test2',
-        data: allData[2],
-        color: this.props.colors[2],
-      }];
+    try {
+      for (let i = 0; i < dl; i += 1) {
+        series.push({ name: this.data[i].data[0].country_label, data: allData[i], color: this.props.colors[i] });
+      }
+    } catch (error) {
+      series = [];
     }
 
     const options = {
@@ -93,25 +81,64 @@ export default class HighChartsBar extends Component {
       },
       xAxis: {
         type: 'category',
+        lineWidth: 3,
+        lineColor: classes.darkBlueColor,
         labels: {
           style: {
             fontSize: '13px',
             fontFamily: 'Verdana, sans-serif',
+            color: classes.darkBlueColor,
+            fontWeight: 'bold',
           },
         },
       },
       yAxis: {
         min: 0,
         title: {
-          text: 'Population (millions)',
+          text: name,
         },
+        labels: {
+          formatter() {
+            if (this.value >= 1E9) {
+              // alert('toto');
+              return `${(this.value / 1E12)} Md`;
+            } if (this.value >= 1E6) {
+              return `${(this.value / 1E6)} M`;
+            }
+            return this.value;
+          },
+        },
+      },
+      tooltip: {
+        shared: true,
+        crosshairs: true,
+        formatter() {
+          const points = this.points;
+          const len = points.length;
+          const tooltipMarkup = [];
+
+          tooltipMarkup.push(`${points[0].x}<br />`);
+          for (let i = 0; i < len; i += 1) {
+            if (this.y >= 1E9) {
+              tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
+            } else if (this.y >= 1E6) {
+              tooltipMarkup.push(`<br />${points[i].series.name}<br />${(points[i].y / 1E6).toFixed(1)} M`);
+            }
+          }
+          return tooltipMarkup;
+        },
+        // formatter() {
+        //   if (this.y >= 1E9) {
+        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
+        //   } if (this.y >= 1E6) {
+        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E6).toFixed(1)} M`;
+        //   }
+        //   return this.y.toFixed(1);
+        // },
       },
       legend: {
         enabled: false,
       },
-      // tooltip: {
-      //   enabled: true,
-      // },
       series,
       exporting: {
         buttons: {
@@ -145,21 +172,17 @@ export default class HighChartsBar extends Component {
 
   render() {
     const ShareComponent = () => (
-      <div style={{ overflow: 'hidden', paddingLeft: '2%' }}>
-        <hr />
-        <div style={{ float: 'left' }}>
-          <p>Partager</p>
-          <i className="fas fa-share-alt-square fa-lg" />
-          <p>Intégrer le code</p>
-          <i className="fas fa-code fa-lg" />
-        </div>
-        <div style={{ float: 'right' }}>
-          <p><b>Télécharger</b></p>
-          <button type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
-          <p>.png</p>
-          <button type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
-          <p>.csv</p>
-        </div>
+      <div className={classes.exportBtn}>
+        <span>Partager</span>
+        <button className={classes.dot} type="button"><i className="fas fa-share-alt-square fa-lg" /></button>
+        <span>Intégrer le code</span>
+        <button className={classes.dot} type="button"><i className="fas fa-code fa-lg" /></button>
+        <span>Télécharger</span>
+        <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image fa-lg" /></button>
+        <span>.png</span>
+        <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table fa-lg" /></button>
+        <span>.csv</span>
+        <span className={classes.src}>{this.props.source}</span>
       </div>
     );
     return (
@@ -186,5 +209,6 @@ export default class HighChartsBar extends Component {
 HighChartsBar.propTypes = {
   colors: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  source: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
 };

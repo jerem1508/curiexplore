@@ -3,7 +3,7 @@
     { "name": "pib", "label": "Produit intérieur brut", "type": "column", "unit" :
       [
         { "label": "Monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
-        { "label" : "$ PPA courantes", "code" : "NY.GDP.MKTP.PP.CD"}
+        { "label" : "$ PPA internationaux courants", "code" : "NY.GDP.MKTP.PP.CD"}
       ]
     }, {
       "name": "pop_act", "label": "Population active (total)", "type": "line", "unit" :
