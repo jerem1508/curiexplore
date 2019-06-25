@@ -147,6 +147,7 @@ class Contacts extends Component {
             <Map
               className={classes.Map}
               {...mapProps}
+              scrollWheelZoom={false}
             >
               <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -245,6 +246,5 @@ export default Contacts;
 
 Contacts.propTypes = {
   // language: PropTypes.string.isRequired,
-  // switchLanguage: PropTypes.func.isRequired,
   data: PropTypes.object,
 };

@@ -33,7 +33,20 @@
     }
   }
 
-  @media (max-width: 1520px) {
-    padding-top: 56px;
+  @media (min-width: 768px) {
+    padding-top: 100px;
+    padding-left: 220px;
+  }
+  @media (min-width: 1043px) {
+    padding-top: 60px;
+    padding-left: 220px;
+  }
+  @media (min-width: 1200px) {
+    padding-top: 60px;
+    padding-left: 220px;
+  }
+  @media (min-width: 1550px) {
+    padding-top: 60px;
+    padding-left: 2rem;
   }
 }

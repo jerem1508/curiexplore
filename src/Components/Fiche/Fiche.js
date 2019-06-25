@@ -133,7 +133,6 @@ class Fiche extends Component {
             ? (
               <Contacts
                 language={this.props.language}
-                switchLanguage={this.props.switchLanguage}
                 data={this.state.data.odsContacts}
               />
             ) : null
