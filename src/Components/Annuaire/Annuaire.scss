@@ -1,16 +1,21 @@
 @import '../../style.scss';
 
-.Annuaire {
-
-}
-
 .Letter {
   display: inline-block;
   padding: 5px 5px 0 5px;
   cursor: pointer;
-  color: white;
+  color: $lightBlueColor;
 }
-
+.LetterClickable {
+  display: inline-block;
+  padding: 5px 5px 0 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+.SelectedLetter {
+  text-decoration: underline;
+}
 
 .HeaderTitle {
   padding-bottom: 36px;
@@ -73,8 +78,22 @@
     }
   }
 
-  @media (max-width: 1520px) {
+
+  @media (min-width: 768px) {
+    padding-top: 100px;
+    padding-left: 220px;
+  }
+  @media (min-width: 1043px) {
     padding-top: 60px;
     padding-left: 220px;
   }
+  @media (min-width: 1200px) {
+    padding-top: 60px;
+    padding-left: 220px;
+  }
+  @media (min-width: 1550px) {
+    padding-top: 60px;
+    padding-left: 2rem;
+  }
 }
+/* /HeaderTitle*/
