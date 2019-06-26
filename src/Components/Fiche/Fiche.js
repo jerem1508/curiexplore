@@ -87,6 +87,14 @@ class Fiche extends Component {
     return result;
   }
 
+  filteredActorsA8 = (thematic) => {
+    let result = [];
+    if (this.state.data.odsInstitutions.length > 0) {
+      result = this.state.data.odsInstitutions.filter(el => el.codethematiqueinstitution === thematic);
+    }
+    return result;
+  }
+
   renderNoData = () => (
     <div className={classes.Fiche}>
       loading ...
@@ -101,8 +109,8 @@ class Fiche extends Component {
     const type5 = 'Analyse du système national';
     const type6 = 'Établissement d\'Enseignement supérieur';
     const type7 = 'Institution de Recherche et Innovation';
-    const type8 = 'Implantation d\'entités françaises';
-  //  const type9 = 'Principaux acteurs en charge de la définition des politiques ESRI';
+    const type8 = 'ES';
+    const type9 = 'RI';
 
     const filteredActors1 = this.filteredActors(type1);
     const filteredActors2 = this.filteredActors(type2);
@@ -111,11 +119,8 @@ class Fiche extends Component {
     const filteredActors5 = this.filteredActors(type5);
     const filteredActors6 = this.filteredActors(type6);
     const filteredActors7 = this.filteredActors(type7);
-    const filteredActors8 = this.filteredActors(type8);
-//    const filteredActors9 = this.filteredActors(type9);
-
-    console.log('length =>', filteredActors2.length);
-    console.log('filteredActors =>', filteredActors1);
+    const filteredActors8 = this.filteredActorsA8(type8);
+    const filteredActors9 = this.filteredActorsA8(type9);
 
     return (
       <div className={classes.Fiche}>
@@ -246,7 +251,7 @@ class Fiche extends Component {
                   anchor="#example"
                 />
                 <CounterCard
-                  count={filteredActors8.length}
+                  count={filteredActors9.length}
                   icon="fas fa-star fa-2x"
                   label="acteurs évaluations"
                   anchor="#example"
@@ -408,6 +413,54 @@ class Fiche extends Component {
                 <div className="row">
                   {
                     filteredActors7.map(item => (
+                      <InstitutionCard
+                        nomFr={(item.nominstitutionfr || null)}
+                        nom={(item.nominstitution || null)}
+                        sigleFr={(item.sigleInstitutionfr || null)}
+                        sigle={(item.sigleinstitution || null)}
+                        description={(item.descriptioninstitutionclean || null)}
+                        webSite={(item.siteinstitution || null)}
+                      />
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className={classes.ActorsList}>
+              <SubTitleActors
+                count={filteredActors8.length}
+                icon="fas fa-thumbtack"
+                label="acteurs français ES sur place"
+              />
+              <div className={classes.gridActors}>
+                <div className="row">
+                  {
+                    filteredActors8.map(item => (
+                      <InstitutionCard
+                        nomFr={(item.nominstitutionfr || null)}
+                        nom={(item.nominstitution || null)}
+                        sigleFr={(item.sigleInstitutionfr || null)}
+                        sigle={(item.sigleinstitution || null)}
+                        description={(item.descriptioninstitutionclean || null)}
+                        webSite={(item.siteinstitution || null)}
+                      />
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className={classes.ActorsList}>
+              <SubTitleActors
+                count={filteredActors9.length}
+                icon="fas fa-thumbtack"
+                label="acteurs français RI sur place"
+              />
+              <div className={classes.gridActors}>
+                <div className="row">
+                  {
+                    filteredActors9.map(item => (
                       <InstitutionCard
                         nomFr={(item.nominstitutionfr || null)}
                         nom={(item.nominstitution || null)}
