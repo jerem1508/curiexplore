@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -282,17 +282,17 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div className={classes.GraphCurie}>
+      <Row>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
-              <fragment>
+              <Col className={classes.GraphCurie}>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
-                  <Col sm={11} className="pl-0 pr-0" style={{ display: 'inline' }}>
+                  <Col sm={11}>
                     {this.getLegend()}
                   </Col>
-                  <Col sm={1} className="pl-0 pr-0">
+                  <Col sm={1}>
                     <i className="fas fa-info-circle" />
                   </Col>
                 </Row>
@@ -307,7 +307,7 @@ class GraphCurie extends Component {
                   </Col>
                 </Row>
                 <Row style={{ backgroundColor: 'white' }}>
-                  <Col className="pl-0 pr-0">
+                  <Col>
                     {
                       // Ajouter switch bar ou courbe
                       // Regrouper filterData au meme endroit
@@ -318,11 +318,11 @@ class GraphCurie extends Component {
                       : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                   </Col>
                 </Row>
-              </fragment>
+              </Col>
             ),
           ]
         }
-      </div>
+      </Row>
     );
   }
 }
