@@ -282,11 +282,11 @@ class GraphCurie extends Component {
 
   render() {
     return (
-      <div style={{ marginLeft: '31px', marginTop: '16px', height: 'auto', minHeight: '650px' }} className={classes.GraphCurie}>
+      <div className={classes.GraphCurie}>
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
-              <div style={{ width: 'auto' }}>
+              <div>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
                   <Col sm={11} className="pl-0 pr-0" style={{ display: 'inline' }}>

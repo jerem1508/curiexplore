@@ -39,9 +39,21 @@ export default class HighChartsBar extends Component {
 
   componentDidMount() {
     const allData = [];
-    const dl = this.data.length;
     let series = [];
     let name = '';
+
+    for (let i = 0; i < this.data.length * 2; i += 1) {
+      for (let j = 0; j < this.data.length; j += 1) {
+        if (this.data[j].data.length === 0) {
+          // push l'index dans color array ?
+          this.data.splice(j, 1);
+        }
+      }
+    }
+
+    const dl = this.data.length;
+    let j = 0;
+    // alert(dl);
     try {
       name = this.data[0].data[0].label_long;
     } catch (error) {
@@ -50,13 +62,15 @@ export default class HighChartsBar extends Component {
     for (let i = 0; i < dl; i += 1) {
       const data = [];
       this.data[i].data.sort((a, b) => (a.year - b.year));
-      for (let j = 0; j < this.data[i].data.length; j += 1) {
+      for (j = 0; j < this.data[i].data.length; j += 1) {
         const tmp = [];
         tmp.push(this.data[i].data[j].year);
         tmp.push(this.data[i].data[j].value);
         data.push(tmp);
       }
-      allData.push(data);
+      if (j > 0) {
+        allData.push(data);
+      }
     }
 
     try {
@@ -123,7 +137,7 @@ export default class HighChartsBar extends Component {
             if (this.y >= 1E9) {
               tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
             } else if (this.y >= 1E6) {
-              tooltipMarkup.push(`<br />${points[i].series.name}<br />${(points[i].y / 1E6).toFixed(1)} M`);
+              tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
             }
           }
           return tooltipMarkup;
@@ -139,6 +153,13 @@ export default class HighChartsBar extends Component {
       },
       legend: {
         enabled: false,
+      },
+      plotOptions: {
+        line: {
+          marker: {
+            symbol: 'circle',
+          },
+        },
       },
       series,
       exporting: {

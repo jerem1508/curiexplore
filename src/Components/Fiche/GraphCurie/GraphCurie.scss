@@ -1,6 +1,11 @@
 @import '../../../style.scss';
 
 .GraphCurie {
+  margin-left: 31px;
+  margin-top: 16px;
+  // height: auto;
+  min-height: 650px;
+  box-shadow: 0px 15px 15px 0px #ccc !important;
   .Menu {
     height: 40px;
     background-color: $darkBlueColor;
