@@ -286,7 +286,7 @@ class GraphCurie extends Component {
         { this.country === null ? <div>Initializing</div>
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
-              <div>
+              <fragment>
                 <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
                   <Col sm={11} className="pl-0 pr-0" style={{ display: 'inline' }}>
@@ -318,7 +318,7 @@ class GraphCurie extends Component {
                       : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                   </Col>
                 </Row>
-              </div>
+              </fragment>
             ),
           ]
         }
