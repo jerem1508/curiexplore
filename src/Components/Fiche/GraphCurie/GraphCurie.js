@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import GraphHeader from './Shared/GraphHeader';
+import GraphMenu from './Shared/GraphMenu';
 import HighChartsGraph from './Graphs/HighChartsGraph';
 
 import classes from './GraphCurie.scss';
@@ -36,6 +37,7 @@ class GraphCurie extends Component {
     this.allData = [];
     this.indic = 0;
     this.colors = [];
+    this.tempColor = [];
     this.state = {
       isMissing: true,
       filterData: null,
@@ -46,7 +48,6 @@ class GraphCurie extends Component {
     this.handleIndic = this.handleIndic.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getLegend = this.getLegend.bind(this);
-    this.getMenu = this.getMenu.bind(this);
   }
 
   componentDidMount() {
@@ -88,6 +89,7 @@ class GraphCurie extends Component {
     this.colors.push(classes.monde);
     this.colors.push(classes.ocde);
     this.colors.push(classes.ue);
+    this.tempColor[0] = classes.firstCountry;
   }
 
   async getGraphValues(label, index, indic) {
@@ -156,27 +158,18 @@ class GraphCurie extends Component {
     for (let i = 0; i < this.countryList.length; i += 1) {
       for (let j = 0; j < isoList.length; j += 1) {
         if (this.countryList[i] === isoList[j].ISO_alpha3) {
-          if (i === 0) {
-            ctryList.push(
-              <span className={classes.btnDefaultCountry}>
-                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
-                {isoList[j].Pays}
-              </span>,
-            );
-          } else {
-            ctryList.push(
-              <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
-                <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
-                {isoList[j].Pays}
-              </span>,
-            );
-          }
+          ctryList.push(
+            <span className={classes.btnDefaultCountry}>
+              <span className={classes.dot} style={{ backgroundColor: this.tempColor[i] }} />
+              {isoList[j].Pays}
+            </span>,
+          );
         }
       }
       if (this.countryList[i] === 'WLD' || this.countryList[i] === 'OED' || this.countryList[i] === 'EUU') {
         ctryList.push(
-          <span className={classes.btnCountry} onClick={() => this.toggleCountry(this.countryList[i])}>
-            <span className={classes.dot} style={{ backgroundColor: this.colors[i] }} />
+          <span className={classes.btnDefaultCountry}>
+            <span className={classes.dot} style={{ backgroundColor: this.tempColor[i] }} />
             {this.countryList[i]}
           </span>,
         );
@@ -239,23 +232,6 @@ class GraphCurie extends Component {
     );
   }
 
-  getMenu() {
-    return (
-      <span>
-        <input type="checkbox" name="love" value="love" id="FRA" onChange={e => this.toggleCountry(e.target.id)} />
-          FRA
-        <input type="checkbox" name="love" value="love" id="CAN" onChange={e => this.toggleCountry(e.target.id)} />
-          CAN
-        <input type="checkbox" name="love" value="love" id="WLD" onChange={e => this.toggleCountry(e.target.id)} />
-          WLD
-        <input type="checkbox" name="love" value="love" id="OED" onChange={e => this.toggleCountry(e.target.id)} />
-          OED
-        <input type="checkbox" name="love" value="love" id="EUU" onChange={e => this.toggleCountry(e.target.id)} />
-          EUU
-      </span>
-    );
-  }
-
   handleIndic(event) {
     let i = 0;
     for (i = 0; i < params[this.props.graphType].length; i += 1) {
@@ -268,13 +244,20 @@ class GraphCurie extends Component {
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
-  toggleCountry(id) {
+  toggleCountry(id, colors) {
+    this.tempColor = [this.colors[0]];
+
     if (!this.countryList.includes(id)) {
       this.countryList.push(id);
     } else {
       const index = this.countryList.indexOf(id);
       if (index > -1) {
         this.countryList.splice(index, 1);
+      }
+    }
+    for (let i = 0; i < colors.length; i += 1) {
+      if (colors[i] !== '#ccc') {
+        this.tempColor.push(colors[i]);
       }
     }
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
@@ -298,7 +281,7 @@ class GraphCurie extends Component {
                 </Row>
                 <Row>
                   <Col className={classes.Menu}>
-                    {this.getMenu()}
+                    <GraphMenu colors={this.colors} toggleCountry={this.toggleCountry} />
                   </Col>
                 </Row>
                 <Row>
@@ -314,7 +297,7 @@ class GraphCurie extends Component {
                       // Menu indépendant
                     }
                     {this.state.filterData
-                      ? <HighChartsGraph colors={this.colors} data={this.state.filterData} type={this.graphFormat} source={this.getSource()} />
+                      ? <HighChartsGraph colors={this.tempColor} data={this.state.filterData} type={this.graphFormat} source={this.getSource()} />
                       : <div style={{ backgroundColor: 'white' }}>Loading</div>}
                   </Col>
                 </Row>

@@ -1,0 +1,48 @@
+@import '../../../../style.scss';
+
+.Arrow {
+  margin-left: 30px;
+}
+
+.BtnCountry {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: #696969;
+  background-color: white;
+  border-radius: 15px;
+  font-style: italic;
+}
+
+.BtnDefaultCountry {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: #696969;
+  background-color: white;
+  border-radius: 15px;
+  width: 95px;
+  font-style: italic;
+  border: 0;
+}
+
+.Dot {
+  margin-right: 5px;
+  height: 15px;
+  width: 15px;
+  border:1px solid black;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #ccc;
+}
+
+.Text {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+  font-style: italic;
+}
