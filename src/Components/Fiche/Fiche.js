@@ -11,6 +11,7 @@ import GraphCurie from './GraphCurie/GraphCurie';
 import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
+import Scimago from './Scimago/Scimago';
 
 import classes from './Fiche.scss';
 
@@ -54,7 +55,30 @@ class Fiche extends Component {
         return { data };
       });
     });
+
+    // Données Scimago
+    // Récupération de toutes les années disponibles pour le pays en cours
+    const urlScimagoYears = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=0&sort=year&facet=year&refine.iso_alpha3=${this.props.match.params.id}`;
+    Axios.get(urlScimagoYears).then((responseYear) => {
+      const years = [];
+      for (let i = 0; i < responseYear.data.facet_groups[0].facets.length; i += 1) {
+        years.push(responseYear.data.facet_groups[0].facets[i].name);
+      }
+      years.sort((a, b) => b - a);
+
+      // récupération des données de l'année la plus récente
+      // le reste se fera sur le onChange du selecteur d'année Scimago
+      const urlScimago = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=5000&refine.year=${years[0]}`;
+      Axios.get(urlScimago).then((responseData) => {
+        this.setState((prevState) => {
+          const data = { ...prevState.data };
+          data.odsScimago = { years, selectedYear: years[0], data: responseData.data.records };
+          return { data };
+        });
+      });
+    });
   }
+
 
   renderNoData = () => (
     <div className={classes.Fiche}>
@@ -63,7 +87,7 @@ class Fiche extends Component {
   );
 
   renderFiche = () => (
-    <div className={classes.Fiche}>
+    <main className={classes.Fiche}>
       <Header
         language={this.props.language}
         switchLanguage={this.props.switchLanguage}
@@ -73,7 +97,7 @@ class Fiche extends Component {
         switchLanguage={this.props.switchLanguage}
         countryName={this.state.data.restCountries.translations.fr}
       />
-      <div className="container">
+      <section className="container">
         <Title
           label="Connaitre le pays"
           icon="fas fa-binoculars"
@@ -121,9 +145,23 @@ class Fiche extends Component {
           graphType="aboutCountry"
           countryCode={this.props.match.params.id}
         />
-      </div>
+      </section>
 
-      <div className="container">
+      {
+        (this.state.data.odsScimago)
+          ? (
+            <section className={`container-fluid ${classes.Scimago}`}>
+              <Scimago
+                language={this.props.language}
+                data={this.state.data.odsScimago}
+                onYearChangeHandler=""
+              />
+            </section>
+          )
+          : null
+      }
+
+      <section className="container">
         <Title
           label="Contacts - Ressources"
           icon="fas fa-address-book"
@@ -137,10 +175,10 @@ class Fiche extends Component {
               />
             ) : null
         }
-      </div>
+      </section>
 
       <Footer language={this.props.language} />
-    </div>
+    </main>
   );
 
   render() {
