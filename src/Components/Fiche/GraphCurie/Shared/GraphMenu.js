@@ -24,6 +24,7 @@ export default class GraphMenu extends Component {
   }
 
   changeStyle(e, id) {
+    // alert(this.state.colors.length);
     const colors = this.state.colors;
     if (this.state.colors[id] === '#ccc') {
       colors[id] = this.props.colors[id];
