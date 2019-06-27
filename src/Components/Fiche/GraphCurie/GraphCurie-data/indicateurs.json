@@ -10,18 +10,6 @@
       [
         { "label": "Population active, total", "code" : "SL.TLF.TOTL.IN"}
       ]
-    }, {
-      "name": "fictif", "label": "toto", "type": "line", "unit" :
-      [
-        { "label": "Unité", "code" : "SL.TLF.TOTL.IN"}
-      ]
-    }, {
-      "name": "fictif2", "label": "tata", "type": "column", "unit" :
-      [
-        { "label": "Unité 1", "code" : "SL.TLF.TOTL.IN"},
-        { "label": "Unité 2", "code" : "SL.TLF.TOTL.IN"},
-        { "label": "Unité 3", "code" : "dsfdsgfsfsfjudsf"}
-      ]
     }
   ],
   "esri": ["Personnel"],
