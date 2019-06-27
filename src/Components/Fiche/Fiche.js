@@ -34,8 +34,8 @@ class Fiche extends Component {
     this.getData();
   }
 
-  getData = () => {
-    let url = `https://restcountries.eu/rest/v2/alpha/${this.props.match.params.id}`;
+  getRestCountriesData = () => {
+    const url = `https://restcountries.eu/rest/v2/alpha/${this.props.match.params.id}`;
     Axios.get(url).then((response) => {
       this.setState((prevState) => {
         const data = { ...prevState.data };
@@ -43,9 +43,10 @@ class Fiche extends Component {
         return { data };
       });
     });
+  }
 
-    // Données contacts
-    url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-information-generale&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+  getOdsContactsData = () => {
+    const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-information-generale&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
       this.setState((prevState) => {
         const data = { ...prevState.data };
@@ -55,30 +56,46 @@ class Fiche extends Component {
         return { data };
       });
     });
+  }
 
-    // Données Scimago
+  getOdsScimagoData = (year = null) => {
     // Récupération de toutes les années disponibles pour le pays en cours
     const urlScimagoYears = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=0&sort=year&facet=year&refine.iso_alpha3=${this.props.match.params.id}`;
     Axios.get(urlScimagoYears).then((responseYear) => {
-      const years = [];
-      for (let i = 0; i < responseYear.data.facet_groups[0].facets.length; i += 1) {
-        years.push(responseYear.data.facet_groups[0].facets[i].name);
+      let years = [];
+      if (!year) {
+        for (let i = 0; i < responseYear.data.facet_groups[0].facets.length; i += 1) {
+          years.push(responseYear.data.facet_groups[0].facets[i].name);
+        }
+        years.sort((a, b) => b - a);
+      } else {
+        years = this.state.data.odsScimago.years;
       }
-      years.sort((a, b) => b - a);
+
+      const yearToGet = (year || years[0]);
 
       // récupération des données de l'année la plus récente
       // le reste se fera sur le onChange du selecteur d'année Scimago
-      const urlScimago = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=5000&refine.year=${years[0]}`;
+      const urlScimago = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=5000&refine.year=${yearToGet}`;
       Axios.get(urlScimago).then((responseData) => {
         this.setState((prevState) => {
           const data = { ...prevState.data };
-          data.odsScimago = { years, selectedYear: years[0], data: responseData.data.records };
+          data.odsScimago = { years, selectedYear: yearToGet, data: responseData.data.records };
           return { data };
         });
       });
     });
   }
 
+  getData = () => {
+    this.getRestCountriesData();
+    this.getOdsContactsData();
+    this.getOdsScimagoData();
+  }
+
+  scimagoOnYearChangeHandler = (e) => {
+    this.getOdsScimagoData(e.target.value);
+  }
 
   renderNoData = () => (
     <div className={classes.Fiche}>
@@ -154,7 +171,7 @@ class Fiche extends Component {
               <Scimago
                 language={this.props.language}
                 data={this.state.data.odsScimago}
-                onYearChangeHandler=""
+                onYearChangeHandler={this.scimagoOnYearChangeHandler}
               />
             </section>
           )

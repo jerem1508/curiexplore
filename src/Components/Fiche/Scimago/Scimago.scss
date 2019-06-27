@@ -27,6 +27,7 @@
   .Content {
     height: 500px;
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .Row {
@@ -35,7 +36,7 @@
     margin-bottom: 5px;
     border-radius: 25px;
     height: 40px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
     padding-top: 5px;
   }
@@ -50,11 +51,43 @@
     background-color: $skyBlueColor;
     border-radius: 25px;
     font-size: 1.1rem;
-    padding-top: 3px;
+    SPAN {
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    IMG {
+      width: 35px;
+      padding-right: 5px;
+      display: inline-block;
+    }
   }
 
   .Number {
+    color: white;
+    background-color: $greyBColor;
+    border-radius: 25px;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    width: 90px;
+  }
 
+  .NumberSelected {
+    background-color: $blueColor;
+  }
+
+  .BtnSort {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 4px 8px;
+    border-radius: 17px;
+    color: white;
+    background-color: $greyBColor;
+  }
+  .BtnSortSelected{
+    background-color: $blueColor;
   }
 
 }
