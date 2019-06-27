@@ -13,11 +13,49 @@ import classes from './Scimago.scss';
 */
 class Scimago extends Component {
   state = {
-    data: {},
+    columnSelected: 'documents',
+    orderDirection: 'asc',
+    data: this.props.data.data,
   };
 
   componentDidMount() {
-    console.log('componentDidMount()');
+    this.sortDataState();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.columnSelected !== this.state.columnSelected || prevState.orderDirection !== this.state.orderDirection) {
+      this.sortDataState();
+    }
+    if (prevProps.data !== this.props.data) {
+      this.setState({ data: this.props.data.data });
+    }
+  }
+
+  sortDataState = () => {
+    /* eslint-disable */
+    const filteredData = [...this.state.data];
+    /* eslint-enable */
+    if (this.state.orderDirection === 'asc') {
+      filteredData.sort((a, b) => (b.fields[this.state.columnSelected] - a.fields[this.state.columnSelected]));
+    } else {
+      filteredData.sort((a, b) => (a.fields[this.state.columnSelected] - b.fields[this.state.columnSelected]));
+    }
+    this.setState({ data: filteredData });
+  }
+
+  btnSortClickHandler = (column) => {
+    let direction = 'asc';
+    if (this.state.columnSelected === column) {
+      direction = this.getNewDirection();
+    }
+    this.setState({ columnSelected: column, orderDirection: direction });
+  }
+
+  getNewDirection = () => {
+    if (this.state.orderDirection === 'desc') {
+      return 'asc';
+    }
+    return 'desc';
   }
 
   render() {
@@ -34,7 +72,11 @@ class Scimago extends Component {
                   Année
                 </label>
                 <div className="col-sm-10">
-                  <select id="scimagoYearSelector" className="form-control form-control-sm">
+                  <select
+                    id="scimagoYearSelector"
+                    className="form-control form-control-sm"
+                    onChange={this.props.onYearChangeHandler}
+                  >
                     {
                       this.props.data.years.map(year => <option>{year}</option>)
                     }
@@ -55,85 +97,136 @@ class Scimago extends Component {
               <br />
               documents
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('documents')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'documents') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'documents') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
             <div className={`col ${classes.TableTitle} ${classes.Title}`}>
               Citable
               <br />
               documents
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('citable_documents')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'citable_documents') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citable_documents') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
             <div className={`col ${classes.TableTitle} ${classes.Title}`}>
               Nombe de
               <br />
               citations
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('citations')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'citations') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citations') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
             <div className={`col ${classes.TableTitle} ${classes.Title}`}>
               Nombe de
               <br />
               self citations
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('self_citations')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'self_citations') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'self_citations') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
             <div className={`col ${classes.TableTitle} ${classes.Title}`}>
               Nombe de
               <br />
               citations/doc
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('citations_per_document')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'citations_per_document') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citations_per_document') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
             <div className={`col ${classes.TableTitle} ${classes.Title}`}>
               &nbsp;
               <br />
               H index
               <hr />
-              BT
+              <span
+                onClick={() => this.btnSortClickHandler('h_index')}
+                className={`${classes.BtnSort} ${(this.state.columnSelected === 'h_index') ? classes.BtnSortSelected : ''}`}
+              >
+                {
+                  (this.state.orderDirection === 'asc' && this.state.columnSelected === 'h_index') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
+                }
+              </span>
             </div>
           </div>
           <div className={classes.Content}>
             {
-              this.props.data.data.map((item) => {
-                if (item.fields.pays !== 'NA') {
-                  return (
-                    <div className={classes.Row}>
+              this.state.data.map((item, index) => (
+                <div className={classes.Row}>
+                  <div className="row">
+                    <div className="col-4">
                       <div className="row">
-                        <div className="col-4">
-                          <div className="row">
-                            <div className={`col-2 ${classes.Rank}`}>
-                              {item.fields.rank}
-                            </div>
-                            <div className={`col ${classes.CountryName}`}>
-                              {item.fields.pays}
-                            </div>
-                          </div>
+                        <div className={`col-2 ${classes.Rank}`}>
+                          {/* item.fields.rank */}
+                          {index + 1}
                         </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.documents}
-                        </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.citable_documents}
-                        </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.citations}
-                        </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.self_citations}
-                        </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.citations_per_document}
-                        </div>
-                        <div className={`col ${classes.Number}`}>
-                          {item.fields.h_index}
+                        <div className={`col ${classes.CountryName}`}>
+                          <img src={`https://restcountries.eu/data/${item.fields.iso_alpha3.toLowerCase()}.svg`} />
+                          <span>{(item.fields.pays === 'NA') ? item.fields.country : item.fields.pays}</span>
                         </div>
                       </div>
                     </div>
-                  );
-                }
-                return null;
-              })
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'documents') ? classes.NumberSelected : ''}`}>
+                        {item.fields.documents.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'citable_documents') ? classes.NumberSelected : ''}`}>
+                        {item.fields.citable_documents.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'citations') ? classes.NumberSelected : ''}`}>
+                        {item.fields.citations.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'self_citations') ? classes.NumberSelected : ''}`}>
+                        {item.fields.self_citations.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'citations_per_document') ? classes.NumberSelected : ''}`}>
+                        {item.fields.citations_per_document.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col text-center">
+                      <span className={`${classes.Number} ${(this.state.columnSelected === 'h_index') ? classes.NumberSelected : ''}`}>
+                        {item.fields.h_index.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
             }
           </div>
         </div>
@@ -145,6 +238,7 @@ class Scimago extends Component {
 export default Scimago;
 
 Scimago.propTypes = {
-  language: PropTypes.string.isRequired,
+  // language: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  onYearChangeHandler: PropTypes.func.isRequired,
 };
