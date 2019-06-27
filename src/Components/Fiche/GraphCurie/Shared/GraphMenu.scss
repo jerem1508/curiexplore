@@ -4,6 +4,22 @@
   margin-left: 30px;
 }
 
+.Selector {
+  display: inline-block;
+  position: relative;
+  DIV:first-child {
+    background-color: $blueColor;
+    position: absolute;
+    z-index: 1000;
+    width: 440px;
+    height:440px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 .BtnCountry {
   display: inline-block;
   padding: 5px 10px;
@@ -14,6 +30,7 @@
   background-color: white;
   border-radius: 15px;
   font-style: italic;
+  border: 0;
   cursor: pointer;
 }
 
