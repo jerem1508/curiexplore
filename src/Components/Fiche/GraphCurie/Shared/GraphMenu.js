@@ -10,6 +10,7 @@ const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
+    this.countryList = [];
     this.state = {
       colors: [],
       vis: ['hidden', 'hidden'],
@@ -31,7 +32,6 @@ export default class GraphMenu extends Component {
     this.setState({ colors: tempColor });
   }
 
-  // eslint-disable-next-line
   getCountryList(id) {
     const ctryList = [];
 
@@ -47,11 +47,17 @@ export default class GraphMenu extends Component {
   }
 
   setCountry(e, id) {
+    // eslint-disable-next-line
+    const vis = this.state.vis;
+
     if (id === 0) {
+      vis[0] = 'hidden';
       this.setState({ firstCountry: e.target.value });
     } else {
+      vis[1] = 'hidden';
       this.setState({ secondCountry: e.target.value });
     }
+    this.setState({ vis });
     this.changeStyle(e, id + 1);
   }
 
