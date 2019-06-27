@@ -247,13 +247,13 @@ class Fiche extends Component {
                 <CounterCard
                   count={filteredActors8.length}
                   icon="fas fa-money-bill-wave fa-2x"
-                  label="acteurs de financement"
+                  label="acteurs français ES sur place"
                   anchor="#example"
                 />
                 <CounterCard
                   count={filteredActors9.length}
                   icon="fas fa-star fa-2x"
-                  label="acteurs évaluations"
+                  label="acteurs français RI sur place"
                   anchor="#example"
                 />
               </div>
