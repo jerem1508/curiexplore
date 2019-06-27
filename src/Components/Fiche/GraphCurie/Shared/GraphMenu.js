@@ -5,13 +5,21 @@ import classes from './GraphMenu.scss';
 
 // TODO : ADD REMOVE FUNCTION HERE
 
+const isoList = require('../../../Homepage/CountriesList/countriesList.json');
+
 export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       colors: [],
+      vis: ['hidden', 'hidden'],
+      firstCountry: 'Choisir un pays',
+      secondCountry: 'Choisir un pays',
     };
     this.changeStyle = this.changeStyle.bind(this);
+    this.toggleList = this.toggleList.bind(this);
+    this.getCountryList = this.getCountryList.bind(this);
+    this.setCountry = this.setCountry.bind(this);
   }
 
   componentDidMount() {
@@ -23,8 +31,32 @@ export default class GraphMenu extends Component {
     this.setState({ colors: tempColor });
   }
 
+  // eslint-disable-next-line
+  getCountryList(id) {
+    const ctryList = [];
+
+    for (let i = 0; i < isoList.length; i += 1) {
+      ctryList.push(<button type="button" id={isoList[i].ISO_alpha3} value={isoList[i].Pays} style={{ border: '0' }} onClick={e => this.setCountry(e, id)}>{isoList[i].Pays}</button>);
+      ctryList.push(<br />);
+    }
+    return (
+      <div style={{ overflowY: 'auto', height: '280px' }}>
+        {ctryList}
+      </div>
+    );
+  }
+
+  setCountry(e, id) {
+    if (id === 0) {
+      this.setState({ firstCountry: e.target.value });
+    } else {
+      this.setState({ secondCountry: e.target.value });
+    }
+    this.changeStyle(e, id + 1);
+  }
+
   changeStyle(e, id) {
-    // alert(this.state.colors.length);
+    // eslint-disable-next-line
     const colors = this.state.colors;
     if (this.state.colors[id] === '#ccc') {
       colors[id] = this.props.colors[id];
@@ -35,41 +67,69 @@ export default class GraphMenu extends Component {
     this.props.toggleCountry(e.target.id, this.state.colors);
   }
 
+  toggleList(id) {
+    // eslint-disable-next-line
+    let vis = this.state.vis;
+    if (vis[id] === 'hidden') {
+      vis[id] = 'visible';
+    } else {
+      vis[id] = 'hidden';
+    }
+    this.setState({ vis });
+  }
+
   render() {
+    const CountryList = props => (
+      <div>
+        <br />
+        Chercher un pays
+        <br />
+        <input type="text" name="fname" placeholder="Ex: France" />
+        <br />
+        France
+        <br />
+        <hr style={{ size: 15 }} />
+        {this.getCountryList(props.id)}
+      </div>
+    );
     return (
       <span>
-        <span className={classes.BtnCountry}>
-          <span className={classes.Dot} style={{ backgroundColor: this.state.colors[1] }} />
-          Choisir un pays
-          <i className={`fas fa-sort-down ${classes.Arrow}`} />
-        </span>
+        <div className={classes.Selector}>
+          <button type="button" className={classes.BtnCountry} onClick={() => this.toggleList(0)}>
+            <span className={classes.Dot} style={{ backgroundColor: this.state.colors[1] }} />
+            {this.state.firstCountry}
+            <i className={`fas fa-sort-down ${classes.Arrow}`} />
+          </button>
+          <div style={{ visibility: this.state.vis[0] }}>
+            <CountryList id={0} />
+          </div>
+        </div>
         <span className={classes.Text}> et </span>
-        <span className={classes.BtnCountry}>
-          <span className={classes.Dot} style={{ backgroundColor: this.state.colors[2] }} />
-          Choisir un pays
-          <i className={`fas fa-sort-down ${classes.Arrow}`} />
-        </span>
+        <div className={classes.Selector}>
+          <button type="button" className={classes.BtnCountry} onClick={() => this.toggleList(1)}>
+            <span className={classes.Dot} style={{ backgroundColor: this.state.colors[2] }} />
+            {this.state.secondCountry}
+            <i className={`fas fa-sort-down ${classes.Arrow}`} />
+          </button>
+          <div style={{ visibility: this.state.vis[1] }}>
+            <CountryList id={1}/>
+          </div>
+        </div>
         <span className={classes.Text}> et avec </span>
-        <span>
-          <button type="button" id="WLD" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 3)}>
-            <span id="WLD" className={classes.Dot} style={{ backgroundColor: this.state.colors[3] }} />
-              Monde
-          </button>
-        </span>
-        <span>
-          <button type="button" id="OED" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 4)}>
-            <span id="OED" className={classes.Dot} style={{ backgroundColor: this.state.colors[4] }} />
-              OCDE
-          </button>
-        </span>
-        <span>
-          <button type="button" id="EUU" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 5)}>
-            <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
-              UE
-          </button>
-        </span>
+        <button type="button" id="WLD" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 3)}>
+          <span id="WLD" className={classes.Dot} style={{ backgroundColor: this.state.colors[3] }} />
+            Monde
+        </button>
+        <button type="button" id="OED" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 4)}>
+          <span id="OED" className={classes.Dot} style={{ backgroundColor: this.state.colors[4] }} />
+            OCDE
+        </button>
+        <button type="button" id="EUU" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 5)}>
+          <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
+            UE
+        </button>
       </span>
-    )
+    );
   }
 }
 
