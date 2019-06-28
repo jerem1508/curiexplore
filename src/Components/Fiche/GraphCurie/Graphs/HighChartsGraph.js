@@ -112,17 +112,17 @@ export default class HighChartsBar extends Component {
         title: {
           text: name,
         },
-        labels: {
-          formatter() {
-            if (this.value >= 1E9) {
-              // alert('toto');
-              return `${(this.value / 1E12)} Md`;
-            } if (this.value >= 1E6) {
-              return `${(this.value / 1E6)} M`;
-            }
-            return this.value;
-          },
-        },
+        // labels: {
+        //   formatter() {
+        //     if (this.value >= 1E9) {
+        //       // alert('toto');
+        //       return `${(this.value / 1E12)} Md`;
+        //     } if (this.value >= 1E6) {
+        //       return `${(this.value / 1E6)} M`;
+        //     }
+        //     return this.value;
+        //   },
+        // },
       },
       tooltip: {
         shared: true,
@@ -134,11 +134,12 @@ export default class HighChartsBar extends Component {
 
           tooltipMarkup.push(`${points[0].x}<br />`);
           for (let i = 0; i < len; i += 1) {
-            if (this.y >= 1E9) {
-              tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
-            } else if (this.y >= 1E6) {
-              tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
-            }
+            // if (this.y >= 1E9) {
+            //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
+            // } else if (this.y >= 1E6) {
+            //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
+            // }
+            tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)}`);
           }
           return tooltipMarkup;
         },
