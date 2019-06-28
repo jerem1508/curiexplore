@@ -43,7 +43,7 @@ const Header = (props) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className={classes.Link} href="/recherche/all">
+                <a className={classes.Link} href="/cartographie">
                   <FormattedHTMLMessage
                     id="Header.link.Cartographie"
                     defaultMessage="Cartographie ESRI"
