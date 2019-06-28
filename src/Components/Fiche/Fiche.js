@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
+import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 
 import { ODS_API_KEY } from '../../config/config';
 
@@ -26,6 +27,8 @@ import classes from './Fiche.scss';
  * Accessible : .
  * Tests unitaires : .
 */
+
+configureAnchors({ offset: -80, scrollDuration: 300 });
 
 class Fiche extends Component {
   state = {
@@ -202,19 +205,19 @@ class Fiche extends Component {
                   count={filteredActors1.length}
                   icon="fas fa-thumbtack fa-2x"
                   label="acteurs stratégiques"
-                  anchor="#example" // link to anchor
+                  anchor="#strategie"
                 />
                 <CounterCard
                   count={filteredActors2.length}
                   icon="fas fa-money-bill-wave fa-2x"
                   label="acteurs de financement"
-                  anchor="#example"
+                  anchor="#finance"
                 />
                 <CounterCard
                   count={filteredActors3.length}
                   icon="fas fa-star fa-2x"
                   label="acteurs évaluations"
-                  anchor="#example"
+                  anchor="#evaluation"
                 />
               </div>
               <div className="row">
@@ -222,19 +225,19 @@ class Fiche extends Component {
                   count={filteredActors4.length}
                   icon="fas fa-exchange-alt fa-2x"
                   label="acteurs mobilités"
-                  anchor="#example" // link to anchor
+                  anchor="#mobilite"
                 />
                 <CounterCard
                   count={filteredActors5.length}
                   icon="fas fa-microscope fa-2x"
                   label="acteurs ES"
-                  anchor="#example"
+                  anchor="#ES"
                 />
                 <CounterCard
                   count={filteredActors6.length}
                   icon="fas fa-lightbulb fa-2x"
                   label="acteurs RI"
-                  anchor="#example"
+                  anchor="#RI"
                 />
               </div>
               <div className="row">
@@ -242,238 +245,256 @@ class Fiche extends Component {
                   count={filteredActors7.length}
                   icon="fas fa-square-root-alt fa-2x"
                   label="acteurs analyses"
-                  anchor="#example" // link to anchor
+                  anchor="#analyse" // link to anchor
                 />
                 <CounterCard
                   count={filteredActors8.length}
                   icon="fas fa-money-bill-wave fa-2x"
                   label="acteurs français ES sur place"
-                  anchor="#example"
+                  anchor="#implantationES"
                 />
                 <CounterCard
                   count={filteredActors9.length}
                   icon="fas fa-star fa-2x"
                   label="acteurs français RI sur place"
-                  anchor="#example"
+                  anchor="#implantationRI"
                 />
               </div>
             </div>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors1.length}
-                icon="fas fa-thumbtack"
-                label="acteurs stratégiques"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors1.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="strategie">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors1.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs stratégiques"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors1.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors2.length}
-                icon="fas fa-thumbtack"
-                label="acteurs de financement"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors2.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="finance">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors2.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs de financement"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors2.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors3.length}
-                icon="fas fa-thumbtack"
-                label="acteurs évaluations"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors3.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="evaluation">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors3.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs évaluations"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors3.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors4.length}
-                icon="fas fa-thumbtack"
-                label="acteurs mobilités"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors4.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="mobilite">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors4.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs mobilités"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors4.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors5.length}
-                icon="fas fa-thumbtack"
-                label="acteurs ES"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors5.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="ES">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors5.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs ES"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors5.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors6.length}
-                icon="fas fa-thumbtack"
-                label="acteurs RI"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors6.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="RI">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors6.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs RI"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors6.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors7.length}
-                icon="fas fa-thumbtack"
-                label="acteurs analyses"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors7.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="analyse">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors7.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs analyses"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors7.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors8.length}
-                icon="fas fa-thumbtack"
-                label="acteurs français ES sur place"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors8.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="implantationES">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors8.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs français ES sur place"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors8.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
 
-            <div className={classes.ActorsList}>
-              <SubTitleActors
-                count={filteredActors9.length}
-                icon="fas fa-thumbtack"
-                label="acteurs français RI sur place"
-              />
-              <div className={classes.gridActors}>
-                <div className="row">
-                  {
-                    filteredActors9.map(item => (
-                      <InstitutionCard
-                        nomFr={(item.nominstitutionfr || null)}
-                        nom={(item.nominstitution || null)}
-                        sigleFr={(item.sigleInstitutionfr || null)}
-                        sigle={(item.sigleinstitution || null)}
-                        description={(item.descriptioninstitutionclean || null)}
-                        webSite={(item.siteinstitution || null)}
-                      />
-                    ))
-                  }
+            <ScrollableAnchor id="implantationRI">
+              <div className={classes.ActorsList}>
+                <SubTitleActors
+                  count={filteredActors9.length}
+                  icon="fas fa-thumbtack"
+                  label="acteurs français RI sur place"
+                />
+                <div className={classes.gridActors}>
+                  <div className="row">
+                    {
+                      filteredActors9.map(item => (
+                        <InstitutionCard
+                          nomFr={(item.nominstitutionfr || null)}
+                          nom={(item.nominstitution || null)}
+                          sigleFr={(item.sigleInstitutionfr || null)}
+                          sigle={(item.sigleinstitution || null)}
+                          description={(item.descriptioninstitutionclean || null)}
+                          webSite={(item.siteinstitution || null)}
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollableAnchor>
           </div>
 
         </div>
