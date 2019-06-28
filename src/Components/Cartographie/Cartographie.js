@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import propTypes from 'prop-types';
 // import { Row, Col } from 'react-bootstrap';
 import {
-  Map, Marker, TileLayer, GeoJSON
+  Map, withLeaflet, GeoJSON,
 } from 'react-leaflet';
+import PrintControlDefault from 'react-leaflet-easyprint';
 
 import Header from '../Shared/Header/Header';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
@@ -12,6 +13,8 @@ import Footer from '../Shared/Footer/Footer';
 
 import classes from './Cartographie.scss';
 import worldGeoJSON from '../Homepage/Maps/custom.geo.json';
+
+const PrintControl = withLeaflet(PrintControlDefault);
 
 export default class Carto extends Component {
   constructor(props) {
@@ -24,6 +27,7 @@ export default class Carto extends Component {
     this.zoom = 2;
     this.zoomIn = this.zoomIn.bind(this);
     this.zoomOut = this.zoomOut.bind(this);
+    this.exportChartPng = this.exportChartPng.bind(this);
   }
 
   onEachFeature = (feature, layer) => {
@@ -67,7 +71,23 @@ export default class Carto extends Component {
     }
   }
 
+  print() {
+    this.printControl.printMap('A4Portrait', 'test_nom_fichier');
+  }
+
+  exportChartPng() {
+    this.printControl.printMap('A4Portrait', 'test_nom_fichier');
+  }
+
   render() {
+    const downloadOptions = {
+      position: 'bottomright',
+      filename: 'test_nom_fichier',
+      sizeModes: ['Current', 'A4Portrait', 'A4Landscape'],
+      title: 'Télécharger au format PNG',
+      hideControlContainer: false,
+      exportOnly: true,
+    };
     return (
       <Fragment>
         <Header
@@ -118,6 +138,7 @@ export default class Carto extends Component {
               })}
               onEachFeature={this.onEachFeature}
             />
+            <PrintControl style={{ display: 'none' }} ref={(ref) => { this.printControl = ref; }} {...downloadOptions} />
           </Map>
           <div className={classes.exportBtn}>
             <span style={{ float: 'left' }}>
