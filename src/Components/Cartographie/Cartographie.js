@@ -72,11 +72,11 @@ export default class Carto extends Component {
   }
 
   print() {
-    this.printControl.printMap('A4Portrait', 'test_nom_fichier');
+    this.printControl.printMap('A4Landscape', 'test_nom_fichier');
   }
 
   exportChartPng() {
-    this.printControl.printMap('A4Portrait', 'test_nom_fichier');
+    this.printControl.printMap('A4Landscape', 'test_nom_fichier');
   }
 
   render() {
@@ -138,7 +138,7 @@ export default class Carto extends Component {
               })}
               onEachFeature={this.onEachFeature}
             />
-            <PrintControl style={{ display: 'none' }} ref={(ref) => { this.printControl = ref; }} {...downloadOptions} />
+            <PrintControl ref={(ref) => { this.printControl = ref; }} {...downloadOptions} />
           </Map>
           <div className={classes.exportBtn}>
             <span style={{ float: 'left' }}>
