@@ -17,9 +17,11 @@ export default class Carto extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // classes.blueColor+50
       zoom: 2,
+      btnColor: [classes.blueColor, classes.blueColor + 50]
     };
-    this.zoom = 1;
+    this.zoom = 2;
     this.zoomIn = this.zoomIn.bind(this);
     this.zoomOut = this.zoomOut.bind(this);
   }
@@ -36,18 +38,32 @@ export default class Carto extends Component {
   }
 
   zoomIn() {
-    const zoom = this.state.zoom;
+    let zoom = this.state.zoom;
+    const colors = this.state.btnColor;
 
     if (zoom < 7) {
-      this.setState({ zoom: zoom + 1 });
+      colors[1] = classes.blueColor;
+      this.setState({ zoom: zoom + 1, btnColor: colors });
+    }
+    zoom += 1;
+    if (zoom === 7) {
+      colors[0] = classes.blueColor + 50;
+      this.setState({ btnColor: colors });
     }
   }
 
   zoomOut() {
-    const zoom = this.state.zoom;
+    let zoom = this.state.zoom;
+    const colors = this.state.btnColor;
 
-    if (zoom > 1) {
-      this.setState({ zoom: zoom - 1 });
+    if (zoom > 2) {
+      colors[0] = classes.blueColor;
+      this.setState({ zoom: zoom - 1, btnColor: colors });
+    }
+    zoom -= 1;
+    if (zoom === 2) {
+      colors[1] = classes.blueColor + 50;
+      this.setState({ btnColor: colors });
     }
   }
 
@@ -104,12 +120,16 @@ export default class Carto extends Component {
             />
           </Map>
           <div className={classes.exportBtn}>
-            <button className={classes.dot} type="button" onClick={this.zoomIn}><i className="fas fa-plus" /></button>
-            <button className={classes.dot} type="button" onClick={this.zoomOut}><i className="fas fa-minus" /></button>
-            <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
-            <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
-            <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
-            <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
+            <span style={{ float: 'left' }}>
+              <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[0] }} type="button" onClick={this.zoomIn}><i className="fas fa-plus" /></button>
+              <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[1] }} type="button" onClick={this.zoomOut}><i className="fas fa-minus" /></button>
+            </span>
+            <span style={{ float: 'right' }}>
+              <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
+              <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
+              <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
+              <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
+            </span>
           </div>
         </div>
         <Newsletter language={this.props.language} />
