@@ -10,7 +10,7 @@ const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
-    this.countryList = [];
+    this.countryList = ['', ''];
     this.state = {
       colors: [],
       vis: ['hidden', 'hidden'],
@@ -64,11 +64,18 @@ export default class GraphMenu extends Component {
   changeStyle(e, id) {
     // eslint-disable-next-line
     const colors = this.state.colors;
-    if (this.state.colors[id] === '#ccc') {
-      colors[id] = this.props.colors[id];
-    } else {
-      colors[id] = '#ccc';
+    // if (this.state.colors[id] === '#ccc') {
+    //   colors[id] = this.props.colors[id];
+    //   this.countryList[id - 1] = e.target.id;
+    // } else {
+    //   colors[id] = '#ccc';
+    //   this.countryList[id] = '';
+    // }
+    colors[id] = this.props.colors[id];
+    if (this.countryList[id - 1] !== '') {
+      this.props.toggleCountry(this.countryList[id - 1], this.state.colors);
     }
+    this.countryList[id - 1] = e.target.id;
     this.setState({ colors });
     this.props.toggleCountry(e.target.id, this.state.colors);
   }
@@ -118,7 +125,7 @@ export default class GraphMenu extends Component {
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
           </button>
           <div style={{ visibility: this.state.vis[1] }}>
-            <CountryList id={1}/>
+            <CountryList id={1} />
           </div>
         </div>
         <span className={classes.Text}> et avec </span>

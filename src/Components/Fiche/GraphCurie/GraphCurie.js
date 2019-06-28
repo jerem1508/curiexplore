@@ -254,6 +254,7 @@ class GraphCurie extends Component {
       if (index > -1) {
         this.countryList.splice(index, 1);
       }
+      return;
     }
     for (let i = 0; i < colors.length; i += 1) {
       if (colors[i] !== '#ccc') {
