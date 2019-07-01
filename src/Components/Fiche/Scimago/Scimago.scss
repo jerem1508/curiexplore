@@ -36,24 +36,26 @@
     margin-bottom: 5px;
     border-radius: 25px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding-top: 5px;
+    padding-top: 0px;
   }
 
   .Rank {
     color: $darkBlueColor;
     padding-left: 25px;
+    padding-top: 7px;
   }
 
   .CountryName {
     color: $darkBlueColor;
     background-color: $skyBlueColor;
     border-radius: 25px;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    height: 40px;
     SPAN {
-      margin-top: 5px;
       display: inline-block;
+      margin-top: 8px;
     }
 
     IMG {
@@ -63,11 +65,17 @@
     }
   }
 
+  .CountrySelected {
+    background-color: $orangeColor;
+  }
+
+
   .Number {
     color: white;
     background-color: $greyBColor;
     border-radius: 25px;
     padding: 0;
+    margin-top: 7px;
     text-align: center;
     display: inline-block;
     width: 90px;

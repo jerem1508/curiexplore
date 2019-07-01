@@ -172,6 +172,7 @@ class Fiche extends Component {
                 language={this.props.language}
                 data={this.state.data.odsScimago}
                 onYearChangeHandler={this.scimagoOnYearChangeHandler}
+                isoAlpha3={this.props.match.params.id}
               />
             </section>
           )
