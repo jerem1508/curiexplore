@@ -103,9 +103,81 @@
         { "label": "dont hommes", "code" : "42620"}
       ]
     }, {
-      "name": "eff_fin_adm_pub", "label": "Financement initial des administrations publiques par étudiant du supérieur", "type": "column", "unit" :
+      "name": "percent_dipl_es_ing_indus_ctr", "label": "Pourcentage de diplômés de l'enseignement supérieur en  Ingénierie, industries de transformation et construction", "type": "column", "unit" :
       [
-        { "label": "$PPA en valeur constante", "code" : "XUNIT_PPPconst_5T8_FSGOV_FFntr"}
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F700"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F700_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F700_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_agr_syl", "label": "Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F800"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F800_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F800_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_comm_adm", "label": "Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F400"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F400_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F400_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_non_spec", "label": "Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_FUK"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_FUK_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_FUK_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_edu", "label": "Pourcentage de diplômés de l'enseignement supérieur en Education", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F110"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F110_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F110_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_art", "label": "Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F200"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F200_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F200_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_ste_protec_soc", "label": "Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociale", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F900"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F900_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F900_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_sn_math_stat", "label": "Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F500"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F500_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F500_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_scso_journ_inf", "label": "Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F300"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F300_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F300_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_serv", "label": "Pourcentage de diplômés de l'enseignement supérieur en Services", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F1000"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F1000_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F1000_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_tech_inf_comm", "label": "Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F600"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F600_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F600_M"}
       ]
     }
   ],
