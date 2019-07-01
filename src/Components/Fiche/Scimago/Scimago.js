@@ -27,7 +27,13 @@ class Scimago extends Component {
       this.sortDataState();
     }
     if (prevProps.data !== this.props.data) {
-      this.setState({ data: this.props.data.data });
+      const filteredData = this.props.data.data;
+      if (this.state.orderDirection === 'asc') {
+        filteredData.sort((a, b) => (b.fields[this.state.columnSelected] - a.fields[this.state.columnSelected]));
+      } else {
+        filteredData.sort((a, b) => (a.fields[this.state.columnSelected] - b.fields[this.state.columnSelected]));
+      }
+      this.setState({ data: filteredData });
     }
   }
 
@@ -188,8 +194,8 @@ class Scimago extends Component {
                           {/* item.fields.rank */}
                           {index + 1}
                         </div>
-                        <div className={`col ${classes.CountryName}`}>
-                          <img src={`https://restcountries.eu/data/${item.fields.iso_alpha3.toLowerCase()}.svg`} />
+                        <div className={`col ${classes.CountryName} ${(item.fields.iso_alpha3.toUpperCase() === this.props.isoAlpha3) ? classes.CountrySelected : null}`}>
+                          <img src={`https://restcountries.eu/data/${item.fields.iso_alpha3.toLowerCase()}.svg`} alt="Drapeau du pays" />
                           <span>{(item.fields.pays === 'NA') ? item.fields.country : item.fields.pays}</span>
                         </div>
                       </div>
@@ -241,4 +247,5 @@ Scimago.propTypes = {
   // language: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   onYearChangeHandler: PropTypes.func.isRequired,
+  isoAlpha3: PropTypes.string.isRequired,
 };

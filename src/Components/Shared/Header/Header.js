@@ -59,7 +59,7 @@ const Header = (props) => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className={classes.Link} href="/focus">
+                <a className={classes.Link} href="/annuaire">
                   <FormattedHTMLMessage
                     id="Header.link.annuaire"
                     defaultMessage="Annuaire"
