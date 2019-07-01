@@ -180,20 +180,33 @@ class Fiche extends Component {
         />
       </section>
 
-      {
-        (this.state.data.odsScimago)
-          ? (
-            <section className={`container-fluid ${classes.Scimago}`}>
-              <Scimago
-                language={this.props.language}
-                data={this.state.data.odsScimago}
-                onYearChangeHandler={this.scimagoOnYearChangeHandler}
-                isoAlpha3={this.props.match.params.id}
-              />
-            </section>
-          )
-          : null
-      }
+      <section className="container-fluid">
+        <div className="container">
+          <Title
+            label="Le paysage de sa recherche et de son innovation (RI)"
+            icon="fas fa-microscope"
+          />
+          <SubTitle
+            callbackLabel="Paysage de sa ri"
+            label="Paysage RI"
+          />
+        </div>
+        {
+          (this.state.data.odsScimago)
+            ? (
+              <div className={`container-fluid ${classes.Scimago}`}>
+                <Scimago
+                  language={this.props.language}
+                  data={this.state.data.odsScimago}
+                  onYearChangeHandler={this.scimagoOnYearChangeHandler}
+                  isoAlpha3={this.props.match.params.id}
+                />
+            </div>
+            )
+            : null
+        }
+      </section>
+
 
       <section className="container">
         <Title
