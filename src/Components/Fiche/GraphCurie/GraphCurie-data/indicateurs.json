@@ -194,8 +194,7 @@
       "name": "chercheurs_etp", "label": "Chercheurs (ETP)", "type": "column", "unit" :
       [
         { "label": "Total", "code" : "20001"},
-        { "label": "dont femmes", "code" : "20106"},
-        { "label": "dont hommes", "code" : "20105"}
+        { "label": "dont femmes", "code" : "20105"}
       ]
     }, {
       "name": "techniciens_etp", "label": "Techniciens (ETP)", "type": "column", "unit" :
@@ -218,7 +217,7 @@
     }, {
       "name": "total_r-d_emplois_etp", "label": "Personnel total de R-D (ETP) pour mille emplois (ETP)", "type": "column", "unit" :
       [
-        { "label": "Total", "code" : "PersDen_Emp_TFTE"}
+        { "label": "Total", "code" : "PERSDEN_EMP_TFTE"}
       ]
     }
   ],
