@@ -159,7 +159,15 @@ class Fiche extends Component {
           </div>
         </div>
         <GraphCurie
+          graphType="mobilite-etudiante"
+          countryCode={this.props.match.params.id}
+        />
+        <GraphCurie
           graphType="Pays"
+          countryCode={this.props.match.params.id}
+        />
+        <GraphCurie
+          graphType="paysage-ES"
           countryCode={this.props.match.params.id}
         />
         <GraphCurie

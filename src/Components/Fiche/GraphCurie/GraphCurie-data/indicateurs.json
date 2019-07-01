@@ -1,13 +1,23 @@
 {
-  "Pays": [
-    {
-      "name": "pop", "label": "Population", "type": "line", "unit" :
+  "mobilite-etudiante": [
+    { "name": "etudiants_nat_etranger", "label": "Etudiants nationaux inscrits à l'étranger", "type": "column", "unit" :
       [
-        { "label": "Population, total", "code" : "SP.POP.TOTL"},
-        { "label": "dont femmes", "code" : "SP.POP.TOTL.FE.IN"},
-        { "label": "dont hommes", "code" : "SP.POP.TOTL.MA.IN"}
+        { "label": "Total", "code" : "OE_5T8_40510"}
       ]
-    }, { "name": "parite_pouv_achat", "label": "Parité de pouvoir d'achat", "type": "column", "unit" :
+    }, { "name": "taux_mob", "label": "Taux de mobilité vers le pays d'accueil", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "MSEP_5T8"},
+        { "label": "femmes (%)", "code" : "MSEP_5T8_F"},
+        { "label": "hommes (%)", "code" : "MSEP_5T8_M"}
+      ]
+    }, { "name": "flux_etudiants_mob", "label": "Flux net des étudiants en mobilité internationale", "type": "column", "unit" :
+      [
+        { "label": "Total: étudiants provenant de l'étranger dans le pays d'accueil - étudiants du pays à l'étranger, les deux sexes", "code" : "MENF_5T8"}
+      ]
+    }
+  ],
+  "Pays": [
+    { "name": "parite_pouv_achat", "label": "Parité de pouvoir d'achat", "type": "column", "unit" :
       [
         { "label": "Monnaie nationale par dollars américains", "code" : "PPP-C"}
       ]
@@ -15,10 +25,6 @@
       [
         { "label": "$ PPA internationaux courants", "code" : "VA_PPP"},
         { "label": "$ monnaie nationale", "code" : "VA"}
-      ]
-    }, { "name": "pop_niv_educ", "label": "Population par niveau d'éducation atteint, sexe et âge (%)", "type": "column", "unit" :
-      [
-        { "label": "pourcentage (%)", "code" : "edat_lfse_03"}
       ]
     }, { "name": "pib", "label": "Produit intérieur brut", "type": "column", "unit" :
       [
@@ -45,6 +51,49 @@
       "name": "pop_rurale", "label": "Population rurale", "type": "line", "unit" :
       [
         { "label": "Total", "code" : "SP.RUR.TOTL"}
+      ]
+    }, {
+      "name": "pop", "label": "Population", "type": "line", "unit" :
+      [
+        { "label": "Population, total", "code" : "SP.POP.TOTL"},
+        { "label": "dont femmes", "code" : "SP.POP.TOTL.FE.IN"},
+        { "label": "dont hommes", "code" : "SP.POP.TOTL.MA.IN"}
+      ]
+    }
+  ],
+  "paysage-ES": [
+    {
+      "name": "depense_adm", "label": "Dépenses des administrations publiques pour l'enseignement supérieur", "type": "column", "unit" :
+      [
+        { "label": "Pourcentage du PIB (%)", "code" : "XGDP_5T8_FSGOV"}
+      ]
+    }, {
+      "name": "eff_sco_es5", "label": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 5 de la CITE", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "25051"},
+        { "label": "dont femmes", "code" : "25055"},
+        { "label": "dont hommes", "code" : "42614"}
+      ]
+    }, {
+      "name": "eff_sco_es6", "label": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "42654"},
+        { "label": "dont femmes", "code" : "42635"},
+        { "label": "dont hommes", "code" : "42615"}
+      ]
+    }, {
+      "name": "eff_sco_es7", "label": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "42656"},
+        { "label": "dont femmes", "code" : "42637"},
+        { "label": "dont hommes", "code" : "42617"}
+      ]
+    }, {
+      "name": "eff_sco_es8", "label": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 8 de la CITE", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "25052"},
+        { "label": "dont femmes", "code" : "25056"},
+        { "label": "dont hommes", "code" : "42619"}
       ]
     }
   ],
@@ -89,14 +138,5 @@
       ]
     }
   ],
-  "Paysage-es": [
-    {
-      "name": "pop", "label": "Population", "type": "column", "unit" :
-      [
-        { "label": "Population, total", "code" : "FOSGP_5T8_F700"}
-      ]
-    }
-  ],
-  "intlCoop": ["Programme de collaboration internationale"],
-  "studentMobility": ["Étudiants par nationalité"]
+  "intlCoop": ["Programme de collaboration internationale"]
 }
