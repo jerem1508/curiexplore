@@ -95,6 +95,18 @@
         { "label": "dont femmes", "code" : "25056"},
         { "label": "dont hommes", "code" : "42619"}
       ]
+    }, {
+      "name": "eff_sco_es_tot", "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "25053"},
+        { "label": "dont femmes", "code" : "25057"},
+        { "label": "dont hommes", "code" : "42620"}
+      ]
+    }, {
+      "name": "eff_fin_adm_pub", "label": "Financement initial des administrations publiques par étudiant du supérieur", "type": "column", "unit" :
+      [
+        { "label": "$PPA en valeur constante", "code" : "XUNIT_PPPconst_5T8_FSGOV_FFntr"}
+      ]
     }
   ],
   "paysage-RI": [
