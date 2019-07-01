@@ -133,6 +133,7 @@ class Maps extends Component {
                 center={[50, 10]}
                 zoom={2}
                 maxZoom={10}
+                maxBounds={[[85, -180], [-85, 180]]}
                 attributionControl
                 zoomControl
                 doubleClickZoom

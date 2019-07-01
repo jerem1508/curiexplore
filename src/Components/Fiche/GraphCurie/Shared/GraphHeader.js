@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   Row, Col,
@@ -20,6 +20,25 @@ function getSelect(props) {
   );
 }
 
+function getIndic(props) {
+  let str1 = 'indicateurs';
+  let str2 = 'disponibles';
+
+  if (props.indicNb <= 1) {
+    str1 = 'indicateur';
+    str2 = 'disponible';
+  }
+  return (
+    <Fragment>
+      {props.indicNb}
+      &nbsp;
+      {str1}
+      <br />
+      {str2}
+    </Fragment>
+  );
+}
+
 const GraphHeader = props => (
   <Row>
     <Col sm={6} className={classes.LeftCol}>
@@ -30,10 +49,7 @@ const GraphHeader = props => (
         </Col>
         <Col />
         <Col sm={3} className={`${classes.IndicPart} text-right`}>
-          {props.indicNb}
-          &nbsp;indicateurs
-          <br />
-          disponibes
+          {getIndic(props)}
         </Col>
       </Row>
     </Col>
@@ -51,7 +67,7 @@ getSelect.propTypes = {
   graphType: PropTypes.string.isRequired,
 };
 
-GraphHeader.propTypes = {
+getIndic.propTypes = {
   indicNb: PropTypes.number.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,

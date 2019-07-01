@@ -127,22 +127,22 @@ export default class HighChartsBar extends Component {
       tooltip: {
         shared: true,
         crosshairs: true,
-        formatter() {
-          const points = this.points;
-          const len = points.length;
-          const tooltipMarkup = [];
-
-          tooltipMarkup.push(`${points[0].x}<br />`);
-          for (let i = 0; i < len; i += 1) {
-            // if (this.y >= 1E9) {
-            //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
-            // } else if (this.y >= 1E6) {
-            //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
-            // }
-            tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)}`);
-          }
-          return tooltipMarkup;
-        },
+        // formatter() {
+        //   const points = this.points;
+        //   const len = points.length;
+        //   const tooltipMarkup = [];
+        //
+        //   tooltipMarkup.push(`${points[0].x}<br />`);
+        //   for (let i = 0; i < len; i += 1) {
+        //     // if (this.y >= 1E9) {
+        //     //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
+        //     // } else if (this.y >= 1E6) {
+        //     //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
+        //     // }
+        //     tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)}`);
+        //   }
+        //   return tooltipMarkup;
+        // },
         // formatter() {
         //   if (this.y >= 1E9) {
         //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
