@@ -80,6 +80,10 @@
 
     .ActorsList {
       margin-top: 20px;
+
+      .SubTitleActors {
+          font-weight: bold;
+      }
     }
 
     .gridActors {
@@ -97,6 +101,58 @@
       span {
         color: $blueColor;
         font-weight: bold;
+        font-family: 'Bitter', serif;
+      }
+
+      i {
+        color: $lightBlueColor;
+        padding: 10px;
+        border-bottom: 1.5px solid $lightBlueColor;
+      }
+
+      .Buttons {
+        padding-top: 16px;
+        padding-left: 32px;
+        padding-right: 32px;
+
+        .Button {
+          display: inline-block;
+          padding: 5px;
+          border-radius: 16px;
+          background-color: $blueColor;
+          color: white;
+          font-size: 0.9em;
+          font-weight: bold;
+          span:first-child {
+            display: inline-block;
+            width: 80%;
+            padding-left: 16px;
+          }
+          span:last-child {
+            display: inline-block;
+            width: 20%;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .CounterCardEmpty {
+      background-color: none;
+      margin-top: 5px;
+      text-align: center;
+      padding: 15px;
+      color: $darkBlueColor;
+
+      div:first-child {
+        color: $blueColor;
+        font-weight: bold;
+        font-family: 'Bitter', serif;
+
+        .label {
+          color: $darkBlueColor;
+          font-weight: lighter;
+        }
       }
 
       i {

@@ -9,7 +9,13 @@ const SubTitleActors = props => (
     <div className="col">
       <i className={props.icon} />
       &nbsp;&nbsp;&nbsp;&nbsp;
-      {props.count}
+      {
+        (props.count === 0)
+          ? (
+            <span>Non renseigné -</span>
+          ) : (<span>{props.count}</span>)
+      }
+
       &nbsp;
       {props.label}
     </div>
