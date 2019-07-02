@@ -12,6 +12,7 @@ import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
 import Scimago from './Scimago/Scimago';
+import BlocText from './BlocText/BlocText';
 
 import classes from './Fiche.scss';
 
@@ -27,6 +28,14 @@ class Fiche extends Component {
   state = {
     data: {
       restCountries: [],
+      odsES: {
+        PaysageEsLocal: '',
+        RelationEs: '',
+      },
+      odsRI: {
+        PaysageRiLocal: '',
+        RelationRi: '',
+      },
     },
   };
 
@@ -53,6 +62,34 @@ class Fiche extends Component {
         if (response.data.records[0]) {
           data.odsContacts = response.data.records[0].fields;
         }
+        return { data };
+      });
+    });
+  }
+
+  getOdsEsData = () => {
+    const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-enseignement-superieur&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.odsES = {
+          PaysageEsLocal: response.data.records[0].fields.descriptionesclean,
+          RelationEs: response.data.records[1].fields.descriptionesclean,
+        };
+        return { data };
+      });
+    });
+  }
+
+  getOdsRiData = () => {
+    const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-recherche-innovation&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        data.odsRI = {
+          PaysageRiLocal: response.data.records[0].fields.descriptionriclean,
+          RelationRi: response.data.records[1].fields.descriptionriclean,
+        };
         return { data };
       });
     });
@@ -91,6 +128,8 @@ class Fiche extends Component {
     this.getRestCountriesData();
     this.getOdsContactsData();
     this.getOdsScimagoData();
+    this.getOdsEsData();
+    this.getOdsRiData();
   }
 
   scimagoOnYearChangeHandler = (e) => {
@@ -159,25 +198,47 @@ class Fiche extends Component {
           </div>
         </div>
         <GraphCurie
-          graphType="mobilite-etudiante"
-          countryCode={this.props.match.params.id}
-        />
-        <GraphCurie
           graphType="Pays"
           countryCode={this.props.match.params.id}
         />
-        <GraphCurie
-          graphType="paysage-ES"
-          countryCode={this.props.match.params.id}
-        />
-        <GraphCurie
-          graphType="paysage-RI"
-          countryCode={this.props.match.params.id}
-        />
-        <GraphCurie
-          graphType="politique-ESRI"
-          countryCode={this.props.match.params.id}
-        />
+
+        {
+          /*
+            <GraphCurie
+              graphType="mobilite-etudiante"
+              countryCode={this.props.match.params.id}
+            />
+            <GraphCurie
+              graphType="paysage-ES"
+              countryCode={this.props.match.params.id}
+            />
+            <GraphCurie
+              graphType="politique-ESRI"
+              countryCode={this.props.match.params.id}
+            />
+          */
+        }
+
+      </section>
+
+      <section className="container-fluid">
+        <div className="container">
+          <Title
+            label="Le paysage de son enseignement supérieur (ES)"
+            icon="fas fa-microscope"
+          />
+          <SubTitle
+            callbackLabel="Paysage de son es"
+            label="Paysage ES"
+          />
+          <BlocText data={this.state.data.odsES.PaysageEsLocal} />
+
+          <GraphCurie
+            graphType="paysage-ES"
+            countryCode={this.props.match.params.id}
+          />
+        </div>
+
       </section>
 
       <section className="container-fluid">
@@ -190,6 +251,14 @@ class Fiche extends Component {
             callbackLabel="Paysage de sa ri"
             label="Paysage RI"
           />
+          {
+            <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
+          }
+
+          <GraphCurie
+            graphType="paysage-RI"
+            countryCode={this.props.match.params.id}
+          />
         </div>
         {
           (this.state.data.odsScimago)
@@ -201,12 +270,11 @@ class Fiche extends Component {
                   onYearChangeHandler={this.scimagoOnYearChangeHandler}
                   isoAlpha3={this.props.match.params.id}
                 />
-            </div>
+              </div>
             )
             : null
         }
       </section>
-
 
       <section className="container">
         <Title
