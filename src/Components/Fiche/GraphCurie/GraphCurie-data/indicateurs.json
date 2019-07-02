@@ -103,17 +103,132 @@
         { "label": "dont hommes", "code" : "42620"}
       ]
     }, {
-      "name": "eff_fin_adm_pub", "label": "Financement initial des administrations publiques par étudiant du supérieur", "type": "column", "unit" :
+      "name": "percent_dipl_es_ing_indus_ctr", "label": "Pourcentage de diplômés de l'enseignement supérieur en  Ingénierie, industries de transformation et construction", "type": "column", "unit" :
       [
-        { "label": "$PPA en valeur constante", "code" : "XUNIT_PPPconst_5T8_FSGOV_FFntr"}
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F700"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F700_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F700_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_agr_syl", "label": "Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F800"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F800_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F800_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_comm_adm", "label": "Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F400"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F400_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F400_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_non_spec", "label": "Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_FUK"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_FUK_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_FUK_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_edu", "label": "Pourcentage de diplômés de l'enseignement supérieur en Education", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F110"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F110_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F110_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_art", "label": "Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F200"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F200_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F200_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_ste_protec_soc", "label": "Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociale", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F900"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F900_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F900_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_sn_math_stat", "label": "Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F500"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F500_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F500_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_scso_journ_inf", "label": "Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F300"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F300_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F300_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_serv", "label": "Pourcentage de diplômés de l'enseignement supérieur en Services", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F1000"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F1000_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F1000_M"}
+      ]
+    }, {
+      "name": "percent_dipl_es_tech_inf_comm", "label": "Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication", "type": "column", "unit" :
+      [
+        { "label": "Total (%)", "code" : "FOSGP_5T8_F600"},
+        { "label": "femmes (%)", "code" : "FOSGP_5T8_F600_F"},
+        { "label": "hommes (%)", "code" : "FOSGP_5T8_F600_M"}
       ]
     }
   ],
   "paysage-RI": [
     {
-      "name": "brevets_inv_etr", "label": "Brevets avec co-inventeur(s) étranger(s)", "type": "column", "unit" :
+      "name": "brevets_dep_pct", "label": "Nombre de demandes de brevets déposées au PCT (année de priorité)", "type": "column", "unit" :
       [
-        { "label": "Total", "code" : "CO_INV"}
+        { "label": "Total", "code" : "P_PCT"},
+        { "label": "part dans le secteur des TIC", "code" : "P_ICTPCT"},
+        { "label": "part dans le secteur des biotechnologies", "code" : "P_BIOPCT"}
+      ]
+    }, {
+      "name": "nb_fam_triad", "label": "Nombre de familles 'triadiques' de brevets (année de priorité)", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "P_TRIAD"}
+      ]
+    }, {
+      "name": "nb_pays_triad", "label": "Part des pays dans les familles 'triadiques' des brevets (année de priorité)", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "P_XTRIAD"}
+      ]
+    }, {
+      "name": "dird_fin", "label": "Financement du DIRD", "type": "column", "unit" :
+      [
+        { "label": "% du PIB total", "code" : "G_XGDP" },
+        { "label": "% de la DIRD financée par d'autres sources nationales", "code" : "G_XFON" },
+        { "label": "% de la DIRD financée par l'Etat", "code" : "G_XFG" },
+        { "label": "% de la DIRD financée par le reste du monde", "code" : "G_XFA" },
+        { "label": "% de la DIRD financée par les entreprises", "code" : "G_XFB" }
+      ]
+    }, {
+      "name": "dirde_fin", "label": "DIRDE (Dépenses intramuros de R D du secteur des entreprises)", "type": "column", "unit" :
+      [
+        { "label": "% de la DIRDE financée par d'autres sources nationales", "code" : "B_XFON" },
+        { "label": "% de la DIRDE financée par l'Etat", "code" : "B_XFG" },
+        { "label": "% de la DIRDE financée par le reste du monde", "code" : "B_XFA" },
+        { "label": "% de la DIRDE financée par les entreprises", "code" : "B_XFB" },
+        { "label": "% $PPA", "code" : "B_PPP" },
+        { "label": "% du PIB total", "code" : "B_XGDP" }
+      ]
+    }, {
+      "name": "dirdes_fin", "label": "DIRDES (Dépenses intramuros de R D du secteur de l'enseignement supérieur)", "type": "column", "unit" :
+      [
+        { "label": "$PPA", "code" : "H_PPP" },
+        { "label": "% du PIB", "code" : "H_XGDP" }
+      ]
+    }, {
+      "name": "dirdet_fin", "label": "DIRDET (Dépenses intramuros de R D du secteur de l'État)", "type": "column", "unit" :
+      [
+        { "label": "$PPA", "code" : "GV_PPP" },
+        { "label": "% du PIB", "code" : "GV_XGDP" }
       ]
     }
   ],
@@ -122,8 +237,7 @@
       "name": "chercheurs_etp", "label": "Chercheurs (ETP)", "type": "column", "unit" :
       [
         { "label": "Total", "code" : "20001"},
-        { "label": "dont femmes", "code" : "20106"},
-        { "label": "dont hommes", "code" : "20105"}
+        { "label": "dont femmes", "code" : "20105"}
       ]
     }, {
       "name": "techniciens_etp", "label": "Techniciens (ETP)", "type": "column", "unit" :
@@ -146,7 +260,7 @@
     }, {
       "name": "total_r-d_emplois_etp", "label": "Personnel total de R-D (ETP) pour mille emplois (ETP)", "type": "column", "unit" :
       [
-        { "label": "Total", "code" : "PersDen_Emp_TFTE"}
+        { "label": "Total", "code" : "PERSDEN_EMP_TFTE"}
       ]
     }
   ],

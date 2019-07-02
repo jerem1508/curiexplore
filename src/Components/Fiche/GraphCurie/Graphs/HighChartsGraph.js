@@ -161,6 +161,9 @@ export default class HighChartsBar extends Component {
             symbol: 'circle',
           },
         },
+        series: {
+          stacking: 'normal',
+        },
       },
       series,
       exporting: {
