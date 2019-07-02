@@ -67,7 +67,7 @@ class GraphCurie extends Component {
         break;
       }
     } // Si on arrive a la fin on a pas trouvé le pay
-    if (i === 249) {
+    if (i === isoList.length - 1) {
       this.setState({ isMissing: true });
       return;
     }
@@ -187,22 +187,14 @@ class GraphCurie extends Component {
 
   getInputs() {
     const radioList = [];
+    const id = params[this.props.graphType][this.indic].unit;
     for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
-      if (i === this.graphIndex) {
-        radioList.push(
-          <span>
-            <input type="radio" name="test" checked value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
-            {params[this.props.graphType][this.indic].unit[i].label}
-          </span>,
-        );
-      } else {
-        radioList.push(
-          <span>
-            <input type="radio" name="test" value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
-            {params[this.props.graphType][this.indic].unit[i].label}
-          </span>,
-        );
-      }
+      radioList.push(
+        <span>
+          <input type="radio" name={id + i} checked={(i === this.grapIndex)} value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
+          {params[this.props.graphType][this.indic].unit[i].label}
+        </span>,
+      );
     }
     return (
       <div className={classes.units}>
