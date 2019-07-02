@@ -191,7 +191,7 @@ class GraphCurie extends Component {
     for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
       radioList.push(
         <span>
-          <input type="radio" name={id + i} checked={(i === this.grapIndex)} value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
+          <input type="radio" name={id[i].label + i} checked={(i === this.graphIndex)} value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
           {params[this.props.graphType][this.indic].unit[i].label}
         </span>,
       );
