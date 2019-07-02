@@ -254,7 +254,6 @@ class Fiche extends Component {
           {
             <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
           }
-
           <GraphCurie
             graphType="paysage-RI"
             countryCode={this.props.match.params.id}
@@ -276,21 +275,52 @@ class Fiche extends Component {
         }
       </section>
 
-      <section className="container">
-        <Title
-          label="Contacts - Ressources"
-          icon="fas fa-address-book"
-        />
-        {
-          (this.state.data.odsContacts)
-            ? (
+      <section className={`container-fluid ${classes.LinkWithFrance}`}>
+        <div className="container">
+          <Title
+            label="Ses liens avec la France"
+            icon="fas fa-handshake"
+            cssStyle={{ color: '#fff' }}
+          />
+          <SubTitle
+            callbackLabel="Ses liens avec la France"
+            label="Nature des relations ES avec la France"
+            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+          />
+          <BlocText
+            data={this.state.data.odsES.RelationEs}
+            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+          />
+
+          <SubTitle
+            callbackLabel="Ses liens avec la France"
+            label="Nature des relations RI avec la France"
+            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+          />
+          <BlocText
+            data={this.state.data.odsRI.RelationRi}
+            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+          />
+
+        </div>
+
+      </section>
+
+      {
+        (this.state.data.odsContacts)
+          ? (
+            <section className="container">
+              <Title
+                label="Contacts - Ressources"
+                icon="fas fa-address-book"
+              />
               <Contacts
                 language={this.props.language}
                 data={this.state.data.odsContacts}
               />
-            ) : null
+            </section>
+          ) : null
         }
-      </section>
 
       <Footer language={this.props.language} />
     </main>

@@ -15,6 +15,8 @@ $skyBlueColor: #EEF7FF;
 $magentaColor: #FF195A;
 $greyAColor: #647D94;
 $greyBColor: #9DB3C7;
+$shadowColorLight: #9DB3C7;
+$shadowColorDark: #002d54;
 
 
 /* hommePage map */
@@ -57,14 +59,25 @@ $quatrePalliersColor4: #F2B51B;
 /* Classements */
 $yellowColor: #FFDE23;
 
+
 :export {
-  darkBlueColor: $darkBlueColor ;
-  blueColor: $blueColor ;
-  lightBlueColor: $lightBlueColor ;
-  skyBlueColor: $skyBlueColor ;
-  magentaColor: $magentaColor ;
-  greyAColor: $greyAColor ;
-  greyBColor: $greyBColor ;
+  /* Exports pour GraphCurie */
+  firstCountry: $femmeParPaysColor;
+  secondCountry: $paysComparaison1Color;
+  thirdCountry: $paysComparaison2Color;
+  monde: $mondeColor;
+  ocde: $ocdeColor;
+  ue: $ueColor;
+  
+  darkBlueColor: $darkBlueColor;
+  blueColor: $blueColor;
+  lightBlueColor: $lightBlueColor;
+  skyBlueColor: $skyBlueColor;
+  magentaColor: $magentaColor;
+  greyAColor: $greyAColor;
+  greyBColor: $greyBColor;
+  shadowColorLight: $shadowColorLight;
+  shadowColorDark: $shadowColorDark;
 
   mapBgColor: $mapBgColor;
   mapCountryColor: $mapCountryColor;
@@ -94,14 +107,6 @@ $yellowColor: #FFDE23;
   quatrePalliersColor2: $quatrePalliersColor2 ;
   quatrePalliersColor3: $quatrePalliersColor3 ;
   quatrePalliersColor4: $quatrePalliersColor4 ;
-
-  /* Exports pour GraphCurie */
-  firstCountry: $femmeParPaysColor;
-  secondCountry: $paysComparaison1Color;
-  thirdCountry: $paysComparaison2Color;
-  monde: $mondeColor;
-  ocde: $ocdeColor;
-  ue: $ueColor;
 }
 
 /* BANNIERES*/

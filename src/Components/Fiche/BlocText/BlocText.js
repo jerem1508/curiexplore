@@ -13,7 +13,7 @@ import classes from './BlocText.scss';
  * Tests unitaires : .
 */
 const BlocText = props => (
-  <div className={classes.BlocText}>
+  <div className={classes.BlocText} style={props.cssStyle}>
     <div className={classes.Text}>
       {Parser(props.data)}
     </div>
@@ -24,4 +24,5 @@ export default BlocText;
 
 BlocText.propTypes = {
   data: PropTypes.string.isRequired,
+  cssStyle: PropTypes.string,
 };
