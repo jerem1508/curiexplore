@@ -1,0 +1,33 @@
+@import '../../../style.scss';
+
+.BlocText {
+  max-height: 500px;
+
+  background-color: white;
+  margin-left: 16px;
+  margin-right: -15px;
+  margin-top: 16px;
+  box-shadow: 0px 15px 25px 0px #ccc !important;
+
+  .Text {
+    margin: 36px;
+    padding-right: 24px;
+    overflow-y: scroll;
+    height: 450px;
+    color: $darkBlueColor;
+    font-size: 0.9rem;
+    font-family: 'Bitter', serif;
+    display: inline-block;
+  }
+  .Text::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 8px;
+    background-color: $skyBlueColor;
+  }
+  .Text::-webkit-scrollbar-thumb {
+    border: solid 8px $darkBlueColor;
+    -webkit-border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 0 0px $darkBlueColor, inset 0 0 0 6px White;
+  }
+}
