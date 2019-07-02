@@ -161,15 +161,23 @@ export default class HighChartsBar extends Component {
             symbol: 'circle',
           },
         },
-        series: {
-          stacking: 'normal',
-        },
+        // series: {
+        //   stacking: 'normal',
+        // },
       },
       series,
       exporting: {
         buttons: {
           contextButton: {
             enabled: false,
+          },
+        },
+        chartOptions: {
+          legend: {
+            enabled: true,
+          },
+          title: {
+            text: 'Titre test',
           },
         },
       },

@@ -11,6 +11,8 @@ import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
 import Newsletter from '../Shared/Newsletter/Newsletter';
 import Footer from '../Shared/Footer/Footer';
 
+import CountryMap from './CountryMap';
+
 import classes from './Cartographie.scss';
 import worldGeoJSON from '../Homepage/Maps/custom.geo.json';
 
@@ -31,8 +33,8 @@ export default class Carto extends Component {
   }
 
   onEachFeature = (feature, layer) => {
-    console.log('layer : ' + layer);
-    console.log('feature :' + feature);
+    // console.log('layer : ' + layer);
+    // console.log('feature :' + feature);
     layer.on({
       click: () => { window.open(`/fiche/${feature.properties.iso_a3}`, '_blank'); },
       // click: () => { window.location.href = `/fiche/${feature.properties.iso_a3}`; },
@@ -113,7 +115,7 @@ export default class Carto extends Component {
             // className={classes.Map}
             center={[50, 10]}
             zoom={this.state.zoom}
-            minZoom={1}
+            minZoom={2}
             zoomControl={false}
             maxZoom={7}
             attributionControl
@@ -154,6 +156,7 @@ export default class Carto extends Component {
           </div>
         </div>
         <Newsletter language={this.props.language} />
+        <CountryMap isoCode="DEU" />
         <Footer language={this.props.language} />
       </Fragment>
     );
