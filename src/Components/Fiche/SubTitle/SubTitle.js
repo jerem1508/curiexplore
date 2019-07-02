@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classes from './SubTitle.scss';
 
 const SubTitle = props => (
-  <div className={`row ${classes.SubTitle}`}>
+  <div className={`row ${classes.SubTitle}`} style={props.cssStyle}>
     <div className="col">
       <div>
         {props.callbackLabel}
@@ -22,4 +22,5 @@ export default SubTitle;
 SubTitle.propTypes = {
   callbackLabel: PropTypes.string,
   label: PropTypes.string,
+  cssStyle: PropTypes.string,
 };

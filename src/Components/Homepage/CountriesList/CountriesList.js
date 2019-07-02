@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { IntlProvider } from 'react-intl';
+import React, { Component, Fragment } from 'react';
+// import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
 
 /* Gestion des langues */
-import messagesFr from './translations/fr.json';
-import messagesEn from './translations/en.json';
+// import messagesFr from './translations/fr.json';
+// import messagesEn from './translations/en.json';
 
 /* SCSS */
 import classes from './CountriesList.scss';
@@ -12,10 +12,10 @@ import classes from './CountriesList.scss';
 /* Data */
 import countries from './countriesList.json';
 
-const messages = {
-  fr: messagesFr,
-  en: messagesEn,
-};
+// const messages = {
+//   fr: messagesFr,
+//   en: messagesEn,
+// };
 
 class CountriesList extends Component {
   state = {
@@ -26,7 +26,6 @@ class CountriesList extends Component {
     const text = event.target.value;
     const newData = countries.filter(el => el.Pays.toLowerCase().search(text.toLowerCase()) !== -1);
     this.setState({ data: newData });
-    console.log(newData);
   }
 
   createColumn = (column) => {
@@ -58,6 +57,10 @@ class CountriesList extends Component {
     return col;
   }
 
+  btnDeployHandler = () => {
+    console.log('btnDeployHandler');
+  }
+
   render() {
     let content = null;
     if (this.state.data.length !== 0) {
@@ -72,27 +75,37 @@ class CountriesList extends Component {
       const col4 = this.createColumn(letterCol4);
 
       content = (
-        <div className={`row ${classes.countryList}`}>
-          <div className="col-3">
-            {
-              col1.map(letterList => letterList)
-            }
+        <div className={`text-center ${classes.countryList}`}>
+          <div className={`row ${classes.Content}`}>
+            <div className="col-3">
+              {
+                col1.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col2.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col3.map(letterList => letterList)
+              }
+            </div>
+            <div className="col-3">
+              {
+                col4.map(letterList => letterList)
+              }
+            </div>
           </div>
-          <div className="col-3">
-            {
-              col2.map(letterList => letterList)
-            }
-          </div>
-          <div className="col-3">
-            {
-              col3.map(letterList => letterList)
-            }
-          </div>
-          <div className="col-3">
-            {
-              col4.map(letterList => letterList)
-            }
-          </div>
+          <button
+            className={`btn ${classes.btnDeploy}`}
+            type="button"
+            onClick={this.btnDeployHandler}
+          >
+            Voir toute la liste
+            <i className="fas fa-arrow-down" />
+          </button>
         </div>
       );
     }
@@ -117,8 +130,8 @@ class CountriesList extends Component {
     return (
       <div className="container-fluid">
         <div className="container">
-          <div className={`row col-md-8 offset-md-4 ${classes.searchRow}`}>
-            <div className={`col ${classes.searchText}`}>
+          <div className={`row ${classes.searchRow}`}>
+            <div className={`col-9 text-right ${classes.searchText}`}>
               Recherchez un pays dans la liste suivante
             </div>
             <div className="col">
@@ -126,7 +139,7 @@ class CountriesList extends Component {
                 <fieldset className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-sm"
                     placeholder="ex:Chine..."
                     onChange={this.filteredList}
                   />

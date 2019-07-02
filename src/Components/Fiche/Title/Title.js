@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classes from './Title.scss';
 
 const Title = props => (
-  <div className={`row ${classes.Title}`}>
+  <div className={`row ${classes.Title}`} style={props.cssStyle}>
     <div className="col">
       <i className={props.icon} />
       <span>
@@ -20,4 +20,5 @@ export default Title;
 Title.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.string,
+  cssStyle: PropTypes.string,
 };
