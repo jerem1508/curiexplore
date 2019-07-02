@@ -53,7 +53,7 @@ const GraphHeader = props => (
         </Col>
       </Row>
     </Col>
-    <Col style={{ backgroundColor: '#ffb200' }} className={classes.ArrowRight}>
+    <Col style={{ backgroundColor: '#ffb200' }} className={`d-flex align-items-center ${classes.ArrowRight}`}>
       {getSelect(props)}
     </Col>
   </Row>

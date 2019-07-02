@@ -59,7 +59,16 @@ $quatrePalliersColor4: #F2B51B;
 /* Classements */
 $yellowColor: #FFDE23;
 
+
 :export {
+  /* Exports pour GraphCurie */
+  firstCountry: $femmeParPaysColor;
+  secondCountry: $paysComparaison1Color;
+  thirdCountry: $paysComparaison2Color;
+  monde: $mondeColor;
+  ocde: $ocdeColor;
+  ue: $ueColor;
+  
   darkBlueColor: $darkBlueColor;
   blueColor: $blueColor;
   lightBlueColor: $lightBlueColor;

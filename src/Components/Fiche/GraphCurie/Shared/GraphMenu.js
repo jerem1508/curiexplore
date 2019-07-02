@@ -36,7 +36,19 @@ export default class GraphMenu extends Component {
     const ctryList = [];
 
     for (let i = 0; i < isoList.length; i += 1) {
-      ctryList.push(<button type="button" id={isoList[i].ISO_alpha3} value={isoList[i].Pays} style={{ border: '0' }} onClick={e => this.setCountry(e, id)}>{isoList[i].Pays}</button>);
+      ctryList.push((
+        <span
+          className={classes.BtnInList}
+          id={isoList[i].ISO_alpha3}
+          value={isoList[i].Pays}
+          onClick={e => this.setCountry(e, id, isoList[i].Pays)}
+          onKeyPress={e => this.setCountry(e, id, isoList[i].Pays)}
+          role="button"
+          tabIndex={0}
+        >
+          {isoList[i].Pays}
+        </span>
+      ));
       ctryList.push(<br />);
     }
     return (
@@ -46,16 +58,16 @@ export default class GraphMenu extends Component {
     );
   }
 
-  setCountry(e, id) {
+  setCountry(e, id, country) {
     // eslint-disable-next-line
     const vis = this.state.vis;
 
     if (id === 0) {
       vis[0] = 'hidden';
-      this.setState({ firstCountry: e.target.value });
+      this.setState({ firstCountry: country });
     } else {
       vis[1] = 'hidden';
-      this.setState({ secondCountry: e.target.value });
+      this.setState({ secondCountry: country });
     }
     this.setState({ vis });
     this.changeStyle(e, id + 1);
