@@ -16,6 +16,8 @@
 - Afficher la légende au telechargement
 - Ajouter le titre en props
 - Fix mes couleurs
+- Ajuster le zoom sur les pays + ajout ville
 
 # Divers
 - Font Awesome en local
+- Clone repo sur pc portable
