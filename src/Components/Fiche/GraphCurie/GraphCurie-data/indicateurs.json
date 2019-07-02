@@ -200,9 +200,35 @@
         { "label": "Total", "code" : "P_XTRIAD"}
       ]
     }, {
-      "name": "dird_ppa_dom_exec_r-d", "label": "DIRD en milliers de $ PPA courantes, par domaine d'exécution", "type": "column", "unit" :
+      "name": "dird_fin", "label": "Financement du DIRD", "type": "column", "unit" :
       [
-        { "label": "milliers de dollars américains", "code" : "EXPPP_CUR" }
+        { "label": "% du PIB total", "code" : "G_XGDP" },
+        { "label": "% de la DIRD financée par d'autres sources nationales", "code" : "G_XFON" },
+        { "label": "% de la DIRD financée par l'Etat", "code" : "G_XFG" },
+        { "label": "% de la DIRD financée par le reste du monde", "code" : "G_XFA" },
+        { "label": "% de la DIRD financée par les entreprises", "code" : "G_XFB" }
+      ]
+    }, {
+      "name": "dirde_fin", "label": "DIRDE (Dépenses intramuros de R D du secteur des entreprises)", "type": "column", "unit" :
+      [
+        { "label": "% de la DIRDE financée par d'autres sources nationales", "code" : "B_XFON" },
+        { "label": "% de la DIRDE financée par l'Etat", "code" : "B_XFG" },
+        { "label": "% de la DIRDE financée par le reste du monde", "code" : "B_XFA" },
+        { "label": "% de la DIRDE financée par les entreprises", "code" : "B_XFB" },
+        { "label": "% $PPA", "code" : "B_PPP" },
+        { "label": "% du PIB total", "code" : "B_XGDP" }
+      ]
+    }, {
+      "name": "dirdes_fin", "label": "DIRDES (Dépenses intramuros de R D du secteur de l'enseignement supérieur)", "type": "column", "unit" :
+      [
+        { "label": "$PPA", "code" : "H_PPP" },
+        { "label": "% du PIB", "code" : "H_XGDP" }
+      ]
+    }, {
+      "name": "dirdet_fin", "label": "DIRDET (Dépenses intramuros de R D du secteur de l'État)", "type": "column", "unit" :
+      [
+        { "label": "$PPA", "code" : "GV_PPP" },
+        { "label": "% du PIB", "code" : "GV_XGDP" }
       ]
     }
   ],
