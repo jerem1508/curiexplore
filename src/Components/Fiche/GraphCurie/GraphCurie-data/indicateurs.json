@@ -183,9 +183,26 @@
   ],
   "paysage-RI": [
     {
-      "name": "brevets_inv_etr", "label": "Brevets avec co-inventeur(s) étranger(s)", "type": "column", "unit" :
+      "name": "brevets_dep_pct", "label": "Nombre de demandes de brevets déposées au PCT (année de priorité)", "type": "column", "unit" :
       [
-        { "label": "Total", "code" : "CO_INV"}
+        { "label": "Total", "code" : "P_PCT"},
+        { "label": "part dans le secteur des TIC", "code" : "P_ICTPCT"},
+        { "label": "part dans le secteur des biotechnologies", "code" : "P_BIOPCT"}
+      ]
+    }, {
+      "name": "nb_fam_triad", "label": "Nombre de familles 'triadiques' de brevets (année de priorité)", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "P_TRIAD"}
+      ]
+    }, {
+      "name": "nb_pays_triad", "label": "Part des pays dans les familles 'triadiques' des brevets (année de priorité)", "type": "column", "unit" :
+      [
+        { "label": "Total", "code" : "P_XTRIAD"}
+      ]
+    }, {
+      "name": "dird_ppa_dom_exec_r-d", "label": "DIRD en milliers de $ PPA courantes, par domaine d'exécution", "type": "column", "unit" :
+      [
+        { "label": "milliers de dollars américains", "code" : "EXPPP_CUR" }
       ]
     }
   ],

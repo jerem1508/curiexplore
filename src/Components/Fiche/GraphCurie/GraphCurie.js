@@ -11,10 +11,11 @@ import classes from './GraphCurie.scss';
 
 const params = require('./GraphCurie-data/indicateurs.json');
 const isoList = require('../../Homepage/CountriesList/countriesList.json');
-const authKey = require('../../../config/config.js');
+const configFile = require('../../../config/config.js');
+
+const url = configFile.CURIE_URL;
 
 // const url = 'http://185.161.45.213/datastore/curie';
-const url = 'http://10.243.98.74/datastore/curie';
 
 
 // CODE WORDL : WLD
@@ -78,7 +79,7 @@ class GraphCurie extends Component {
   async getData(i, label, indic, index) {
     const res = await axios.get(url, {
       // headers: {
-      //   Authorization: `Basic ${authKey.CURIE_AUTH_KEY}`,
+      //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
       // },
       params: {
         where: `{"country_code":"${this.countryList[i]}","code":"${params[label][indic].unit[index].code}"}`,
