@@ -73,8 +73,11 @@
 
 .ListSearch {
   color: white;
-  font-style: italic;
+  // font-style: italic;
   input {
     font-style: italic;
+  }
+  span {
+    font-style: normal;
   }
 }

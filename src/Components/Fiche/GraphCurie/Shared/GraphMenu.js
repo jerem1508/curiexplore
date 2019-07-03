@@ -116,8 +116,16 @@ export default class GraphMenu extends Component {
         <br />
         <input type="text" name="fname" placeholder="Ex: France" />
         <br />
+        <div
+          id="FRA"
+          value="France"
+          onClick={e => this.setCountry(e, props.id, 'France')}
+          onKeyPress={e => this.setCountry(e, props.id, 'France')}
+          role="button"
+          tabIndex={0}
+        >
         France
-        <br />
+        </div>
         <hr style={{ size: 15 }} />
         {this.getCountryList(props.id)}
       </div>
