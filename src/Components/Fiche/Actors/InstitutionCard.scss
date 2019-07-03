@@ -1,0 +1,104 @@
+@import '../../../style.scss';
+
+.InstitutionCard {
+  background-color: white;
+  margin-top: 15px;
+  padding: 20px;
+  height: 510px;
+
+  H1, H2, H3, H4, H5, H6 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .title {
+    color: $darkBlueColor;
+    font-family: 'Bitter',serif;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 40px;
+    height: 48px;
+    overflow: hidden;
+  }
+
+  .subtitle {
+    color: $darkBlueColor;
+    font-family: 'Bitter',serif;
+    font-style: italic;
+    padding-left: 15px;
+    height: 48px;
+  }
+
+  .sigle {
+    margin: 15px;
+    border-top: $lightBlueColor solid 2px;
+    border-bottom: $lightBlueColor solid 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    DIV:first-child {
+      font-weight: bold;
+      color: $darkBlueColor;
+      font-family: 'Bitter',serif;
+      height: 24px;
+    }
+
+    DIV:last-child {
+      font-style: italic;
+      color: $darkBlueColor;
+      font-family: 'Bitter',serif;
+      height: 24px;
+    }
+  }
+
+  .description {
+    height: 200px;
+    overflow-y: scroll;
+
+    .descriptionTitle {
+      i {
+        color: $darkBlueColor;
+      }
+      font-style: italic;
+      color: $darkBlueColor;
+    }
+
+    .descriptionText {
+      padding-top: 5px;
+      color: $darkBlueColor;
+      font-family: 'Bitter',serif;
+      padding-left: 15px;
+    }
+
+  }
+
+  .Buttons {
+    padding-top: 16px;
+    padding-left: 15px;
+    padding-right: 32px;
+
+    a {
+      width: 70%;
+    }
+
+    .Button {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 16px;
+      background-color: $blueColor;
+      color: white;
+      font-size: 0.9em;
+      font-weight: bold;
+      span:first-child {
+        display: inline-block;
+        width: 80%;
+        padding-left: 16px;
+      }
+      span:last-child {
+        display: inline-block;
+        width: 20%;
+        text-align: center;
+      }
+    }
+  }
+}
