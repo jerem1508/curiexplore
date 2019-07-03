@@ -14,6 +14,10 @@ import Contacts from '../Shared/Contacts/Contacts';
 import Scimago from './Scimago/Scimago';
 import BlocText from './BlocText/BlocText';
 
+import CounterCard from './Actors/CounterCard';
+import SubTitleActors from './SubTitle/SubTitleActors';
+import InstitutionCard from './Actors//InstitutionCard';
+
 import classes from './Fiche.scss';
 
 /**
@@ -36,6 +40,8 @@ class Fiche extends Component {
         PaysageRiLocal: '',
         RelationRi: '',
       },
+      odsContacts: {},
+      odsInstitutions: {},
     },
   };
 
@@ -49,6 +55,23 @@ class Fiche extends Component {
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.restCountries = response.data;
+        return { data };
+      });
+    });
+  }
+
+  getOdsInstitutionsData = () => {
+    const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-institutions&q=isoalpha3%3D${this.props.match.params.id}&rows=185&sort=isoalpha3`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        if (response.data.nhits) {
+          const tabData = [];
+          for (let i = 0; i < response.data.records.length; i += 1) {
+            tabData.push(response.data.records[i].fields);
+          }
+          data.odsInstitutions = tabData;
+        }
         return { data };
       });
     });
@@ -127,6 +150,7 @@ class Fiche extends Component {
   getData = () => {
     this.getRestCountriesData();
     this.getOdsContactsData();
+    this.getOdsInstitutionsData();
     this.getOdsScimagoData();
     this.getOdsEsData();
     this.getOdsRiData();
@@ -141,6 +165,153 @@ class Fiche extends Component {
       loading ...
     </div>
   );
+
+  filteredActors = (actorsType) => {
+    let result = [];
+    if (this.state.data.odsInstitutions.length > 0) {
+      result = this.state.data.odsInstitutions.filter(el => el.typologieinstitution === actorsType);
+    }
+    return result;
+  }
+
+  filteredActorsA8 = (thematic) => {
+    let result = [];
+    if (this.state.data.odsInstitutions.length > 0) {
+      result = this.state.data.odsInstitutions.filter(el => el.codethematiqueinstitution === thematic);
+    }
+    return result;
+  }
+
+  renderActors = () => {
+    const actors = [];
+    actors.push({ id: 'strategie', data: this.filteredActors('Principaux acteurs en charge de la définition des politiques ESRI'), label: 'acteurs stratégiques' });
+    actors.push({ id: 'finance', data: this.filteredActors('Principaux acteurs en charge du financement de l\'ESRI'), label: 'acteurs de financement' });
+    actors.push({ id: 'evaluation', data: this.filteredActors('Principaux acteurs en charge de l\'évaluation de l\'ESRI'), label: 'acteurs évaluation' });
+    actors.push({ id: 'mobilite', data: this.filteredActors('Mobilité internationale'), label: 'acteurs mobilités' });
+    actors.push({ id: 'analyses', data: this.filteredActors('Analyse du système national'), label: 'acteurs analyse' });
+    actors.push({ id: 'acteursES', data: this.filteredActors('Établissement d\'Enseignement supérieur'), label: 'acteurs ES' });
+    actors.push({ id: 'acteursRI', data: this.filteredActors('Institution de Recherche et Innovation'), label: 'acteurs RI' });
+    actors.push({ id: 'acteursFrES', data: this.filteredActorsA8('ES'), label: 'acteurs français ES' });
+    actors.push({ id: 'acteursFrRI', data: this.filteredActorsA8('RI'), label: 'acteurs français RI' });
+
+    return (
+      <section className="container">
+        <Title
+          label="Les acteurs de l'ESRI"
+          icon="fas fa-city"
+        />
+        <div className={classes.Actors}>
+          <div className="row">
+            <div className={`col ${classes.Map}`}>
+              map
+            </div>
+          </div>
+
+          <div className={classes.gridActors}>
+            <div className="row">
+              <CounterCard
+                data={actors}
+                id="strategie"
+                icon="fas fa-thumbtack fa-2x"
+                label="acteurs stratégiques"
+                anchor={`/fiche/${this.props.match.params.id}#strategie`}
+              />
+              <CounterCard
+                data={actors}
+                id="finance"
+                icon="fas fa-money-bill-wave fa-2x"
+                label="acteurs de financement"
+                anchor={`/fiche/${this.props.match.params.id}#finance`}
+              />
+              <CounterCard
+                data={actors}
+                id="evaluation"
+                icon="fas fa-star fa-2x"
+                label="acteurs évaluations"
+                anchor={`/fiche/${this.props.match.params.id}#evaluation`}
+              />
+            </div>
+            <div className="row">
+              <CounterCard
+                data={actors}
+                id="mobilite"
+                icon="fas fa-exchange-alt fa-2x"
+                label="acteurs mobilités"
+                anchor={`/fiche/${this.props.match.params.id}#mobilite`}
+              />
+              <CounterCard
+                data={actors}
+                id="acteursES"
+                icon="fas fa-microscope fa-2x"
+                label="acteurs ES"
+                anchor={`/fiche/${this.props.match.params.id}#ES`}
+              />
+              <CounterCard
+                data={actors}
+                id="acteursRI"
+                icon="fas fa-lightbulb fa-2x"
+                label="acteurs RI"
+                anchor={`/fiche/${this.props.match.params.id}#RI`}
+              />
+            </div>
+            <div className="row">
+              <CounterCard
+                data={actors}
+                id="analyses"
+                icon="fas fa-square-root-alt fa-2x"
+                label="acteurs analyses"
+                anchor={`/fiche/${this.props.match.params.id}#analyse`}
+              />
+              <CounterCard
+                data={actors}
+                id="acteursFrES"
+                icon="fas fa-money-bill-wave fa-2x"
+                label="acteurs français ES sur place"
+                anchor={`/fiche/${this.props.match.params.id}#implantationES`}
+              />
+              <CounterCard
+                data={actors}
+                id="acteursFrRI"
+                icon="fas fa-star fa-2x"
+                label="acteurs français RI sur place"
+                anchor={`/fiche/${this.props.match.params.id}#implantationRI`}
+              />
+            </div>
+          </div>{ /* /gridActors */ }
+
+          {
+            actors.map((actor => (
+                <div className={classes.ActorsList} id={actor.id}>
+                  <SubTitleActors
+                    count={actor.data.length}
+                    icon="fas fa-thumbtack"
+                    label={actor.label}
+                  />
+                  <div className={classes.gridActors}>
+                    <div className="row">
+                      {
+                        actor.data.map(item => (
+                          <InstitutionCard
+                            nomFr={(item.nominstitutionfr || null)}
+                            nom={(item.nominstitution || null)}
+                            sigleFr={(item.sigleInstitutionfr || null)}
+                            sigle={(item.sigleinstitution || null)}
+                            description={(item.descriptioninstitutionclean || '')}
+                            webSite={(item.siteinstitution || null)}
+                          />
+                        ))
+                      }
+                    </div>
+                  </div>
+                </div>
+              )
+            ))
+          }
+
+        </div>{ /* /Actors */ }
+      </section>
+    );
+  }
 
   renderFiche = () => (
     <main className={classes.Fiche}>
@@ -273,6 +444,11 @@ class Fiche extends Component {
             )
             : null
         }
+      </section>
+
+
+      <section className="container-fluid">
+        {this.renderActors()}
       </section>
 
       <section className={`container-fluid ${classes.LinkWithFrance}`}>
