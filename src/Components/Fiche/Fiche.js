@@ -93,6 +93,7 @@ class Fiche extends Component {
   getOdsEsData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-enseignement-superieur&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
+      if (!response.data.records.fields) {return false}
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsES = {
@@ -107,6 +108,7 @@ class Fiche extends Component {
   getOdsRiData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-recherche-innovation&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
+      if (!response.data.records.fields) {return false}
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsRI = {
@@ -122,6 +124,7 @@ class Fiche extends Component {
     // Récupération de toutes les années disponibles pour le pays en cours
     const urlScimagoYears = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=0&sort=year&facet=year&refine.iso_alpha3=${this.props.match.params.id}`;
     Axios.get(urlScimagoYears).then((responseYear) => {
+      if (!responseYear.data.facet_groups) {return false}
       let years = [];
       if (!year) {
         for (let i = 0; i < responseYear.data.facet_groups[0].facets.length; i += 1) {
