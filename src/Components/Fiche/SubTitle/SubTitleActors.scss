@@ -1,0 +1,26 @@
+@import '../../../style.scss';
+
+.SubTitleActors {
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  height: 70px;
+  padding-left: 52px;
+  padding-top: 20px;
+
+  col {
+    padding-top: auto;
+  }
+
+  DIV:first-child {
+    color: $blueColor;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    line-height: 24px;
+  }
+  DIV:last-child {
+    color: $darkBlueColor;
+    font-size: 1.6rem;
+    text-transform: none;
+  }
+}
