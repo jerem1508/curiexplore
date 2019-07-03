@@ -67,5 +67,14 @@
 }
 
 .BtnInList {
+  color: white;
   cursor: pointer;
+}
+
+.ListSearch {
+  color: white;
+  font-style: italic;
+  input {
+    font-style: italic;
+  }
 }

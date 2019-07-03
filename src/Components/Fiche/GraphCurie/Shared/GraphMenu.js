@@ -13,7 +13,8 @@ export default class GraphMenu extends Component {
     this.countryList = ['', ''];
     this.state = {
       colors: [],
-      vis: ['hidden', 'hidden'],
+      firstVis: { display: 'none' },
+      secondVis: { display: 'none' },
       firstCountry: 'Choisir un pays',
       secondCountry: 'Choisir un pays',
     };
@@ -63,13 +64,12 @@ export default class GraphMenu extends Component {
     const vis = this.state.vis;
 
     if (id === 0) {
-      vis[0] = 'hidden';
+      this.setState({ firstVis: { display: 'none' } });
       this.setState({ firstCountry: country });
     } else {
-      vis[1] = 'hidden';
+      this.setState({ secondVis: { display: 'none' } });
       this.setState({ secondCountry: country });
     }
-    this.setState({ vis });
     this.changeStyle(e, id + 1);
   }
 
@@ -93,19 +93,24 @@ export default class GraphMenu extends Component {
   }
 
   toggleList(id) {
-    // eslint-disable-next-line
-    let vis = this.state.vis;
-    if (vis[id] === 'hidden') {
-      vis[id] = 'visible';
-    } else {
-      vis[id] = 'hidden';
+    if (id === 0) {
+      if (this.state.firstVis.display === 'none') {
+        this.setState({ firstVis: { display: '' } });
+      } else {
+        this.setState({ firstVis: { display: 'none' } });
+      }
+      return;
     }
-    this.setState({ vis });
+    if (this.state.secondVis.display === 'none') {
+      this.setState({ secondVis: { display: '' } });
+    } else {
+      this.setState({ secondVis: { display: 'none' } });
+    }
   }
 
   render() {
     const CountryList = props => (
-      <div>
+      <div className={classes.ListSearch}>
         <br />
         Chercher un pays
         <br />
@@ -125,7 +130,7 @@ export default class GraphMenu extends Component {
             {this.state.firstCountry}
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
           </button>
-          <div style={{ visibility: this.state.vis[0] }}>
+          <div style={this.state.firstVis}>
             <CountryList id={0} />
           </div>
         </div>
@@ -136,7 +141,7 @@ export default class GraphMenu extends Component {
             {this.state.secondCountry}
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
           </button>
-          <div style={{ visibility: this.state.vis[1] }}>
+          <div style={this.state.secondVis}>
             <CountryList id={1} />
           </div>
         </div>
