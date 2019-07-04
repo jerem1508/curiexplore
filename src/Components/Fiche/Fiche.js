@@ -16,7 +16,9 @@ import BlocText from './BlocText/BlocText';
 
 import CounterCard from './Actors/CounterCard';
 import SubTitleActors from './SubTitle/SubTitleActors';
-import InstitutionCard from './Actors//InstitutionCard';
+import InstitutionCard from './Actors/InstitutionCard';
+
+import CountryMap from './CountryMap/CountryMap';
 
 import classes from './Fiche.scss';
 
@@ -358,7 +360,7 @@ class Fiche extends Component {
           </div>
           <div className="col pl-1 pr-0">
             <div className={`${classes.CountryMap}`}>
-              carte pays
+              <CountryMap height='552px' isoCode={this.props.match.params.id} />
             </div>
           </div>
         </div>

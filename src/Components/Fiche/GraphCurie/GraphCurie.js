@@ -245,6 +245,7 @@ class GraphCurie extends Component {
 
   // Cette section doit être appelée direct dans le menu
   toggleCountry(id, colors) {
+    alert(id);
     this.tempColor = [this.colors[0]];
 
     if (!this.countryList.includes(id)) {

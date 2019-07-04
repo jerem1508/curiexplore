@@ -59,6 +59,9 @@ $quatrePalliersColor4: #F2B51B;
 /* Classements */
 $yellowColor: #FFDE23;
 
+/* Oragne clair carte avec capitale */
+$lightOrange: #FFD980;
+
 
 :export {
   /* Exports pour GraphCurie */
@@ -68,7 +71,10 @@ $yellowColor: #FFDE23;
   monde: $mondeColor;
   ocde: $ocdeColor;
   ue: $ueColor;
-  
+
+  /* Exports pour la carte avec la capitale */
+  otherCountryColor: $lightOrange;
+
   darkBlueColor: $darkBlueColor;
   blueColor: $blueColor;
   lightBlueColor: $lightBlueColor;

@@ -11,8 +11,6 @@ import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
 import Newsletter from '../Shared/Newsletter/Newsletter';
 import Footer from '../Shared/Footer/Footer';
 
-import CountryMap from './CountryMap';
-
 import classes from './Cartographie.scss';
 import worldGeoJSON from '../Homepage/Maps/custom.geo.json';
 
@@ -156,7 +154,6 @@ export default class Carto extends Component {
           </div>
         </div>
         <Newsletter language={this.props.language} />
-        <CountryMap isoCode="DEU" />
         <Footer language={this.props.language} />
       </Fragment>
     );

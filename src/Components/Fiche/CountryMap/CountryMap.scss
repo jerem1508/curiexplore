@@ -1,0 +1,16 @@
+@import '../../../style.scss';
+
+.CapitalName {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.LabelStyle {
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin-top: 20px;
+  permanent: true;
+  direction: 'center';
+  interactive: false;
+}
