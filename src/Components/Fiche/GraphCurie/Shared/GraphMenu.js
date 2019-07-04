@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Modal, Button } from 'react-bootstrap';
 
 import classes from './GraphMenu.scss';
 
@@ -10,9 +11,11 @@ const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
-    this.countryList = ['', ''];
+    this.countryList = [this.props.countryCode];
+    this.errorMsg = 'Erreur: ce pays est déjà utilisé';
     this.state = {
       colors: [],
+      show: false,
       firstVis: { display: 'none' },
       secondVis: { display: 'none' },
       firstCountry: 'Choisir un pays',
@@ -22,6 +25,8 @@ export default class GraphMenu extends Component {
     this.toggleList = this.toggleList.bind(this);
     this.getCountryList = this.getCountryList.bind(this);
     this.setCountry = this.setCountry.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -60,9 +65,6 @@ export default class GraphMenu extends Component {
   }
 
   setCountry(e, id, country) {
-    // eslint-disable-next-line
-    const vis = this.state.vis;
-
     if (id === 0) {
       this.setState({ firstVis: { display: 'none' } });
       this.setState({ firstCountry: country });
@@ -70,7 +72,18 @@ export default class GraphMenu extends Component {
       this.setState({ secondVis: { display: 'none' } });
       this.setState({ secondCountry: country });
     }
+    alert(this.countryList);
+    this.handleShow();
     this.changeStyle(e, id + 1);
+    alert(this.countryList);
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
   }
 
   changeStyle(e, id) {
@@ -166,6 +179,14 @@ export default class GraphMenu extends Component {
           <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
             UE
         </button>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Body>{this.errorMsg}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="error" onClick={this.handleClose}>
+              Fermer
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </span>
     );
   }
@@ -175,4 +196,5 @@ export default class GraphMenu extends Component {
 GraphMenu.propTypes = {
   toggleCountry: PropTypes.func.isRequired,
   colors: PropTypes.object.isRequired,
+  countryCode: PropTypes.string.isRequired,
 };

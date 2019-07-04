@@ -281,7 +281,7 @@ class GraphCurie extends Component {
                 </Row>
                 <Row>
                   <Col className={classes.Menu}>
-                    <GraphMenu colors={this.colors} toggleCountry={this.toggleCountry} />
+                    <GraphMenu colors={this.colors} countryCode={this.props.countryCode} toggleCountry={this.toggleCountry} />
                   </Col>
                 </Row>
                 <Row>
