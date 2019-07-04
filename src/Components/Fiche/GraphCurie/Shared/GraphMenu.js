@@ -67,12 +67,10 @@ export default class GraphMenu extends Component {
   setCountry(e, id, country) {
     if (id === 0) {
       this.setState({ firstVis: { display: 'none' } });
-      this.setState({ firstCountry: country });
     } else {
       this.setState({ secondVis: { display: 'none' } });
-      this.setState({ secondCountry: country });
     }
-    this.changeStyle(e, id + 1);
+    this.changeStyle(e, id + 1, country);
   }
 
   handleClose() {
@@ -83,7 +81,7 @@ export default class GraphMenu extends Component {
     this.setState({ show: true, errorMsg: 'Erreur: ce pays est déjà utilisé' });
   }
 
-  changeStyle(e, id) {
+  changeStyle(e, id, country) {
     // eslint-disable-next-line
     const colors = this.state.colors;
     // if (this.state.colors[id] === '#ccc') {
@@ -94,14 +92,21 @@ export default class GraphMenu extends Component {
     //   this.countryList[id] = '';
     // }
     // alert(this.countryList);
-    // this.handleShow();
+    if (this.countryList.includes(e.target.id)) {
+      this.handleShow();
+      return;
+    }
+    if (id === 1) {
+      this.setState({ firstCountry: country });
+    } else {
+      this.setState({ secondCountry: country });
+    }
     colors[id] = this.props.colors[id];
     if (this.countryList[id] !== '') {
       this.props.toggleCountry(this.countryList[id], this.state.colors);
     }
     this.countryList[id] = e.target.id;
     this.setState({ colors });
-    alert(this.countryList);
     this.props.toggleCountry(e.target.id, this.state.colors);
   }
 
