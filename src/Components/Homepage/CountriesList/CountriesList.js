@@ -1,10 +1,5 @@
-import React, { Component, Fragment } from 'react';
-// import { IntlProvider } from 'react-intl';
-import PropTypes from 'prop-types';
-
-/* Gestion des langues */
-// import messagesFr from './translations/fr.json';
-// import messagesEn from './translations/en.json';
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 
 /* SCSS */
 import classes from './CountriesList.scss';
@@ -12,14 +7,11 @@ import classes from './CountriesList.scss';
 /* Data */
 import countries from './countriesList.json';
 
-// const messages = {
-//   fr: messagesFr,
-//   en: messagesEn,
-// };
 
 class CountriesList extends Component {
   state = {
     data: countries,
+    deployed: false,
   };
 
   filteredList = (event) => {
@@ -52,13 +44,19 @@ class CountriesList extends Component {
           countryName.push(a);
         }
       }
-      col.push(<dl>{title}<ul>{countryName}</ul></dl>);
+      col.push((
+        <dl>
+          {title}
+          <ul>
+            {countryName}
+          </ul>
+        </dl>));
     }
     return col;
   }
 
   btnDeployHandler = () => {
-    console.log('btnDeployHandler');
+    this.setState(prevState => ({ deployed: !prevState.deployed }));
   }
 
   render() {
@@ -75,7 +73,10 @@ class CountriesList extends Component {
       const col4 = this.createColumn(letterCol4);
 
       content = (
-        <div className={`text-center ${classes.countryList}`}>
+        <div
+          className={`text-center ${classes.countryList}`}
+          style={(this.state.deployed) ? { height: '100%' } : { height: '250px' }}
+        >
           <div className={`row ${classes.Content}`}>
             <div className="col-3">
               {
@@ -103,8 +104,21 @@ class CountriesList extends Component {
             type="button"
             onClick={this.btnDeployHandler}
           >
-            Voir toute la liste
-            <i className="fas fa-arrow-down" />
+            {
+              (this.state.deployed)
+                ? (
+                  <div>
+                    Réduire la liste
+                    <i className="fas fa-arrow-up" />
+                  </div>
+                )
+                : (
+                  <div>
+                    Voir toute la liste
+                    <i className="fas fa-arrow-down" />
+                  </div>
+                )
+            }
           </button>
         </div>
       );
@@ -156,6 +170,6 @@ class CountriesList extends Component {
 
 export default CountriesList;
 
-CountriesList.propTypes = {
-  language: PropTypes.string.isRequired,
-};
+// CountriesList.propTypes = {
+//   // language: PropTypes.string.isRequired,
+// };
