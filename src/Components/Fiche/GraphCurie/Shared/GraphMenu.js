@@ -12,9 +12,9 @@ export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
     this.countryList = [this.props.countryCode, '', '', '', '', ''];
-    this.errorMsg = 'Erreur: ce pays est déjà utilisé';
     this.state = {
       colors: [],
+      errorMsg: '',
       show: false,
       firstVis: { display: 'none' },
       secondVis: { display: 'none' },
@@ -80,7 +80,7 @@ export default class GraphMenu extends Component {
   }
 
   handleShow() {
-    this.setState({ show: true });
+    this.setState({ show: true, errorMsg: 'Erreur: ce pays est déjà utilisé' });
   }
 
   changeStyle(e, id) {
@@ -94,13 +94,14 @@ export default class GraphMenu extends Component {
     //   this.countryList[id] = '';
     // }
     // alert(this.countryList);
-    this.handleShow();
+    // this.handleShow();
     colors[id] = this.props.colors[id];
-    // if (this.countryList[id] !== '') {
-    //   this.props.toggleCountry(this.countryList[id - 1], this.state.colors);
-    // }
-    this.countryList[id - 1] = e.target.id;
+    if (this.countryList[id] !== '') {
+      this.props.toggleCountry(this.countryList[id], this.state.colors);
+    }
+    this.countryList[id] = e.target.id;
     this.setState({ colors });
+    alert(this.countryList);
     this.props.toggleCountry(e.target.id, this.state.colors);
   }
 
@@ -113,10 +114,12 @@ export default class GraphMenu extends Component {
       }
       return;
     }
-    if (this.state.secondVis.display === 'none') {
+    if (this.state.secondVis.display === 'none' && this.countryList[1] !== '') {
       this.setState({ secondVis: { display: '' } });
-    } else {
+    } else if (this.countryList[1] !== '') {
       this.setState({ secondVis: { display: 'none' } });
+    } else {
+      this.setState({ show: true, errorMsg: "Veuillez d'abord sélectionner un premier pays" });
     }
   }
 
@@ -179,7 +182,7 @@ export default class GraphMenu extends Component {
             UE
         </button>
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Body>{this.errorMsg}</Modal.Body>
+          <Modal.Body>{this.state.errorMsg}</Modal.Body>
           <Modal.Footer>
             <Button variant="error" onClick={this.handleClose}>
               Fermer
