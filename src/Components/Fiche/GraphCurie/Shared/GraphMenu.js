@@ -11,7 +11,7 @@ const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 export default class GraphMenu extends Component {
   constructor(props) {
     super(props);
-    this.countryList = [this.props.countryCode];
+    this.countryList = [this.props.countryCode, '', '', '', '', ''];
     this.errorMsg = 'Erreur: ce pays est déjà utilisé';
     this.state = {
       colors: [],
@@ -72,10 +72,7 @@ export default class GraphMenu extends Component {
       this.setState({ secondVis: { display: 'none' } });
       this.setState({ secondCountry: country });
     }
-    alert(this.countryList);
-    this.handleShow();
     this.changeStyle(e, id + 1);
-    alert(this.countryList);
   }
 
   handleClose() {
@@ -96,10 +93,12 @@ export default class GraphMenu extends Component {
     //   colors[id] = '#ccc';
     //   this.countryList[id] = '';
     // }
+    // alert(this.countryList);
+    this.handleShow();
     colors[id] = this.props.colors[id];
-    if (this.countryList[id - 1] !== '') {
-      this.props.toggleCountry(this.countryList[id - 1], this.state.colors);
-    }
+    // if (this.countryList[id] !== '') {
+    //   this.props.toggleCountry(this.countryList[id - 1], this.state.colors);
+    // }
     this.countryList[id - 1] = e.target.id;
     this.setState({ colors });
     this.props.toggleCountry(e.target.id, this.state.colors);

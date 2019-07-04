@@ -17,6 +17,7 @@
 - Formater tooltip
 - Afficher message si unité pas dispo
 - Ajouter le titre en props
+- Menu indépendant pour le graph
 
 # Divers
 - Font Awesome en local

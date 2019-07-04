@@ -243,6 +243,7 @@ class GraphCurie extends Component {
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
+  // Cette section doit être appelée direct dans le menu
   toggleCountry(id, colors) {
     this.tempColor = [this.colors[0]];
 
