@@ -6,6 +6,8 @@ import {
 } from 'react-leaflet';
 import PrintControlDefault from 'react-leaflet-easyprint';
 
+import MapMenu from './MapMenu';
+
 import Header from '../Shared/Header/Header';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
 import Newsletter from '../Shared/Newsletter/Newsletter';
@@ -31,11 +33,8 @@ export default class Carto extends Component {
   }
 
   onEachFeature = (feature, layer) => {
-    // console.log('layer : ' + layer);
-    // console.log('feature :' + feature);
     layer.on({
       click: () => { window.open(`/fiche/${feature.properties.iso_a3}`, '_blank'); },
-      // click: () => { window.location.href = `/fiche/${feature.properties.iso_a3}`; },
     });
 
     layer.bindTooltip(feature.properties.name);
@@ -109,6 +108,7 @@ export default class Carto extends Component {
           //   />
           // </Map>
         }
+          <MapMenu />
           <Map
             // className={classes.Map}
             center={[50, 10]}
