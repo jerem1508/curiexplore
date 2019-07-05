@@ -108,7 +108,6 @@ export default class HighChartsBar extends Component {
         },
       },
       yAxis: {
-        min: 0,
         title: {
           text: name,
         },
