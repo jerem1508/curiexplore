@@ -15,7 +15,7 @@ export default class Carto extends Component {
     super(props);
     this.capital = '';
     this.isBLurred = true;
-    this.blurred = classes.isBLurred;
+    this.blurred = classes.Blurred;
     this.state = {
       capitalPos: [0, 0],
       bounds: [[85, -180], [-85, 180]],
@@ -23,6 +23,8 @@ export default class Carto extends Component {
     this.onEachFeature = this.onEachFeature.bind(this);
     this.getRestCountriesData = this.getRestCountriesData.bind(this);
   }
+
+// set state quand la data
 
   async onEachFeature(feature, layer) {
     const latLngNE = [];
@@ -32,14 +34,13 @@ export default class Carto extends Component {
     let data;
 
     if (layer.feature.properties.adm0_a3 === this.props.isoCode) {
-      layer.on({
-        mouseover: () => { layer.setStyle({ fillColor: '#fff' }); },
-      });
+      layer.setStyle({ fillColor: '#fff' });
       // eslint-disable-next-line
       latLngNE.push(layer._bounds._northEast.lat, layer._bounds._northEast.lng);
       // eslint-disable-next-line
       latLngSW.push(layer._bounds._southWest.lat, layer._bounds._southWest.lng);
       bounds.push(latLngNE, latLngSW);
+      // paser capitale en param
       data = await this.getRestCountriesData();
       this.capital = data.capital;
       for (let i = 0; i < capitalsList.length; i += 1) {
@@ -52,6 +53,8 @@ export default class Carto extends Component {
         }
       }
       this.setState({ bounds });
+    } else {
+      layer.setStyle({ fillColor: `${classes.otherCountryColor}` });
     }
   }
 
@@ -63,11 +66,12 @@ export default class Carto extends Component {
 
   render() {
     return (
-      <div className={this.blurred}>
+      <div>
         <Map
           center={[50, 10]}
           zoom={15}
-          zoomControl={false}
+          // zoomControl={false}
+          zoomControl
           // maxZoom={7}
           // attributionControl
           scrollWheelZoom={false}
@@ -86,7 +90,6 @@ export default class Carto extends Component {
             data={worldGeoJSON}
             style={() => ({
               color: `${classes.femmeParPaysColor}`,
-              fillColor: `${classes.otherCountryColor}`,
               weight: 0.7,
               fillOpacity: 1,
             })}

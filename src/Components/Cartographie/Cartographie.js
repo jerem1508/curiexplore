@@ -22,7 +22,7 @@ export default class Carto extends Component {
     this.state = {
       // classes.blueColor+50
       zoom: 2,
-      btnColor: [classes.blueColor, classes.blueColor + 50]
+      btnColor: [classes.blueColor, classes.blueColor + 50],
     };
     this.zoom = 2;
     this.zoomIn = this.zoomIn.bind(this);
