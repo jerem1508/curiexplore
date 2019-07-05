@@ -14,6 +14,8 @@ export default class Carto extends Component {
   constructor(props) {
     super(props);
     this.capital = '';
+    this.isBLurred = true;
+    this.blurred = classes.isBLurred;
     this.state = {
       capitalPos: [0, 0],
       bounds: [[85, -180], [-85, 180]],
@@ -31,7 +33,7 @@ export default class Carto extends Component {
 
     if (layer.feature.properties.adm0_a3 === this.props.isoCode) {
       layer.on({
-        ready: () => { layer.setStyle({ fillColor: '#fff' }); },
+        mouseover: () => { layer.setStyle({ fillColor: '#fff' }); },
       });
       // eslint-disable-next-line
       latLngNE.push(layer._bounds._northEast.lat, layer._bounds._northEast.lng);
@@ -61,45 +63,47 @@ export default class Carto extends Component {
 
   render() {
     return (
-      <Map
-        center={[50, 10]}
-        zoom={15}
-        zoomControl={false}
-        // maxZoom={7}
-        // attributionControl
-        scrollWheelZoom={false}
-        dragging
-        animate
-        bounds={this.state.bounds}
-        fitBounds={this.state.bounds}
-        // boundsOptions={{ padding: [-3000, -3000] }}
-        easeLinearity={0.35}
-        style={{
-          height: this.props.height,
-          backgroundColor: `${classes.femmeParPaysColor}`,
-        }}
-      >
-        <GeoJSON
-          data={worldGeoJSON}
-          style={() => ({
-            color: `${classes.femmeParPaysColor}`,
-            fillColor: `${classes.otherCountryColor}`,
-            weight: 0.7,
-            fillOpacity: 1,
-          })}
-          onEachFeature={this.onEachFeature}
-        />
-        <Circle
-          center={this.state.capitalPos}
-          color="black"
-          radius={20}
-          weight={5}
+      <div className={this.blurred}>
+        <Map
+          center={[50, 10]}
+          zoom={15}
+          zoomControl={false}
+          // maxZoom={7}
+          // attributionControl
+          scrollWheelZoom={false}
+          dragging
+          animate
+          bounds={this.state.bounds}
+          fitBounds={this.state.bounds}
+          // boundsOptions={{ padding: [-3000, -3000] }}
+          easeLinearity={0.35}
+          style={{
+            height: this.props.height,
+            backgroundColor: `${classes.femmeParPaysColor}`,
+          }}
         >
-          <Tooltip permanent direction="center" className={classes.LabelStyle}>
-            <span className={classes.CapitalName}>{this.capital}</span>
-          </Tooltip>
-        </Circle>
-      </Map>
+          <GeoJSON
+            data={worldGeoJSON}
+            style={() => ({
+              color: `${classes.femmeParPaysColor}`,
+              fillColor: `${classes.otherCountryColor}`,
+              weight: 0.7,
+              fillOpacity: 1,
+            })}
+            onEachFeature={this.onEachFeature}
+          />
+          <Circle
+            center={this.state.capitalPos}
+            color="black"
+            radius={20}
+            weight={5}
+          >
+            <Tooltip permanent direction="center" className={classes.LabelStyle}>
+              <span className={classes.CapitalName}>{this.capital}</span>
+            </Tooltip>
+          </Circle>
+        </Map>
+      </div>
     );
   }
 }

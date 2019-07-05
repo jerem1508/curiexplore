@@ -95,7 +95,7 @@ class Fiche extends Component {
   getOdsEsData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-enseignement-superieur&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
-      if (!response.data.records.fields) {return false}
+      if (!response.data.records[0].fields || !response.data.records[1].fields) {return false}
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsES = {
@@ -110,7 +110,7 @@ class Fiche extends Component {
   getOdsRiData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-recherche-innovation&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
-      if (!response.data.records.fields) {return false}
+      if (!response.data.records[0].fields || !response.data.records[1].fields) {return false}
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsRI = {
