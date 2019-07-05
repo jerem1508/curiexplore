@@ -8,17 +8,14 @@
 # FicheCurie
 - Toggle la liste + recherche
 - Fix mes couleurs
-- A faire : carte avec zoom sur le pays
-- Ajuster le zoom sur les pays + ajout ville
 - A FAIRE : GRAPHS STACKS (pour politique ESRI)
 - Scanrv2: modifier les graphs afficher listes
 - rajouter des commentaires sur les parties qui ne servent à rien
 - Optimiser les doubles boucles
-- Formater tooltip
+- Formater tooltip des graphs
 - Afficher message si unité pas dispo
 - Ajouter le titre en props
 - Menu indépendant pour le graph
 
 # Divers
 - Font Awesome en local
-- Clone repo sur pc portable
