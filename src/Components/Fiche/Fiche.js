@@ -360,7 +360,7 @@ class Fiche extends Component {
           </div>
           <div className="col pl-1 pr-0">
             <div className={`${classes.CountryMap}`}>
-              <CountryMap height='552px' isoCode={this.props.match.params.id} />
+              <CountryMap capital={this.state.data.restCountries.capital} height="552px" isoCode={this.props.match.params.id} />
             </div>
           </div>
         </div>

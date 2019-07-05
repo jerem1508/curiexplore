@@ -21,17 +21,13 @@ export default class Carto extends Component {
       bounds: [[85, -180], [-85, 180]],
     };
     this.onEachFeature = this.onEachFeature.bind(this);
-    this.getRestCountriesData = this.getRestCountriesData.bind(this);
   }
 
-// set state quand la data
-
-  async onEachFeature(feature, layer) {
+  onEachFeature(feature, layer) {
     const latLngNE = [];
     const latLngSW = [];
     const bounds = [];
     const capitalPos = [];
-    let data;
 
     if (layer.feature.properties.adm0_a3 === this.props.isoCode) {
       layer.setStyle({ fillColor: '#fff' });
@@ -40,9 +36,6 @@ export default class Carto extends Component {
       // eslint-disable-next-line
       latLngSW.push(layer._bounds._southWest.lat, layer._bounds._southWest.lng);
       bounds.push(latLngNE, latLngSW);
-      // paser capitale en param
-      data = await this.getRestCountriesData();
-      this.capital = data.capital;
       for (let i = 0; i < capitalsList.length; i += 1) {
         if (capitalsList[i].capital === 'primary' && capitalsList[i].iso3 === this.props.isoCode) {
           capitalPos.push(capitalsList[i].lat, capitalsList[i].lng);
@@ -56,12 +49,6 @@ export default class Carto extends Component {
     } else {
       layer.setStyle({ fillColor: `${classes.otherCountryColor}` });
     }
-  }
-
-  async getRestCountriesData() {
-    const url = `https://restcountries.eu/rest/v2/alpha/${this.props.isoCode}`;
-    const res = await axios.get(url);
-    return (res.data);
   }
 
   render() {
@@ -102,7 +89,7 @@ export default class Carto extends Component {
             weight={5}
           >
             <Tooltip permanent direction="center" className={classes.LabelStyle}>
-              <span className={classes.CapitalName}>{this.capital}</span>
+              <span className={classes.CapitalName}>{this.props.capital}</span>
             </Tooltip>
           </Circle>
         </Map>
@@ -112,6 +99,7 @@ export default class Carto extends Component {
 }
 
 Carto.propTypes = {
-  isoCode: propTypes.string.isRequired,
+  capital: propTypes.string.isRequired,
   height: propTypes.string.isRequired,
+  isoCode: propTypes.string.isRequired,
 };
