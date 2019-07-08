@@ -22,7 +22,6 @@ export default class Carto extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // classes.blueColor+50
       zoom: 2,
       btnColor: [classes.blueColor, classes.blueColor + 50],
     };
@@ -100,14 +99,6 @@ export default class Carto extends Component {
           url2="/cartographie"
         />
         <div>
-          {
-          // <Map center={position} zoom={13} style={{ height: '200px' }}>
-          //   <TileLayer
-          //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          //     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-          //   />
-          // </Map>
-        }
           <MapMenu />
           <Map
             // className={classes.Map}

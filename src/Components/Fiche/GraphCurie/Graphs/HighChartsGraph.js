@@ -29,6 +29,7 @@ export default class HighChartsBar extends Component {
     this.chart = React.createRef();
     this.data = this.props.data;
     this.type = this.props.type;
+    this.filename = '';
     this.state = {
       options: null,
     };
@@ -59,6 +60,7 @@ export default class HighChartsBar extends Component {
     try {
       name = this.data[0].data[0].label_long;
       year = this.data[0].data[0].year;
+      this.filename = name;
     } catch (error) {
       name = '';
     }
@@ -190,9 +192,10 @@ export default class HighChartsBar extends Component {
             enabled: true,
           },
           title: {
-            text: 'Titre test',
+            text: this.filename,
           },
         },
+        filename: this.filename,
       },
       credits: {
         enabled: false,

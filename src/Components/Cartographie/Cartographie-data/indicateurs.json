@@ -1,0 +1,11 @@
+{ "name": "pib", "label": "Produit intérieur brut", "unit" :
+  [
+    { "label": "Monnaies nationale", "code" : "NY.GDP.MKTP.CN.AD"},
+    { "label" : "$ PPA internationaux courants", "code" : "NY.GDP.MKTP.PP.CD"}
+  ]
+},
+{ "name": "etudiants_nat_etranger", "label": "Etudiants nationaux inscrits à l'étranger", "unit" :
+  [
+    { "label": "Total", "code" : "OE_5T8_40510"}
+  ]
+}
