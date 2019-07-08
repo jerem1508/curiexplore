@@ -58,7 +58,7 @@ export default class HighChartsBar extends Component {
     // alert(dl);
     try {
       name = this.data[0].data[0].label_long;
-      year = this.data[0].data[0].year
+      year = this.data[0].data[0].year;
     } catch (error) {
       name = '';
     }

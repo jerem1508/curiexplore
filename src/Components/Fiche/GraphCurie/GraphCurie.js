@@ -244,19 +244,16 @@ class GraphCurie extends Component {
   }
 
   // Cette section doit être appelée direct dans le menu
-  toggleCountry(id, colors) {
-    // alert(id);
+  toggleCountry(id, colors, countryList) {
+    const tempList = [];
+    for (let i = 0; i < countryList.length; i += 1) {
+      if (countryList[i] !== '') {
+        tempList.push(countryList[i]);
+      }
+    }
+    this.countryList = tempList;
     this.tempColor = [this.colors[0]];
 
-    if (!this.countryList.includes(id)) {
-      this.countryList.push(id);
-    } else {
-      const index = this.countryList.indexOf(id);
-      if (index > -1) {
-        this.countryList.splice(index, 1);
-      }
-      return;
-    }
     for (let i = 0; i < colors.length; i += 1) {
       if (colors[i] !== '#ccc') {
         this.tempColor.push(colors[i]);
@@ -283,7 +280,11 @@ class GraphCurie extends Component {
                 </Row>
                 <Row>
                   <Col className={classes.Menu}>
-                    <GraphMenu colors={this.colors} countryCode={this.props.countryCode} toggleCountry={this.toggleCountry} />
+                    <GraphMenu
+                      colors={this.colors}
+                      countryCode={this.props.countryCode}
+                      toggleCountry={this.toggleCountry}
+                    />
                   </Col>
                 </Row>
                 <Row>
