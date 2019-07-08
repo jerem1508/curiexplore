@@ -42,20 +42,23 @@ export default class HighChartsBar extends Component {
     let series = [];
     let name = '';
 
-    for (let i = 0; i < this.data.length * 2; i += 1) {
-      for (let j = 0; j < this.data.length; j += 1) {
-        if (this.data[j].data.length === 0) {
-          // push l'index dans color array ?
-          this.data.splice(j, 1);
-        }
-      }
-    }
+    // for (let i = 0; i < this.data.length * 2; i += 1) {
+    //   for (let j = 0; j < this.data.length; j += 1) {
+    //     if (this.data[j].data.length === 0) {
+    //       // push l'index dans color array ?
+    //       this.data.splice(j, 1);
+    //     }
+    //   }
+    // }
 
     const dl = this.data.length;
     let j = 0;
+    let year = 0;
+    let max = 0;
     // alert(dl);
     try {
       name = this.data[0].data[0].label_long;
+      year = this.data[0].data[0].year
     } catch (error) {
       name = '';
     }
@@ -69,6 +72,15 @@ export default class HighChartsBar extends Component {
         data.push(tmp);
       }
       if (j > 0) {
+        max = j;
+        allData.push(data);
+      } else {
+        for (j = 0; j < max; j += 1) {
+          const tmp = [];
+          tmp.push(year + j);
+          tmp.push(0);
+          data.push(tmp);
+        }
         allData.push(data);
       }
     }
@@ -76,10 +88,12 @@ export default class HighChartsBar extends Component {
     try {
       for (let i = 0; i < dl; i += 1) {
         let ctryName = '';
-        if (this.data[i].data[0].country_label != null) {
+        if (this.data[i].data.length > 0 && this.data[i].data[0].country_label != null) {
           ctryName = this.data[i].data[0].country_label;
-        } else {
+        } else if (this.data[i].data.length > 0 && this.data[i].data[0].country_code != null) {
           ctryName = this.data[i].data[0].country_code;
+        } else {
+          ctryName = 'Pas de données disponibles';
         }
         series.push({ name: ctryName, data: allData[i], color: this.props.colors[i] });
       }
