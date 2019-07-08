@@ -91,12 +91,11 @@ export default class GraphMenu extends Component {
         return;
       }
     }
-    if (id === 1) {
-      this.setState({ firstCountry: country });
-    } else if (id === 2) {
-      this.setState({ secondCountry: country });
-    }
     if (id < 3) {
+      if (this.countryList.includes(e.target.id)) {
+        this.handleShow();
+        return;
+      }
       this.countryList[id] = e.target.id;
       colors[id] = this.props.colors[id];
     } else if (id >= 3) {
@@ -107,6 +106,11 @@ export default class GraphMenu extends Component {
         this.countryList[id] = '';
         colors[id] = '#ccc';
       }
+    }
+    if (id === 1) {
+      this.setState({ firstCountry: country });
+    } else if (id === 2) {
+      this.setState({ secondCountry: country });
     }
     this.setState({ colors });
     this.props.toggleCountry(e.target.id, this.state.colors, this.countryList);
