@@ -14,22 +14,26 @@ export default class Carto extends Component {
   constructor(props) {
     super(props);
     this.capital = '';
-    this.isBLurred = true;
+    // this.isBLurred = true;
+    this.hasCapital = false;
     this.blurred = classes.Blurred;
     this.state = {
       capitalPos: [0, 0],
       bounds: [[85, -180], [-85, 180]],
     };
     this.onEachFeature = this.onEachFeature.bind(this);
+    this.getCapital = this.getCapital.bind(this);
   }
 
-  onEachFeature(feature, layer) {
+  onEachFeature(feature, layer, index) {
     const latLngNE = [];
     const latLngSW = [];
     const bounds = [];
     const capitalPos = [];
 
     if (layer.feature.properties.adm0_a3 === this.props.isoCode) {
+      console.log(layer);
+      console.log(feature);
       layer.setStyle({ fillColor: '#fff' });
       // eslint-disable-next-line
       latLngNE.push(layer._bounds._northEast.lat, layer._bounds._northEast.lng);
@@ -39,16 +43,29 @@ export default class Carto extends Component {
       for (let i = 0; i < capitalsList.length; i += 1) {
         if (capitalsList[i].capital === 'primary' && capitalsList[i].iso3 === this.props.isoCode) {
           capitalPos.push(capitalsList[i].lat, capitalsList[i].lng);
-          this.setState({ capitalPos });
           // alert(capitalsList[i].lat);
           // alert(capitalsList[i].lng);
           break;
         }
       }
+      this.hasCapital = true;
+      this.setState({ capitalPos });
       this.setState({ bounds });
     } else {
       layer.setStyle({ fillColor: `${classes.otherCountryColor}` });
     }
+  }
+
+  getCapital() {
+    const capitalPos = [];
+    for (let i = 0; i < capitalsList.length; i += 1) {
+      if (capitalsList[i].capital === 'primary' && capitalsList[i].iso3 === this.props.isoCode) {
+        capitalPos.push(capitalsList[i].lat, capitalsList[i].lng);
+        break;
+      }
+    }
+    this.setState({ capitalPos });
+    this.hasCapital = true;
   }
 
   render() {
@@ -82,6 +99,7 @@ export default class Carto extends Component {
             })}
             onEachFeature={this.onEachFeature}
           />
+          {this.hasCapital === false ? this.getCapital() : null}
           <Circle
             center={this.state.capitalPos}
             color="black"
