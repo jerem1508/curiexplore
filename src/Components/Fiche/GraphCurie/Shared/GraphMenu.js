@@ -96,10 +96,10 @@ export default class GraphMenu extends Component {
     } else if (id === 2) {
       this.setState({ secondCountry: country });
     }
-    if (id < 2) {
+    if (id < 3) {
       this.countryList[id] = e.target.id;
       colors[id] = this.props.colors[id];
-    } else if (id >= 2) {
+    } else if (id >= 3) {
       if (this.countryList[id] === '') {
         this.countryList[id] = e.target.id;
         colors[id] = this.props.colors[id];

@@ -6,9 +6,9 @@
 - Positionner le scoll au niveau du pays sélectionné
 
 # FicheCurie
-- Toggle la liste + recherche
+- Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE
 - Fix mes couleurs
-- A FAIRE : GRAPHS STACKS (pour politique ESRI)
+- A FAIRE : GRAPHS STACKS (pour politique ESRI) (voir si possible ?)
 - Scanrv2: modifier les graphs afficher listes
 - rajouter des commentaires sur les parties qui ne servent à rien
 - Optimiser les doubles boucles
