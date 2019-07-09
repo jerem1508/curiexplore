@@ -40,6 +40,8 @@ export default class MapHeader extends Component {
     for (let i = 0; i < this.allData.length; i += 1) {
       if (this.allData[i][0] === code) {
         this.handleClose();
+        // alert(this.allData[i][1].data[0].source);
+        this.setState({ source: this.allData[i][1][0].data[0].source });
         this.props.setData(this.allData[i][1], size);
         return;
       }

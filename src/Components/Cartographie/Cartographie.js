@@ -57,6 +57,7 @@ export default class Carto extends Component {
       this.colors.push(classes.sixPalliersColor6);
     }
     this.data = data;
+    this.size = size;
     // alert(this.data[0]);
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);
@@ -69,20 +70,20 @@ export default class Carto extends Component {
         for (let j = 0; j < this.layers.length; j += 1) {
           if (this.data[i].data.length > 0) {
             if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[0].country_code) {
-              this.layers[j].setStyle({ fillColor: this.colors[i % 4] });
+              this.layers[j].setStyle({ fillColor: this.colors[i % this.size] });
               this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
             }
           } else {
             // eslint-disable-next-line
             if (this.layers[j].options.fillColor === classes.paysComparaison2Color) {
-              this.layers[j].setStyle({ fillColor: classes.greyAColor });
+              this.layers[j].setStyle({ fillColor: classes.greyAColor + 90 });
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
             }
           }
         }
       }
     } else {
-      layer.setStyle({ fillColor: `${classes.paysComparaison2Color}` });
+      layer.setStyle({ fillColor: `${classes.greyAColor}` });
       this.layers.push(layer);
     }
     // Pour les couleurs construire ma string moi meme en fonction nb size (string pre def + ajout nb pour load couleurs)data.length)

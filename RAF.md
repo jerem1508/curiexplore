@@ -6,6 +6,11 @@
 - Positionner le scoll au niveau du pays sélectionné
 
 # FicheCurie
+- AJOUT DES COMMENTAIRES
+- Ajouts sources, unités, etc. dans HighCharts csv
+- Si stack -> faire plusieurs requetes en meme temp
+- Rendre les graphs + beau
+- Ajout de trop de pays dans la liste
 - Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE
 - Bouton annuler la liste
 - Fix mes couleurs
