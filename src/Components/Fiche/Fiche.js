@@ -496,7 +496,7 @@ class Fiche extends Component {
                 icon="fas fa-address-book"
               />
               <Contacts
-                language={this.props.language}
+                language="fr"
                 data={this.state.data.odsContacts}
               />
             </section>
