@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import propTypes from 'prop-types';
-// import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import {
   Map, withLeaflet, GeoJSON,
 } from 'react-leaflet';
@@ -21,22 +21,71 @@ const PrintControl = withLeaflet(PrintControlDefault);
 export default class Carto extends Component {
   constructor(props) {
     super(props);
+    this.data = [];
+    this.zoom = 2;
+    this.layers = [];
+    this.colors = [];
     this.state = {
       zoom: 2,
       btnColor: [classes.blueColor, classes.blueColor + 50],
     };
-    this.zoom = 2;
+    this.changeLayer = this.changeLayer.bind(this);
     this.zoomIn = this.zoomIn.bind(this);
     this.zoomOut = this.zoomOut.bind(this);
     this.exportChartPng = this.exportChartPng.bind(this);
+    this.setData = this.setData.bind(this);
   }
 
-  onEachFeature = (feature, layer) => {
-    layer.on({
-      click: () => { window.open(`/fiche/${feature.properties.iso_a3}`, '_blank'); },
-    });
+  setData(data, size) {
+    if (size === 4) {
+      this.colors.push(classes.quatrePalliersColor1);
+      this.colors.push(classes.quatrePalliersColor2);
+      this.colors.push(classes.quatrePalliersColor3);
+      this.colors.push(classes.quatrePalliersColor4);
+    } else if (size === 5) {
+      this.colors.push(classes.cinqPalliersColor1);
+      this.colors.push(classes.cinqPalliersColor2);
+      this.colors.push(classes.cinqPalliersColor3);
+      this.colors.push(classes.cinqPalliersColor4);
+      this.colors.push(classes.cinqPalliersColor5);
+    } else {
+      this.colors.push(classes.sixPalliersColor1);
+      this.colors.push(classes.sixPalliersColor2);
+      this.colors.push(classes.sixPalliersColor3);
+      this.colors.push(classes.sixPalliersColor4);
+      this.colors.push(classes.sixPalliersColor5);
+      this.colors.push(classes.sixPalliersColor6);
+    }
+    this.data = data;
+    // alert(this.data[0]);
+    // alert(this.data[0].data[0].country_code);
+    // alert(this.data[0].data[0].year);
+    this.changeLayer();
+  }
 
-    layer.bindTooltip(feature.properties.name);
+  changeLayer(feature, layer) {
+    if (this.data.length > 0) {
+      for (let i = 0; i < this.data.length; i += 1) {
+        for (let j = 0; j < this.layers.length; j += 1) {
+          if (this.data[i].data.length > 0) {
+            if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[0].country_code) {
+              this.layers[j].setStyle({ fillColor: this.colors[i % 4] });
+              this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
+            }
+          } else {
+            // eslint-disable-next-line
+            if (this.layers[j].options.fillColor === classes.paysComparaison2Color) {
+              this.layers[j].setStyle({ fillColor: classes.greyAColor });
+              this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
+            }
+          }
+        }
+      }
+    } else {
+      layer.setStyle({ fillColor: `${classes.paysComparaison2Color}` });
+      this.layers.push(layer);
+    }
+    // Pour les couleurs construire ma string moi meme en fonction nb size (string pre def + ajout nb pour load couleurs)data.length)
   }
 
   zoomIn() {
@@ -99,7 +148,7 @@ export default class Carto extends Component {
           url2="/cartographie"
         />
         <div>
-          <MapMenu />
+          <MapMenu setData={this.setData} />
           <Map
             // className={classes.Map}
             center={[50, 10]}
@@ -123,26 +172,32 @@ export default class Carto extends Component {
               data={worldGeoJSON}
               style={() => ({
                 color: '#fff',
-                fillColor: `${classes.sixPalliersColor5}`,
                 weight: 0.7,
                 fillOpacity: 1,
               })}
-              onEachFeature={this.onEachFeature}
+              onEachFeature={this.changeLayer}
             />
             <PrintControl ref={(ref) => { this.printControl = ref; }} {...downloadOptions} />
           </Map>
-          <div className={classes.exportBtn}>
-            <span style={{ float: 'left' }}>
-              <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[0] }} type="button" onClick={this.zoomIn}><i className="fas fa-plus" /></button>
-              <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[1] }} type="button" onClick={this.zoomOut}><i className="fas fa-minus" /></button>
-            </span>
-            <span style={{ float: 'right' }}>
-              <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
-              <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
-              <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
-              <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
-            </span>
-          </div>
+          <Container>
+            <Row>
+              <Col sm={1} />
+              <Col sm={8} className={classes.exportBtn}>
+                <span>
+                  <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[0] }} type="button" onClick={this.zoomIn}><i className="fas fa-plus" /></button>
+                  <button className={classes.dot} style={{ backgroundColor: this.state.btnColor[1] }} type="button" onClick={this.zoomOut}><i className="fas fa-minus" /></button>
+                </span>
+              </Col>
+              <Col sm={3} className={classes.exportBtn}>
+                <span>
+                  <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
+                  <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
+                  <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
+                  <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
+                </span>
+              </Col>
+            </Row>
+          </Container>
         </div>
         <Newsletter language={this.props.language} />
         <Footer language={this.props.language} />

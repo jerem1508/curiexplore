@@ -7,6 +7,7 @@
 
 # FicheCurie
 - Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE
+- Bouton annuler la liste
 - Fix mes couleurs
 - A FAIRE : GRAPHS STACKS (pour politique ESRI) (voir si possible ?)
 - Scanrv2: modifier les graphs afficher listes

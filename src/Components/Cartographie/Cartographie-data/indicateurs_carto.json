@@ -2,12 +2,10 @@
   { "value": "pib", "label": "Produit intérieur brut en $PPA", "label_en" : "TODO", "code" : "NY.GDP.MKTP.PP.CD", "steps" :
     [
       { "unit" : "percent", "limits" : [
-          [0, 5],
-          [5, 20],
-          [20, 35],
-          [35, 45],
-          [45, 60],
-          [60, 100]
+          [0, 25],
+          [25, 50],
+          [50, 75],
+          [75, 100]
         ]
       }
     ]
@@ -15,10 +13,12 @@
   { "value": "eff_sco_es", "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes", "label_en" : "TODO", "code" : "25053", "steps" :
     [
       { "unit" : "percent", "limits" : [
-          [0, 25],
-          [25, 50],
-          [50, 75],
-          [75, 100]
+          [0, 5],
+          [5, 20],
+          [20, 35],
+          [35, 45],
+          [45, 60],
+          [60, 100]
         ]
       }
     ]

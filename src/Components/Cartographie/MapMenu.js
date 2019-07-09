@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import {
+  Row, Col, Container, Modal,
+} from 'react-bootstrap';
+import axios from 'axios';
+import propTypes from 'prop-types';
 
 const config = require('./Cartographie-data/indicateurs_carto.json');
 const isoList = require('../Homepage/CountriesList/countriesList.json');
+const configFile = require('../../config/config.js');
 
-// aller chercher les données comme dans graphCurie
+const url = configFile.CURIE_URL;
 
 export default class MapHeader extends Component {
   constructor(props) {
     super(props);
-    this.source = 'Unesco';
+    this.allData = [];
+    this.source = 'N.A';
     this.state = {
       value: '',
+      show: true,
     };
-    this.getValues = this.getValues.bind(this);
     this.getSelect = this.getSelect.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -24,91 +32,26 @@ export default class MapHeader extends Component {
     });
   }
 
-  // async getData(i, label, indic, index) {
-  //   const res = await axios.get(url, {
-  //     // headers: {
-  //     //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
-  //     // },
-  //     params: {
-  //       where: `{"country_code":"${this.countryList[i]}","code":"${params[label][indic].unit[index].code}"}`,
-  //     },
-  //   });
-  //   return (res.data);
-  // }
-  //
-  // async getGraphValues(label, index, indic) {
-  //   // On vérifie si le label existe pour la récupération des indicateurs et des codes
-  //   if (params[label] == null) {
-  //     this.setState({ isMissing: true });
-  //     return;
-  //   }
-  //
-  //   // On créé tempData qui va contenir les différentes données
-  //   let tempData = [];
-  //   for (let i = 0; i < this.countryList.length; i += 1) {
-  //     tempData.push(null);
-  //   }
-  //
-  //   // On met à jour l'index (définit quel code choisir pour l'indicateur choisi)
-  //   this.graphIndex = index;
-  //
-  //   // On reset les données
-  //   this.setState({ filterData: null });
-  //
-  //   // On vérifie si la data est dispo afin d'éviter les requêtes inutiles
-  //   for (let i = 0; i < this.countryList.length; i += 1) {
-  //     for (let j = 0; j < this.allData.length; j += 1) {
-  //       // Si le pays et le code correspondants sont déjà rentrés, on les met dans tempData
-  //       if ((this.allData[j][0] === this.countryList[i]) && (this.allData[j][1] === params[label][indic].unit[index].code)) {
-  //         tempData[i] = this.allData[2];
-  //       }
-  //     }
-  //   }
-  //
-  //   const results = [];
-  //   for (let i = 0; i < tempData.length; i += 1) {
-  //     // Si c'est null, on a pas recup les données via allData
-  //     if (tempData[i] === null) {
-  //       // On met l'appel de fonction à faire dans results (pour await toutes les réponses avant de continuer)
-  //       results.push(this.getData(i, label, indic, index));
-  //     } else {
-  //       // Sinon on fait pas de requete
-  //       results.push('');
-  //     }
-  //   }
-  //   // On effectue toutes les requêtes nécssaires
-  //   tempData = await Promise.all(results);
-  //   for (let i = 0; i < results.length; i += 1) {
-  //     if (tempData[i] === '') {
-  //       for (let j = 0; j < this.allData.length; j += 1) {
-  //         if ((this.allData[j][0] === this.countryList[i]) && (this.allData[j][1] === params[label][indic].unit[index].code)) {
-  //           tempData[i] = this.allData[j][2];
-  //         }
-  //       }
-  //     } else {
-  //       const tmpLbl = [];
-  //       tmpLbl.push(this.countryList[i]);
-  //       tmpLbl.push(params[label][indic].unit[index].code);
-  //       tmpLbl.push(tempData[i]);
-  //       this.allData.push(tmpLbl);
-  //     }
-  //   }
-  //   this.graphFormat = params[label][indic].type;
-  //   this.setState({ filterData: tempData });
-  // }
+  async getData(code, size) {
+    const queries = [];
+    let results = [];
+    this.handleShow();
 
-  getValues() {
-    let i = 0;
-    for (i = 0; i < config.length; i += 1) {
-      if (config[i].value === this.state.value) {
-        break;
+    for (let i = 0; i < this.allData.length; i += 1) {
+      if (this.allData[i][0] === code) {
+        this.handleClose();
+        this.props.setData(this.allData[i][1], size);
+        return;
       }
     }
-    if (i === config.length) {
-      return;
+    for (let i = 0; i < isoList.length; i += 1) {
+      queries.push(this.fetchData(code, isoList[i].ISO_alpha3));
     }
-    // alert(config[i].code);
-    // alert(config[i].steps[0].limits.length);
+    results = await Promise.all(queries);
+    this.handleClose();
+    this.setState({ source: results[0].data[0].source });
+    this.allData.push([code, results]);
+    this.props.setData(results, size);
   }
 
   getSelect() {
@@ -121,6 +64,40 @@ export default class MapHeader extends Component {
         {selectList}
       </select>
     );
+  }
+
+  getValues() {
+    let i = 0;
+    for (i = 0; i < config.length; i += 1) {
+      if (config[i].value === this.state.value) {
+        break;
+      }
+    }
+    if (i === config.length) {
+      return;
+    }
+    this.getData(config[i].code, config[i].steps[0].limits.length);
+  }
+
+  // eslint-disable-next-line
+  async fetchData(code, isoCode) {
+    const res = await axios.get(url, {
+      // headers: {
+      //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
+      // },
+      params: {
+        where: `{"country_code":"${isoCode}","code":"${code}"}`,
+      },
+    });
+    return (res.data);
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
   }
 
   handleIndic(e) {
@@ -139,7 +116,7 @@ export default class MapHeader extends Component {
             <p>{this.getSelect()}</p>
             <span>
               Source:&nbsp;
-              {this.source}
+              {this.state.source}
             </span>
           </Col>
           <Col sm={5}>
@@ -147,9 +124,17 @@ export default class MapHeader extends Component {
             <p>ligne1</p>
             <p>ligne2</p>
           </Col>
-          <Col />
         </Row>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Body>Chargement en cours...</Modal.Body>
+        </Modal>
       </Container>
     );
   }
 }
+
+MapHeader.propTypes = {
+  setData: propTypes.func.isRequired,
+  // language: PropTypes.string.isRequired,
+  // switchLanguage: PropTypes.func.isRequired,
+};
