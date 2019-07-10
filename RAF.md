@@ -9,7 +9,7 @@
 - AJOUT DES COMMENTAIRES
 - Ajouts sources, unités, etc. dans HighCharts csv
 - Si stack -> faire plusieurs requetes en meme temp
-- Rendre les graphs + beau
+- Rendre les graphs + beau (Texte normal mais display hidden div on click)
 - Ajout de trop de pays dans la liste
 - Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE
 - Bouton annuler la liste
@@ -19,7 +19,7 @@
 - rajouter des commentaires sur les parties qui ne servent à rien
 - Optimiser les doubles boucles
 - Formater tooltip des graphs
-- Afficher message si unité pas dispo
+- Afficher message si unité pas dispo (plus ou moins fait)
 - Ajouter le titre en props
 - Menu indépendant pour le graph
 

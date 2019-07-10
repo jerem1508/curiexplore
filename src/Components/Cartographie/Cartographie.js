@@ -16,6 +16,8 @@ import Footer from '../Shared/Footer/Footer';
 import classes from './Cartographie.scss';
 import worldGeoJSON from '../Homepage/Maps/custom.geo.json';
 
+const config = require('./Cartographie-data/indicateurs_carto.json');
+
 const PrintControl = withLeaflet(PrintControlDefault);
 
 export default class Carto extends Component {
@@ -36,7 +38,7 @@ export default class Carto extends Component {
     this.setData = this.setData.bind(this);
   }
 
-  setData(data, size) {
+  setData(data, size, confIndex) {
     if (size === 4) {
       this.colors.push(classes.quatrePalliersColor1);
       this.colors.push(classes.quatrePalliersColor2);
@@ -61,22 +63,31 @@ export default class Carto extends Component {
     // alert(this.data[0]);
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);
-    this.changeLayer();
+    this.changeLayer(null, null, confIndex, size);
   }
 
-  changeLayer(feature, layer) {
+  changeLayer(feature, layer, confIndex, size) {
     if (this.data.length > 0) {
       for (let i = 0; i < this.data.length; i += 1) {
         for (let j = 0; j < this.layers.length; j += 1) {
           if (this.data[i].data.length > 0) {
             if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[0].country_code) {
-              this.layers[j].setStyle({ fillColor: this.colors[i % this.size] });
+              let k = 0;
+              for (k = 0; k < size; k += 1) {
+                if (this.data[i].data[0].value > config[confIndex].steps[0].limits[k][0] && this.data[i].data[0].value < config[confIndex].steps[0].limits[k][1]) {
+                  break;
+                }
+              }
+              // alert(this.data[i].data[0].year);
+              // alert(this.data[i].data[0].value);
+              // alert(config[confIndex].steps[0].limits[0][1]);
+              this.layers[j].setStyle({ fillColor: this.colors[k] });
               this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
             }
           } else {
             // eslint-disable-next-line
-            if (this.layers[j].options.fillColor === classes.paysComparaison2Color) {
-              this.layers[j].setStyle({ fillColor: classes.greyAColor + 90 });
+            if (this.layers[j].options.fillColor === classes.greyAColor) {
+              this.layers[j].setStyle({ fillColor: classes.greyAColor + 40 });
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
             }
           }
@@ -158,7 +169,7 @@ export default class Carto extends Component {
             zoomControl={false}
             maxZoom={7}
             attributionControl
-            doubleClickZoom
+            // doubleClickZoom
             scrollWheelZoom={false}
             dragging
             animate

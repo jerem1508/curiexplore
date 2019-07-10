@@ -32,7 +32,7 @@ export default class MapHeader extends Component {
     });
   }
 
-  async getData(code, size) {
+  async getData(code, size, index) {
     const queries = [];
     let results = [];
     this.handleShow();
@@ -42,10 +42,11 @@ export default class MapHeader extends Component {
         this.handleClose();
         // alert(this.allData[i][1].data[0].source);
         this.setState({ source: this.allData[i][1][0].data[0].source });
-        this.props.setData(this.allData[i][1], size);
+        this.props.setData(this.allData[i][1], size, index);
         return;
       }
     }
+    // for (let i = 0; i < 30; i += 1) {
     for (let i = 0; i < isoList.length; i += 1) {
       queries.push(this.fetchData(code, isoList[i].ISO_alpha3));
     }
@@ -53,7 +54,7 @@ export default class MapHeader extends Component {
     this.handleClose();
     this.setState({ source: results[0].data[0].source });
     this.allData.push([code, results]);
-    this.props.setData(results, size);
+    this.props.setData(results, size, index);
   }
 
   getSelect() {
@@ -78,7 +79,7 @@ export default class MapHeader extends Component {
     if (i === config.length) {
       return;
     }
-    this.getData(config[i].code, config[i].steps[0].limits.length);
+    this.getData(config[i].code, config[i].steps[0].limits.length, i);
   }
 
   // eslint-disable-next-line
