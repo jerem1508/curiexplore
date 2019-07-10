@@ -25,3 +25,6 @@
 
 # Divers
 - Font Awesome en local
+
+# Data
+- trier données API Datastore par date (croissant) puis par variable, par pays
