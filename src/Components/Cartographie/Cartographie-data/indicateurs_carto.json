@@ -1,4 +1,17 @@
 [
+  { "value": "eff_sco_es", "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes", "label_en" : "TODO", "code" : "25053", "steps" :
+    [
+      { "unit" : "percent", "limits" : [
+          [0, 2000000],
+          [2000000, 4000000],
+          [4000000, 6000000],
+          [6000000, 8000000],
+          [8000000, 10000000],
+          [10000000, 100000000]
+        ]
+      }
+    ]
+  },
   { "value": "pib", "label": "Produit intérieur brut en $PPA", "label_en" : "TODO", "code" : "NY.GDP.MKTP.PP.CD", "steps" :
     [
       { "unit" : "percent", "limits" : [
@@ -8,19 +21,6 @@
           [50511356000, 61565054000],
           [61565054000, 7515773840000],
           [7515773840000, 100000000000000]
-        ]
-      }
-    ]
-  },
-  { "value": "eff_sco_es", "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes", "label_en" : "TODO", "code" : "25053", "steps" :
-    [
-      { "unit" : "percent", "limits" : [
-          [0, 5],
-          [5, 20],
-          [20, 35],
-          [35, 45],
-          [45, 60],
-          [60, 100]
         ]
       }
     ]

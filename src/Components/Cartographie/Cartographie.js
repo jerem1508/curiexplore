@@ -27,8 +27,10 @@ export default class Carto extends Component {
     this.zoom = 2;
     this.layers = [];
     this.colors = [];
+    this.year = 2013;
     this.state = {
       zoom: 2,
+      year: 0,
       btnColor: [classes.blueColor, classes.blueColor + 50],
     };
     this.changeLayer = this.changeLayer.bind(this);
@@ -64,17 +66,27 @@ export default class Carto extends Component {
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);
     this.changeLayer(null, null, confIndex, size);
+    this.setState({ year: this.year });
   }
 
   changeLayer(feature, layer, confIndex, size) {
     if (this.data.length > 0) {
       for (let i = 0; i < this.data.length; i += 1) {
+        let hasData = false;
+        let l = 0;
+        for (l = 0; l < this.data[i].data.length; l += 1) {
+          if (this.data[i].data[l].year === this.year) {
+            hasData = true;
+            break;
+          }
+        }
         for (let j = 0; j < this.layers.length; j += 1) {
-          if (this.data[i].data.length > 0) {
-            if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[0].country_code) {
+          if (this.data[i].data.length > 0 && hasData === true) {
+            if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[l].country_code) {
               let k = 0;
+              // alert(this.data[i].data[0].value);
               for (k = 0; k < size; k += 1) {
-                if (this.data[i].data[0].value > config[confIndex].steps[0].limits[k][0] && this.data[i].data[0].value < config[confIndex].steps[0].limits[k][1]) {
+                if (this.data[i].data[l].value >= config[confIndex].steps[0].limits[k][0] && this.data[i].data[l].value < config[confIndex].steps[0].limits[k][1]) {
                   break;
                 }
               }
@@ -210,6 +222,7 @@ export default class Carto extends Component {
               </Col>
             </Row>
           </Container>
+          <div>{this.state.year}</div>
         </div>
         <Newsletter language={this.props.language} />
         <Footer language={this.props.language} />
