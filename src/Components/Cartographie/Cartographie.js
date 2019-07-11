@@ -17,6 +17,7 @@ import classes from './Cartographie.scss';
 import worldGeoJSON from '../Homepage/Maps/custom.geo.json';
 
 const config = require('./Cartographie-data/indicateurs_carto.json');
+const isoList = require('../Homepage/CountriesList/countriesList.json');
 
 const PrintControl = withLeaflet(PrintControlDefault);
 
@@ -27,7 +28,8 @@ export default class Carto extends Component {
     this.zoom = 2;
     this.layers = [];
     this.colors = [];
-    this.year = 2013;
+    this.countryDataIso = [];
+    this.year = 2009;
     this.state = {
       zoom: 2,
       year: 0,
@@ -65,23 +67,31 @@ export default class Carto extends Component {
     // alert(this.data[0]);
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);
+    this.countryDataIso = [];
     this.changeLayer(null, null, confIndex, size);
     this.setState({ year: this.year });
+    // console.log(this.countryDataIso);
+    this.changeColorMissingData();
   }
 
   changeLayer(feature, layer, confIndex, size) {
     if (this.data.length > 0) {
+      // alert('year : ' + this.data[0].data[0].year);
+      // alert('code : ' + this.data[0].data[0].country_code);
+      // alert(size);
       for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
         let l = 0;
+        // alert(this.data[i].data.length);
         for (l = 0; l < this.data[i].data.length; l += 1) {
           if (this.data[i].data[l].year === this.year) {
             hasData = true;
+            this.countryDataIso.push(this.data[i].data[l].country_code);
             break;
           }
         }
         for (let j = 0; j < this.layers.length; j += 1) {
-          if (this.data[i].data.length > 0 && hasData === true) {
+          if (hasData === true) {
             if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[l].country_code) {
               let k = 0;
               // alert(this.data[i].data[0].value);
@@ -96,20 +106,42 @@ export default class Carto extends Component {
               this.layers[j].setStyle({ fillColor: this.colors[k] });
               this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
             }
-          } else {
-            // eslint-disable-next-line
-            if (this.layers[j].options.fillColor === classes.greyAColor) {
+          } else if (this.data[i].data.length > 0) {
+            if (this.data[i].data[0].country_code === this.layers[j].feature.properties.adm0_a3) {
               this.layers[j].setStyle({ fillColor: classes.greyAColor + 40 });
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
+              this.countryDataIso.push(this.data[i].data[0].country_code);
             }
+            // alert('hasData: ' + hasData);
+            // alert('data length: ' + this.data[i].data.length);
+            // alert('toto');
           }
+          // else if (this.data[i].length > 0) {
+          //   alert('test');
+          //   if (this.data[i].data[0].country_code === this.layers[j].feature.properties.adm0_a3) {
+          //     this.layers[j].setStyle({ fillColor: `${classes.greyAColor + 40}` });
+          //   }
+          // }
         }
       }
     } else {
-      layer.setStyle({ fillColor: `${classes.greyAColor}` });
+      layer.setStyle({ fillColor: `${classes.greyAColor + 40}` });
+      layer.bindTooltip(`${layer.feature.properties.admin} : pas de données disponibles.`);
       this.layers.push(layer);
     }
-    // Pour les couleurs construire ma string moi meme en fonction nb size (string pre def + ajout nb pour load couleurs)data.length)
+    // ajouter les pays check dans tableau et comparer avec countryList et set les layers
+  }
+
+  changeColorMissingData() {
+    for (let i = 0; i < isoList.length; i += 1) {
+      if (this.countryDataIso.indexOf(isoList[i].ISO_alpha3) === -1) {
+        for (let j = 0; j < this.layers.length; j += 1) {
+          if (isoList[i].ISO_alpha3 === this.layers[j].feature.properties.adm0_a3) {
+            this.layers[j].setStyle({ fillColor: `${classes.greyAColor + 40}` });
+          }
+        }
+      }
+    }
   }
 
   zoomIn() {
@@ -181,7 +213,7 @@ export default class Carto extends Component {
             zoomControl={false}
             maxZoom={7}
             attributionControl
-            // doubleClickZoom
+            doubleClickZoom={false}
             scrollWheelZoom={false}
             dragging
             animate
