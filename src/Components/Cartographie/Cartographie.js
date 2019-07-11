@@ -116,12 +116,6 @@ export default class Carto extends Component {
             // alert('data length: ' + this.data[i].data.length);
             // alert('toto');
           }
-          // else if (this.data[i].length > 0) {
-          //   alert('test');
-          //   if (this.data[i].data[0].country_code === this.layers[j].feature.properties.adm0_a3) {
-          //     this.layers[j].setStyle({ fillColor: `${classes.greyAColor + 40}` });
-          //   }
-          // }
         }
       }
     } else {
@@ -129,7 +123,6 @@ export default class Carto extends Component {
       layer.bindTooltip(`${layer.feature.properties.admin} : pas de données disponibles.`);
       this.layers.push(layer);
     }
-    // ajouter les pays check dans tableau et comparer avec countryList et set les layers
   }
 
   changeColorMissingData() {

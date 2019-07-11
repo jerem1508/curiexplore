@@ -52,7 +52,12 @@ export default class MapHeader extends Component {
     }
     results = await Promise.all(queries);
     this.handleClose();
-    this.setState({ source: results[0].data[0].source });
+    for (let i = 0; i < results.length; i += 1) {
+      if (results[i].data.length > 0) {
+        this.setState({ source: results[i].data[0].source });
+        break;
+      }
+    }
     this.allData.push([code, results]);
     this.props.setData(results, size, index);
   }

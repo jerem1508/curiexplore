@@ -24,5 +24,18 @@
         ]
       }
     ]
+  },
+  { "value": "dens_pop", "label": "Densité de la population", "label_en" : "TODO", "code" : "EN.POP.DNST", "steps" :
+    [
+      { "unit" : "percent", "limits" : [
+          [300, 500],
+          [200, 300],
+          [90, 200],
+          [30, 90],
+          [15, 30],
+          [0, 15]
+        ]
+      }
+    ]
   }
 ]
