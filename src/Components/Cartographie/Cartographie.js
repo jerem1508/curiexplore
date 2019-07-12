@@ -42,28 +42,10 @@ export default class Carto extends Component {
     this.setData = this.setData.bind(this);
   }
 
-  setData(data, size, confIndex) {
-    if (size === 4) {
-      this.colors.push(classes.quatrePalliersColor1);
-      this.colors.push(classes.quatrePalliersColor2);
-      this.colors.push(classes.quatrePalliersColor3);
-      this.colors.push(classes.quatrePalliersColor4);
-    } else if (size === 5) {
-      this.colors.push(classes.cinqPalliersColor1);
-      this.colors.push(classes.cinqPalliersColor2);
-      this.colors.push(classes.cinqPalliersColor3);
-      this.colors.push(classes.cinqPalliersColor4);
-      this.colors.push(classes.cinqPalliersColor5);
-    } else {
-      this.colors.push(classes.sixPalliersColor1);
-      this.colors.push(classes.sixPalliersColor2);
-      this.colors.push(classes.sixPalliersColor3);
-      this.colors.push(classes.sixPalliersColor4);
-      this.colors.push(classes.sixPalliersColor5);
-      this.colors.push(classes.sixPalliersColor6);
-    }
+  setData(data, size, colors, confIndex) {
     this.data = data;
     this.size = size;
+    this.colors = colors;
     // alert(this.data[0]);
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);

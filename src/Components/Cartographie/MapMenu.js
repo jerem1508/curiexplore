@@ -5,6 +5,8 @@ import {
 import axios from 'axios';
 import propTypes from 'prop-types';
 
+import classes from './Cartographie.scss';
+
 const config = require('./Cartographie-data/indicateurs_carto.json');
 const configFile = require('../../config/config.js');
 
@@ -16,8 +18,9 @@ export default class MapHeader extends Component {
     this.allData = [];
     this.source = 'N.A';
     this.state = {
-      value: '',
+      colors: [],
       show: true,
+      value: '',
     };
     this.getSelect = this.getSelect.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
@@ -41,7 +44,8 @@ export default class MapHeader extends Component {
         this.handleClose();
         // alert(this.allData[i][1].data[0].source);
         this.setState({ source: this.allData[i][1][0].source });
-        this.props.setData(this.allData[i][1], size, index);
+        this.getColors(size);
+        this.props.setData(this.allData[i][1], size, this.state.colors, index);
         return;
       }
     }
@@ -54,8 +58,33 @@ export default class MapHeader extends Component {
         break;
       }
     }
+    this.getColors(size);
     this.allData.push([code, results[0].data]);
-    this.props.setData(results[0].data, size, index);
+    this.props.setData(results[0].data, size, this.state.colors, index);
+  }
+
+  getColors(size) {
+    const colors = [];
+    if (size === 4) {
+      colors.push(classes.quatrePalliersColor1);
+      colors.push(classes.quatrePalliersColor2);
+      colors.push(classes.quatrePalliersColor3);
+      colors.push(classes.quatrePalliersColor4);
+    } else if (size === 5) {
+      colors.push(classes.cinqPalliersColor1);
+      colors.push(classes.cinqPalliersColor2);
+      colors.push(classes.cinqPalliersColor3);
+      colors.push(classes.cinqPalliersColor4);
+      colors.push(classes.cinqPalliersColor5);
+    } else {
+      colors.push(classes.sixPalliersColor1);
+      colors.push(classes.sixPalliersColor2);
+      colors.push(classes.sixPalliersColor3);
+      colors.push(classes.sixPalliersColor4);
+      colors.push(classes.sixPalliersColor5);
+      colors.push(classes.sixPalliersColor6);
+    }
+    this.setState({ colors });
   }
 
   getSelect() {
