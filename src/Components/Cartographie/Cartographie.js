@@ -69,6 +69,7 @@ export default class Carto extends Component {
     // alert(this.data[0].data[0].year);
     this.countryDataIso = [];
     this.initYear(confIndex);
+    alert(this.data.length);
     this.changeLayer(null, null, confIndex, size);
     // console.log(this.countryDataIso);
     this.changeColorMissingData();
@@ -76,10 +77,11 @@ export default class Carto extends Component {
 
   changeLayer(feature, layer, confIndex, size) {
     if (this.data.length > 0) {
+      // alert('toto');
       // alert('year : ' + this.data[0].data[0].year);
       // alert('code : ' + this.data[0].data[0].country_code);
       // alert(size);
-      for (let i = 0; i < this.data.length; i += 1) {
+      for (let i = 0; i < this.data[0].length; i += 1) {
         let hasData = false;
         let l = 0;
         // alert(this.data[i].data.length);

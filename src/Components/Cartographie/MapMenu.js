@@ -6,7 +6,6 @@ import axios from 'axios';
 import propTypes from 'prop-types';
 
 const config = require('./Cartographie-data/indicateurs_carto.json');
-const isoList = require('../Homepage/CountriesList/countriesList.json');
 const configFile = require('../../config/config.js');
 
 const url = configFile.CURIE_URL;
@@ -33,7 +32,7 @@ export default class MapHeader extends Component {
   }
 
   async getData(code, size, index) {
-    const queries = [];
+    const requests = [];
     let results = [];
     this.handleShow();
 
@@ -41,25 +40,22 @@ export default class MapHeader extends Component {
       if (this.allData[i][0] === code) {
         this.handleClose();
         // alert(this.allData[i][1].data[0].source);
-        this.setState({ source: this.allData[i][1][0].data[0].source });
+        this.setState({ source: this.allData[i][1][0].source });
         this.props.setData(this.allData[i][1], size, index);
         return;
       }
     }
-    // for (let i = 0; i < 30; i += 1) {
-    for (let i = 0; i < isoList.length; i += 1) {
-      queries.push(this.fetchData(code, isoList[i].ISO_alpha3));
-    }
-    results = await Promise.all(queries);
+    requests.push(this.fetchData(code));
     this.handleClose();
+    results = await Promise.all(requests);
     for (let i = 0; i < results.length; i += 1) {
       if (results[i].data.length > 0) {
         this.setState({ source: results[i].data[0].source });
         break;
       }
     }
-    this.allData.push([code, results]);
-    this.props.setData(results, size, index);
+    this.allData.push([code, results[0].data]);
+    this.props.setData(results[0].data, size, index);
   }
 
   getSelect() {
@@ -88,13 +84,14 @@ export default class MapHeader extends Component {
   }
 
   // eslint-disable-next-line
-  async fetchData(code, isoCode) {
+  async fetchData(code) {
     const res = await axios.get(url, {
       // headers: {
       //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
       // },
       params: {
-        where: `{"country_code":"${isoCode}","code":"${code}"}`,
+        where: `{"code":"${code}"}`,
+        max_results: '3000',
       },
     });
     return (res.data);
