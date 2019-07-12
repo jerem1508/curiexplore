@@ -29,7 +29,7 @@ export default class Carto extends Component {
     this.layers = [];
     this.colors = [];
     this.countryDataIso = [];
-    this.year = 2009;
+    this.year = 2008;
     this.state = {
       zoom: 2,
       year: 0,
@@ -68,8 +68,8 @@ export default class Carto extends Component {
     // alert(this.data[0].data[0].country_code);
     // alert(this.data[0].data[0].year);
     this.countryDataIso = [];
+    this.initYear(confIndex);
     this.changeLayer(null, null, confIndex, size);
-    this.setState({ year: this.year });
     // console.log(this.countryDataIso);
     this.changeColorMissingData();
   }
@@ -121,8 +121,16 @@ export default class Carto extends Component {
     } else {
       layer.setStyle({ fillColor: `${classes.greyAColor + 40}` });
       layer.bindTooltip(`${layer.feature.properties.admin} : pas de données disponibles.`);
+      layer.on({
+        click: () => { window.open(`/fiche/${feature.properties.iso_a3}`, '_blank'); },
+      });
       this.layers.push(layer);
     }
+  }
+
+  initYear(confIndex) {
+    this.year = config[confIndex].years[0];
+    this.setState({ year: this.year });
   }
 
   changeColorMissingData() {
@@ -196,7 +204,7 @@ export default class Carto extends Component {
           url1="/"
           url2="/cartographie"
         />
-        <div>
+        <div className={classes.Menu}>
           <MapMenu setData={this.setData} />
           <Map
             // className={classes.Map}
