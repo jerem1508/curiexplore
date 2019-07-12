@@ -13,4 +13,5 @@ export const PUBLICATION_COLOR = '#cc3d8f';
 export const ODS_API_KEY = '421d71a0ab8b10e550bd2f439c3d53abe4705a09f72d57e12aefd92f';
 
 export const CURIE_AUTH_KEY = 'cm9vdDp0b25uZXJyZTJCcmVzdA==';
-export const CURIE_URL = 'http://10.243.98.74/datastore/curie';
+// export const CURIE_URL = 'http://10.243.98.74/datastore/curie';
+export const CURIE_URL = 'http://185.161.45.213/datastore/curie';

@@ -78,9 +78,9 @@ class GraphCurie extends Component {
   // Cette fonction va chercher les données en fonction de l'inciateur et de l'unité
   async getData(i, label, indic, index) {
     const res = await axios.get(url, {
-      // headers: {
-      //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
-      // },
+      headers: {
+        Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
+      },
       params: {
         where: `{"country_code":"${this.countryList[i]}","code":"${params[label][indic].unit[index].code}"}`,
       },

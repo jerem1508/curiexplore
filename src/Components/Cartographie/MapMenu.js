@@ -86,9 +86,9 @@ export default class MapHeader extends Component {
   // eslint-disable-next-line
   async fetchData(code) {
     const res = await axios.get(url, {
-      // headers: {
-      //   Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
-      // },
+      headers: {
+        Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
+      },
       params: {
         where: `{"code":"${code}"}`,
         max_results: '3000',
