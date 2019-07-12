@@ -69,7 +69,6 @@ export default class Carto extends Component {
     // alert(this.data[0].data[0].year);
     this.countryDataIso = [];
     this.initYear(confIndex);
-    alert(this.data.length);
     this.changeLayer(null, null, confIndex, size);
     // console.log(this.countryDataIso);
     this.changeColorMissingData();
@@ -81,24 +80,20 @@ export default class Carto extends Component {
       // alert('year : ' + this.data[0].data[0].year);
       // alert('code : ' + this.data[0].data[0].country_code);
       // alert(size);
-      for (let i = 0; i < this.data[0].length; i += 1) {
+      for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
-        let l = 0;
         // alert(this.data[i].data.length);
-        for (l = 0; l < this.data[i].data.length; l += 1) {
-          if (this.data[i].data[l].year === this.year) {
-            hasData = true;
-            this.countryDataIso.push(this.data[i].data[l].country_code);
-            break;
-          }
+        if (this.data[i].year === this.year) {
+          hasData = true;
+          this.countryDataIso.push(this.data[i].country_code);
         }
         for (let j = 0; j < this.layers.length; j += 1) {
           if (hasData === true) {
-            if (this.layers[j].feature.properties.adm0_a3 === this.data[i].data[l].country_code) {
+            if (this.layers[j].feature.properties.adm0_a3 === this.data[i].country_code) {
               let k = 0;
               // alert(this.data[i].data[0].value);
               for (k = 0; k < size; k += 1) {
-                if (this.data[i].data[l].value >= config[confIndex].steps[0].limits[k][0] && this.data[i].data[l].value < config[confIndex].steps[0].limits[k][1]) {
+                if (this.data[i].value >= config[confIndex].steps[0].limits[k][0] && this.data[i].value < config[confIndex].steps[0].limits[k][1]) {
                   break;
                 }
               }
@@ -108,8 +103,8 @@ export default class Carto extends Component {
               this.layers[j].setStyle({ fillColor: this.colors[k] });
               this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
             }
-          } else if (this.data[i].data.length > 0) {
-            if (this.data[i].data[0].country_code === this.layers[j].feature.properties.adm0_a3) {
+          } else if (this.data[i].length > 0) {
+            if (this.data[i].country_code === this.layers[j].feature.properties.adm0_a3) {
               this.layers[j].setStyle({ fillColor: classes.greyAColor + 40 });
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
               this.countryDataIso.push(this.data[i].data[0].country_code);
