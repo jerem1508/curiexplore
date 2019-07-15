@@ -19,6 +19,14 @@
   background-color: $skyBlueColor;
 }
 
+.Title {
+  span:first-child {
+    font-style: italic;
+    color: $darkBlueColor;
+    // color: $greyAColor;
+  }
+}
+
 .dot {
   height: 35px;
   width: 35px;

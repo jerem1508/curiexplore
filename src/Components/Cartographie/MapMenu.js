@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Row, Col, Container, Modal,
 } from 'react-bootstrap';
@@ -23,6 +23,7 @@ export default class MapHeader extends Component {
       value: '',
     };
     this.getSelect = this.getSelect.bind(this);
+    this.getLegend = this.getLegend.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -44,8 +45,7 @@ export default class MapHeader extends Component {
         this.handleClose();
         // alert(this.allData[i][1].data[0].source);
         this.setState({ source: this.allData[i][1][0].source });
-        this.getColors(size);
-        this.props.setData(this.allData[i][1], size, this.state.colors, index);
+        this.getColors(this.allData[i][1], size, index);
         return;
       }
     }
@@ -58,12 +58,11 @@ export default class MapHeader extends Component {
         break;
       }
     }
-    this.getColors(size);
     this.allData.push([code, results[0].data]);
-    this.props.setData(results[0].data, size, this.state.colors, index);
+    this.getColors(results[0].data, size, index);
   }
 
-  getColors(size) {
+  getColors(data, size, index) {
     const colors = [];
     if (size === 4) {
       colors.push(classes.quatrePalliersColor1);
@@ -84,7 +83,9 @@ export default class MapHeader extends Component {
       colors.push(classes.sixPalliersColor5);
       colors.push(classes.sixPalliersColor6);
     }
-    this.setState({ colors });
+    this.setState({ colors }, () => {
+      this.props.setData(data, size, this.state.colors, index);
+    });
   }
 
   getSelect() {
@@ -126,6 +127,30 @@ export default class MapHeader extends Component {
     return (res.data);
   }
 
+  getLegend() {
+    const colors = this.state.colors;
+    const firstLine = [];
+    const secondLine = [];
+
+    for (let i = 0; i < colors.length; i += 1) {
+      if (i < colors.length / 2) {
+        firstLine.push(<span style={{ backgroundColor: colors[i] }}>Ligne 1</span>);
+      } else {
+        secondLine.push(<span style={{ backgroundColor: colors[i] }}>Ligne 1</span>);
+      }
+    }
+    return (
+      <Fragment>
+        <p>
+          {firstLine}
+        </p>
+        <p>
+          {secondLine}
+        </p>
+      </Fragment>
+    );
+  }
+
   handleClose() {
     this.setState({ show: false });
   }
@@ -145,7 +170,7 @@ export default class MapHeader extends Component {
       <Container>
         <Row>
           <Col sm={1} />
-          <Col sm={5}>
+          <Col sm={5} className={classes.Title}>
             <span>Sélectionner un indicateur</span>
             <p>{this.getSelect()}</p>
             <span>
@@ -153,10 +178,9 @@ export default class MapHeader extends Component {
               {this.state.source}
             </span>
           </Col>
-          <Col sm={5}>
-            <p>Complément de légende</p>
-            <p>ligne1</p>
-            <p>ligne2</p>
+          <Col sm={5} className={classes.Title}>
+            <span>Complément de légende</span>
+            {this.getLegend()}
           </Col>
         </Row>
         <Modal show={this.state.show} onHide={this.handleClose}>

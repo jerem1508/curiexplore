@@ -1,22 +1,4 @@
 [
-  { "value": "eff_sco_es",
-    "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
-    "label_en" : "TODO",
-    "code" : "25053",
-    "years" : [2009, 2017],
-    "steps" : [
-      { "unit" : "percent",
-        "limits" : [
-          [0, 2000000],
-          [2000000, 4000000],
-          [4000000, 6000000],
-          [6000000, 8000000],
-          [8000000, 10000000],
-          [10000000, 100000000]
-        ]
-      }
-    ]
-  },
   { "value": "pib",
     "label": "Produit intérieur brut en $PPA",
     "label_en" : "TODO",
@@ -35,6 +17,24 @@
       }
     ]
   },
+  { "value": "eff_sco_es",
+    "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
+    "label_en" : "TODO",
+    "code" : "25053",
+    "years" : [2009, 2017],
+    "steps" : [
+      { "unit" : "percent",
+        "limits" : [
+          [0, 2000000],
+          [2000000, 4000000],
+          [4000000, 6000000],
+          [6000000, 8000000],
+          [8000000, 10000000],
+          [10000000, 100000000]
+        ]
+      }
+    ]
+  },
   { "value": "dens_pop",
     "label": "Densité de la population",
     "label_en" : "TODO",
@@ -49,6 +49,23 @@
           [30, 90],
           [15, 30],
           [0, 15]
+        ]
+      }
+    ]
+  },
+  { "value": "test",
+    "label": "Test dens",
+    "label_en" : "TODO",
+    "code" : "EN.POP.DNST",
+    "years" : [2008, 2017],
+    "steps" : [
+      { "unit" : "percent",
+        "limits" : [
+          [300, 500],
+          [200, 300],
+          [100, 200],
+          [50, 100],
+          [0, 50]
         ]
       }
     ]
