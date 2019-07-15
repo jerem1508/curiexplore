@@ -7,6 +7,7 @@ import {
 import PrintControlDefault from 'react-leaflet-easyprint';
 
 import MapMenu from './MapMenu';
+import MapSlider from './MapSlider';
 
 import Header from '../Shared/Header/Header';
 import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
@@ -29,13 +30,14 @@ export default class Carto extends Component {
     this.layers = [];
     this.colors = [];
     this.countryDataIso = [];
-    this.year = 2008;
+    this.yearInterval = [2008, 2017];
     this.state = {
       zoom: 2,
-      year: 0,
+      year: 2008,
       btnColor: [classes.blueColor, classes.blueColor + 50],
     };
     this.changeLayer = this.changeLayer.bind(this);
+    this.changeYear = this.changeYear.bind(this);
     this.zoomIn = this.zoomIn.bind(this);
     this.zoomOut = this.zoomOut.bind(this);
     this.exportChartPng = this.exportChartPng.bind(this);
@@ -65,7 +67,7 @@ export default class Carto extends Component {
       for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
         // alert(this.data[i].data.length);
-        if (this.data[i].year === this.year) {
+        if (this.data[i].year === this.state.year) {
           hasData = true;
           this.countryDataIso.push(this.data[i].country_code);
         }
@@ -108,8 +110,12 @@ export default class Carto extends Component {
   }
 
   initYear(confIndex) {
-    this.year = config[confIndex].years[0];
-    this.setState({ year: this.year });
+    this.yearInterval = config[confIndex].years;
+    this.setState({ year: config[confIndex].years[0] });
+  }
+
+  changeYear(year) {
+    this.setState({ year });
   }
 
   changeColorMissingData() {
@@ -234,6 +240,7 @@ export default class Carto extends Component {
               </Col>
             </Row>
           </Container>
+          <MapSlider yearInterval={this.yearInterval} changeYear={this.changeYear} />
           <div>{this.state.year}</div>
         </div>
         <Newsletter language={this.props.language} />

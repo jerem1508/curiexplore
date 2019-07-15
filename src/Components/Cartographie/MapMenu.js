@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   Row, Col, Container, Modal,
 } from 'react-bootstrap';
@@ -17,6 +17,7 @@ export default class MapHeader extends Component {
     super(props);
     this.allData = [];
     this.source = 'N.A';
+    this.index = 0;
     this.state = {
       colors: [],
       show: true,
@@ -44,6 +45,13 @@ export default class MapHeader extends Component {
       if (this.allData[i][0] === code) {
         this.handleClose();
         // alert(this.allData[i][1].data[0].source);
+        this.index = index;
+        for (let j = 0; i < results.length; j += 1) {
+          if (this.allData[i][1][j].data.length > 0) {
+            this.setState({ source: this.allData[i][1][j].data[0].source });
+            break;
+          }
+        }
         this.setState({ source: this.allData[i][1][0].source });
         this.getColors(this.allData[i][1], size, index);
         return;
@@ -58,6 +66,7 @@ export default class MapHeader extends Component {
         break;
       }
     }
+    this.index = index;
     this.allData.push([code, results[0].data]);
     this.getColors(results[0].data, size, index);
   }
@@ -131,23 +140,52 @@ export default class MapHeader extends Component {
     const colors = this.state.colors;
     const firstLine = [];
     const secondLine = [];
+    let values = [0, 0];
 
     for (let i = 0; i < colors.length; i += 1) {
       if (i < colors.length / 2) {
-        firstLine.push(<span style={{ backgroundColor: colors[i] }}>Ligne 1</span>);
+        values = [config[this.index].steps[0].limits[i][0], config[this.index].steps[0].limits[i][1]];
+        if (config[this.index].steps[0].unit === 'M') {
+          values[0] = (values[0] - (values[0] % 1000000)) / 1000000;
+          values[1] = (values[1] - (values[1] % 1000000)) / 1000000;
+        }
+        firstLine.push(
+          <Col sm={4}>
+            <span className={classes.legendDot} style={{ backgroundColor: colors[i] }} />
+            de&nbsp;
+            {values[0]}
+            &nbsp;à&nbsp;
+            {values[1]}
+            {config[this.index].steps[0].unit}
+          </Col>,
+        );
       } else {
-        secondLine.push(<span style={{ backgroundColor: colors[i] }}>Ligne 1</span>);
+        values = [config[this.index].steps[0].limits[i][0], config[this.index].steps[0].limits[i][1]];
+        if (config[this.index].steps[0].unit === 'M') {
+          values[0] = (values[0] - (values[0] % 1000000)) / 1000000;
+          values[1] = (values[1] - (values[1] % 1000000)) / 1000000;
+        }
+        secondLine.push(
+          <Col sm={4}>
+            <span className={classes.legendDot} style={{ backgroundColor: colors[i] }} />
+            de&nbsp;
+            {values[0]}
+            &nbsp;à&nbsp;
+            {values[1]}
+            {config[this.index].steps[0].unit}
+          </Col>,
+        );
       }
     }
     return (
-      <Fragment>
-        <p>
+      <Container>
+        <Row>
           {firstLine}
-        </p>
-        <p>
+        </Row>
+        <Row>
           {secondLine}
-        </p>
-      </Fragment>
+        </Row>
+      </Container>
     );
   }
 
