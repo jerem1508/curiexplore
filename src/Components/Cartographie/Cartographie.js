@@ -50,15 +50,10 @@ export default class Carto extends Component {
     this.data = data;
     this.size = size;
     this.colors = colors;
-    // alert(this.data[0]);
-    // alert(this.data[0].data[0].country_code);
-    // alert(this.data[0].data[0].year);
     this.countryDataIso = [];
-    this.initYear(confIndex);
     this.confIndex = confIndex;
-    this.size = size;
+    this.initYear(confIndex);
     this.changeLayer(null, null, confIndex, size);
-    // console.log(this.countryDataIso);
     this.changeColorMissingData();
   }
 
@@ -245,7 +240,7 @@ export default class Carto extends Component {
               </Col>
             </Row>
           </Container>
-          <MapSlider yearInterval={this.yearInterval} currYear={this.state.year} changeYear={this.changeYear} />
+          <MapSlider yearInterval={this.yearInterval} defaultYear={config[this.confIndex].years[0]} changeYear={this.changeYear} />
           <div>{this.state.year}</div>
         </div>
         <Newsletter language={this.props.language} />
