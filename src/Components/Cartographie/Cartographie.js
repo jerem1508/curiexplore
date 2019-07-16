@@ -30,6 +30,8 @@ export default class Carto extends Component {
     this.layers = [];
     this.colors = [];
     this.countryDataIso = [];
+    this.confIndex = 0;
+    this.size = 0;
     this.yearInterval = [2008, 2017];
     this.state = {
       zoom: 2,
@@ -53,6 +55,8 @@ export default class Carto extends Component {
     // alert(this.data[0].data[0].year);
     this.countryDataIso = [];
     this.initYear(confIndex);
+    this.confIndex = confIndex;
+    this.size = size;
     this.changeLayer(null, null, confIndex, size);
     // console.log(this.countryDataIso);
     this.changeColorMissingData();
@@ -116,6 +120,7 @@ export default class Carto extends Component {
 
   changeYear(year) {
     this.setState({ year });
+    this.changeLayer(null, null, this.confIndex, this.size);
   }
 
   changeColorMissingData() {
@@ -240,7 +245,7 @@ export default class Carto extends Component {
               </Col>
             </Row>
           </Container>
-          <MapSlider yearInterval={this.yearInterval} changeYear={this.changeYear} />
+          <MapSlider yearInterval={this.yearInterval} currYear={this.state.year} changeYear={this.changeYear} />
           <div>{this.state.year}</div>
         </div>
         <Newsletter language={this.props.language} />

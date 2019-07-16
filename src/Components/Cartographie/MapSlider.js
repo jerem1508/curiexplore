@@ -27,7 +27,7 @@ function getMarks(yearInterval) {
 const MapSlider = props => (
   <Container>
     <Slider
-      defaultValue={2008}
+      defaultValue={props.currYear}
       aria-labelledby="discrete-slider-restrict"
       step={null}
       valueLabelDisplay="auto"
@@ -42,6 +42,7 @@ const MapSlider = props => (
 export default MapSlider;
 
 MapSlider.propTypes = {
-  yearInterval: propTypes.object.isRequired,
   changeYear: propTypes.func.isRequired,
+  currYear: propTypes.number.isRequired,
+  yearInterval: propTypes.object.isRequired,
 };
