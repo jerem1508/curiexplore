@@ -68,9 +68,11 @@ export default class GraphMenu extends Component {
 
   setCountry(e, id, country) {
     if (id === 0) {
-      this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountryOn });
+      // this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountryOn });
+      this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountry });
     } else {
-      this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountryOn });
+      // this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountryOn });
+      this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountry });
     }
     this.changeStyle(e, id + 1, country);
   }
