@@ -13,7 +13,7 @@
 - Ajout de trop de pays dans la liste
 - Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE
 - Bouton annuler la liste
-- Fix mes couleurs
+- Fix mes couleurs (fait)
 - A FAIRE : GRAPHS STACKS (pour politique ESRI) (voir si possible ?)
 - Scanrv2: modifier les graphs afficher listes
 - rajouter des commentaires sur les parties qui ne servent à rien

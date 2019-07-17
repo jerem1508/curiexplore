@@ -120,6 +120,7 @@ export default class GraphMenu extends Component {
     if (id === 0) {
       if (this.state.firstVis.display === 'none') {
         this.setState({ firstVis: { display: '' } });
+        this.setState({ secondVis: { display: 'none' } });
       } else {
         this.setState({ firstVis: { display: 'none' } });
       }
@@ -127,6 +128,7 @@ export default class GraphMenu extends Component {
     }
     if (this.state.secondVis.display === 'none' && this.countryList[1] !== '') {
       this.setState({ secondVis: { display: '' } });
+      this.setState({ firstVis: { display: 'none' } });
     } else if (this.countryList[1] !== '') {
       this.setState({ secondVis: { display: 'none' } });
     } else {

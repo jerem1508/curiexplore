@@ -34,6 +34,21 @@
   cursor: pointer;
 }
 
+.BtnCountryListDown {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  color: white;
+  background-color: $blueColor;
+  border-radius: 15px;
+  font-style: italic;
+  border: 0;
+  cursor: pointer;
+}
+
+
 .BtnDefaultCountry {
   display: inline-block;
   padding: 5px 10px;

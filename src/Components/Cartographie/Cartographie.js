@@ -221,6 +221,8 @@ export default class Carto extends Component {
             />
             <PrintControl ref={(ref) => { this.printControl = ref; }} {...downloadOptions} />
           </Map>
+        </div>
+        <div style={{ backgroundColor: 'white' }}>
           <Container>
             <Row>
               <Col sm={1} />
@@ -240,6 +242,8 @@ export default class Carto extends Component {
               </Col>
             </Row>
           </Container>
+        </div>
+        <div className={classes.ScrollBar}>
           <MapSlider yearInterval={this.yearInterval} defaultYear={config[this.confIndex].years[0]} changeYear={this.changeYear} />
           <div>{this.state.year}</div>
         </div>
