@@ -16,6 +16,8 @@ export default class GraphMenu extends Component {
       colors: [],
       errorMsg: '',
       show: false,
+      firstBtnclass: classes.BtnCountry,
+      secondBtnclass: classes.BtnCountry,
       firstVis: { display: 'none' },
       secondVis: { display: 'none' },
       firstCountry: 'Choisir un pays',
@@ -66,9 +68,9 @@ export default class GraphMenu extends Component {
 
   setCountry(e, id, country) {
     if (id === 0) {
-      this.setState({ firstVis: { display: 'none' } });
+      this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountryOn });
     } else {
-      this.setState({ secondVis: { display: 'none' } });
+      this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountryOn });
     }
     this.changeStyle(e, id + 1, country);
   }
@@ -117,20 +119,51 @@ export default class GraphMenu extends Component {
   }
 
   toggleList(id) {
+    const colors = this.state.colors;
+
     if (id === 0) {
       if (this.state.firstVis.display === 'none') {
-        this.setState({ firstVis: { display: '' } });
-        this.setState({ secondVis: { display: 'none' } });
+        if (colors[2] === '#fff') {
+          colors[2] = '#ccc';
+        }
+        if (colors[1] === '#ccc') {
+          colors[1] = '#fff';
+        }
+        this.setState({
+          firstVis: { display: '' },
+          firstBtnclass: classes.BtnCountryListDown,
+          secondVis: { display: 'none' },
+          secondBtnclass: classes.BtnCountry,
+          colors,
+        });
+        this.setState();
       } else {
-        this.setState({ firstVis: { display: 'none' } });
+        if (colors[1] === '#fff') {
+          colors[1] = '#ccc';
+        }
+        this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountry, colors });
       }
       return;
     }
     if (this.state.secondVis.display === 'none' && this.countryList[1] !== '') {
-      this.setState({ secondVis: { display: '' } });
-      this.setState({ firstVis: { display: 'none' } });
+      if (colors[1] === '#fff') {
+        colors[1] = '#ccc';
+      }
+      if (colors[2] === '#ccc') {
+        colors[2] = '#fff';
+      }
+      this.setState({
+        secondVis: { display: '' },
+        secondBtnclass: classes.BtnCountryListDown,
+        firstVis: { display: 'none' },
+        firstBtnclass: classes.BtnCountry,
+        colors,
+      });
     } else if (this.countryList[1] !== '') {
-      this.setState({ secondVis: { display: 'none' } });
+      if (colors[2] === '#fff') {
+        colors[2] = '#ccc';
+      }
+      this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountry, colors });
     } else {
       this.setState({ show: true, errorMsg: "Veuillez d'abord sélectionner un premier pays" });
     }
@@ -161,7 +194,7 @@ export default class GraphMenu extends Component {
     return (
       <span>
         <div className={classes.Selector}>
-          <button type="button" className={classes.BtnCountry} onClick={() => this.toggleList(0)}>
+          <button type="button" className={this.state.firstBtnclass} onClick={() => this.toggleList(0)}>
             <span className={classes.Dot} style={{ backgroundColor: this.state.colors[1] }} />
             {this.state.firstCountry}
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
@@ -172,7 +205,7 @@ export default class GraphMenu extends Component {
         </div>
         <span className={classes.Text}> et </span>
         <div className={classes.Selector}>
-          <button type="button" className={classes.BtnCountry} onClick={() => this.toggleList(1)}>
+          <button type="button" className={this.state.secondBtnclass} onClick={() => this.toggleList(1)}>
             <span className={classes.Dot} style={{ backgroundColor: this.state.colors[2] }} />
             {this.state.secondCountry}
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
