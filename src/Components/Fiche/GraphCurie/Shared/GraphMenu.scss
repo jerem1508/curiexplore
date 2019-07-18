@@ -7,6 +7,7 @@
 .Selector {
   display: inline-block;
   position: relative;
+  width: 200px;
   DIV:first-child {
     background-color: $blueColor;
     position: absolute;
@@ -29,21 +30,6 @@
   color: #696969;
   background-color: white;
   border-radius: 15px;
-  font-style: italic;
-  border: 0;
-  cursor: pointer;
-}
-
-.BtnCountryOn {
-  display: inline-block;
-  padding: 5px 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  color: $blueColor;
-  background-color: white;
-  border-radius: 15px;
-  border-color: $blueColor;
   font-style: italic;
   border: 0;
   cursor: pointer;
@@ -101,12 +87,30 @@
   cursor: pointer;
 }
 
+.Search {
+  margin-left: 10px;
+}
+
 .ListSearch {
   color: white;
   // font-style: italic;
   input {
+    width: 350px;
+    //font-style: italic;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: 0px solid;
+    padding-left: 15px;
+  }
+
+  input::-webkit-input-placeholder {
     font-style: italic;
   }
+  input::-moz-placeholder {
+     font-style: italic;
+  }
+
   span {
     font-style: normal;
   }
