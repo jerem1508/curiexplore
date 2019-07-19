@@ -166,6 +166,28 @@ export default class HighChartsBar extends Component {
         //   }
         //   return this.y.toFixed(1);
         // },
+        
+        // formatter() {
+        //   const points = this.points;
+        //   const len = points.length;
+        //   const tooltipMarkup = [];
+        //
+        //   tooltipMarkup.push(`${points[0].x}<br />`);
+        //   for (let i = 0; i < len; i += 1) {
+        //     const labelValue = points[i].y;
+        //     let value = Math.abs(Number(labelValue)) >= 1.0e+9
+        //     ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
+        //     // Six Zeroes for Millions
+        //     : Math.abs(Number(labelValue)) >= 1.0e+6
+        //     ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
+        //     // Three Zeroes for Thousands
+        //     : Math.abs(Number(labelValue)) >= 1.0e+3
+        //     ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
+        //     : Math.abs(Number(labelValue));
+        //     tooltipMarkup.push(`<br />${points[i].series.name} : ${labelValue}`);
+        //   }
+        //   return tooltipMarkup;
+        // },
       },
       legend: {
         enabled: false,
