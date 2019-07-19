@@ -65,6 +65,17 @@
   cursor: pointer;
 }
 
+.BtnCancel {
+  float: right;
+  color: white;
+  font-style: italic;
+  margin-top: 7px;
+  I:first-child {
+    margin-left: 2px;
+    color: red;
+  }
+}
+
 .Dot {
   margin-right: 5px;
   height: 15px;

@@ -28,6 +28,7 @@ export default class GraphMenu extends Component {
     };
     this.changeStyle = this.changeStyle.bind(this);
     this.toggleList = this.toggleList.bind(this);
+    this.resetCountry = this.resetCountry.bind(this);
     this.getCountryList = this.getCountryList.bind(this);
     this.filterCountries = this.filterCountries.bind(this);
     this.setCountry = this.setCountry.bind(this);
@@ -106,6 +107,28 @@ export default class GraphMenu extends Component {
 
   handleShow() {
     this.setState({ show: true, errorMsg: 'Erreur: ce pays est déjà utilisé' });
+  }
+
+  resetCountry() {
+    this.countryList = [this.props.countryCode, '', '', '', '', ''];
+    const tempColor = [];
+
+    for (let i = 0; i < this.props.colors.length; i += 1) {
+      tempColor.push('#ccc');
+    }
+    this.setState({
+      countries: isoList,
+      colors: tempColor,
+      firstValue: '',
+      secondValue: '',
+      firstBtnclass: classes.BtnCountry,
+      secondBtnclass: classes.BtnCountry,
+      firstVis: { display: 'none' },
+      secondVis: { display: 'none' },
+      firstCountry: 'Choisir un pays',
+      secondCountry: 'Choisir un pays',
+    });
+    this.props.toggleCountry(0, this.state.colors, this.countryList);
   }
 
   changeStyle(e, id, country) {
@@ -195,36 +218,6 @@ export default class GraphMenu extends Component {
   }
 
   render() {
-    // const CountryList = props => (
-    //   <div className={classes.ListSearch}>
-    //     <br />
-    //     <span>Chercher un pays</span>
-    //     <br />
-    //     <span>
-    //       <input
-    //         type="text"
-    //         // A changer -> passer type graph en props + id ?
-    //         name="fname"
-    //         onChange={e => this.filterCountries(e.target.value)}
-    //         placeholder="Ex: France"
-    //       />
-    //       <i className={`fas fa-search ${classes.Search}`} />
-    //     </span>
-    //     <br />
-    //     <div
-    //       id="FRA"
-    //       value="France"
-    //       onClick={e => this.setCountry(e, props.id, 'France')}
-    //       onKeyPress={e => this.setCountry(e, props.id, 'France')}
-    //       role="button"
-    //       tabIndex={0}
-    //     >
-    //     France
-    //     </div>
-    //     <hr style={{ size: 15 }} />
-    //     {this.getCountryList(props.id)}
-    //   </div>
-    // );
     return (
       <span>
         <div className={classes.Selector}>
@@ -317,6 +310,22 @@ export default class GraphMenu extends Component {
           <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
             UE
         </button>
+        {(this.countryList[1] !== '')
+          ? (
+            <span
+              className={classes.BtnCancel}
+              onClick={this.resetCountry}
+              onKeyPress={this.resetCountry}
+              role="button"
+              tabIndex={0}
+            >
+              annuler
+              <span className="fa-stack">
+                <i className="fas fa-circle fa-stack-2x" />
+                <i className="fas fa-times fa-stack-1x" />
+              </span>
+            </span>
+          ) : null}
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Body>{this.state.errorMsg}</Modal.Body>
           <Modal.Footer>

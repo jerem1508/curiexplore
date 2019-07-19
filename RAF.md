@@ -9,12 +9,12 @@
 - AJOUT DES COMMENTAIRES
 - Ajouts sources, unités, etc. dans HighCharts csv
 - Si stack -> faire plusieurs requetes en meme temp
-- Rendre les graphs + beau (Texte normal mais display hidden div on click)
-- Ajout de trop de pays dans la liste
-- Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE (fait)
-- Bouton annuler la liste
-- Fix mes couleurs (fait)
 - A FAIRE : GRAPHS STACKS (pour politique ESRI) (voir si possible ?)
+- Rendre les graphs + beau (Texte normal mais display hidden div on click)
+- Ajout de trop de pays dans la liste (???)
+- Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE (fait)
+- Bouton annuler la liste (fait)
+- Fix mes couleurs (fait)
 - Scanrv2: modifier les graphs afficher listes
 - rajouter des commentaires sur les parties qui ne servent à rien
 - Optimiser les doubles boucles
