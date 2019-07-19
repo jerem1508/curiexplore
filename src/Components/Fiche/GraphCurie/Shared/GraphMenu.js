@@ -14,8 +14,11 @@ export default class GraphMenu extends Component {
     this.countryList = [this.props.countryCode, '', '', '', '', ''];
     this.state = {
       colors: [],
+      countries: isoList,
       errorMsg: '',
       show: false,
+      firstValue: '',
+      secondValue: '',
       firstBtnclass: classes.BtnCountry,
       secondBtnclass: classes.BtnCountry,
       firstVis: { display: 'none' },
@@ -26,8 +29,8 @@ export default class GraphMenu extends Component {
     this.changeStyle = this.changeStyle.bind(this);
     this.toggleList = this.toggleList.bind(this);
     this.getCountryList = this.getCountryList.bind(this);
+    this.filterCountries = this.filterCountries.bind(this);
     this.setCountry = this.setCountry.bind(this);
-    this.selectCountry = this.selectCountry.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -44,23 +47,21 @@ export default class GraphMenu extends Component {
   getCountryList(id) {
     const ctryList = [];
 
-    for (let i = 0; i < isoList.length; i += 1) {
-      if (isoList[i].Pays[0] === 'F') {
-        ctryList.push((
-          <span
-            className={classes.BtnInList}
-            id={isoList[i].ISO_alpha3}
-            value={isoList[i].Pays}
-            onClick={e => this.setCountry(e, id, isoList[i].Pays)}
-            onKeyPress={e => this.setCountry(e, id, isoList[i].Pays)}
-            role="button"
-            tabIndex={0}
-          >
-            {isoList[i].Pays}
-          </span>
-        ));
-        ctryList.push(<br />);
-      }
+    for (let i = 0; i < this.state.countries.length; i += 1) {
+      ctryList.push((
+        <span
+          className={classes.BtnInList}
+          id={this.state.countries[i].ISO_alpha3}
+          value={this.state.countries.Pays}
+          onClick={e => this.setCountry(e, id, this.state.countries[i].Pays)}
+          onKeyPress={e => this.setCountry(e, id, this.state.countries[i].Pays)}
+          role="button"
+          tabIndex={0}
+        >
+          {this.state.countries[i].Pays}
+        </span>
+      ));
+      ctryList.push(<br />);
     }
     return (
       <div style={{ overflowY: 'auto', height: '280px' }}>
@@ -80,11 +81,22 @@ export default class GraphMenu extends Component {
     this.changeStyle(e, id + 1, country);
   }
 
-  selectCountry(id, value) {
+  filterCountries(value, id) {
     if (value === '') {
-      this.getCountryList(id);
+      this.setState({ countries: isoList });
+      if (id === 0) {
+        this.setState({ firstValue: value });
+      } else {
+        this.setState({ secondValue: value });
+      }
+      return;
+    }
+    const newData = isoList.filter(el => el.Pays.toLowerCase().search(value.toLowerCase()) !== -1);
+    this.setState({ countries: newData });
+    if (id === 0) {
+      this.setState({ firstValue: value });
     } else {
-      this.getPartialCountryList(id, value);
+      this.setState({ secondValue: value });
     }
   }
 
@@ -123,11 +135,11 @@ export default class GraphMenu extends Component {
       }
     }
     if (id === 1) {
-      this.setState({ firstCountry: country });
+      this.setState({ firstCountry: country, firstValue: '' });
     } else if (id === 2) {
-      this.setState({ secondCountry: country });
+      this.setState({ secondCountry: country, secondValue: '' });
     }
-    this.setState({ colors });
+    this.setState({ colors, countries: isoList });
     this.props.toggleCountry(e.target.id, this.state.colors, this.countryList);
   }
 
@@ -183,36 +195,36 @@ export default class GraphMenu extends Component {
   }
 
   render() {
-    const CountryList = props => (
-      <div className={classes.ListSearch}>
-        <br />
-        <span>Chercher un pays</span>
-        <br />
-        <span>
-          <input
-            type="text"
-            // A changer -> passer type graph en props + id ?
-            name="fname"
-            onChange={e => this.selectCountry(props.id, e.target.value)}
-            placeholder="Ex: France"
-          />
-          <i className={`fas fa-search ${classes.Search}`} />
-        </span>
-        <br />
-        <div
-          id="FRA"
-          value="France"
-          onClick={e => this.setCountry(e, props.id, 'France')}
-          onKeyPress={e => this.setCountry(e, props.id, 'France')}
-          role="button"
-          tabIndex={0}
-        >
-        France
-        </div>
-        <hr style={{ size: 15 }} />
-        {this.getCountryList(props.id)}
-      </div>
-    );
+    // const CountryList = props => (
+    //   <div className={classes.ListSearch}>
+    //     <br />
+    //     <span>Chercher un pays</span>
+    //     <br />
+    //     <span>
+    //       <input
+    //         type="text"
+    //         // A changer -> passer type graph en props + id ?
+    //         name="fname"
+    //         onChange={e => this.filterCountries(e.target.value)}
+    //         placeholder="Ex: France"
+    //       />
+    //       <i className={`fas fa-search ${classes.Search}`} />
+    //     </span>
+    //     <br />
+    //     <div
+    //       id="FRA"
+    //       value="France"
+    //       onClick={e => this.setCountry(e, props.id, 'France')}
+    //       onKeyPress={e => this.setCountry(e, props.id, 'France')}
+    //       role="button"
+    //       tabIndex={0}
+    //     >
+    //     France
+    //     </div>
+    //     <hr style={{ size: 15 }} />
+    //     {this.getCountryList(props.id)}
+    //   </div>
+    // );
     return (
       <span>
         <div className={classes.Selector}>
@@ -222,7 +234,35 @@ export default class GraphMenu extends Component {
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
           </button>
           <div style={this.state.firstVis}>
-            <CountryList id={0} />
+            <div className={classes.ListSearch}>
+              <br />
+              <span>Chercher un pays</span>
+              <br />
+              <span>
+                <input
+                  type="text"
+                  // A changer -> passer type graph en props + id ?
+                  name="fname"
+                  value={this.state.firstValue}
+                  onChange={e => this.filterCountries(e.target.value, 0)}
+                  placeholder="Ex: France"
+                />
+                <i className={`fas fa-search ${classes.Search}`} />
+              </span>
+              <br />
+              <div
+                id="FRA"
+                value="France"
+                onClick={e => this.setCountry(e, 0, 'France')}
+                onKeyPress={e => this.setCountry(e, 0, 'France')}
+                role="button"
+                tabIndex={0}
+              >
+              France
+              </div>
+              <hr style={{ size: 15 }} />
+              {this.getCountryList(0)}
+            </div>
           </div>
         </div>
         <span className={classes.Text}> et </span>
@@ -233,7 +273,35 @@ export default class GraphMenu extends Component {
             <i className={`fas fa-sort-down ${classes.Arrow}`} />
           </button>
           <div style={this.state.secondVis}>
-            <CountryList id={1} />
+            <div className={classes.ListSearch}>
+              <br />
+              <span>Chercher un pays</span>
+              <br />
+              <span>
+                <input
+                  type="text"
+                  // A changer -> passer type graph en props + id ?
+                  name="fname"
+                  value={this.state.secondValue}
+                  onChange={e => this.filterCountries(e.target.value, 1)}
+                  placeholder="Ex: France"
+                />
+                <i className={`fas fa-search ${classes.Search}`} />
+              </span>
+              <br />
+              <div
+                id="FRA"
+                value="France"
+                onClick={e => this.setCountry(e, 1, 'France')}
+                onKeyPress={e => this.setCountry(e, 1, 'France')}
+                role="button"
+                tabIndex={0}
+              >
+              France
+              </div>
+              <hr style={{ size: 15 }} />
+              {this.getCountryList(1)}
+            </div>
           </div>
         </div>
         <span className={classes.Text}> et avec </span>
