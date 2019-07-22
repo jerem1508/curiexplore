@@ -274,8 +274,8 @@ class GraphCurie extends Component {
                   <Col sm={11}>
                     {this.getLegend()}
                   </Col>
-                  <Col sm={1}>
-                    <i className="fas fa-info-circle" />
+                  <Col>
+                    <i style={{ marginTop: '15px', paddingLeft: '25%' }} className="fas fa-info-circle" />
                   </Col>
                 </Row>
                 <Row>

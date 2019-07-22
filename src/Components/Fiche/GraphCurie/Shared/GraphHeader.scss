@@ -8,6 +8,23 @@
   border-left: 40px solid $darkBlueColor;
 }
 
+.ListBtn {
+  float: right;
+  font-style: italic;
+}
+
+.Selector {
+  background-color: $blueColor;
+  position: absolute;
+  z-index: 1000;
+  width: 440px;
+  height:440px;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .LeftCol {
   background-color: $darkBlueColor;
   SPAN {
