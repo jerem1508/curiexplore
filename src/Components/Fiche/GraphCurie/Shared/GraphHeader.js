@@ -10,10 +10,10 @@ const params = require('../GraphCurie-data/indicateurs.json');
 class GraphHeader extends Component {
   constructor(props) {
     super(props);
-    this.indic = 'Je suis un indicateur test';
     this.state = {
       class: 'chevron-down',
       radioValue: '',
+      label: '',
     };
     this.getIndic = this.getIndic.bind(this);
     this.getRadio = this.getRadio.bind(this);
@@ -23,7 +23,7 @@ class GraphHeader extends Component {
   }
 
   componentDidMount() {
-    this.setState({ radioValue: params[this.props.graphType][0].name})
+    this.setState({ radioValue: params[this.props.graphType][0].name, label: params[this.props.graphType][0].label });
   }
 
   getIndic() {
@@ -52,7 +52,7 @@ class GraphHeader extends Component {
       radioList.push(
         <input
           type="radio"
-          name={params[this.props.graphType][i].name + i}
+          name={params[this.props.graphType][i].label}
           checked={(params[this.props.graphType][i].name === this.state.radioValue)}
           value={params[this.props.graphType][i].name}
           onChange={e => this.handleChange(e)}
@@ -69,7 +69,7 @@ class GraphHeader extends Component {
   }
 
   handleChange(e) {
-    this.setState({ class: 'chevron-down', radioValue: e.target.value });
+    this.setState({ class: 'chevron-down', radioValue: e.target.value, label: e.target.name });
     this.props.handleIndic(e);
   }
 
@@ -129,7 +129,7 @@ class GraphHeader extends Component {
             tabIndex={0}
           >
             <span className={classes.IndicName}>
-              {this.indic}
+              {this.state.label}
             </span>
             <span>
               <i className={`fas fa-${this.state.class}`} />
@@ -155,7 +155,6 @@ export default GraphHeader;
 GraphHeader.propTypes = {
   indicNb: PropTypes.number.isRequired,
   handleIndic: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
   graphType: PropTypes.string.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,

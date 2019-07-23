@@ -269,7 +269,7 @@ class GraphCurie extends Component {
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
               <Col className={classes.GraphCurie}>
-                <GraphHeader handleIndic={this.handleIndic} value={this.state.label} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
+                <GraphHeader handleIndic={this.handleIndic} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
                 <Row>
                   <Col sm={11}>
                     {this.getLegend()}
