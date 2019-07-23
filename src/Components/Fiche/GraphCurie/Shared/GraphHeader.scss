@@ -16,13 +16,13 @@
 .Selector {
   background-color: $blueColor;
   position: absolute;
-  z-index: 1000;
-  width: 440px;
-  height:440px;
-  border-radius: 10px;
-  border: 1px solid black;
-  padding-left: 20px;
-  padding-right: 20px;
+  z-index: 10;
+  width: 100%;
+  height:584px;
+  overflow-y: auto;
+  margin-left: -15px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .LeftCol {
@@ -44,4 +44,9 @@
     color: white;
     padding-top: 20px;
   }
+}
+
+.IndicName {
+  width: 90%;
+  font-size: 20px;
 }

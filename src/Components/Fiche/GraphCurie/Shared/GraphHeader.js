@@ -13,11 +13,17 @@ class GraphHeader extends Component {
     this.indic = 'Je suis un indicateur test';
     this.state = {
       class: 'chevron-down',
+      radioValue: '',
     };
     this.getIndic = this.getIndic.bind(this);
-    this.getSelect = this.getSelect.bind(this);
+    this.getRadio = this.getRadio.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.showDiv = this.showDiv.bind(this);
     this.toggleList = this.toggleList.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ radioValue: params[this.props.graphType][0].name})
   }
 
   getIndic() {
@@ -39,23 +45,38 @@ class GraphHeader extends Component {
     );
   }
 
-  getSelect() {
+  getRadio() {
     // On génère la liste en fonction du fichier de conf
-    const selectList = [];
+    const radioList = [];
     for (let i = 0; i < params[this.props.graphType].length; i += 1) {
-      selectList.push(<option value={params[this.props.graphType][i].name}>{params[this.props.graphType][i].label}</option>);
+      radioList.push(
+        <input
+          type="radio"
+          name={params[this.props.graphType][i].name + i}
+          checked={(params[this.props.graphType][i].name === this.state.radioValue)}
+          value={params[this.props.graphType][i].name}
+          onChange={e => this.handleChange(e)}
+        />,
+        params[this.props.graphType][i].label,
+        <br />,
+      );
     }
     return (
-      <select onChange={this.props.handleIndic} value={this.props.value} className="form-control">
-        {selectList}
-      </select>
+      <div>
+        { radioList }
+      </div>
     );
+  }
+
+  handleChange(e) {
+    this.setState({ class: 'chevron-down', radioValue: e.target.value });
+    this.props.handleIndic(e);
   }
 
   showDiv() {
     return (
       <div className={classes.Selector}>
-        {this.getSelect()}
+        {this.getRadio()}
       </div>
     );
   }
@@ -107,7 +128,7 @@ class GraphHeader extends Component {
             role="button"
             tabIndex={0}
           >
-            <span style={{ width: '90%' }}>
+            <span className={classes.IndicName}>
               {this.indic}
             </span>
             <span>
