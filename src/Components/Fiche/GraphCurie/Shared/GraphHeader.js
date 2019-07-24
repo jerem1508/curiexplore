@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Row, Col,
+  Container, Row, Col,
 } from 'react-bootstrap';
 import classes from './GraphHeader.scss';
 
@@ -57,27 +57,52 @@ class GraphHeader extends Component {
           value={params[this.props.graphType][i].name}
           onChange={e => this.handleChange(e)}
         />,
-        params[this.props.graphType][i].label,
+        <span
+          style={(params[this.props.graphType][i].name === this.state.radioValue) ? { color: 'white' } : null}
+        >
+          {params[this.props.graphType][i].label}
+        </span>,
         <br />,
       );
     }
     return (
-      <div>
+      <div className={classes.Radio}>
         { radioList }
       </div>
     );
   }
 
   handleChange(e) {
+    console.log(e.target);
     this.setState({ class: 'chevron-down', radioValue: e.target.value, label: e.target.name });
     this.props.handleIndic(e);
   }
 
   showDiv() {
     return (
-      <div className={classes.Selector}>
-        {this.getRadio()}
-      </div>
+      <Fragment>
+        <div className={classes.Selector} />
+        <div className={classes.RadioContainer}>
+          <Container>
+            <Row>
+              <Col>
+                <span style={{ color: 'white' }}>
+                  <i className="fas fa-square fa-2x" />
+                  <span>Afficher uniquement un graphique</span>
+                </span>
+              </Col>
+              <Col>
+                <span style={{ color: classes.lightBlueColor }}>
+                  <i className="fas fa-th-large fa-2x" />
+                  <span>Afficher tous les graphiques</span>
+                </span>
+              </Col>
+            </Row>
+          </Container>
+          <hr className={classes.Hr} />
+          {this.getRadio()}
+        </div>
+      </Fragment>
     );
   }
 
@@ -90,19 +115,6 @@ class GraphHeader extends Component {
       this.setState({ class: 'times' });
     }
   }
-
-  // getSelect() {
-  //   // On génère la liste en fonction du fichier de conf
-  //   const selectList = [];
-  //   for (let i = 0; i < params[this.props.graphType].length; i += 1) {
-  //     selectList.push(<option value={params[this.props.graphType][i].name}>{params[this.props.graphType][i].label}</option>);
-  //   }
-  //   return (
-  //     <select onChange={this.props.handleIndic} value={this.props.value} className="form-control">
-  //       {selectList}
-  //     </select>
-  //   );
-  // }
 
   render() {
     return (

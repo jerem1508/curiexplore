@@ -65,7 +65,7 @@ export default class GraphMenu extends Component {
       ctryList.push(<br />);
     }
     return (
-      <div style={{ overflowY: 'auto', height: '280px' }}>
+      <div className={classes.CtryList}>
         {ctryList}
       </div>
     );
@@ -253,7 +253,7 @@ export default class GraphMenu extends Component {
               >
               France
               </div>
-              <hr style={{ size: 15 }} />
+              <hr />
               {this.getCountryList(0)}
             </div>
           </div>
@@ -292,7 +292,7 @@ export default class GraphMenu extends Component {
               >
               France
               </div>
-              <hr style={{ size: 15 }} />
+              <hr />
               {this.getCountryList(1)}
             </div>
           </div>

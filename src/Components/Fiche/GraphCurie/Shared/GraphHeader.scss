@@ -8,21 +8,52 @@
   border-left: 40px solid $darkBlueColor;
 }
 
+.Hr {
+  color: $ueColor;
+  border-width: 3px;
+}
+
 .ListBtn {
   float: right;
   font-style: italic;
 }
 
 .Selector {
-  background-color: $blueColor;
+  background-color: $darkBlueColor;
   position: absolute;
-  z-index: 10;
+  z-index: 9;
   width: 100%;
   height:584px;
-  overflow-y: auto;
   margin-left: -15px;
   padding-left: 30px;
   padding-right: 30px;
+
+  opacity: 0.95;
+  -webkit-filter: blur(4px);
+}
+
+.RadioContainer {
+  position: absolute;
+  width: 98%;
+  height:580px;
+  z-index: 10;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.Radio {
+  overflow-y: auto;
+  height: 360px;
+  INPUT {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  SPAN {
+    margin: 10px 0px 10px 10px;
+    color: $lightBlueColor;
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 
 .LeftCol {
