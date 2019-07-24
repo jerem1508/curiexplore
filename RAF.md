@@ -22,6 +22,7 @@
 - Afficher message si unité pas dispo (plus ou moins fait)
 - Ajouter le titre en props
 - Menu indépendant pour le graph
+- Boutons de partage & exports à faire + telechargement groupés
 
 # Divers
 - Font Awesome en local

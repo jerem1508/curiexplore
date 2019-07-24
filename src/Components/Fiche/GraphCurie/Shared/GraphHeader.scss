@@ -18,6 +18,31 @@
   font-style: italic;
 }
 
+.exportBtn {
+  span {
+    font-style: italic;
+    color: white;
+    margin-right: 10px;
+  }
+  button {
+    margin-left: 15px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+}
+
+.dot {
+  height: 35px;
+  width: 35px;
+
+  border: 0;
+  background-color: $blueColor;
+  border-radius: 50%;
+  i {
+    color: white;
+  }
+}
+
 .Selector {
   background-color: $darkBlueColor;
   position: absolute;
@@ -43,7 +68,8 @@
 
 .Radio {
   overflow-y: auto;
-  height: 360px;
+  height: 371px;
+  margin-left: 20px;
   INPUT {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -80,4 +106,15 @@
 .IndicName {
   width: 90%;
   font-size: 20px;
+}
+
+.Text {
+  margin-top: 20px;
+  margin-left: 15px;
+  color: white;
+  font-size: 16px;
+}
+
+.TextType {
+  margin-left: 15px;
 }

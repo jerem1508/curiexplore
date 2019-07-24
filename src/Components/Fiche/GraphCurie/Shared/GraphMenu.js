@@ -4,7 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 import classes from './GraphMenu.scss';
 
-// TODO : ADD REMOVE FUNCTION HERE
+// TODO : ADD REMOVE FUNCTION HERE + comment
 
 const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 

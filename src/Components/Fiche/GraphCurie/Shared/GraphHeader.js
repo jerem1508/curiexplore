@@ -7,6 +7,8 @@ import classes from './GraphHeader.scss';
 
 const params = require('../GraphCurie-data/indicateurs.json');
 
+// TODO : add comments
+
 class GraphHeader extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +75,6 @@ class GraphHeader extends Component {
   }
 
   handleChange(e) {
-    console.log(e.target);
     this.setState({ class: 'chevron-down', radioValue: e.target.value, label: e.target.name });
     this.props.handleIndic(e);
   }
@@ -85,22 +86,39 @@ class GraphHeader extends Component {
         <div className={classes.RadioContainer}>
           <Container>
             <Row>
-              <Col>
-                <span style={{ color: 'white' }}>
-                  <i className="fas fa-square fa-2x" />
-                  <span>Afficher uniquement un graphique</span>
+              <Col
+                onClick={() => alert('gauche')}
+                onKeyPress={() => alert('gauche')}
+                role="button"
+                tabIndex={0}
+              >
+                <span style={{ color: 'white', display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-square fa-3x" />
+                  <span className={classes.TextType}>Afficher uniquement un graphique</span>
                 </span>
               </Col>
-              <Col>
-                <span style={{ color: classes.lightBlueColor }}>
-                  <i className="fas fa-th-large fa-2x" />
-                  <span>Afficher tous les graphiques</span>
+              <Col
+                onClick={() => alert('droite')}
+                onKeyPress={() => alert('droite')}
+                role="button"
+                tabIndex={0}
+              >
+                <span style={{ color: classes.lightBlueColor, display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-th-large fa-3x" />
+                  <span className={classes.TextType}>Afficher tous les graphiques</span>
                 </span>
               </Col>
             </Row>
           </Container>
           <hr className={classes.Hr} />
           {this.getRadio()}
+          <p className={classes.Text}>Télécharger tout le contenu</p>
+          <div className={classes.exportBtn}>
+            <button className={classes.dot} type="button"><i className="fas fa-file-pdf" /></button>
+            <span>Graphiques (.pdf)</span>
+            <button className={classes.dot} type="button"><i className="fas fa-table" /></button>
+            <span>Données (.csv)</span>
+          </div>
         </div>
       </Fragment>
     );
