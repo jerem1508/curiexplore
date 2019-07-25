@@ -14,12 +14,15 @@ class GraphHeader extends Component {
     super(props);
     this.state = {
       class: 'chevron-down',
+      firstColor: 'white',
+      secondColor: classes.lightBlueColor,
       radioValue: '',
       label: '',
     };
     this.getIndic = this.getIndic.bind(this);
     this.getRadio = this.getRadio.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleGraphDisplay = this.handleGraphDisplay.bind(this);
     this.showDiv = this.showDiv.bind(this);
     this.toggleList = this.toggleList.bind(this);
   }
@@ -79,6 +82,15 @@ class GraphHeader extends Component {
     this.props.handleIndic(e);
   }
 
+  handleGraphDisplay(id) {
+    if (id === 0) {
+      this.setState({ class: 'chevron-down', firstColor: 'white', secondColor: classes.lightBlueColor });
+    } else {
+      this.setState({ class: 'chevron-down', firstColor: classes.lightBlueColor, secondColor: 'white' });
+    }
+    this.props.handleType(id);
+  }
+
   showDiv() {
     return (
       <Fragment>
@@ -87,23 +99,23 @@ class GraphHeader extends Component {
           <Container>
             <Row>
               <Col
-                onClick={() => alert('gauche')}
-                onKeyPress={() => alert('gauche')}
+                onClick={() => this.handleGraphDisplay(0)}
+                onKeyPress={() => this.handleGraphDisplay(0)}
                 role="button"
                 tabIndex={0}
               >
-                <span style={{ color: 'white', display: 'flex', alignItems: 'center' }}>
+                <span style={{ color: this.state.firstColor, display: 'flex', alignItems: 'center' }}>
                   <i className="fas fa-square fa-3x" />
                   <span className={classes.TextType}>Afficher uniquement un graphique</span>
                 </span>
               </Col>
               <Col
-                onClick={() => alert('droite')}
-                onKeyPress={() => alert('droite')}
+                onClick={() => this.handleGraphDisplay(1)}
+                onKeyPress={() => this.handleGraphDisplay(1)}
                 role="button"
                 tabIndex={0}
               >
-                <span style={{ color: classes.lightBlueColor, display: 'flex', alignItems: 'center' }}>
+                <span style={{ color: this.state.secondColor, display: 'flex', alignItems: 'center' }}>
                   <i className="fas fa-th-large fa-3x" />
                   <span className={classes.TextType}>Afficher tous les graphiques</span>
                 </span>
@@ -185,6 +197,7 @@ export default GraphHeader;
 GraphHeader.propTypes = {
   indicNb: PropTypes.number.isRequired,
   handleIndic: PropTypes.func.isRequired,
+  handleType: PropTypes.func.isRequired,
   graphType: PropTypes.string.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,

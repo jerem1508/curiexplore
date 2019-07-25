@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -43,6 +43,7 @@ class GraphCurie extends Component {
     this.colors = [];
     this.tempColor = [];
     this.state = {
+      simpleGraph: true,
       isMissing: true,
       filterData: null,
     };
@@ -50,6 +51,7 @@ class GraphCurie extends Component {
     this.toggleCountry = this.toggleCountry.bind(this);
     this.getData = this.getData.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
+    this.handleType = this.handleType.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getLegend = this.getLegend.bind(this);
   }
@@ -243,6 +245,16 @@ class GraphCurie extends Component {
     this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
+  handleType(id) {
+    if (id === 0) {
+      // alert('graph simple');
+      this.setState({ simpleGraph: true });
+    } else {
+      // alert('graph complexe');
+      this.setState({ simpleGraph: false });
+    }
+  }
+
   // Cette section doit être appelée direct dans le menu
   toggleCountry(id, colors, countryList) {
     const tempList = [];
@@ -269,7 +281,12 @@ class GraphCurie extends Component {
           : [this.state.isMissing ? <div>Ce graph est indisponible pour le moment.</div>
             : (
               <Col className={classes.GraphCurie}>
-                <GraphHeader handleIndic={this.handleIndic} indicNb={params[this.props.graphType].length} graphType={this.props.graphType} />
+                <GraphHeader
+                  handleIndic={this.handleIndic}
+                  indicNb={params[this.props.graphType].length}
+                  graphType={this.props.graphType}
+                  handleType={this.handleType}
+                />
                 <Row>
                   <Col sm={11}>
                     {this.getLegend()}
@@ -299,9 +316,36 @@ class GraphCurie extends Component {
                       // Regrouper filterData au meme endroit
                       // Menu indépendant
                     }
-                    {this.state.filterData
-                      ? <HighChartsGraph colors={this.tempColor} data={this.state.filterData} type={this.graphFormat} source={this.getSource()} />
-                      : <div style={{ backgroundColor: 'white' }}>Loading</div>}
+                    {this.state.filterData && this.state.simpleGraph
+                      ? (
+                        <HighChartsGraph
+                          colors={this.tempColor}
+                          data={this.state.filterData}
+                          type={this.graphFormat}
+                          source={this.getSource()}
+                        />
+                      )
+                      : <div style={{ backgroundColor: 'white' }}>Loading</div>
+                    }
+                    {this.state.filterData && this.state.simpleGraph === false
+                      ? (
+                        <Fragment>
+                          <HighChartsGraph
+                            colors={this.tempColor}
+                            data={this.state.filterData}
+                            type={this.graphFormat}
+                            source={this.getSource()}
+                          />
+                          <HighChartsGraph
+                            colors={this.tempColor}
+                            data={this.state.filterData}
+                            type={this.graphFormat}
+                            source={this.getSource()}
+                          />
+                        </Fragment>
+                      )
+                      : null
+                    }
                   </Col>
                 </Row>
               </Col>
