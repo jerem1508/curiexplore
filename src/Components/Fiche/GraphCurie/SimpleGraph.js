@@ -24,9 +24,9 @@ class SimpleGraph extends Component {
           <input
             type="radio"
             name={id[i].label + i}
-            checked={(i === this.graphIndex)}
+            checked={(i === this.props.graphIndex)}
             value={params[this.props.graphType][this.props.indic].unit[i].label}
-            onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)}
+            onChange={() => this.props.getGraphValues(this.props.graphType, i, this.props.indic)}
           />
           {params[this.props.graphType][this.props.indic].unit[i].label}
         </span>,
@@ -95,6 +95,8 @@ export default SimpleGraph;
 SimpleGraph.propTypes = {
   colors: propTypes.array.isRequired,
   data: propTypes.object.isRequired,
+  getGraphValues: propTypes.func.isRequired,
+  graphIndex: propTypes.number.isRequired,
   graphType: propTypes.string.isRequired,
   indic: propTypes.number.isRequired,
   type: propTypes.string.isRequired,

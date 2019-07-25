@@ -267,12 +267,15 @@ class GraphCurie extends Component {
                     <SimpleGraph
                       colors={this.tempColor}
                       data={this.state.filterData}
+                      getGraphValues={this.getGraphValues}
+                      graphIndex={this.graphIndex}
                       graphType={this.props.graphType}
                       indic={this.indic}
                       type={this.graphFormat}
                     />
                   )
-                  : null}
+                  : <div style={{ backgroundColor: 'white' }}>Loading</div>
+                }
                 {
                 // <Row>
                 //   <Col>
