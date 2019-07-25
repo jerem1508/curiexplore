@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import GraphHeader from './Shared/GraphHeader';
 import GraphMenu from './Shared/GraphMenu';
-import HighChartsGraph from './Graphs/HighChartsGraph';
+import SimpleGraph from './SimpleGraph';
 
 import classes from './GraphCurie.scss';
 
@@ -21,6 +21,11 @@ const url = configFile.CURIE_URL;
 // CODE WORDL : WLD
 // CODE OCDE : OED
 // CODE EUROPE : EUU
+
+// TODO ->
+// Ajouter switch bar ou courbe
+// Regrouper filterData au meme endroit
+// Menu indépendant
 
 /**
  * GraphCurie
@@ -52,7 +57,6 @@ class GraphCurie extends Component {
     this.getData = this.getData.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
     this.handleType = this.handleType.bind(this);
-    this.getInputs = this.getInputs.bind(this);
     this.getLegend = this.getLegend.bind(this);
   }
 
@@ -187,52 +191,6 @@ class GraphCurie extends Component {
     return (ctryList);
   }
 
-  getInputs() {
-    const radioList = [];
-    const id = params[this.props.graphType][this.indic].unit;
-    for (let i = 0; i < params[this.props.graphType][this.indic].unit.length; i += 1) {
-      radioList.push(
-        <span>
-          <input type="radio" name={id[i].label + i} checked={(i === this.graphIndex)} value={params[this.props.graphType][this.indic].unit[i].label} onChange={() => this.getGraphValues(this.props.graphType, i, this.indic)} />
-          {params[this.props.graphType][this.indic].unit[i].label}
-        </span>,
-      );
-    }
-    return (
-      <div className={classes.units}>
-        <span>Afficher en</span>
-        {radioList}
-      </div>
-    );
-  }
-
-  getSource() {
-    const srcList = [];
-    for (let i = 0; i < this.state.filterData.length; i += 1) {
-      for (let j = 0; j < this.state.filterData[i].data.length; j += 1) {
-        if (!srcList.includes(this.state.filterData[i].data[j].source)) {
-          srcList.push(this.state.filterData[i].data[j].source);
-        } else if (srcList.length > 1) {
-          srcList.push(`, ${this.state.filterData[i].data[j].source}`);
-        }
-      }
-    }
-    if (srcList.length > 1) {
-      return (
-        <span>
-          Sources :&nbsp;
-          {srcList}
-        </span>
-      );
-    }
-    return (
-      <span>
-        Source :&nbsp;
-        {srcList}
-      </span>
-    );
-  }
-
   handleIndic(event) {
     let i = 0;
     for (i = 0; i < params[this.props.graphType].length; i += 1) {
@@ -304,50 +262,58 @@ class GraphCurie extends Component {
                     />
                   </Col>
                 </Row>
-                <Row>
-                  <Col>
-                    {this.state.filterData ? this.getInputs() : null}
-                  </Col>
-                </Row>
-                <Row style={{ backgroundColor: 'white' }}>
-                  <Col>
-                    {
-                      // Ajouter switch bar ou courbe
-                      // Regrouper filterData au meme endroit
-                      // Menu indépendant
-                    }
-                    {this.state.filterData && this.state.simpleGraph
-                      ? (
-                        <HighChartsGraph
-                          colors={this.tempColor}
-                          data={this.state.filterData}
-                          type={this.graphFormat}
-                          source={this.getSource()}
-                        />
-                      )
-                      : <div style={{ backgroundColor: 'white' }}>Loading</div>
-                    }
-                    {this.state.filterData && this.state.simpleGraph === false
-                      ? (
-                        <Fragment>
-                          <HighChartsGraph
-                            colors={this.tempColor}
-                            data={this.state.filterData}
-                            type={this.graphFormat}
-                            source={this.getSource()}
-                          />
-                          <HighChartsGraph
-                            colors={this.tempColor}
-                            data={this.state.filterData}
-                            type={this.graphFormat}
-                            source={this.getSource()}
-                          />
-                        </Fragment>
-                      )
-                      : null
-                    }
-                  </Col>
-                </Row>
+                {this.state.filterData
+                  ? (
+                    <SimpleGraph
+                      colors={this.tempColor}
+                      data={this.state.filterData}
+                      graphType={this.props.graphType}
+                      indic={this.indic}
+                      type={this.graphFormat}
+                    />
+                  )
+                  : null}
+                {
+                // <Row>
+                //   <Col>
+                //     {this.state.filterData ? this.getInputs() : null}
+                //   </Col>
+                // </Row>
+                // <Row style={{ backgroundColor: 'white' }}>
+                //   <Col>
+                //     {this.state.filterData && this.state.simpleGraph
+                //       ? (
+                //         <HighChartsGraph
+                //           colors={this.tempColor}
+                //           data={this.state.filterData}
+                //           type={this.graphFormat}
+                //           source={this.getSource()}
+                //         />
+                //       )
+                //       : <div style={{ backgroundColor: 'white' }}>Loading</div>
+                //     }
+                //     {this.state.filterData && this.state.simpleGraph === false
+                //       ? (
+                //         <Fragment>
+                //           <HighChartsGraph
+                //             colors={this.tempColor}
+                //             data={this.state.filterData}
+                //             type={this.graphFormat}
+                //             source={this.getSource()}
+                //           />
+                //           <HighChartsGraph
+                //             colors={this.tempColor}
+                //             data={this.state.filterData}
+                //             type={this.graphFormat}
+                //             source={this.getSource()}
+                //           />
+                //         </Fragment>
+                //       )
+                //       : <div style={{ backgroundColor: 'white' }}>Loading</div>
+                //     }
+                //   </Col>
+                // </Row>
+              }
               </Col>
             ),
           ]

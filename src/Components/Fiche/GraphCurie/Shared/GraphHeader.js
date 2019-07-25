@@ -104,7 +104,10 @@ class GraphHeader extends Component {
                 role="button"
                 tabIndex={0}
               >
-                <span style={{ color: this.state.firstColor, display: 'flex', alignItems: 'center' }}>
+                <span style={{
+                  color: this.state.firstColor, display: 'flex', alignItems: 'center', cursor: 'pointer',
+                }}
+                >
                   <i className="fas fa-square fa-3x" />
                   <span className={classes.TextType}>Afficher uniquement un graphique</span>
                 </span>
@@ -115,7 +118,10 @@ class GraphHeader extends Component {
                 role="button"
                 tabIndex={0}
               >
-                <span style={{ color: this.state.secondColor, display: 'flex', alignItems: 'center' }}>
+                <span style={{
+                  color: this.state.secondColor, display: 'flex', alignItems: 'center', cursor: 'pointer',
+                }}
+                >
                   <i className="fas fa-th-large fa-3x" />
                   <span className={classes.TextType}>Afficher tous les graphiques</span>
                 </span>
