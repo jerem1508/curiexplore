@@ -282,7 +282,6 @@ class GraphCurie extends Component {
                         colors={this.tempColor}
                         countryList={this.countryList}
                         graphType={this.props.graphType}
-                        type={this.graphFormat}
                       />
                     ),
                   ] : <div style={{ backgroundColor: 'white' }}>Loading</div>

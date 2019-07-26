@@ -32,6 +32,7 @@ class MultipleGraph extends Component {
       data: null,
     };
     this.getData = this.getData.bind(this);
+    this.getGraphs = this.getGraphs.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getSource = this.getSource.bind(this);
   }
@@ -57,6 +58,33 @@ class MultipleGraph extends Component {
     // separer les data en fonction catégories
     console.log(data);
     this.setState({ data });
+  }
+
+  getGraphs() {
+    const graphList = [];
+
+    for (let i = 0; i < this.codeArray.length; i += 1) {
+      graphList.push(
+        <Col sm={6}>
+          {params[this.props.graphType][i].label}
+          {this.getInputs(i)}
+          <HighChartsGraph
+            colors={this.props.colors}
+            data={this.state.data}
+            full={false}
+            source={this.getSource()}
+            type={params[this.props.graphType][0].type}
+          />
+        </Col>,
+      );
+    }
+    return (
+      <Fragment>
+        <Row style={{ backgroundColor: 'white' }}>
+          {graphList}
+        </Row>
+      </Fragment>
+    );
   }
 
   getInputs(indic) {
@@ -130,23 +158,7 @@ class MultipleGraph extends Component {
     // console.log(this.props.countryList);
     return (
       <Fragment>
-        <Row style={{ backgroundColor: 'white' }}>
-          <Col sm={6}>
-            {this.state.data
-              ? (
-                <Fragment>
-                  {this.getInputs(0)}
-                  <HighChartsGraph
-                    colors={this.props.colors}
-                    data={this.state.data}
-                    full={false}
-                    source={this.getSource()}
-                    type={this.props.type}
-                  />
-                </Fragment>
-              ) : null}
-          </Col>
-        </Row>
+        {this.state.data ? this.getGraphs() : null}
       </Fragment>
     );
   }
@@ -159,7 +171,6 @@ MultipleGraph.propTypes = {
   colors: propTypes.array.isRequired,
   countryList: propTypes.array.isRequired,
   graphType: propTypes.string.isRequired,
-  type: propTypes.string.isRequired,
 };
 
 // const MultipleGraph = () => (
