@@ -129,14 +129,17 @@ class GraphHeader extends Component {
             </Row>
           </Container>
           <hr className={classes.Hr} />
-          {this.getRadio()}
-          <p className={classes.Text}>Télécharger tout le contenu</p>
-          <div className={classes.exportBtn}>
-            <button className={classes.dot} type="button"><i className="fas fa-file-pdf" /></button>
-            <span>Graphiques (.pdf)</span>
-            <button className={classes.dot} type="button"><i className="fas fa-table" /></button>
-            <span>Données (.csv)</span>
-          </div>
+          {this.state.firstColor === 'white' ? this.getRadio() : (
+            <Fragment>
+              <p className={classes.Text}>Télécharger tout le contenu</p>
+              <div className={classes.exportBtn}>
+                <button className={classes.dot} type="button"><i className="fas fa-file-pdf" /></button>
+                <span>Graphiques (.pdf)</span>
+                <button className={classes.dot} type="button"><i className="fas fa-table" /></button>
+                <span>Données (.csv)</span>
+              </div>
+            </Fragment>
+          ) }
         </div>
       </Fragment>
     );
@@ -182,9 +185,6 @@ class GraphHeader extends Component {
             <span>
               <i className={`fas fa-${this.state.class}`} />
             </span>
-            {
-              // getSelect(props)
-            }
           </Col>
         </Row>
         <Row>

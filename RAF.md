@@ -29,3 +29,8 @@
 
 # Data
 - trier données API Datastore par date (croissant) puis par variable, par pays
+
+Quand graph multiple changer un state (genre graph simple ou multiple) et appeler composent qui gère affichage multiple (dans la partie graph ?) mettre ce composnat dans le this et afficher
+let set à nul au départ et si pas nul toggle sans appeler fonction
+This.getgrafvalues va call simple graph
+Et par defaulr state simple

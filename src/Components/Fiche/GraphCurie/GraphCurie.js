@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import GraphHeader from './Shared/GraphHeader';
 import GraphMenu from './Shared/GraphMenu';
 import SimpleGraph from './SimpleGraph';
+import MultipleGraph from './MultipleGraph';
 
 import classes from './GraphCurie.scss';
 
@@ -240,10 +241,10 @@ class GraphCurie extends Component {
             : (
               <Col className={classes.GraphCurie}>
                 <GraphHeader
-                  handleIndic={this.handleIndic}
-                  indicNb={params[this.props.graphType].length}
                   graphType={this.props.graphType}
+                  handleIndic={this.handleIndic}
                   handleType={this.handleType}
+                  indicNb={params[this.props.graphType].length}
                 />
                 <Row>
                   <Col sm={11}>
@@ -263,18 +264,20 @@ class GraphCurie extends Component {
                   </Col>
                 </Row>
                 {this.state.filterData
-                  ? (
-                    <SimpleGraph
-                      colors={this.tempColor}
-                      data={this.state.filterData}
-                      getGraphValues={this.getGraphValues}
-                      graphIndex={this.graphIndex}
-                      graphType={this.props.graphType}
-                      indic={this.indic}
-                      type={this.graphFormat}
-                    />
-                  )
-                  : <div style={{ backgroundColor: 'white' }}>Loading</div>
+                  ? [this.state.simpleGraph
+                    ? (
+                      <SimpleGraph
+                        colors={this.tempColor}
+                        data={this.state.filterData}
+                        getGraphValues={this.getGraphValues}
+                        graphIndex={this.graphIndex}
+                        graphType={this.props.graphType}
+                        indic={this.indic}
+                        type={this.graphFormat}
+                      />
+                    )
+                    : <MultipleGraph />,
+                  ] : <div style={{ backgroundColor: 'white' }}>Loading</div>
                 }
                 {
                 // <Row>

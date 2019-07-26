@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -166,7 +166,7 @@ export default class HighChartsBar extends Component {
         //   }
         //   return this.y.toFixed(1);
         // },
-        
+
         // formatter() {
         //   const points = this.points;
         //   const len = points.length;
@@ -243,7 +243,7 @@ export default class HighChartsBar extends Component {
   }
 
   render() {
-    const ShareComponent = () => (
+    const CompleteShare = () => (
       <div className={classes.exportBtn}>
         <span>Partager</span>
         <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
@@ -257,19 +257,34 @@ export default class HighChartsBar extends Component {
         <span className={classes.src}>{this.props.source}</span>
       </div>
     );
+    const SimpleShare = () => (
+      <div className={classes.exportBtn}>
+        <button className={classes.dot} type="button"><i className="fas fa-share-alt" /></button>
+        <button className={classes.dot} type="button"><i className="fas fa-code" /></button>
+        <button className={classes.dot} type="button" onClick={this.exportChartPng}><i className="fas fa-image" /></button>
+        <button className={classes.dot} type="button" onClick={this.exportChartCsv}><i className="fas fa-table" /></button>
+        <span className={classes.src}>{this.props.source}</span>
+      </div>
+    );
+    const ShareComponent = () => {
+      if (this.props.width === '100%') {
+        return <CompleteShare />;
+      }
+      return <SimpleShare />;
+    };
     return (
-      <div>
+      <div style={{ width: this.props.width, display: 'inline-block' }}>
         {
           this.state.options !== null
             ? (
-              <div>
+              <Fragment>
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={this.state.options}
                   ref={this.chart}
                 />
                 <ShareComponent />
-              </div>
+              </Fragment>
             )
             : <div>Loading...</div>
         }
@@ -283,4 +298,5 @@ HighChartsBar.propTypes = {
   data: PropTypes.object.isRequired,
   source: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
 };

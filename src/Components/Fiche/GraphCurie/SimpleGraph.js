@@ -80,8 +80,9 @@ class SimpleGraph extends Component {
             <HighChartsGraph
               colors={this.props.colors}
               data={this.props.data}
-              type={this.props.type}
               source={this.getSource()}
+              type={this.props.type}
+              width="100%"
             />
           </Col>
         </Row>
