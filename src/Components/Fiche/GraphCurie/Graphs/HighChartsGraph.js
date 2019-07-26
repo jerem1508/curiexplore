@@ -267,13 +267,13 @@ export default class HighChartsBar extends Component {
       </div>
     );
     const ShareComponent = () => {
-      if (this.props.width === '100%') {
+      if (this.props.full) {
         return <CompleteShare />;
       }
       return <SimpleShare />;
     };
     return (
-      <div style={{ width: this.props.width, display: 'inline-block' }}>
+      <div>
         {
           this.state.options !== null
             ? (
@@ -296,7 +296,7 @@ export default class HighChartsBar extends Component {
 HighChartsBar.propTypes = {
   colors: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  full: PropTypes.bool.isRequired,
   source: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
 };

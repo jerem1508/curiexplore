@@ -1,13 +1,190 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import propTypes from 'prop-types';
+import axios from 'axios';
+
 import HighChartsGraph from './Graphs/HighChartsGraph';
 
-// const MultipleGraph = () => (
-//   <HCMultipleGraph />
-// );
+import classes from './GraphCurie.scss';
 
-const MultipleGraph = () => (
-  <p>wesh le gang mdr</p>
-);
+const params = require('./GraphCurie-data/indicateurs.json');
+const configFile = require('../../../config/config.js');
+
+const url = configFile.CURIE_URL;
+
+// TODO : garder les données déjà envoyées
+
+/**
+ * GraphCurie -> MultipleGraph
+ * Url : <br/>
+ * Description : Gestion de plusieurs graphs, appel des différents graphs<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
+class MultipleGraph extends Component {
+  constructor(props) {
+    super(props);
+    this.codeArray = [];
+    this.countryList = [];
+    this.state = {
+      data: null,
+    };
+    this.getData = this.getData.bind(this);
+    this.getInputs = this.getInputs.bind(this);
+    this.getSource = this.getSource.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  async getData() {
+    for (let i = 0; i < params[this.props.graphType].length; i += 1) {
+      this.codeArray.push(params[this.props.graphType][i].unit[0].code);
+    }
+    this.countryList = this.props.countryList.map(e => `"${e}"`);
+    // console.log('codeArray et CountryList');
+    // console.log(this.codeArray);
+    // console.log(this.countryList);
+    const results = [];
+    // for (let i = 0; i < this.codeArray.length; i += 1) {
+    for (let i = 0; i < 1; i += 1) {
+      results.push(this.apiRequest(this.codeArray[i]));
+    }
+    const data = await Promise.all(results);
+    // separer les data en fonction catégories
+    console.log(data);
+    this.setState({ data });
+  }
+
+  getInputs(indic) {
+    const radioList = [];
+    const id = params[this.props.graphType][indic].unit;
+    for (let i = 0; i < params[this.props.graphType][indic].unit.length; i += 1) {
+      radioList.push(
+        <span>
+          <input
+            type="radio"
+            name={id[i].label + i}
+            checked={(i === 0)}
+            value={params[this.props.graphType][indic].unit[i].label}
+            // onChange={() => this.props.getGraphValues(this.props.graphType, i, this.props.indic)}
+          />
+          {params[this.props.graphType][indic].unit[i].label}
+        </span>,
+      );
+    }
+    return (
+      <div className={classes.units}>
+        <span>Afficher en</span>
+        {radioList}
+      </div>
+    );
+  }
+
+  getSource() {
+    const srcList = [];
+    this.data = this.state.data;
+    for (let i = 0; i < this.data.length; i += 1) {
+      for (let j = 0; j < this.data[i].data.length; j += 1) {
+        if (!srcList.includes(this.data[i].data[j].source)) {
+          srcList.push(this.data[i].data[j].source);
+        } else if (srcList.length > 1) {
+          srcList.push(`, ${this.data[i].data[j].source}`);
+        }
+      }
+    }
+    if (srcList.length > 1) {
+      return (
+        <span>
+          Sources :&nbsp;
+          {srcList}
+        </span>
+      );
+    }
+    return (
+      <span>
+        Source :&nbsp;
+        {srcList}
+      </span>
+    );
+  }
+
+  async apiRequest(code) {
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Basic ${configFile.CURIE_AUTH_KEY}`,
+      },
+      params: {
+        where: `{"country_code":{"$in": [${this.countryList}]},"code":"${code}"}`,
+      },
+    });
+    return (res.data);
+  }
+
+  render() {
+    // console.log(this.props.graphType);
+    // console.log(this.props.type);
+    // console.log(this.props.countryList);
+    return (
+      <Fragment>
+        <Row style={{ backgroundColor: 'white' }}>
+          <Col sm={6}>
+            {this.state.data
+              ? (
+                <Fragment>
+                  {this.getInputs(0)}
+                  <HighChartsGraph
+                    colors={this.props.colors}
+                    data={this.state.data}
+                    full={false}
+                    source={this.getSource()}
+                    type={this.props.type}
+                  />
+                </Fragment>
+              ) : null}
+          </Col>
+        </Row>
+      </Fragment>
+    );
+  }
+}
 
 
 export default MultipleGraph;
+
+MultipleGraph.propTypes = {
+  colors: propTypes.array.isRequired,
+  countryList: propTypes.array.isRequired,
+  graphType: propTypes.string.isRequired,
+  type: propTypes.string.isRequired,
+};
+
+// const MultipleGraph = () => (
+//   <Fragment>
+//     <Row style={{ backgroundColor: 'white' }}>
+//       <Col>
+//         {this.getInputs()}
+//         <HighChartsGraph
+//           colors={this.props.colors}
+//           data={this.props.data}
+//           full={false}
+//           source={this.getSource()}
+//           type={this.props.type}
+//         />
+//       </Col>
+//       <Col>
+//         {this.getInputs()}
+//         <HighChartsGraph
+//           colors={this.props.colors}
+//           data={this.props.data}
+//           full={false}
+//           source={this.getSource()}
+//           type={this.props.type}
+//         />
+//       </Col>
+//     </Row>
+//   </Fragment>
+// );

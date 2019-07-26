@@ -7,7 +7,14 @@ import classes from './GraphHeader.scss';
 
 const params = require('../GraphCurie-data/indicateurs.json');
 
-// TODO : add comments
+/**
+ * GraphCurie -> GraphHeader
+ * Url : <br/>
+ * Description : Gestion du choix d'indicateur, et de un / plusieurs graphs, exports des données groupées<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
 
 class GraphHeader extends Component {
   constructor(props) {
@@ -84,9 +91,20 @@ class GraphHeader extends Component {
 
   handleGraphDisplay(id) {
     if (id === 0) {
-      this.setState({ class: 'chevron-down', firstColor: 'white', secondColor: classes.lightBlueColor });
+      this.setState({
+        class: 'chevron-down',
+        firstColor: 'white',
+        secondColor: classes.lightBlueColor,
+        label: this.prevLabel,
+      });
     } else {
-      this.setState({ class: 'chevron-down', firstColor: classes.lightBlueColor, secondColor: 'white' });
+      this.prevLabel = this.state.label;
+      this.setState({
+        class: 'chevron-down',
+        firstColor: classes.lightBlueColor,
+        secondColor: 'white',
+        label: 'Tous les indicateurs',
+      });
     }
     this.props.handleType(id);
   }

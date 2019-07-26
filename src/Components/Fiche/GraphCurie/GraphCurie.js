@@ -164,6 +164,7 @@ class GraphCurie extends Component {
       }
     }
     this.graphFormat = params[label][indic].type;
+    console.log(tempData);
     this.setState({ filterData: tempData });
   }
 
@@ -276,7 +277,14 @@ class GraphCurie extends Component {
                         type={this.graphFormat}
                       />
                     )
-                    : <MultipleGraph />,
+                    : (
+                      <MultipleGraph
+                        colors={this.tempColor}
+                        countryList={this.countryList}
+                        graphType={this.props.graphType}
+                        type={this.graphFormat}
+                      />
+                    ),
                   ] : <div style={{ backgroundColor: 'white' }}>Loading</div>
                 }
                 {

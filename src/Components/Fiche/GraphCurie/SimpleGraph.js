@@ -8,6 +8,15 @@ import classes from './GraphCurie.scss';
 
 const params = require('./GraphCurie-data/indicateurs.json');
 
+/**
+ * GraphCurie -> SimpleGraph
+ * Url : <br/>
+ * Description : Gestions inputs + source, appel au graph<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
 class SimpleGraph extends Component {
   constructor(props) {
     super(props);
@@ -80,9 +89,9 @@ class SimpleGraph extends Component {
             <HighChartsGraph
               colors={this.props.colors}
               data={this.props.data}
+              full
               source={this.getSource()}
               type={this.props.type}
-              width="100%"
             />
           </Col>
         </Row>
@@ -95,7 +104,7 @@ export default SimpleGraph;
 
 SimpleGraph.propTypes = {
   colors: propTypes.array.isRequired,
-  data: propTypes.object.isRequired,
+  data: propTypes.array.isRequired,
   getGraphValues: propTypes.func.isRequired,
   graphIndex: propTypes.number.isRequired,
   graphType: propTypes.string.isRequired,

@@ -4,7 +4,14 @@ import { Modal, Button } from 'react-bootstrap';
 
 import classes from './GraphMenu.scss';
 
-// TODO : ADD REMOVE FUNCTION HERE + comment
+/**
+ * GraphCurie -> GraphMenu
+ * Url : <br/>
+ * Description : Gestions ajouts/suppression de pays dans le/les graphs<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
 
 const isoList = require('../../../Homepage/CountriesList/countriesList.json');
 
@@ -342,6 +349,6 @@ export default class GraphMenu extends Component {
 
 GraphMenu.propTypes = {
   toggleCountry: PropTypes.func.isRequired,
-  colors: PropTypes.object.isRequired,
+  colors: PropTypes.array.isRequired,
   countryCode: PropTypes.string.isRequired,
 };
