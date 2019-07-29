@@ -12,6 +12,15 @@ const configFile = require('../../config/config.js');
 
 const url = configFile.CURIE_URL;
 
+/**
+ * Cartographie -> MapMenu
+ * Url : /cartographie<br/>
+ * Description : Récupération des données en fonction de l'indicateur<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
 export default class MapHeader extends Component {
   constructor(props) {
     super(props);

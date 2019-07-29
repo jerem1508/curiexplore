@@ -22,6 +22,15 @@ const isoList = require('../Homepage/CountriesList/countriesList.json');
 
 const PrintControl = withLeaflet(PrintControlDefault);
 
+/**
+ * Cartographie
+ * Url : /cartographie<br/>
+ * Description : Gestions de la carte<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
 export default class Carto extends Component {
   constructor(props) {
     super(props);
@@ -245,7 +254,6 @@ export default class Carto extends Component {
         </div>
         <div className={classes.ScrollBar}>
           <MapSlider yearInterval={this.yearInterval} defaultYear={config[this.confIndex].years[0]} changeYear={this.changeYear} />
-          <div>{this.state.year}</div>
         </div>
         <Newsletter language={this.props.language} />
         <Footer language={this.props.language} />

@@ -6,6 +6,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import classes from './Cartographie.scss';
 
+/**
+ * Cartographie -> MapSlider
+ * Url : /cartographie<br/>
+ * Description : Gestion du slider sous la map<br/>
+ * Responsive : . <br/>
+ * Accessible : . <br/>
+ * Tests unitaires : . <br/>.
+*/
+
 const AirbnbSlider = withStyles({
   root: {
     color: '#3a8589',
