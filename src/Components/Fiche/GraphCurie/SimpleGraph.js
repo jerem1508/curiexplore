@@ -32,7 +32,7 @@ class SimpleGraph extends Component {
         <span>
           <input
             type="radio"
-            name={id[i].label + i}
+            name={params[this.props.graphType][this.props.indic].label + id[i].label}
             checked={(i === this.props.graphIndex)}
             value={params[this.props.graphType][this.props.indic].unit[i].label}
             onChange={() => this.props.getGraphValues(this.props.graphType, i, this.props.indic)}

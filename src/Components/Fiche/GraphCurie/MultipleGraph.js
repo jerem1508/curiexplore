@@ -27,10 +27,12 @@ class MultipleGraph extends Component {
   constructor(props) {
     super(props);
     this.codeArray = [];
+    this.indicArray = [];
     this.countryList = [];
     this.state = {
       data: null,
     };
+    this.changeIndic = this.changeIndic.bind(this);
     this.getData = this.getData.bind(this);
     this.getGraphs = this.getGraphs.bind(this);
     this.getInputs = this.getInputs.bind(this);
@@ -60,11 +62,10 @@ class MultipleGraph extends Component {
 
   getGraphs() {
     const graphList = [];
-
     for (let i = 0; i < this.codeArray.length; i += 1) {
       graphList.push(
         <Col sm={6}>
-          {params[this.props.graphType][i].label}
+          <span className={classes.graphTitle}>{params[this.props.graphType][i].label}</span>
           {this.getInputs(i)}
           <HighChartsGraph
             colors={this.props.colors}
@@ -88,17 +89,22 @@ class MultipleGraph extends Component {
   getInputs(indic) {
     const radioList = [];
     const id = params[this.props.graphType][indic].unit;
-    for (let i = 0; i < params[this.props.graphType][indic].unit.length; i += 1) {
+    if (this.indicArray[indic] === undefined) {
+      this.indicArray.push(0);
+    }
+    for (let i = 0; i < id.length; i += 1) {
+      // alert(this.indicArray[i]);
       radioList.push(
         <span>
           <input
             type="radio"
-            name={id[i].label + i}
-            checked={(i === 0)}
-            value={params[this.props.graphType][indic].unit[i].label}
+            name={params[this.props.graphType][indic].label + id[i].label}
+            checked={(i === this.indicArray[indic])}
+            value={id[i].label}
+            onChange={() => this.changeIndic(indic, i)}
             // onChange={() => this.props.getGraphValues(this.props.graphType, i, this.props.indic)}
           />
-          {params[this.props.graphType][indic].unit[i].label}
+          {id[i].label}
         </span>,
       );
     }
@@ -148,6 +154,15 @@ class MultipleGraph extends Component {
       },
     });
     return (res.data);
+  }
+
+  changeIndic(indic, i) {
+    const data = this.state.data;
+    // alert(this.codeArray[indic]);
+    this.codeArray[indic] = params[this.props.graphType][indic].unit[i].code;
+    this.indicArray[indic] = i;
+    // alert(this.codeArray[indic]);
+    this.setState({ data })
   }
 
   render() {
