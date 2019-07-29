@@ -35,6 +35,7 @@ class MultipleGraph extends Component {
     this.getGraphs = this.getGraphs.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getSource = this.getSource.bind(this);
+    this.parseData = this.parseData.bind(this);
   }
 
   componentDidMount() {
@@ -50,8 +51,8 @@ class MultipleGraph extends Component {
     // console.log(this.codeArray);
     // console.log(this.countryList);
     const results = [];
-    // for (let i = 0; i < this.codeArray.length; i += 1) {
-    for (let i = 0; i < 1; i += 1) {
+    for (let i = 0; i < this.codeArray.length; i += 1) {
+    // for (let i = 0; i < 1; i += 1) {
       results.push(this.apiRequest(this.codeArray[i]));
     }
     const data = await Promise.all(results);
@@ -70,10 +71,10 @@ class MultipleGraph extends Component {
           {this.getInputs(i)}
           <HighChartsGraph
             colors={this.props.colors}
-            data={this.state.data}
+            data={this.parseData(i)}
             full={false}
             source={this.getSource()}
-            type={params[this.props.graphType][0].type}
+            type={params[this.props.graphType][i].type}
           />
         </Col>,
       );
@@ -138,6 +139,12 @@ class MultipleGraph extends Component {
         {srcList}
       </span>
     );
+  }
+
+  parseData(i) {
+    const data = [];
+    data.push(this.state.data[i]);
+    return (data);
   }
 
   async apiRequest(code) {

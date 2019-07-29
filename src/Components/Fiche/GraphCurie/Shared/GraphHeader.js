@@ -103,7 +103,7 @@ class GraphHeader extends Component {
         class: 'chevron-down',
         firstColor: classes.lightBlueColor,
         secondColor: 'white',
-        label: 'Tous les indicateurs',
+        label: 'Tous les graphiques',
       });
     }
     this.props.handleType(id);

@@ -164,7 +164,6 @@ class GraphCurie extends Component {
       }
     }
     this.graphFormat = params[label][indic].type;
-    console.log(tempData);
     this.setState({ filterData: tempData });
   }
 
