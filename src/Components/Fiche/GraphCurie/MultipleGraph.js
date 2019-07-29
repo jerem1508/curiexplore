@@ -40,13 +40,13 @@ class MultipleGraph extends Component {
   }
 
   componentDidMount() {
+    for (let i = 0; i < params[this.props.graphType].length; i += 1) {
+      this.codeArray.push(params[this.props.graphType][i].unit[0].code);
+    }
     this.getData();
   }
 
   async getData() {
-    for (let i = 0; i < params[this.props.graphType].length; i += 1) {
-      this.codeArray.push(params[this.props.graphType][i].unit[0].code);
-    }
     this.countryList = this.props.countryList.map(e => `"${e}"`);
     // console.log('codeArray et CountryList');
     // console.log(this.codeArray);
@@ -57,6 +57,7 @@ class MultipleGraph extends Component {
     }
     const data = await Promise.all(results);
     // separer les data en fonction catégories
+    console.log(data);
     this.setState({ data });
   }
 
@@ -157,12 +158,11 @@ class MultipleGraph extends Component {
   }
 
   changeIndic(indic, i) {
-    const data = this.state.data;
     // alert(this.codeArray[indic]);
     this.codeArray[indic] = params[this.props.graphType][indic].unit[i].code;
     this.indicArray[indic] = i;
     // alert(this.codeArray[indic]);
-    this.setState({ data })
+    this.getData();
   }
 
   render() {
