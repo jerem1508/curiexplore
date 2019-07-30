@@ -317,7 +317,10 @@ export default class GraphMenu extends Component {
           <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
             UE
         </button>
-        {(this.countryList[1] !== '')
+        {((this.countryList[1] !== '')
+          || (this.countryList[3] !== '')
+          || (this.countryList[4] !== '')
+          || (this.countryList[5] !== ''))
           ? (
             <span
               className={classes.BtnCancel}

@@ -49,17 +49,12 @@ class MultipleGraph extends Component {
 
   async getData() {
     this.countryList = this.props.countryList.map(e => `"${e}"`);
-    // alert(this.countryList);
-    // console.log('codeArray et CountryList');
-    // console.log(this.codeArray);
-    // console.log(this.countryList);
     const results = [];
     for (let i = 0; i < this.codeArray.length; i += 1) {
       results.push(this.apiRequest(this.codeArray[i]));
     }
     const data = await Promise.all(results);
     // separer les data en fonction catégories
-    console.log(data);
     this.setState({ data: null });
     this.setState({ data });
   }
@@ -100,7 +95,6 @@ class MultipleGraph extends Component {
       this.indicArray.push(0);
     }
     for (let i = 0; i < id.length; i += 1) {
-      // alert(this.indicArray[i]);
       radioList.push(
         <span>
           <input
