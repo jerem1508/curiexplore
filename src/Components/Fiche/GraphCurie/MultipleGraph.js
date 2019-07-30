@@ -49,6 +49,7 @@ class MultipleGraph extends Component {
 
   async getData() {
     this.countryList = this.props.countryList.map(e => `"${e}"`);
+    // alert(this.countryList);
     // console.log('codeArray et CountryList');
     // console.log(this.codeArray);
     // console.log(this.countryList);
@@ -59,11 +60,15 @@ class MultipleGraph extends Component {
     const data = await Promise.all(results);
     // separer les data en fonction catégories
     console.log(data);
+    this.setState({ data: null });
     this.setState({ data });
   }
 
   getGraphs() {
     const graphList = [];
+    if (this.countryList.length !== this.props.countryList.length) {
+      this.getData();
+    }
     for (let i = 0; i < this.codeArray.length; i += 1) {
       graphList.push(
         <Col sm={6}>
@@ -160,51 +165,32 @@ class MultipleGraph extends Component {
 
   parseData(index) {
     const len = this.props.countryList.length;
-    const apiData = this.state.data[index];
+    const tempData = this.state.data[index];
     const data = [];
-    const tempData = [];
 
-console.log(this.props.countryList);
     for (let i = 0; i < len; i += 1) {
-      tempData.push([]);
+      data.push([]);
     }
-    for (let i = 0; i < apiData.data.length; i += 1) {
+    for (let i = 0; i < tempData.data.length; i += 1) {
       for (let j = 0; j < len; j += 1) {
-        if (apiData.data[i].country_code === this.props.countryList[j]) {
-          tempData[j].push(apiData.data[i]);
+        if (tempData.data[i].country_code === this.props.countryList[j]) {
+          data[j].push(tempData.data[i]);
         }
       }
-      // tempData[(i % this.props.countryList.length)].push(apiData.data[i]);
     }
-    for (let i = 0; i < len; i += 1) {
-      data.push({ data: tempData[i] });
-    }
-    if (index === 0)
-      console.log(data);
-    // alert(index % this.props.countryList.length);
-    return (data);
-    // for (let i = 0; i < index; i += 1) {
-    //
-    // }
-    // faire modulo en fonction size de paysage
-    // et reparti dans différents tableaux
+    return (data.map(x => ({ data: x })));
   }
 
   changeIndic(indic, i) {
-    // alert(this.codeArray[indic]);
     this.codeArray[indic] = params[this.props.graphType][indic].unit[i].code;
     this.indicArray[indic] = i;
-    // alert(this.codeArray[indic]);
     this.getData();
   }
 
   render() {
-    // console.log(this.props.graphType);
-    // console.log(this.props.type);
-    // console.log(this.props.countryList);
     return (
       <Fragment>
-        {this.state.data ? this.getGraphs() : null}
+        {this.state.data ? this.getGraphs() : <div>Loading...</div>}
       </Fragment>
     );
   }
@@ -218,30 +204,3 @@ MultipleGraph.propTypes = {
   countryList: propTypes.array.isRequired,
   graphType: propTypes.string.isRequired,
 };
-
-// const MultipleGraph = () => (
-//   <Fragment>
-//     <Row style={{ backgroundColor: 'white' }}>
-//       <Col>
-//         {this.getInputs()}
-//         <HighChartsGraph
-//           colors={this.props.colors}
-//           data={this.props.data}
-//           full={false}
-//           source={this.getSource()}
-//           type={this.props.type}
-//         />
-//       </Col>
-//       <Col>
-//         {this.getInputs()}
-//         <HighChartsGraph
-//           colors={this.props.colors}
-//           data={this.props.data}
-//           full={false}
-//           source={this.getSource()}
-//           type={this.props.type}
-//         />
-//       </Col>
-//     </Row>
-//   </Fragment>
-// );

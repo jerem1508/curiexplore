@@ -165,8 +165,6 @@ class GraphCurie extends Component {
       }
     }
     this.graphFormat = params[label][indic].type;
-    if (this.countryList.length > 1)
-      console.log(tempData);
     this.setState({ countryList: this.countryList, filterData: tempData });
   }
 
