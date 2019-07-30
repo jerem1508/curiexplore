@@ -37,6 +37,7 @@ class MultipleGraph extends Component {
     this.getGraphs = this.getGraphs.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getSource = this.getSource.bind(this);
+    this.parseData = this.parseData.bind(this);
   }
 
   componentDidMount() {
@@ -70,7 +71,7 @@ class MultipleGraph extends Component {
           {this.getInputs(i)}
           <HighChartsGraph
             colors={this.props.colors}
-            data={[this.state.data[i]]}
+            data={this.parseData(i)}
             full={false}
             source={this.getSource(i)}
             type={params[this.props.graphType][i].type}
@@ -103,7 +104,6 @@ class MultipleGraph extends Component {
             checked={(i === this.indicArray[indic])}
             value={id[i].label}
             onChange={() => this.changeIndic(indic, i)}
-            // onChange={() => this.props.getGraphValues(this.props.graphType, i, this.props.indic)}
           />
           {id[i].label}
         </span>,
@@ -152,9 +152,42 @@ class MultipleGraph extends Component {
       },
       params: {
         where: `{"country_code":{"$in": [${this.countryList}]},"code":"${code}"}`,
+        max_results: 3000,
       },
     });
     return (res.data);
+  }
+
+  parseData(index) {
+    const len = this.props.countryList.length;
+    const apiData = this.state.data[index];
+    const data = [];
+    const tempData = [];
+
+console.log(this.props.countryList);
+    for (let i = 0; i < len; i += 1) {
+      tempData.push([]);
+    }
+    for (let i = 0; i < apiData.data.length; i += 1) {
+      for (let j = 0; j < len; j += 1) {
+        if (apiData.data[i].country_code === this.props.countryList[j]) {
+          tempData[j].push(apiData.data[i]);
+        }
+      }
+      // tempData[(i % this.props.countryList.length)].push(apiData.data[i]);
+    }
+    for (let i = 0; i < len; i += 1) {
+      data.push({ data: tempData[i] });
+    }
+    if (index === 0)
+      console.log(data);
+    // alert(index % this.props.countryList.length);
+    return (data);
+    // for (let i = 0; i < index; i += 1) {
+    //
+    // }
+    // faire modulo en fonction size de paysage
+    // et reparti dans différents tableaux
   }
 
   changeIndic(indic, i) {

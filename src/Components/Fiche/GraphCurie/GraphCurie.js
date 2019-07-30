@@ -52,6 +52,7 @@ class GraphCurie extends Component {
       simpleGraph: true,
       isMissing: true,
       filterData: null,
+      countryList: [],
     };
     this.getGraphValues = this.getGraphValues.bind(this);
     this.toggleCountry = this.toggleCountry.bind(this);
@@ -164,7 +165,9 @@ class GraphCurie extends Component {
       }
     }
     this.graphFormat = params[label][indic].type;
-    this.setState({ filterData: tempData });
+    if (this.countryList.length > 1)
+      console.log(tempData);
+    this.setState({ countryList: this.countryList, filterData: tempData });
   }
 
   getLegend() {
@@ -230,7 +233,11 @@ class GraphCurie extends Component {
         this.tempColor.push(colors[i]);
       }
     }
-    this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
+    if (this.state.simpleGraph) {
+      this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
+    } else {
+      this.setState({ countryList: this.countryList });
+    }
   }
 
   render() {
@@ -279,53 +286,12 @@ class GraphCurie extends Component {
                     : (
                       <MultipleGraph
                         colors={this.tempColor}
-                        countryList={this.countryList}
+                        countryList={this.state.countryList}
                         graphType={this.props.graphType}
                       />
                     ),
                   ] : <div style={{ backgroundColor: 'white' }}>Loading</div>
                 }
-                {
-                // <Row>
-                //   <Col>
-                //     {this.state.filterData ? this.getInputs() : null}
-                //   </Col>
-                // </Row>
-                // <Row style={{ backgroundColor: 'white' }}>
-                //   <Col>
-                //     {this.state.filterData && this.state.simpleGraph
-                //       ? (
-                //         <HighChartsGraph
-                //           colors={this.tempColor}
-                //           data={this.state.filterData}
-                //           type={this.graphFormat}
-                //           source={this.getSource()}
-                //         />
-                //       )
-                //       : <div style={{ backgroundColor: 'white' }}>Loading</div>
-                //     }
-                //     {this.state.filterData && this.state.simpleGraph === false
-                //       ? (
-                //         <Fragment>
-                //           <HighChartsGraph
-                //             colors={this.tempColor}
-                //             data={this.state.filterData}
-                //             type={this.graphFormat}
-                //             source={this.getSource()}
-                //           />
-                //           <HighChartsGraph
-                //             colors={this.tempColor}
-                //             data={this.state.filterData}
-                //             type={this.graphFormat}
-                //             source={this.getSource()}
-                //           />
-                //         </Fragment>
-                //       )
-                //       : <div style={{ backgroundColor: 'white' }}>Loading</div>
-                //     }
-                //   </Col>
-                // </Row>
-              }
               </Col>
             ),
           ]
