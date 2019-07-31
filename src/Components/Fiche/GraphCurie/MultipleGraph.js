@@ -61,7 +61,8 @@ class MultipleGraph extends Component {
 
   getGraphs() {
     const graphList = [];
-    if (this.countryList.length !== this.props.countryList.length) {
+    this.countryList = this.countryList.map(e => e.substring(1, e.length - 1));
+    if (JSON.stringify(this.countryList) !== JSON.stringify(this.props.countryList)) {
       this.getData();
     }
     for (let i = 0; i < this.codeArray.length; i += 1) {
