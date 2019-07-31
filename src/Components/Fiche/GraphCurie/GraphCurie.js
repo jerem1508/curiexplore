@@ -235,6 +235,7 @@ class GraphCurie extends Component {
       this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
     } else {
       this.setState({ countryList: this.countryList });
+      this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
     }
   }
 
