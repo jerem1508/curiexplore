@@ -183,14 +183,6 @@ class GraphCurie extends Component {
           );
         }
       }
-      if (this.countryList[i] === 'WLD' || this.countryList[i] === 'OED' || this.countryList[i] === 'EUU') {
-        ctryList.push(
-          <span className={classes.btnDefaultCountry}>
-            <span className={classes.dot} style={{ backgroundColor: this.tempColor[i] }} />
-            {this.countryList[i]}
-          </span>,
-        );
-      }
     }
     return (ctryList);
   }

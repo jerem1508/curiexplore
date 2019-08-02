@@ -27,6 +27,7 @@
 
 -----------------------------------
 
+- Pour monde, ocde, ue -> fonction qui prend le iso3 et return le label
 - Données en base 100
 - Gestion des accents dans la recherche
 - Le tweet avec les mots clés

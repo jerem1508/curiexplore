@@ -92,7 +92,9 @@ class GraphHeader extends Component {
   handleGraphDisplay(id) {
     let prevLabel = this.prevLabel;
     if (id === 0) {
-      if (prevLabel === undefined) {
+      // console.log('prev label : ' + prevLabel);
+      // console.log('label : ' + this.state.label);
+      if (prevLabel === undefined || (prevLabel !== this.state.label && this.state.label !== 'Tous les graphiques')) {
         prevLabel = this.state.label;
       }
       this.setState({
@@ -102,7 +104,9 @@ class GraphHeader extends Component {
         label: prevLabel,
       });
     } else {
-      this.prevLabel = this.state.label;
+      if (this.state.label !== 'Tous les graphiques') {
+        this.prevLabel = this.state.label;
+      }
       this.setState({
         class: 'chevron-down',
         firstColor: classes.lightBlueColor,
