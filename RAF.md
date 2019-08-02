@@ -10,7 +10,7 @@
 - Ajouts sources, unités, etc. dans HighCharts csv
 - Si stack -> faire plusieurs requetes en meme temp
 - A FAIRE : GRAPHS STACKS (pour politique ESRI) (voir si possible ?)
-- Rendre les graphs + beau (Texte normal mais display hidden div on click)
+- Rendre les graphs + beau (Texte normal mais display hidden div on click) -> fait
 - Ajout de trop de pays dans la liste (???)
 - Toggle la liste (quand on passe de l'un à l'autre)+ recherche A FAIRE (fait)
 - Bouton annuler la liste (fait)
@@ -21,9 +21,21 @@
 - Formater tooltip des graphs
 - Afficher message si unité pas dispo (plus ou moins fait)
 - Ajouter le titre en props
-- Menu indépendant pour le graph
+- Menu indépendant pour le graph (fait)
 - Boutons de partage & exports à faire
-- Telechargement groupés
+- Telechargement groupés (en cours)
+
+-----------------------------------
+
+- Données en base 100
+- Gestion des accents dans la recherche
+- Le tweet avec les mots clés
+- Prévoir la traduction
+- Nom du pays+ valeur + unité (dans tooltip cartographie)
+- Rajouter pas de données dans la légende
+- Moteur pour les indicateurs de la cartographie
+- Données csv (export groupé)
+- Colonne afficher x chiffres (ex: afficher 0.50 si 0.25, et non 0.5)
 
 # Divers
 - Font Awesome en local

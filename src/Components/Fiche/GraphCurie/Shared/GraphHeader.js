@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
   Container, Row, Col,
 } from 'react-bootstrap';
@@ -90,12 +90,16 @@ class GraphHeader extends Component {
   }
 
   handleGraphDisplay(id) {
+    let prevLabel = this.prevLabel;
     if (id === 0) {
+      if (prevLabel === undefined) {
+        prevLabel = this.state.label;
+      }
       this.setState({
         class: 'chevron-down',
         firstColor: 'white',
         secondColor: classes.lightBlueColor,
-        label: this.prevLabel,
+        label: prevLabel,
       });
     } else {
       this.prevLabel = this.state.label;
@@ -151,9 +155,21 @@ class GraphHeader extends Component {
             <Fragment>
               <p className={classes.Text}>Télécharger tout le contenu</p>
               <div className={classes.exportBtn}>
-                <button className={classes.dot} type="button"><i className="fas fa-file-pdf" /></button>
+                <button
+                  className={classes.dot}
+                  type="button"
+                  onClick={() => this.props.exportAllGraphs('pdf')}
+                >
+                  <i className="fas fa-file-pdf" />
+                </button>
                 <span>Graphiques (.pdf)</span>
-                <button className={classes.dot} type="button"><i className="fas fa-table" /></button>
+                <button
+                  className={classes.dot}
+                  type="button"
+                  onClick={() => this.props.exportAllGraphs('csv')}
+                >
+                  <i className="fas fa-table" />
+                </button>
                 <span>Données (.csv)</span>
               </div>
             </Fragment>
@@ -219,10 +235,11 @@ class GraphHeader extends Component {
 export default GraphHeader;
 
 GraphHeader.propTypes = {
-  indicNb: PropTypes.number.isRequired,
-  handleIndic: PropTypes.func.isRequired,
-  handleType: PropTypes.func.isRequired,
-  graphType: PropTypes.string.isRequired,
+  exportAllGraphs: propTypes.func.isRequired,
+  graphType: propTypes.string.isRequired,
+  handleIndic: propTypes.func.isRequired,
+  handleType: propTypes.func.isRequired,
+  indicNb: propTypes.number.isRequired,
   // language: PropTypes.string.isRequired,
   // switchLanguage: PropTypes.func.isRequired,
 };

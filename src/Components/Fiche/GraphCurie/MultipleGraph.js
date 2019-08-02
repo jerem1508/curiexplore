@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import Highcharts from 'highcharts';
 
 import HighChartsGraph from './Graphs/HighChartsGraph';
 
@@ -29,15 +30,19 @@ class MultipleGraph extends Component {
     this.codeArray = [];
     this.indicArray = [];
     this.countryList = [];
+    this.refArray = [];
     this.state = {
       data: null,
     };
     this.changeIndic = this.changeIndic.bind(this);
+    this.exportCharts = this.exportCharts.bind(this);
     this.getData = this.getData.bind(this);
     this.getGraphs = this.getGraphs.bind(this);
     this.getInputs = this.getInputs.bind(this);
     this.getSource = this.getSource.bind(this);
     this.parseData = this.parseData.bind(this);
+    this.resetRef = this.resetRef.bind(this);
+    this.setRef = this.setRef.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +66,9 @@ class MultipleGraph extends Component {
 
   getGraphs() {
     const graphList = [];
+    this.i = 0;
     this.countryList = this.countryList.map(e => e.substring(1, e.length - 1));
+    // this.resetRef();
     if (JSON.stringify(this.countryList) !== JSON.stringify(this.props.countryList)) {
       this.getData();
     }
@@ -74,12 +81,19 @@ class MultipleGraph extends Component {
             colors={this.props.colors}
             data={this.parseData(i)}
             full={false}
+            setRef={this.setRef}
             source={this.getSource(i)}
             type={params[this.props.graphType][i].type}
           />
         </Col>,
       );
     }
+    // // alert(this.props.exportType);
+    // if (this.props.exportType === 'pdf') {
+    //   this.exportChartsPdf();
+    // } else if (this.props.exportType === 'csv') {
+    //   this.exportChartsCsv();
+    // }
     return (
       <Fragment>
         <Row style={{ backgroundColor: 'white' }}>
@@ -145,6 +159,65 @@ class MultipleGraph extends Component {
     );
   }
 
+  setRef(param) {
+    this.refArray.push(param);
+    if (this.refArray.length === params[this.props.graphType].length) {
+      this.exportCharts();
+    }
+  }
+
+  // eslint-disable-next-line
+  getSVG(charts) {
+    const svgArr = [];
+    let top = 0;
+    let width = 0;
+
+    Highcharts.each(charts, (chart) => {
+      let svg = chart.getSVG();
+      // Get width/height of SVG for export
+      const svgWidth = +svg.match(
+        /^<svg[^>]*width\s*=\s*?(\d+)?[^>]*>/,
+      )[1];
+      const svgHeight = +svg.match(
+        /^<svg[^>]*height\s*=\s*?(\d+)?[^>]*>/,
+      )[1];
+
+      svg = svg.replace(
+        '<svg',
+        `<g transform="translate(${width}, 0 )" `,
+      );
+      svg = svg.replace('</svg>', '</g>');
+
+      width += svgWidth;
+      top = Math.max(top, svgHeight);
+
+      svgArr.push(svg);
+    });
+
+    return `<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`;
+  }
+
+  exportCharts() {
+    // const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
+    // console.log(Highcharts);
+    //
+    // // Merge the options
+
+    // Post to export server
+    // console.log(this.refArray.length);
+    // Highcharts.post(options.url, {
+    //   filename: options.filename || 'chart',
+    //   type: options.type,
+    //   width: options.width,
+    //   svg: this.getSVG(this.refArray),
+    // });
+
+    // console.log(this.refArray);
+    // console.log(Object.keys(this.refArray));
+    // console.log(this.refArray);
+    console.log(this.refArray[0]);
+  }
+
   async apiRequest(code) {
     const res = await axios.get(url, {
       headers: {
@@ -156,6 +229,12 @@ class MultipleGraph extends Component {
       },
     });
     return (res.data);
+  }
+
+  resetRef() {
+    // console.log('before :' + this.refArray.length);
+    this.refArray = [];
+    // console.log('after:' + this.refArray.length);
   }
 
   parseData(index) {
@@ -191,11 +270,14 @@ class MultipleGraph extends Component {
   }
 }
 
+// Il vaudrait mieux comparer state data avec le state precedent, et re rendre le composant seulement en cas de différence
+
 
 export default MultipleGraph;
 
 MultipleGraph.propTypes = {
   colors: propTypes.array.isRequired,
   countryList: propTypes.array.isRequired,
+  exportType: propTypes.string.isRequired,
   graphType: propTypes.string.isRequired,
 };

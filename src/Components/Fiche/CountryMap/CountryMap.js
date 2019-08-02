@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import propTypes from 'prop-types';
 import {
   Map, GeoJSON, Circle, Tooltip,
@@ -25,15 +25,15 @@ export default class Carto extends Component {
     this.getCapital = this.getCapital.bind(this);
   }
 
-  onEachFeature(feature, layer, index) {
+  onEachFeature(feature, layer) {
     const latLngNE = [];
     const latLngSW = [];
     const bounds = [];
     const capitalPos = [];
 
     if (layer.feature.properties.adm0_a3 === this.props.isoCode) {
-      console.log(layer);
-      console.log(feature);
+      // console.log(layer);
+      // console.log(feature);
       layer.setStyle({ fillColor: '#fff' });
       // eslint-disable-next-line
       latLngNE.push(layer._bounds._northEast.lat, layer._bounds._northEast.lng);

@@ -53,13 +53,15 @@ class GraphCurie extends Component {
       isMissing: true,
       filterData: null,
       countryList: [],
+      exportType: '',
     };
-    this.getGraphValues = this.getGraphValues.bind(this);
-    this.toggleCountry = this.toggleCountry.bind(this);
+    this.exportAllGraphs = this.exportAllGraphs.bind(this);
     this.getData = this.getData.bind(this);
+    this.getGraphValues = this.getGraphValues.bind(this);
+    this.getLegend = this.getLegend.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
     this.handleType = this.handleType.bind(this);
-    this.getLegend = this.getLegend.bind(this);
+    this.toggleCountry = this.toggleCountry.bind(this);
   }
 
   componentDidMount() {
@@ -239,6 +241,13 @@ class GraphCurie extends Component {
     }
   }
 
+  exportAllGraphs(val) {
+    // alert(val);
+    this.setState({ exportType: val });
+    // reset export ?
+    // dans le composant fils, apres avoir lancé requete impression reset à nul ?
+  }
+
   render() {
     return (
       <Row>
@@ -247,6 +256,7 @@ class GraphCurie extends Component {
             : (
               <Col className={classes.GraphCurie}>
                 <GraphHeader
+                  exportAllGraphs={this.exportAllGraphs}
                   graphType={this.props.graphType}
                   handleIndic={this.handleIndic}
                   handleType={this.handleType}
@@ -286,6 +296,7 @@ class GraphCurie extends Component {
                       <MultipleGraph
                         colors={this.tempColor}
                         countryList={this.state.countryList}
+                        exportType={this.state.exportType}
                         graphType={this.props.graphType}
                       />
                     ),

@@ -67,6 +67,11 @@ export default class HighChartsBar extends Component {
     for (let i = 0; i < dl; i += 1) {
       const data = [];
       this.data[i].data.sort((a, b) => (a.year - b.year));
+      try {
+        year = this.data[0].data[0].year;
+      } catch (error) {
+        name = '';
+      }
       for (j = 0; j < this.data[i].data.length; j += 1) {
         const tmp = [];
         tmp.push(this.data[i].data[j].year);
@@ -78,6 +83,8 @@ export default class HighChartsBar extends Component {
         allData.push(data);
       } else {
         for (j = 0; j < max; j += 1) {
+          // if (this.data[0].data[0].label_long === 'Population active, total')
+          //   console.log(year+j);
           const tmp = [];
           tmp.push(year + j);
           tmp.push(0);
@@ -223,7 +230,13 @@ export default class HighChartsBar extends Component {
         enabled: false,
       },
     };
-    this.setState({ options });
+    this.setState({ options }, () => {
+      if (!this.props.full) {
+        // this.props.setRef('Je suis un graph');
+        // const test = Object.assign(this.chart.current);
+        this.props.setRef(this.chart.current.chart);
+      }
+    });
   }
 
   exportChartPdf() {
@@ -272,6 +285,7 @@ export default class HighChartsBar extends Component {
       }
       return <SimpleShare />;
     };
+    // console.log(this.chart.current);
     return (
       <div>
         {
@@ -297,6 +311,7 @@ HighChartsBar.propTypes = {
   colors: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
   full: PropTypes.bool.isRequired,
+  setRef: PropTypes.func,
   source: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
 };
