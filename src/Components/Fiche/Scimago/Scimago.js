@@ -195,7 +195,11 @@ class Scimago extends Component {
                           {index + 1}
                         </div>
                         <div className={`col ${classes.CountryName} ${(item.fields.iso_alpha3.toUpperCase() === this.props.isoAlpha3) ? classes.CountrySelected : null}`}>
-                          <img src={`https://restcountries.eu/data/${item.fields.iso_alpha3.toLowerCase()}.svg`} alt="Drapeau du pays" />
+                          {
+                            (item.fields.iso_alpha3 !== 'NA')
+                              ? <img src={`https://restcountries.eu/data/${item.fields.iso_alpha3.toLowerCase()}.svg`} alt="Drapeau du pays" />
+                              : null
+                          }
                           <span>{(item.fields.pays === 'NA') ? item.fields.country : item.fields.pays}</span>
                         </div>
                       </div>
