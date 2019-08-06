@@ -30,6 +30,7 @@ export default class HighChartsBar extends Component {
     this.data = this.props.data;
     this.type = this.props.type;
     this.filename = '';
+    this.sourceStr = this.props.sourceStr;
     this.state = {
       options: null,
     };
@@ -100,7 +101,13 @@ export default class HighChartsBar extends Component {
         if (this.data[i].data.length > 0 && this.data[i].data[0].country_label != null) {
           ctryName = this.data[i].data[0].country_label;
         } else if (this.data[i].data.length > 0 && this.data[i].data[0].country_code != null) {
-          ctryName = this.data[i].data[0].country_code;
+          if (this.data[i].data[0].country_code === 'EUU') {
+            ctryName = 'Union européenne';
+          } else if (this.data[i].data[0].country_code === 'WLD') {
+            ctryName = 'Monde';
+          } else {
+            ctryName = 'OCDE';
+          }
         } else {
           ctryName = 'Pas de données disponibles';
         }
@@ -116,6 +123,23 @@ export default class HighChartsBar extends Component {
       },
       title: {
         text: '',
+      },
+      legend: {
+        enabled: false,
+      },
+      // title: {
+      //   text: this.filename,
+      // },
+      // legend: {
+      //   enabled: true,
+      // },
+      // subtitle: {
+      //   text: this.props.sourceStr,
+      // },
+      buttons: {
+        contextButton: {
+          enabled: false,
+        },
       },
       xAxis: {
         type: 'category',
@@ -196,9 +220,6 @@ export default class HighChartsBar extends Component {
         //   return tooltipMarkup;
         // },
       },
-      legend: {
-        enabled: false,
-      },
       plotOptions: {
         line: {
           marker: {
@@ -223,8 +244,11 @@ export default class HighChartsBar extends Component {
           title: {
             text: this.filename,
           },
+          subtitle: {
+            text: this.sourceStr,
+          },
         },
-        filename: this.filename,
+        filename: `${this.filename} - ${this.sourceStr.split(':')[1]}`,
       },
       credits: {
         enabled: false,
@@ -232,8 +256,6 @@ export default class HighChartsBar extends Component {
     };
     this.setState({ options }, () => {
       if (!this.props.full) {
-        // this.props.setRef('Je suis un graph');
-        // const test = Object.assign(this.chart.current);
         this.props.setRef(this.chart.current.chart);
       }
     });
@@ -313,5 +335,6 @@ HighChartsBar.propTypes = {
   full: PropTypes.bool.isRequired,
   setRef: PropTypes.func,
   source: PropTypes.object.isRequired,
+  sourceStr: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };

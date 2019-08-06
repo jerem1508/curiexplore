@@ -288,6 +288,7 @@ class GraphCurie extends Component {
                       <MultipleGraph
                         colors={this.tempColor}
                         countryList={this.state.countryList}
+                        exportTitle={'chart_test'}
                         exportType={this.state.exportType}
                         graphType={this.props.graphType}
                       />

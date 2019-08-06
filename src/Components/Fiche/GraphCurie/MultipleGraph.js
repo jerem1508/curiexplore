@@ -3,10 +3,15 @@ import { Col, Row } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import Highcharts from 'highcharts';
+import HCExporting from 'highcharts/modules/exporting';
+import HCOfflineExporting from 'highcharts/modules/offline-exporting';
 
 import HighChartsGraph from './Graphs/HighChartsGraph';
 
 import classes from './GraphCurie.scss';
+
+HCExporting(Highcharts);
+HCOfflineExporting(Highcharts);
 
 const params = require('./GraphCurie-data/indicateurs.json');
 const configFile = require('../../../config/config.js');
@@ -83,6 +88,7 @@ class MultipleGraph extends Component {
             full={false}
             setRef={this.setRef}
             source={this.getSource(i)}
+            sourceStr={this.getSource(i, true)}
             type={params[this.props.graphType][i].type}
           />
         </Col>,
@@ -131,7 +137,7 @@ class MultipleGraph extends Component {
     );
   }
 
-  getSource(index) {
+  getSource(index, str = false) {
     const srcList = [];
     this.data = [this.state.data[index]];
     for (let i = 0; i < this.data.length; i += 1) {
@@ -142,6 +148,12 @@ class MultipleGraph extends Component {
           srcList.push(`, ${this.data[i].data[j].source}`);
         }
       }
+    }
+    if (str) {
+      if (srcList.length > 1) {
+        return `Sources: ${srcList.toString()}`;
+      }
+      return `Source: ${srcList.toString()}`;
     }
     if (srcList.length > 1) {
       return (
@@ -167,56 +179,101 @@ class MultipleGraph extends Component {
   }
 
   // eslint-disable-next-line
-  getSVG(charts) {
+  getSVG(charts, options) {
     const svgArr = [];
     let top = 0;
     let width = 0;
 
     Highcharts.each(charts, (chart) => {
-      let svg = chart.getSVG();
-      // Get width/height of SVG for export
-      const svgWidth = +svg.match(
-        /^<svg[^>]*width\s*=\s*?(\d+)?[^>]*>/,
-      )[1];
-      const svgHeight = +svg.match(
-        /^<svg[^>]*height\s*=\s*?(\d+)?[^>]*>/,
-      )[1];
+      const svgres = chart.getSVG();
+      let svg;
+      // eslint-disable-next-line
+      const svgWidth = +svgres.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+      // eslint-disable-next-line
+      const svgHeight = +svgres.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
 
-      svg = svg.replace(
-        '<svg',
-        `<g transform="translate(${width}, 0 )" `,
-      );
+      svg = svgres.replace('<svg', `<g transform="translate(0,${top})" `);
       svg = svg.replace('</svg>', '</g>');
 
-      width += svgWidth;
-      top = Math.max(top, svgHeight);
+      top += svgHeight;
+      width = Math.max(width, svgWidth);
 
       svgArr.push(svg);
     });
-
-    return `<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`;
+    return (`<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`);
   }
 
   exportCharts() {
+    // alert('toto');
     // const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
-    // console.log(Highcharts);
-    //
+    const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
+    // console.log(options);
+    // console.log(options.chartOptions);
     // // Merge the options
 
     // Post to export server
-    // console.log(this.refArray.length);
-    // Highcharts.post(options.url, {
-    //   filename: options.filename || 'chart',
-    //   type: options.type,
-    //   width: options.width,
-    //   svg: this.getSVG(this.refArray),
+    // this.refArray = [this.refArray[0]];
+    // alert(this.props.graphType);
+    Highcharts.post(options.url, {
+      filename: this.props.exportTitle || 'chart',
+      type: options.type,
+      svg: this.getSVG(this.refArray, options),
+    });
+
+    const svg = this.getSVG(this.refArray, options);
+    // Highcharts.downloadSVGLocal(this.getSVG(this.refArray), options, () => {
+    //   console.log("Failed to export on client side");
     // });
+    console.log(svg);
 
     // console.log(this.refArray);
     // console.log(Object.keys(this.refArray));
     // console.log(this.refArray);
-    console.log(this.refArray[0]);
+    // console.log(this.refArray[0]);
   }
+
+  // eslint-disable-next-line
+  // getSVG(charts, options, callback) {
+  //   const svgArr = [];
+  //   let top = 0;
+  //   let width = 0;
+  //   const addSVG = function (svgres) {
+  //     // eslint-disable-next-line
+  //     const svgWidth = +svgres.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+  //     // eslint-disable-next-line
+  //     const svgHeight = +svgres.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+  //
+  //     let svg = svgres.replace('<svg', `<g transform="translate(0,'${top}')" `);
+  //     svg = svg.replace('</svg>', '</g>');
+  //     top += svgHeight;
+  //     width = Math.max(width, svgWidth);
+  //     svgArr.push(svg);
+  //   };
+  //   const exportChart = function (i, svg) {
+  //     if (i === charts.length) {
+  //       return callback(`<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`);
+  //     }
+  //     addSVG(svg);
+  //     return exportChart(i + 1); // Export next only when this SVG is received
+  //   };
+  //   exportChart(0);
+  // }
+  //
+  // exportCharts() {
+  //   const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
+  //   Highcharts.setOptions({
+  //     exporting: {
+  //       fallbackToExportServer: false, // Ensure the export happens on the client side or not at all
+  //     },
+  //   });
+  //
+  //   // Get SVG asynchronously and then download the resulting SVG
+  //   this.getSVG(this.refArray, options, (svg) => {
+  //     Highcharts.downloadSVGLocal(svg, options, () => {
+  //       console.log('Failed to export on client side');
+  //     });
+  //   });
+  // }
 
   async apiRequest(code) {
     const res = await axios.get(url, {
@@ -278,6 +335,7 @@ export default MultipleGraph;
 MultipleGraph.propTypes = {
   colors: propTypes.array.isRequired,
   countryList: propTypes.array.isRequired,
+  exportTitle: propTypes.string.isRequired,
   exportType: propTypes.string.isRequired,
   graphType: propTypes.string.isRequired,
 };

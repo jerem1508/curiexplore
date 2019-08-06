@@ -49,7 +49,7 @@ class SimpleGraph extends Component {
     );
   }
 
-  getSource() {
+  getSource(str = false) {
     const srcList = [];
     for (let i = 0; i < this.props.data.length; i += 1) {
       for (let j = 0; j < this.props.data[i].data.length; j += 1) {
@@ -59,6 +59,12 @@ class SimpleGraph extends Component {
           srcList.push(`, ${this.props.data[i].data[j].source}`);
         }
       }
+    }
+    if (str) {
+      if (srcList.length > 1) {
+        return `Sources: ${srcList.toString()}`;
+      }
+      return `Source: ${srcList.toString()}`;
     }
     if (srcList.length > 1) {
       return (
@@ -91,6 +97,7 @@ class SimpleGraph extends Component {
               data={this.props.data}
               full
               source={this.getSource()}
+              sourceStr={this.getSource(true)}
               type={this.props.type}
             />
           </Col>
