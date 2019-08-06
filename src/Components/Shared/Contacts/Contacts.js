@@ -30,6 +30,16 @@ class Contacts extends Component {
   };
 
   componentDidMount() {
+    this.setMarkers();
+  }
+
+  // componentDidUpdate() {
+  //   if (this.props.data !== this.state.data) {
+  //     this.setMarkers();
+  //   }
+  // }
+
+  setMarkers = () => {
     if (this.props.data.adresseambassade && this.props.data.villeambassade) {
       let completAddress = `${this.props.data.adresseambassade} ${this.props.data.villeambassade}`;
       completAddress = completAddress.split(' ').join('%20');
