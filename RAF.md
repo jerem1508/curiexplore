@@ -27,7 +27,7 @@
 
 -----------------------------------
 
-- Pour monde, ocde, ue -> fonction qui prend le iso3 et return le label
+- Pour monde, ocde, ue -> fonction qui prend le iso3 et return le label (fait ?)
 - Données en base 100
 - Gestion des accents dans la recherche
 - Le tweet avec les mots clés
@@ -43,3 +43,4 @@
 
 # Data
 - trier données API Datastore par date (croissant) puis par variable, par pays
+- Ajout d'un country_label pour l'UE, l'OCDE et le Monde ?

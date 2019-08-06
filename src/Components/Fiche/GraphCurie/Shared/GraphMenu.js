@@ -99,7 +99,8 @@ export default class GraphMenu extends Component {
       }
       return;
     }
-    const newData = isoList.filter(el => el.Pays.toLowerCase().search(value.toLowerCase()) !== -1);
+    // Comparaison sur les strings en minuscules, sans accents
+    const newData = isoList.filter(el => el.Pays.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().search(value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()) !== -1);
     this.setState({ countries: newData });
     if (id === 0) {
       this.setState({ firstValue: value });
