@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Row, Col, Container, Modal,
 } from 'react-bootstrap';
@@ -28,15 +28,24 @@ export default class MapHeader extends Component {
     this.source = 'N.A';
     this.index = 0;
     this.state = {
+      btnClass: classes.BtnCountry,
       colors: [],
-      show: true,
+      // show: true,
+      currentIndic: config[0].label,
+      indics: config,
+      inputValue: '',
+      source: this.source,
+      vis: { display: 'none' },
       value: '',
     };
-    this.getSelect = this.getSelect.bind(this);
+    this.filterIndic = this.filterIndic.bind(this);
+    this.getIndic = this.getIndic.bind(this);
+    this.setIndic = this.setIndic.bind(this);
     this.getLegend = this.getLegend.bind(this);
     this.handleIndic = this.handleIndic.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.toggleVis = this.toggleVis.bind(this);
   }
 
   componentDidMount() {
@@ -106,16 +115,42 @@ export default class MapHeader extends Component {
     });
   }
 
-  getSelect() {
-    const selectList = [];
-    for (let i = 0; i < config.length; i += 1) {
-      selectList.push(<option value={config[i].value}>{config[i].label}</option>);
+  setIndic() {
+    this.setState({ vis: { display: 'none' } });
+  }
+
+  getIndic() {
+    const indicList = [];
+
+    for (let i = 0; i < this.state.indics.length; i += 1) {
+      indicList.push((
+        <span
+          className={classes.BtnInList}
+          id={this.state.indics[i].value}
+          onClick={e => this.handleIndic(e)}
+          onKeyPress={e => this.handleIndic(e)}
+          role="button"
+          tabIndex={0}
+        >
+          {this.state.indics[i].label}
+        </span>
+      ));
+      indicList.push(<br />);
     }
     return (
-      <select onChange={e => this.handleIndic(e)} value={this.state.value} className="form-control">
-        {selectList}
-      </select>
+      <Fragment className={classes.IndicList}>
+        {indicList}
+      </Fragment>
     );
+    // const selectList = [];
+    // for (let i = 0; i < config.length; i += 1) {
+    //   selectList.push(<option value={config[i].value}>{config[i].label}</option>);
+    // }
+    // return (
+    //   <select onChange={e => this.handleIndic(e)} value={this.state.value} className="form-control">
+    //     {selectList}
+    //   </select>
+    // );
   }
 
   getValues() {
@@ -128,6 +163,7 @@ export default class MapHeader extends Component {
     if (i === config.length) {
       return;
     }
+    // alert('getValues');
     this.getData(config[i].code, config[i].steps[0].limits.length, i);
   }
 
@@ -198,6 +234,18 @@ export default class MapHeader extends Component {
     );
   }
 
+  filterIndic(value) {
+    if (value === '') {
+      this.setState({ indics: config });
+      this.setState({ inputValue: value });
+      return;
+    }
+    // Comparaison sur les strings en minuscules, sans accents
+    const newData = config.filter(el => el.label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().search(value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()) !== -1);
+    this.setState({ indics: newData });
+    this.setState({ inputValue: value });
+  }
+
   handleClose() {
     this.setState({ show: false });
   }
@@ -206,20 +254,61 @@ export default class MapHeader extends Component {
     this.setState({ show: true });
   }
 
+  toggleVis() {
+    if (this.state.vis.display === '') {
+      this.setState({ vis: { display: 'none' } });
+    } else {
+      this.setState({ vis: { display: '' } });
+    }
+  }
+
   handleIndic(e) {
-    this.setState({ value: e.target.value }, () => {
+    this.setState({
+      currentIndic: e.target.childNodes[0].data,
+      value: e.target.id,
+      vis: { display: 'none' },
+    }, () => {
       this.getValues();
     });
   }
 
   render() {
     return (
-      <Container>
+      <Container style={{ paddingTop: '10px' }}>
         <Row>
           <Col sm={1} />
-          <Col sm={5} className={classes.Title}>
-            <span>Sélectionner un indicateur</span>
-            <p>{this.getSelect()}</p>
+          <Col sm={5}>
+            Sélectionner un indicateur
+            <div className={classes.Selector}>
+              <button
+                type="button"
+                className={this.state.btnClass}
+                onClick={() => this.toggleVis()}
+              >
+                <span>{this.state.currentIndic}</span>
+                <i style={{ float: 'right' }} className="fas fa-sort-down" />
+              </button>
+              <div style={this.state.vis}>
+                <div className={classes.ListSearch}>
+                  <br />
+                  <span>Chercher un pays</span>
+                  <br />
+                  <span>
+                    <input
+                      type="text"
+                      name="fname"
+                      value={this.state.inputValue}
+                      onChange={e => this.filterIndic(e.target.value)}
+                      placeholder="Ex: Produit intérieur brut en $PPA"
+                    />
+                    <i className={`fas fa-search ${classes.Search}`} />
+                  </span>
+                  <br />
+                  <hr />
+                  {this.getIndic()}
+                </div>
+              </div>
+            </div>
             <span>
               Source:&nbsp;
               {this.state.source}

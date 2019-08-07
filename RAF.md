@@ -22,7 +22,7 @@
 - Afficher message si unité pas dispo (plus ou moins fait)
 - Ajouter le titre en props
 - Menu indépendant pour le graph (fait)
-- Boutons de partage & exports à faire
+- Boutons de partage & exports à faire (twitter iframe etc)
 - Telechargement groupés (en cours, à améliorer)
 
 -----------------------------------
@@ -34,7 +34,7 @@
 - Prévoir la traduction
 - Nom du pays+ valeur + unité (dans tooltip cartographie)
 - Rajouter pas de données dans la légende de la carto
-- Moteur pour les indicateurs de la cartographie
+- Moteur pour les indicateurs de la cartographie (fait)
 - Données csv (export groupé)
 - Colonne formatage -> afficher x chiffres (ex: afficher 0.50 si 0.25, et non 0.5)
 - Ajout des sources dans le pdf/png (fait)
