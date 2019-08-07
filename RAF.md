@@ -31,9 +31,10 @@
 - Données en base 100
 - Gestion des accents dans la recherche (fait)
 - Le tweet avec les mots clés
-- Prévoir la traduction
-- Nom du pays+ valeur + unité (dans tooltip cartographie)
-- Rajouter pas de données dans la légende de la carto
+- Prévoir la traduction -> Attention, pays dans le GeoJSON (sur les tooltips) à traduire (actuellement anglais)
+- Nom du pays+ valeur + unité (dans tooltip cartographie) -> fait
+- Arrondir les données dans le tooltip et la légende en fonction des unités
+- Rajouter pas de données dans la légende de la carto (fait)
 - Moteur pour les indicateurs de la cartographie (fait)
 - Données csv (export groupé)
 - Colonne formatage -> afficher x chiffres (ex: afficher 0.50 si 0.25, et non 0.5)

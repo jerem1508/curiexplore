@@ -93,7 +93,7 @@ export default class Carto extends Component {
               // alert(this.data[i].data[0].value);
               // alert(config[confIndex].steps[0].limits[0][1]);
               this.layers[j].setStyle({ fillColor: this.colors[k] });
-              this.layers[j].bindTooltip(this.layers[j].feature.properties.admin);
+              this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin}: ${this.data[i].value} ${config[this.confIndex].steps[0].unit}`);
             }
           } else if (this.data[i].length > 0) {
             if (this.data[i].country_code === this.layers[j].feature.properties.adm0_a3) {
@@ -132,6 +132,7 @@ export default class Carto extends Component {
       if (this.countryDataIso.indexOf(isoList[i].ISO_alpha3) === -1) {
         for (let j = 0; j < this.layers.length; j += 1) {
           if (isoList[i].ISO_alpha3 === this.layers[j].feature.properties.adm0_a3) {
+            this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
             this.layers[j].setStyle({ fillColor: `${classes.greyAColor + 40}` });
           }
         }

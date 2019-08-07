@@ -98,6 +98,7 @@ export default class HighChartsBar extends Component {
     try {
       for (let i = 0; i < dl; i += 1) {
         let ctryName = '';
+        // Penser à ajouter un country_label pour l'UE, l'OCDE et le Monde afin d'enlever cette forêt de if
         if (this.data[i].data.length > 0 && this.data[i].data[0].country_label != null) {
           ctryName = this.data[i].data[0].country_label;
         } else if (this.data[i].data.length > 0 && this.data[i].data[0].country_code != null) {
@@ -105,7 +106,7 @@ export default class HighChartsBar extends Component {
             ctryName = 'Union européenne';
           } else if (this.data[i].data[0].country_code === 'WLD') {
             ctryName = 'Monde';
-          } else {
+          } else if (this.data[i].data[0].country_code === 'OED') {
             ctryName = 'OCDE';
           }
         } else {

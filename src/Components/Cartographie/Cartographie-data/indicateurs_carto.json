@@ -52,22 +52,5 @@
         ]
       }
     ]
-  },
-  { "value": "test",
-    "label": "Test dens",
-    "label_en" : "TODO",
-    "code" : "EN.POP.DNST",
-    "years" : [2008, 2017],
-    "steps" : [
-      { "unit" : "%",
-        "limits" : [
-          [300, 500],
-          [200, 300],
-          [100, 200],
-          [50, 100],
-          [0, 50]
-        ]
-      }
-    ]
   }
 ]

@@ -223,12 +223,18 @@ export default class MapHeader extends Component {
       }
     }
     return (
-      <Container>
+      <Container style={{ width: '800px' }}>
         <Row>
           {firstLine}
         </Row>
         <Row>
           {secondLine}
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <span className={classes.legendDot} style={{ backgroundColor: `${classes.greyAColor + 40}` }} />
+            Pas de données disponibles
+          </Col>
         </Row>
       </Container>
     );
@@ -291,7 +297,7 @@ export default class MapHeader extends Component {
               <div style={this.state.vis}>
                 <div className={classes.ListSearch}>
                   <br />
-                  <span>Chercher un pays</span>
+                  <span>Chercher un indicateur</span>
                   <br />
                   <span>
                     <input
