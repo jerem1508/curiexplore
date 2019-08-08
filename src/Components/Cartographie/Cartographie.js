@@ -260,6 +260,7 @@ export default class Carto extends Component {
             yearInterval={this.yearInterval}
             defaultYear={config[this.confIndex].years[0]}
             changeYear={this.changeYear}
+            type={config[this.confIndex].value}
           />
         </div>
         <Newsletter language={this.props.language} />
