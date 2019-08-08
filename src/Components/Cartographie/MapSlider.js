@@ -79,6 +79,7 @@ export default class MapSlider extends Component {
     this.intervalId = 0;
     this.state = {
       icon: 'pause',
+      prevYear: this.props.defaultYear,
       value: 2008,
     };
     this.changeYear = this.changeYear.bind(this);
@@ -125,6 +126,15 @@ export default class MapSlider extends Component {
   }
 
   render() {
+    if (this.props.defaultYear !== this.state.prevYear) {
+      this.setState({ prevYear: this.props.defaultYear });
+      // if (this.intervalId !== 0) {
+      //   this.pauseTimer();
+      // }
+      this.startTimer(this.props.defaultYear);
+      this.setState({ icon: 'pause' });
+      // console.log('changement');
+    }
     return (
       <Container>
         <Row>
