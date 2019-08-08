@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import Highcharts from 'highcharts';
+import HCExporting from 'highcharts/modules/exporting';
+import HCOfflineExporting from 'highcharts/modules/offline-exporting';
 
 import GraphHeader from './Shared/GraphHeader';
 import GraphMenu from './Shared/GraphMenu';
@@ -9,6 +12,9 @@ import SimpleGraph from './SimpleGraph';
 import MultipleGraph from './MultipleGraph';
 
 import classes from './GraphCurie.scss';
+
+HCExporting(Highcharts);
+HCOfflineExporting(Highcharts);
 
 const params = require('./GraphCurie-data/indicateurs.json');
 const isoList = require('../../Homepage/CountriesList/countriesList.json');
@@ -48,6 +54,7 @@ class GraphCurie extends Component {
     this.indic = 0;
     this.colors = [];
     this.tempColor = [];
+    this.refArray = [];
     this.state = {
       simpleGraph: true,
       isMissing: true,
@@ -62,6 +69,7 @@ class GraphCurie extends Component {
     this.handleIndic = this.handleIndic.bind(this);
     this.handleType = this.handleType.bind(this);
     this.toggleCountry = this.toggleCountry.bind(this);
+    this.setRef = this.setRef.bind(this);
   }
 
   componentDidMount() {
@@ -233,11 +241,73 @@ class GraphCurie extends Component {
     }
   }
 
+
+  // eslint-disable-next-line
+  getSVG(charts, options) {
+    const svgArr = [];
+    let top = 0;
+    let width = 0;
+
+    Highcharts.each(charts, (chart) => {
+      const svgres = chart.getSVG();
+      let svg;
+      // eslint-disable-next-line
+      const svgWidth = +svgres.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+      // eslint-disable-next-line
+      const svgHeight = +svgres.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+
+      svg = svgres.replace('<svg', `<g transform="translate(0,${top})" `);
+      svg = svg.replace('</svg>', '</g>');
+
+      top += svgHeight;
+      width = Math.max(width, svgWidth);
+
+      svgArr.push(svg);
+    });
+    return (`<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`);
+  }
+
+  exportPdf() {
+    // alert('toto');
+    // const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
+    const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
+    // console.log(options);
+    // console.log(options.chartOptions);
+    // // Merge the options
+
+    // Post to export server
+    // this.refArray = [this.refArray[0]];
+    // alert(this.props.graphType);
+    Highcharts.post(options.url, {
+      filename: 'test' || 'chart',
+      type: options.type,
+      svg: this.getSVG(this.refArray, options),
+    });
+
+    const svg = this.getSVG(this.refArray, options);
+    // Highcharts.downloadSVGLocal(this.getSVG(this.refArray), options, () => {
+    //   console.log("Failed to export on client side");
+    // });
+    console.log(svg);
+
+    // console.log(this.refArray);
+    // console.log(Object.keys(this.refArray));
+    // console.log(this.refArray);
+    // console.log(this.refArray[0]);
+  }
+
   exportAllGraphs(val) {
+    if (val === 'pdf') {
+      this.exportPdf();
+    }
     // alert(val);
-    this.setState({ exportType: val });
+    // this.setState({ exportType: val });
     // reset export ?
     // dans le composant fils, apres avoir lancé requete impression reset à nul ?
+  }
+
+  setRef(array) {
+    this.refArray = array;
   }
 
   render() {
@@ -288,9 +358,10 @@ class GraphCurie extends Component {
                       <MultipleGraph
                         colors={this.tempColor}
                         countryList={this.state.countryList}
-                        exportTitle={'chart_test'}
+                        // exportTitle={'chart_test'}
                         exportType={this.state.exportType}
                         graphType={this.props.graphType}
+                        setRef={this.setRef}
                       />
                     ),
                   ] : <div style={{ backgroundColor: 'white' }}>Loading</div>

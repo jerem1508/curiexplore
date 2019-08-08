@@ -160,7 +160,7 @@ class GraphHeader extends Component {
                 <button
                   className={classes.dot}
                   type="button"
-                  onClick={() => this.props.exportAllGraphs('pdf')}
+                  onClick={() => [this.toggleList(), this.props.exportAllGraphs('pdf')]}
                 >
                   <i className="fas fa-file-pdf" />
                 </button>
@@ -168,7 +168,7 @@ class GraphHeader extends Component {
                 <button
                   className={classes.dot}
                   type="button"
-                  onClick={() => this.props.exportAllGraphs('csv')}
+                  onClick={() => [this.toggleList(), this.props.exportAllGraphs('csv')]}
                 >
                   <i className="fas fa-table" />
                 </button>

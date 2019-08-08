@@ -75,6 +75,8 @@ export default class Carto extends Component {
       for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
         // alert(this.data[i].data.length);
+        console.log('Data year : ' + this.data[i].year);
+        console.log('State year : ' + this.state.year);
         if (this.data[i].year === this.state.year) {
           hasData = true;
           this.countryDataIso.push(this.data[i].country_code);

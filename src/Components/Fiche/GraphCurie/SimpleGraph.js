@@ -92,14 +92,18 @@ class SimpleGraph extends Component {
         </Row>
         <Row style={{ backgroundColor: 'white' }}>
           <Col>
-            <HighChartsGraph
-              colors={this.props.colors}
-              data={this.props.data}
-              full
-              source={this.getSource()}
-              sourceStr={this.getSource(true)}
-              type={this.props.type}
-            />
+            {this.props.data[0].data.length === 0
+              ? <div>Désolé, ces données ne sont pas disponibles pour ce pays.</div>
+              : (
+                <HighChartsGraph
+                  colors={this.props.colors}
+                  data={this.props.data}
+                  full
+                  source={this.getSource()}
+                  sourceStr={this.getSource(true)}
+                  type={this.props.type}
+                />
+              )}
           </Col>
         </Row>
       </Fragment>
