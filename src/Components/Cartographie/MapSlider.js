@@ -79,6 +79,7 @@ export default class MapSlider extends Component {
     this.intervalId = 0;
     this.state = {
       icon: 'pause',
+      // type: this.props.value,
       value: 2008,
     };
     this.changeYear = this.changeYear.bind(this);
@@ -125,6 +126,16 @@ export default class MapSlider extends Component {
   }
 
   render() {
+    if (this.props.type !== this.state.type) {
+      this.setState({ type: this.props.type, value: this.props.defaultYear });
+      // if (this.intervalId !== 0) {
+      this.pauseTimer();
+      // }
+      this.toggleButton();
+      // this.startTimer(this.props.defaultYear);
+      // this.setState({ icon: 'pause' });
+      // console.log('changement');
+    }
     return (
       <Container>
         <Row>
@@ -157,5 +168,6 @@ export default class MapSlider extends Component {
 MapSlider.propTypes = {
   changeYear: propTypes.func.isRequired,
   defaultYear: propTypes.number.isRequired,
+  type: propTypes.string.isRequired,
   yearInterval: propTypes.object.isRequired,
 };

@@ -24,6 +24,10 @@
 - Menu indépendant pour le graph (fait)
 - Boutons de partage & exports à faire (twitter iframe etc)
 - Telechargement groupés (en cours, à améliorer)
+- Telechargement pdf au clic et non automatique -> fait
+- Changer le nom du fichier en cas d'exports multiples
+- Ajouter la catégorie de graph dans le fichier de conf json (Connaitre le pays, paysage es, etc.)
+- Ajouter la légende dans la cartographie
 
 -----------------------------------
 
@@ -39,6 +43,7 @@
 - Données csv (export groupé)
 - Colonne formatage -> afficher x chiffres (ex: afficher 0.50 si 0.25, et non 0.5)
 - Ajout des sources dans le pdf/png (fait)
+- Gestion d'erreur si pas de données au départ (fait)
 
 # Divers
 - Font Awesome en local

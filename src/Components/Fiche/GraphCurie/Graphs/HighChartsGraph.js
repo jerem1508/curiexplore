@@ -331,8 +331,8 @@ export default class HighChartsBar extends Component {
 }
 
 HighChartsBar.propTypes = {
-  colors: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  colors: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   full: PropTypes.bool.isRequired,
   setRef: PropTypes.func,
   source: PropTypes.object.isRequired,

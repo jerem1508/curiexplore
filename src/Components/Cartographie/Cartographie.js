@@ -75,6 +75,8 @@ export default class Carto extends Component {
       for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
         // alert(this.data[i].data.length);
+        // console.log('Data year : ' + this.data[i].year);
+        // console.log('State year : ' + this.state.year);
         if (this.data[i].year === this.state.year) {
           hasData = true;
           this.countryDataIso.push(this.data[i].country_code);
@@ -253,8 +255,13 @@ export default class Carto extends Component {
             </Row>
           </Container>
         </div>
-        <div className={classes.ScrollBar}>
-          <MapSlider yearInterval={this.yearInterval} defaultYear={config[this.confIndex].years[0]} changeYear={this.changeYear} />
+        <div className={classes.Slider}>
+          <MapSlider
+            yearInterval={this.yearInterval}
+            defaultYear={config[this.confIndex].years[0]}
+            changeYear={this.changeYear}
+            type={config[this.confIndex].value}
+          />
         </div>
         <Newsletter language={this.props.language} />
         <Footer language={this.props.language} />
