@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -95,15 +95,26 @@ class Fiche extends Component {
   getOdsEsData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-enseignement-superieur&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
-      if (response.data.records.length === 0 || !response.data.records[0].fields || !response.data.records[1].fields) { return false; }
-      this.setState((prevState) => {
-        const data = { ...prevState.data };
-        data.odsES = {
-          PaysageEsLocal: response.data.records[0].fields.descriptionesclean,
-          RelationEs: response.data.records[1].fields.descriptionesclean,
-        };
-        return { data };
-      });
+      if (response.data.records.length === 1 && response.data.records[0].fields) {
+        console.log(response.data.records[0].fields.descriptionesclean);
+        this.setState((prevState) => {
+          const data = { ...prevState.data };
+          data.odsES = {
+            PaysageEsLocal: response.data.records[0].fields.descriptionesclean,
+          };
+          return { data };
+        });
+      } else if (response.data.records.length === 2 && response.data.records[0].fields && response.data.records[1].fields) {
+        console.log(response.data.records[0].fields.descriptionesclean);
+        this.setState((prevState) => {
+          const data = { ...prevState.data };
+          data.odsES = {
+            PaysageEsLocal: response.data.records[0].fields.descriptionesclean,
+            RelationEs: response.data.records[1].fields.descriptionesclean,
+          };
+          return { data };
+        });
+      }
     });
   }
 
@@ -319,6 +330,58 @@ class Fiche extends Component {
     );
   }
 
+renderLinkWithFrance = () => {
+  if (!this.state.data.odsES.RelationEs && !this.state.data.odsES.RelationRi) {
+    return null;
+  }
+
+  return (
+    <section className={`container-fluid ${classes.LinkWithFrance}`}>
+      <div className="container">
+        <Title
+          label="Ses liens avec la France"
+          icon="fas fa-handshake"
+          cssStyle={{ color: '#fff' }}
+        />
+        {
+        (this.state.data.odsES.RelationEs)
+          ? (
+            <Fragment>
+              <SubTitle
+                callbackLabel="Ses liens avec la France"
+                label="Nature des relations ES avec la France"
+                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+              />
+              <BlocText
+                data={this.state.data.odsES.RelationEs}
+                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+              />
+            </Fragment>
+          )
+          : null
+      }
+        {
+        (this.state.data.odsES.RelationRi)
+          ? (
+            <Fragment>
+              <SubTitle
+                callbackLabel="Ses liens avec la France"
+                label="Nature des relations RI avec la France"
+                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+              />
+              <BlocText
+                data={this.state.data.odsRI.RelationRi}
+                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+              />
+            </Fragment>
+          )
+          : null
+      }
+      </div>
+    </section>
+  );
+}
+
   renderFiche = () => (
     <main className={classes.Fiche}>
       <Header
@@ -457,36 +520,9 @@ class Fiche extends Component {
         {this.renderActors()}
       </section>
 
-      <section className={`container-fluid ${classes.LinkWithFrance}`}>
-        <div className="container">
-          <Title
-            label="Ses liens avec la France"
-            icon="fas fa-handshake"
-            cssStyle={{ color: '#fff' }}
-          />
-          <SubTitle
-            callbackLabel="Ses liens avec la France"
-            label="Nature des relations ES avec la France"
-            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-          />
-          <BlocText
-            data={this.state.data.odsES.RelationEs}
-            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-          />
-
-          <SubTitle
-            callbackLabel="Ses liens avec la France"
-            label="Nature des relations RI avec la France"
-            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-          />
-          <BlocText
-            data={this.state.data.odsRI.RelationRi}
-            cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-          />
-
-        </div>
-
-      </section>
+      {
+        this.renderLinkWithFrance()
+      }
 
       {
         (this.state.data.odsContacts)
