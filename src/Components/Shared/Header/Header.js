@@ -9,8 +9,6 @@ import messagesEn from './translations/en.json';
 /* SCSS */
 import classes from './Header.scss';
 
-
-
 const Header = (props) => {
   const frActive = (props.language === 'fr') ? classes.ActiveLink : '';
   const enActive = (props.language === 'en') ? classes.ActiveLink : '';
@@ -138,14 +136,10 @@ const Header = (props) => {
 
 class ScrollLogo extends React.Component {
   handleScroll = (e) => {
-    console.log('onScroll');
     const element = e.target;
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
       // do something at end of scroll
     }
-    console.log('scrollHeight:', element.scrollHeight);
-    console.log('scrollTop:', element.scrollTop);
-    console.log('clientHeight:', element.clientHeight);
   }
 
   render() {
@@ -167,8 +161,4 @@ export default Header;
 Header.propTypes = {
   language: PropTypes.string.isRequired,
   switchLanguage: PropTypes.func.isRequired,
-};
-
-ScrollLogo.propTypes = {
-  scrollStepInPx: PropTypes.number,
 };

@@ -29,7 +29,7 @@ class SimpleGraph extends Component {
     const id = params[this.props.graphType][this.props.indic].unit;
     for (let i = 0; i < params[this.props.graphType][this.props.indic].unit.length; i += 1) {
       radioList.push(
-        <span>
+        <span key={params[this.props.graphType][this.props.indic].label + id[i].label}>
           <input
             type="radio"
             name={params[this.props.graphType][this.props.indic].label + id[i].label}
@@ -92,7 +92,7 @@ class SimpleGraph extends Component {
         </Row>
         <Row style={{ backgroundColor: 'white' }}>
           <Col>
-            {this.props.data[0].data.length === 0
+            {(this.props.data[0].data.length === 0)
               ? <div>Désolé, ces données ne sont pas disponibles pour ce pays.</div>
               : (
                 <HighChartsGraph

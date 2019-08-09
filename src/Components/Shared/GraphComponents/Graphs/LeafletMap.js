@@ -15,16 +15,14 @@ import classes from '../GraphComponents.scss';
 const PrintControl = withLeaflet(PrintControlDefault);
 
 class Search extends MapControl {
-  createLeafletElement() {
-    return GeoSearchControl({
-      // style: 'button',
+  createLeafletElement = () => (
+    GeoSearchControl({
       autoClose: true,
       searchLabel: 'Ex : pays, villes, CP...',
-      // keepResult: false,
       position: 'topright',
       provider: new OpenStreetMapProvider(),
-    });
-  }
+    })
+  )
 }
 
 const GeoSearch = withLeaflet(Search);
@@ -122,6 +120,7 @@ class LeafletMap extends Component<{}, State> {
         this.data.push(tmp);
         this.label.push(element.label.fr);
       } catch (error) {
+        /* eslint-disable-next-line */
         console.log(error);
       }
     });

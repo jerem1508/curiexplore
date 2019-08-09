@@ -40,6 +40,7 @@ export default class FocusList extends Component {
   componentDidMount() {
     const filename = `./Focus-data/${this.props.match.params.id}.json`;
     try {
+      /* eslint-disable-next-line */
       params = require(`${filename}`);
       this.setState({ meta: params });
     } catch (error) {
@@ -57,8 +58,8 @@ export default class FocusList extends Component {
       })
       .catch((error) => {
         this.setState({ error: true });
+        /* eslint-disable-next-line */
         console.log(error);
-        console.log("Couldn't retrieve API data");
       });
     // axios.get(params.url, {
     //   headers: {
@@ -136,7 +137,7 @@ export default class FocusList extends Component {
                   />
                 </div>
               )
-                : [(this.state.missing ? <div>Erreur : ce focus est inexistant.</div> : [this.state.error ? <div>{"Erreur: ce focus n'a pas pu être chargé"}</div> : <div>Chargement/Loading...</div>])]}
+                : [(this.state.missing ? <div>Erreur : ce focus est inexistant.</div> : [this.state.error ? <div>Erreur: ce focus n&#39;a pas pu être chargé</div> : <div>Chargement/Loading...</div>])]}
               {
                 // <GraphComponent
                 //   id={props.match.params.id}

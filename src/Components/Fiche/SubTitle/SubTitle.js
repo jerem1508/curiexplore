@@ -22,5 +22,5 @@ export default SubTitle;
 SubTitle.propTypes = {
   callbackLabel: PropTypes.string,
   label: PropTypes.string,
-  cssStyle: PropTypes.string,
+  cssStyle: PropTypes.object,
 };

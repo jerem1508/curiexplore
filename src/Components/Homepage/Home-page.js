@@ -64,7 +64,6 @@ class HomePage extends Component {
 
         <CountriesList />
 
-
         <Banner
           language={this.props.language}
           labelKey="WhatAreOurSources"

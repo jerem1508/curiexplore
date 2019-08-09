@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Axios from 'axios';
+import { Map, TileLayer } from 'react-leaflet';
 import PropTypes from 'prop-types';
 
 import { ODS_API_KEY } from '../../config/config';
@@ -96,7 +97,6 @@ class Fiche extends Component {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-enseignement-superieur&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
     Axios.get(url).then((response) => {
       if (response.data.records.length === 1 && response.data.records[0].fields) {
-        console.log(response.data.records[0].fields.descriptionesclean);
         this.setState((prevState) => {
           const data = { ...prevState.data };
           data.odsES = {
@@ -105,7 +105,6 @@ class Fiche extends Component {
           return { data };
         });
       } else if (response.data.records.length === 2 && response.data.records[0].fields && response.data.records[1].fields) {
-        console.log(response.data.records[0].fields.descriptionesclean);
         this.setState((prevState) => {
           const data = { ...prevState.data };
           data.odsES = {
@@ -120,9 +119,12 @@ class Fiche extends Component {
 
   getOdsRiData = () => {
     const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-survey-recherche-innovation&q=isoalpha3%3D${this.props.match.params.id}&sort=isoalpha3`;
+    /* eslint-disable */
     Axios.get(url).then((response) => {
-      console.log('response: ', response);
-      if (response.data.records.length === 0 || !response.data.records[0].fields || !response.data.records[1].fields) { return false; }
+      if (response.data.records.length === 0 || !response.data.records[0].fields || !response.data.records[1].fields) {
+        return false;
+      }
+
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.odsRI = {
@@ -132,13 +134,15 @@ class Fiche extends Component {
         return { data };
       });
     });
+    /* eslint-enable */
   }
 
   getOdsScimagoData = (year = null) => {
     // Récupération de toutes les années disponibles pour le pays en cours
     const urlScimagoYears = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=ccp-scimago&rows=0&sort=year&facet=year&refine.iso_alpha3=${this.props.match.params.id}`;
+    /* eslint-disable-next-line */
     Axios.get(urlScimagoYears).then((responseYear) => {
-      if (!responseYear.data.facet_groups) {return false}
+      if (!responseYear.data.facet_groups) { return false; }
       let years = [];
       if (!year) {
         for (let i = 0; i < responseYear.data.facet_groups[0].facets.length; i += 1) {
@@ -211,6 +215,11 @@ class Fiche extends Component {
     actors.push({ id: 'acteursFrES', data: this.filteredActorsA8('ES'), label: 'acteurs français ES' });
     actors.push({ id: 'acteursFrRI', data: this.filteredActorsA8('RI'), label: 'acteurs français RI' });
 
+    const mapProps = {
+      center: [48, 3], // France
+      zoom: 4,
+    };
+
     return (
       <section className="container">
         <Title
@@ -219,8 +228,20 @@ class Fiche extends Component {
         />
         <div className={classes.Actors}>
           <div className="row">
-            <div className={`col ${classes.Map}`}>
-              map
+            <div className="col">
+              <Map
+                className={classes.Map}
+                {...mapProps}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                  url="https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+                />
+                {
+                  // markers.map(marker => marker)
+                }
+              </Map>
             </div>
           </div>
 
@@ -294,93 +315,103 @@ class Fiche extends Component {
                 anchor={`/fiche/${this.props.match.params.id}#implantationRI`}
               />
             </div>
-          </div>{ /* /gridActors */ }
+          </div>
+          { /* /gridActors */ }
 
           {
-            actors.map((actor => (
-                <div className={classes.ActorsList} id={actor.id}>
-                  <SubTitleActors
-                    count={actor.data.length}
-                    icon="fas fa-thumbtack"
-                    label={actor.label}
-                  />
-                  <div className={classes.gridActors}>
-                    <div className="row">
-                      {
-                        actor.data.map(item => (
-                          <InstitutionCard
-                            nomFr={(item.nominstitutionfr || null)}
-                            nom={(item.nominstitution || null)}
-                            sigleFr={(item.sigleInstitutionfr || null)}
-                            sigle={(item.sigleinstitution || null)}
-                            description={(item.descriptioninstitutionclean || '')}
-                            webSite={(item.siteinstitution || null)}
-                          />
-                        ))
-                      }
+            actors.map(((actor) => {
+              if (actor.data.length > 0) {
+                return (
+                  <div
+                    className={classes.ActorsList}
+                    id={actor.id}
+                    key={actor.id}
+                  >
+                    <SubTitleActors
+                      count={actor.data.length}
+                      icon="fas fa-thumbtack"
+                      label={actor.label}
+                    />
+                    <div className={classes.gridActors}>
+                      <div className="row">
+                        {
+                          actor.data.map(item => (
+                            <InstitutionCard
+                              key={`${item.nominstitutionfr}_${item.nominstitution}`}
+                              nomFr={(item.nominstitutionfr || null)}
+                              nom={(item.nominstitution || null)}
+                              sigleFr={(item.sigleInstitutionfr || null)}
+                              sigle={(item.sigleinstitution || null)}
+                              description={(item.descriptioninstitutionclean || '')}
+                              webSite={(item.siteinstitution || null)}
+                            />
+                          ))
+                        }
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
-            ))
+                );
+              }
+              return null;
+            }))
           }
-
-        </div>{ /* /Actors */ }
+        </div>
+        { /* /Actors */ }
       </section>
     );
   }
 
-renderLinkWithFrance = () => {
-  if (!this.state.data.odsES.RelationEs && !this.state.data.odsES.RelationRi) {
-    return null;
-  }
+  renderLinkWithFrance = () => {
+    if (!this.state.data.odsES.RelationEs && !this.state.data.odsES.RelationRi) {
+      return null;
+    }
 
-  return (
-    <section className={`container-fluid ${classes.LinkWithFrance}`}>
-      <div className="container">
-        <Title
-          label="Ses liens avec la France"
-          icon="fas fa-handshake"
-          cssStyle={{ color: '#fff' }}
-        />
-        {
-        (this.state.data.odsES.RelationEs)
-          ? (
-            <Fragment>
-              <SubTitle
-                callbackLabel="Ses liens avec la France"
-                label="Nature des relations ES avec la France"
-                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-              />
-              <BlocText
-                data={this.state.data.odsES.RelationEs}
-                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-              />
-            </Fragment>
-          )
-          : null
-      }
-        {
-        (this.state.data.odsES.RelationRi)
-          ? (
-            <Fragment>
-              <SubTitle
-                callbackLabel="Ses liens avec la France"
-                label="Nature des relations RI avec la France"
-                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-              />
-              <BlocText
-                data={this.state.data.odsRI.RelationRi}
-                cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
-              />
-            </Fragment>
-          )
-          : null
-      }
-      </div>
-    </section>
-  );
-}
+    return (
+      <section className={`container-fluid ${classes.LinkWithFrance}`}>
+        <div className="container">
+          <Title
+            label="Ses liens avec la France"
+            icon="fas fa-handshake"
+            cssStyle={{ color: '#fff' }}
+          />
+          {
+          (this.state.data.odsES.RelationEs)
+            ? (
+              <Fragment>
+                <SubTitle
+                  callbackLabel="Ses liens avec la France"
+                  label="Nature des relations ES avec la France"
+                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                />
+                <BlocText
+                  data={this.state.data.odsES.RelationEs}
+                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                />
+              </Fragment>
+            )
+            : null
+        }
+          {
+          (this.state.data.odsES.RelationRi)
+            ? (
+              <Fragment>
+                <SubTitle
+                  callbackLabel="Ses liens avec la France"
+                  label="Nature des relations RI avec la France"
+                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                />
+                <BlocText
+                  data={this.state.data.odsRI.RelationRi}
+                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                />
+              </Fragment>
+            )
+            : null
+        }
+        </div>
+      </section>
+    );
+  }
 
   renderFiche = () => (
     <main className={classes.Fiche}>
@@ -438,7 +469,7 @@ renderLinkWithFrance = () => {
           </div>
         </div>
         <GraphCurie
-          graphType="Pays"
+          graphType="Connaitre le pays"
           countryCode={this.props.match.params.id}
         />
 
@@ -474,7 +505,7 @@ renderLinkWithFrance = () => {
           <BlocText data={this.state.data.odsES.PaysageEsLocal} />
 
           <GraphCurie
-            graphType="paysage-ES"
+            graphType="Paysage ES"
             countryCode={this.props.match.params.id}
           />
         </div>
@@ -482,23 +513,29 @@ renderLinkWithFrance = () => {
       </section>
 
       <section className="container-fluid">
-        <div className="container">
-          <Title
-            label="Le paysage de sa recherche et de son innovation (RI)"
-            icon="fas fa-microscope"
-          />
-          <SubTitle
-            callbackLabel="Paysage de sa ri"
-            label="Paysage RI"
-          />
-          {
-            <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
-          }
-          <GraphCurie
-            graphType="paysage-RI"
-            countryCode={this.props.match.params.id}
-          />
-        </div>
+        {
+          (this.state.data.odsRI.PaysageRiLocal)
+            ? (
+              <div className="container">
+                <Title
+                  label="Le paysage de sa recherche et de son innovation (RI)"
+                  icon="fas fa-microscope"
+                />
+                <SubTitle
+                  callbackLabel="Paysage de sa ri"
+                  label="Paysage RI"
+                />
+                {
+                  <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
+                }
+                <GraphCurie
+                  graphType="Paysage RI"
+                  countryCode={this.props.match.params.id}
+                />
+              </div>
+            )
+            : null
+        }
         {
           (this.state.data.odsScimago)
             ? (

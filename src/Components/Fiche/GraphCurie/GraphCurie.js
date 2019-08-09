@@ -184,7 +184,7 @@ class GraphCurie extends Component {
       for (let j = 0; j < isoList.length; j += 1) {
         if (this.countryList[i] === isoList[j].ISO_alpha3) {
           ctryList.push(
-            <span className={classes.btnDefaultCountry}>
+            <span className={classes.btnDefaultCountry} key={`graphCurie_${j}`}>
               <span className={classes.dot} style={{ backgroundColor: this.tempColor[i] }} />
               {isoList[j].Pays}
             </span>,
@@ -195,16 +195,33 @@ class GraphCurie extends Component {
     return (ctryList);
   }
 
-  handleIndic(event) {
-    let i = 0;
-    for (i = 0; i < params[this.props.graphType].length; i += 1) {
-      if (params[this.props.graphType][i].name === event.target.value) {
-        break;
-      }
-    }
-    this.indic = i;
-    this.graphIndex = 0;
-    this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
+  setRef(array) {
+    this.refArray = array;
+  }
+
+  // eslint-disable-next-line
+  getSVG(charts, options) {
+    const svgArr = [];
+    let top = 0;
+    let width = 0;
+
+    Highcharts.each(charts, (chart) => {
+      const svgres = chart.getSVG();
+      let svg;
+      // eslint-disable-next-line
+      const svgWidth = +svgres.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+      // eslint-disable-next-line
+      const svgHeight = +svgres.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
+
+      svg = svgres.replace('<svg', `<g transform="translate(0,${top})" `);
+      svg = svg.replace('</svg>', '</g>');
+
+      top += svgHeight;
+      width = Math.max(width, svgWidth);
+
+      svgArr.push(svg);
+    });
+    return (`<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`);
   }
 
   handleType(id) {
@@ -242,31 +259,6 @@ class GraphCurie extends Component {
   }
 
 
-  // eslint-disable-next-line
-  getSVG(charts, options) {
-    const svgArr = [];
-    let top = 0;
-    let width = 0;
-
-    Highcharts.each(charts, (chart) => {
-      const svgres = chart.getSVG();
-      let svg;
-      // eslint-disable-next-line
-      const svgWidth = +svgres.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
-      // eslint-disable-next-line
-      const svgHeight = +svgres.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1];
-
-      svg = svgres.replace('<svg', `<g transform="translate(0,${top})" `);
-      svg = svg.replace('</svg>', '</g>');
-
-      top += svgHeight;
-      width = Math.max(width, svgWidth);
-
-      svgArr.push(svg);
-    });
-    return (`<svg height="${top}" width="${width}" version="1.1" xmlns="http://www.w3.org/2000/svg">${svgArr.join('')}</svg>`);
-  }
-
   exportPdf() {
     // alert('toto');
     // const options = Highcharts.merge(Highcharts.getOptions().exporting, { type: 'application/pdf' });
@@ -283,31 +275,25 @@ class GraphCurie extends Component {
       type: options.type,
       svg: this.getSVG(this.refArray, options),
     });
-
-    const svg = this.getSVG(this.refArray, options);
-    // Highcharts.downloadSVGLocal(this.getSVG(this.refArray), options, () => {
-    //   console.log("Failed to export on client side");
-    // });
-    console.log(svg);
-
-    // console.log(this.refArray);
-    // console.log(Object.keys(this.refArray));
-    // console.log(this.refArray);
-    // console.log(this.refArray[0]);
   }
 
   exportAllGraphs(val) {
     if (val === 'pdf') {
       this.exportPdf();
     }
-    // alert(val);
-    // this.setState({ exportType: val });
-    // reset export ?
-    // dans le composant fils, apres avoir lancé requete impression reset à nul ?
   }
 
-  setRef(array) {
-    this.refArray = array;
+
+  handleIndic(event) {
+    let i = 0;
+    for (i = 0; i < params[this.props.graphType].length; i += 1) {
+      if (params[this.props.graphType][i].name === event.target.value) {
+        break;
+      }
+    }
+    this.indic = i;
+    this.graphIndex = 0;
+    this.getGraphValues(this.props.graphType, this.graphIndex, this.indic);
   }
 
   render() {

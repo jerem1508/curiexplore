@@ -74,17 +74,17 @@ class Scimago extends Component {
           <div className="row">
             <div className="col-4">
               <div className="form-group row">
-                <label for="scimagoYearSelector" className={`col-sm-2 col-form-label ${classes.Title}`}>
+                <div className={`col-sm-2 col-form-label ${classes.Title}`}>
                   Année
-                </label>
-                <div className="col-sm-10">
+                </div>
+                <div className="col-sm-6">
                   <select
                     id="scimagoYearSelector"
                     className="form-control form-control-sm"
                     onChange={this.props.onYearChangeHandler}
                   >
                     {
-                      this.props.data.years.map(year => <option>{year}</option>)
+                      this.props.data.years.map(year => <option key={`scimago_${year}`}>{year}</option>)
                     }
                   </select>
                 </div>
@@ -106,6 +106,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('documents')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'documents') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('documents')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'documents') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -120,6 +123,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('citable_documents')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'citable_documents') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('citable_documents')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citable_documents') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -134,6 +140,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('citations')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'citations') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('citations')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citations') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -148,6 +157,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('self_citations')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'self_citations') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('self_citations')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'self_citations') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -162,6 +174,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('citations_per_document')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'citations_per_document') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('citations_per_document')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'citations_per_document') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -176,6 +191,9 @@ class Scimago extends Component {
               <span
                 onClick={() => this.btnSortClickHandler('h_index')}
                 className={`${classes.BtnSort} ${(this.state.columnSelected === 'h_index') ? classes.BtnSortSelected : ''}`}
+                onKeyPress={() => this.btnSortClickHandler('h_index')}
+                tabIndex={0}
+                role="button"
               >
                 {
                   (this.state.orderDirection === 'asc' && this.state.columnSelected === 'h_index') ? <i className="fas fa-sort-amount-down" /> : <i className="fas fa-sort-amount-up" />
@@ -186,9 +204,10 @@ class Scimago extends Component {
           <div className={classes.Content}>
             {
               this.state.data.map((item, index) => (
-                <div className={classes.Row}>
+                /* eslint-disable-next-line */
+                <div className={classes.Row} key={`scimago_${item}_${index}`}>
                   <div className="row">
-                    <div className="col-4">
+                    <div className="col-sm-4">
                       <div className="row">
                         <div className={`col-2 ${classes.Rank}`}>
                           {/* item.fields.rank */}
@@ -204,32 +223,32 @@ class Scimago extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'documents') ? classes.NumberSelected : ''}`}>
                         {item.fields.documents.toLocaleString()}
                       </span>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'citable_documents') ? classes.NumberSelected : ''}`}>
                         {item.fields.citable_documents.toLocaleString()}
                       </span>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'citations') ? classes.NumberSelected : ''}`}>
                         {item.fields.citations.toLocaleString()}
                       </span>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'self_citations') ? classes.NumberSelected : ''}`}>
                         {item.fields.self_citations.toLocaleString()}
                       </span>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'citations_per_document') ? classes.NumberSelected : ''}`}>
                         {item.fields.citations_per_document.toLocaleString()}
                       </span>
                     </div>
-                    <div className="col text-center">
+                    <div className="col-sm text-center">
                       <span className={`${classes.Number} ${(this.state.columnSelected === 'h_index') ? classes.NumberSelected : ''}`}>
                         {item.fields.h_index.toLocaleString()}
                       </span>
@@ -249,7 +268,7 @@ export default Scimago;
 
 Scimago.propTypes = {
   // language: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   onYearChangeHandler: PropTypes.func.isRequired,
   isoAlpha3: PropTypes.string.isRequired,
 };

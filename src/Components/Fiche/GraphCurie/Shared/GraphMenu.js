@@ -57,7 +57,8 @@ export default class GraphMenu extends Component {
 
     for (let i = 0; i < this.state.countries.length; i += 1) {
       ctryList.push((
-        <span
+        <div
+          key={`graphMenu_${this.props.countryCode}_${i}`}
           className={classes.BtnInList}
           id={this.state.countries[i].ISO_alpha3}
           value={this.state.countries.Pays}
@@ -67,9 +68,8 @@ export default class GraphMenu extends Component {
           tabIndex={0}
         >
           {this.state.countries[i].Pays}
-        </span>
+        </div>
       ));
-      ctryList.push(<br />);
     }
     return (
       <div className={classes.CtryList}>

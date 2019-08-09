@@ -16,7 +16,7 @@
       ]
     }
   ],
-  "Pays": [
+  "Connaitre le pays": [
     { "name": "parite_pouv_achat", "label": "Parité de pouvoir d'achat", "type": "column", "unit" :
       [
         { "label": "Monnaie nationale par dollars américains", "code" : "PPP-C"}
@@ -61,7 +61,7 @@
       ]
     }
   ],
-  "paysage-ES": [
+  "Paysage ES": [
     {
       "name": "depense_adm", "label": "Dépenses des administrations publiques pour l'enseignement supérieur", "type": "column", "unit" :
       [
@@ -181,7 +181,7 @@
       ]
     }
   ],
-  "paysage-RI": [
+  "Paysage RI": [
     {
       "name": "brevets_dep_pct", "label": "Nombre de demandes de brevets déposées au PCT (année de priorité)", "type": "column", "unit" :
       [

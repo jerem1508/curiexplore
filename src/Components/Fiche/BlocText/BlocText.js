@@ -24,5 +24,5 @@ export default BlocText;
 
 BlocText.propTypes = {
   data: PropTypes.string.isRequired,
-  cssStyle: PropTypes.string,
+  cssStyle: PropTypes.object,
 };

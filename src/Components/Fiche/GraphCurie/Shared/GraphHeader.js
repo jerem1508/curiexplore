@@ -62,19 +62,20 @@ class GraphHeader extends Component {
     const radioList = [];
     for (let i = 0; i < params[this.props.graphType].length; i += 1) {
       radioList.push(
-        <input
-          type="radio"
-          name={params[this.props.graphType][i].label}
-          checked={(params[this.props.graphType][i].name === this.state.radioValue)}
-          value={params[this.props.graphType][i].name}
-          onChange={e => this.handleChange(e)}
-        />,
-        <span
-          style={(params[this.props.graphType][i].name === this.state.radioValue) ? { color: 'white' } : null}
-        >
-          {params[this.props.graphType][i].label}
-        </span>,
-        <br />,
+        <div key={`graphHeader_${this.props.graphType}_${i}`}>
+          <input
+            type="radio"
+            name={params[this.props.graphType][i].label}
+            checked={(params[this.props.graphType][i].name === this.state.radioValue)}
+            value={params[this.props.graphType][i].name}
+            onChange={e => this.handleChange(e)}
+          />
+          <span
+            style={(params[this.props.graphType][i].name === this.state.radioValue) ? { color: 'white' } : null}
+          >
+            {params[this.props.graphType][i].label}
+          </span>
+        </div>,
       );
     }
     return (
@@ -198,7 +199,7 @@ class GraphHeader extends Component {
           <Col sm={6} className={classes.LeftCol}>
             <Row>
               <Col sm={5}>
-                <span>Connaître le pays</span>
+                <span>{this.props.graphType}</span>
                 <span>Graphiques</span>
               </Col>
               <Col />
@@ -208,7 +209,7 @@ class GraphHeader extends Component {
             </Row>
           </Col>
           <Col
-            style={{ backgroundColor: '#ffb200' }}
+            style={{ backgroundColor: classes.orangeColor }}
             className={`d-flex align-items-center ${classes.ArrowRight}`}
             onClick={this.toggleList}
             onKeyPress={this.toggleList}

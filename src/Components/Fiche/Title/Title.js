@@ -20,5 +20,5 @@ export default Title;
 Title.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.string,
-  cssStyle: PropTypes.string,
+  cssStyle: PropTypes.object,
 };

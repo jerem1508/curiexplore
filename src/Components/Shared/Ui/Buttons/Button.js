@@ -8,6 +8,9 @@ const ButtonToPage = props => (
   <span
     onClick={() => props.onClickHandler(props.keyToSelect)}
     className={`btn ${classes.Button} text-center ${props.className}`}
+    onKeyPress={() => props.onClickHandler(props.keyToSelect)}
+    tabIndex={0}
+    role="button"
   >
     {props.children}
   </span>

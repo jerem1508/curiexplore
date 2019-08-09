@@ -35,7 +35,7 @@ class CountriesList extends Component {
       for (let j = 0; j < this.state.data.length; j += 1) {
         if (this.state.data[j].Pays.substr(0, 1) === letter) {
           const a = (
-            <li className={classes.country}>
+            <li className={classes.country} key={`countriesListLi_${i}_${j}`}>
               <a href={`/fiche/${this.state.data[j].ISO_alpha3}`}>
                 {this.state.data[j].Pays}
               </a>
@@ -45,7 +45,7 @@ class CountriesList extends Component {
         }
       }
       col.push((
-        <dl>
+        <dl key={`countriesListDl_${i}`}>
           {title}
           <ul>
             {countryName}
