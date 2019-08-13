@@ -22,7 +22,7 @@ class HeaderTitle extends Component {
   handleChange = (e) => {
     this.setState({ selectedOption: e.target.value });
     document.getElementById(e.target.value).scrollIntoView(true);
-    window.scrollBy({ top: -60, behavior: 'smooth' });
+    window.scrollBy({ top: -120, behavior: 'smooth' });
   };
 
   render() {
@@ -46,7 +46,6 @@ class HeaderTitle extends Component {
                 </nav>
               </div>
               <div className="col">
-
                 <select className="form-control" onChange={this.handleChange} value={this.state.selectedOption}>
                   <option value="country">Connaitre le pays</option>
                   <option value="" disabled>Sa politique ESRI</option>
@@ -60,11 +59,17 @@ class HeaderTitle extends Component {
                 </select>
               </div>
             </div>
-            <div className="row">
-              <div className={classes.Title}>
-                {this.props.countryName}
-              </div>
-            </div>
+            {
+              (this.props.isFull)
+                ? (
+                  <div className="row">
+                    <div className={classes.Title}>
+                      {this.props.countryName}
+                    </div>
+                  </div>
+                )
+                : null
+            }
           </div>
         </section>
       </IntlProvider>
@@ -78,4 +83,5 @@ export default HeaderTitle;
 HeaderTitle.propTypes = {
   language: PropTypes.string.isRequired,
   countryName: PropTypes.string.isRequired,
+  isFull: PropTypes.bool.isRequired,
 };

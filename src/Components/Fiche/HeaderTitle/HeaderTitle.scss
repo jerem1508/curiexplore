@@ -1,10 +1,14 @@
 @import '../../../style.scss';
 
 .HeaderTitle {
-  padding-bottom: 36px;
+  padding-bottom: 0;
   padding-left: 50px;
   background-color: $darkBlueColor;
   border-bottom: solid rgb(0, 33, 59);
+  position: fixed;
+  top: 56px;
+  width: 100%;
+  z-index: 1001 !important;
 
   .Content {
     padding-top: 24px;
@@ -38,19 +42,19 @@
   }
 
   @media (min-width: 768px) {
-    padding-top: 100px;
+    padding-top: 40px;
     padding-left: 220px;
   }
   @media (min-width: 1043px) {
-    padding-top: 60px;
+    padding-top: 0px;
     padding-left: 220px;
   }
   @media (min-width: 1200px) {
-    padding-top: 60px;
+    padding-top: 0px;
     padding-left: 220px;
   }
   @media (min-width: 1550px) {
-    padding-top: 60px;
+    padding-top: 0px;
     padding-left: 2rem;
   }
 }

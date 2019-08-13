@@ -7,7 +7,7 @@ import { ODS_API_KEY } from '../../config/config';
 
 import Header from '../Shared/Header/Header';
 import Footer from '../Shared/Footer/Footer';
-import HeaderTitle from '../Shared/HeaderTitle/HeaderTitle';
+import HeaderTitle from './HeaderTitle/HeaderTitle';
 import GraphCurie from './GraphCurie/GraphCurie';
 import Title from './Title/Title';
 import SubTitle from './SubTitle/SubTitle';
@@ -32,24 +32,41 @@ import classes from './Fiche.scss';
  * Tests unitaires : .
 */
 class Fiche extends Component {
-  state = {
-    data: {
-      restCountries: [],
-      odsES: {
-        PaysageEsLocal: '',
-        RelationEs: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      headerFull: true,
+      data: {
+        restCountries: [],
+        odsES: {
+          PaysageEsLocal: '',
+          RelationEs: '',
+        },
+        odsRI: {
+          PaysageRiLocal: '',
+          RelationRi: '',
+        },
+        odsContacts: {},
+        odsInstitutions: {},
       },
-      odsRI: {
-        PaysageRiLocal: '',
-        RelationRi: '',
-      },
-      odsContacts: {},
-      odsInstitutions: {},
-    },
-  };
+    };
+
+    this.handleScroll = this.handleScroll.bind(this);
+  }
 
   componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
     this.getData();
+  }
+
+  handleScroll = () => {
+    if (window.scrollY) {
+      if (this.state.headerFull) { this.setState({ headerFull: false }); }
+    } else {
+      /* eslint-disable */
+      if (!this.state.headerFull && window.scrollY === 0) { this.setState({ headerFull: true }); }
+      /* eslint-enable */
+    }
   }
 
   getRestCountriesData = () => {
@@ -221,7 +238,7 @@ class Fiche extends Component {
     };
 
     return (
-      <section className="container">
+      <section className="container" id="actors">
         <Title
           label="Les acteurs de l'ESRI"
           icon="fas fa-city"
@@ -367,7 +384,7 @@ class Fiche extends Component {
     }
 
     return (
-      <section className={`container-fluid ${classes.LinkWithFrance}`}>
+      <section className={`container-fluid ${classes.LinkWithFrance}`} id="linkWithFrance">
         <div className="container">
           <Title
             label="Ses liens avec la France"
@@ -421,10 +438,10 @@ class Fiche extends Component {
       />
       <HeaderTitle
         language={this.props.language}
-        switchLanguage={this.props.switchLanguage}
         countryName={this.state.data.restCountries.translations.fr}
+        isFull={this.state.headerFull}
       />
-      <section className="container">
+      <section className="container" id="country">
         <Title
           label="Connaitre le pays"
           icon="fas fa-binoculars"
@@ -433,6 +450,7 @@ class Fiche extends Component {
           callbackLabel="Connaitre le pays"
           label="Résumé et situation"
         />
+
         <div className={`row ${classes.ResumeAndSituation}`}>
           <div className="col pr-1">
             <div className={`${classes.Resume}`}>
@@ -492,7 +510,7 @@ class Fiche extends Component {
 
       </section>
 
-      <section className="container-fluid">
+      <section className="container-fluid" id="paysageEs">
         <div className="container">
           <Title
             label="Le paysage de son enseignement supérieur (ES)"
@@ -512,7 +530,7 @@ class Fiche extends Component {
 
       </section>
 
-      <section className="container-fluid">
+      <section className="container-fluid" id="paysageRi">
         {
           (this.state.data.odsRI.PaysageRiLocal)
             ? (
@@ -564,7 +582,7 @@ class Fiche extends Component {
       {
         (this.state.data.odsContacts)
           ? (
-            <section className="container">
+            <section className="container" id="contacts">
               <Title
                 label="Contacts - Ressources"
                 icon="fas fa-address-book"
