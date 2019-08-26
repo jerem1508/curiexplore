@@ -31,6 +31,7 @@ import classes from './Fiche.scss';
  * Accessible : .
  * Tests unitaires : .
 */
+
 class Fiche extends Component {
   constructor(props) {
     super(props);
@@ -299,14 +300,14 @@ class Fiche extends Component {
                 id="acteursES"
                 icon="fas fa-microscope fa-2x"
                 label="acteurs ES"
-                anchor={`/fiche/${this.props.match.params.id}#ES`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursES`}
               />
               <CounterCard
                 data={actors}
                 id="acteursRI"
                 icon="fas fa-lightbulb fa-2x"
                 label="acteurs RI"
-                anchor={`/fiche/${this.props.match.params.id}#RI`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursRI`}
               />
             </div>
             <div className="row">
@@ -315,18 +316,18 @@ class Fiche extends Component {
                 id="analyses"
                 icon="fas fa-square-root-alt fa-2x"
                 label="acteurs analyses"
-                anchor={`/fiche/${this.props.match.params.id}#analyse`}
+                anchor={`/fiche/${this.props.match.params.id}#analyses`}
               />
               <CounterCard
                 data={actors}
-                id="acteursFrES"
+                id="implantationES"
                 icon="fas fa-money-bill-wave fa-2x"
                 label="acteurs français ES sur place"
                 anchor={`/fiche/${this.props.match.params.id}#implantationES`}
               />
               <CounterCard
                 data={actors}
-                id="acteursFrRI"
+                id="implantationRI"
                 icon="fas fa-star fa-2x"
                 label="acteurs français RI sur place"
                 anchor={`/fiche/${this.props.match.params.id}#implantationRI`}
