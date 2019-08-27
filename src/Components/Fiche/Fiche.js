@@ -14,6 +14,7 @@ import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
 import Scimago from './Scimago/Scimago';
 import BlocText from './BlocText/BlocText';
+import ButtonToPage from '../Shared/Ui/Buttons/ButtonToPage';
 
 import CounterCard from './Actors/CounterCard';
 import SubTitleActors from './SubTitle/SubTitleActors';
@@ -320,17 +321,17 @@ class Fiche extends Component {
               />
               <CounterCard
                 data={actors}
-                id="implantationES"
+                id="acteursFrES"
                 icon="fas fa-money-bill-wave fa-2x"
                 label="acteurs français ES sur place"
-                anchor={`/fiche/${this.props.match.params.id}#implantationES`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursFrES`}
               />
               <CounterCard
                 data={actors}
-                id="implantationRI"
+                id="acteursFrRI"
                 icon="fas fa-star fa-2x"
                 label="acteurs français RI sur place"
-                anchor={`/fiche/${this.props.match.params.id}#implantationRI`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursFrRI`}
               />
             </div>
           </div>
@@ -366,6 +367,22 @@ class Fiche extends Component {
                           ))
                         }
                       </div>
+                    </div>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-lg-9">
+                          test
+                        </div>
+                        <div className={`col-lg-3 ${classes.ContainerButton}`}>
+                          <div className={classes.Button}>
+                            <ButtonToPage
+                              url={`/fiche/${this.props.match.params.id}#acteursES`}
+                              target=""
+                             />
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 );

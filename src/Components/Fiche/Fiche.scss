@@ -106,7 +106,8 @@
       background-color: white;
       margin-top: 5px;
       text-align: center;
-      padding: 15px;
+      height: 153px;
+      // padding: 15px;
       color: $darkBlueColor;
       font-family: 'Bitter', serif;
 
@@ -150,10 +151,11 @@
     }
 
     .CounterCardEmpty {
-      background-color: white;
+      // background-color: white;
       margin-top: 5px;
       text-align: center;
-      padding: 15px;
+      height: 153px;
+      // padding: 15px;
       color: $darkBlueColor;
 
       div:first-child {
