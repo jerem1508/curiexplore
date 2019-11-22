@@ -378,7 +378,7 @@ class Fiche extends Component {
                             <ButtonToPage
                               url={`/fiche/${this.props.match.params.id}#acteursES`}
                               target=""
-                             />
+                            />
                           </div>
                         </div>
                       </div>
