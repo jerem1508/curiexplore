@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import propTypes from 'prop-types';
 import { Row, Col, Container } from 'react-bootstrap';
-import {
-  Map, withLeaflet, GeoJSON,
-} from 'react-leaflet';
+import { Map, withLeaflet, GeoJSON } from 'react-leaflet';
 import PrintControlDefault from 'react-leaflet-easyprint';
 
 import MapMenu from './MapMenu';
