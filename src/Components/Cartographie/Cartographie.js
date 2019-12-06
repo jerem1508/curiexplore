@@ -108,14 +108,14 @@ export default class Carto extends Component {
         }
       }
     } else {
-      layer.setStyle({ fillColor: `${classes.greyAColor + 40}` });
+      layer.setStyle({ fillColor: classes.greyAColor + 40 });
       layer.bindTooltip(`${layer.feature.properties.admin} : pas de données disponibles.`);
       layer.on({
         click: () => { window.open(`/fiche/${feature.properties.iso_a3}`, '_blank'); },
       });
       this.layers.push(layer);
     }
-  }
+  } // changeLayer
 
   initYear(confIndex) {
     this.yearInterval = config[confIndex].years;
