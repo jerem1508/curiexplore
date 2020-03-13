@@ -68,15 +68,8 @@ export default class Carto extends Component {
 
   changeLayer(feature, layer, confIndex, size) {
     if (this.data.length > 0) {
-      // alert('toto');
-      // alert('year : ' + this.data[0].data[0].year);
-      // alert('code : ' + this.data[0].data[0].country_code);
-      // alert(size);
       for (let i = 0; i < this.data.length; i += 1) {
         let hasData = false;
-        // alert(this.data[i].data.length);
-        // console.log('Data year : ' + this.data[i].year);
-        // console.log('State year : ' + this.state.year);
         if (this.data[i].year === this.state.year) {
           hasData = true;
           this.countryDataIso.push(this.data[i].country_code);
@@ -85,15 +78,11 @@ export default class Carto extends Component {
           if (hasData === true) {
             if (this.layers[j].feature.properties.adm0_a3 === this.data[i].country_code) {
               let k = 0;
-              // alert(this.data[i].data[0].value);
               for (k = 0; k < size; k += 1) {
                 if (this.data[i].value >= config[confIndex].steps[0].limits[k][0] && this.data[i].value < config[confIndex].steps[0].limits[k][1]) {
                   break;
                 }
               }
-              // alert(this.data[i].data[0].year);
-              // alert(this.data[i].data[0].value);
-              // alert(config[confIndex].steps[0].limits[0][1]);
               this.layers[j].setStyle({ fillColor: this.colors[k] });
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin}: ${this.data[i].value} ${config[this.confIndex].steps[0].unit}`);
             }
@@ -103,9 +92,6 @@ export default class Carto extends Component {
               this.layers[j].bindTooltip(`${this.layers[j].feature.properties.admin} : pas de données disponibles.`);
               this.countryDataIso.push(this.data[i].data[0].country_code);
             }
-            // alert('hasData: ' + hasData);
-            // alert('data length: ' + this.data[i].data.length);
-            // alert('toto');
           }
         }
       }

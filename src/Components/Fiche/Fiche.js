@@ -36,6 +36,7 @@ class Fiche extends Component {
     super(props);
     this.state = {
       headerFull: true,
+      target: null,
       data: {
         restCountries: [],
         odsES: {
@@ -59,12 +60,17 @@ class Fiche extends Component {
     this.getData();
   }
 
+  handleTarget = (target) => {
+    this.setState({ target });
+  }
+
   handleScroll = () => {
+    // RÉTRÉSSISSEMENT DE L'ENTETE AU SCROLL
     if (window.scrollY) {
-      if (this.state.headerFull) { this.setState({ headerFull: false }); }
+      if (this.state.headerFull) { this.setState({ headerFull: false, target: null }); }
     } else {
       /* eslint-disable */
-      if (!this.state.headerFull && window.scrollY === 0) { this.setState({ headerFull: true }); }
+      if (!this.state.headerFull && window.scrollY === 0) { this.setState({ headerFull: true, target: null }); }
       /* eslint-enable */
     }
   }
@@ -440,6 +446,7 @@ class Fiche extends Component {
         language={this.props.language}
         countryName={this.state.data.restCountries.translations.fr}
         isFull={this.state.headerFull}
+        target={this.state.target}
       />
       <section className="container" id="country">
         <Title
@@ -460,7 +467,13 @@ class Fiche extends Component {
                 <br />
                 Phasellus ornare hendrerit tristique. Integer eu gravida augue. Duis pharetra turpis sit amet urna tincidunt porta. Donec at turpis eros. Nulla ornare sodales odio, et porta ex pretium eu. Nunc rutrum, arcu nec laoreet pretium, leo nisl congue libero, ut pharetra ligula dui ut velit. Sed mattis egestas turpis ultricies tempor. Nam nec lorem lectus. Praesent convallis, metus in imperdiet rutrum, risus quam dignissim metus, eget rhoncus arcu massa nec sem.
               </div>
-              <div className={`row ${classes.AllContactsLink}`}>
+              <div
+                className={`row ${classes.AllContactsLink}`}
+                onClick={() => this.handleTarget('contacts')}
+                onKeypress={() => this.handleTarget('contacts')}
+                tabIndex={0}
+                role="button"
+              >
                 <div className="col d-flex align-items-center justify-content-end">
                   Retrouvez&nbsp;
                   <strong>tous les contacts</strong>

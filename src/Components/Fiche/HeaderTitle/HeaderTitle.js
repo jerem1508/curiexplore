@@ -16,14 +16,25 @@ const messages = {
 
 class HeaderTitle extends Component {
   state = {
-    selectedOption: '',
+    selectedOption: null,
   };
 
-  handleChange = (e) => {
-    this.setState({ selectedOption: e.target.value });
-    document.getElementById(e.target.value).scrollIntoView(true);
+  componentDidUpdate(prevProps) {
+    if (prevProps.target !== this.props.target && this.props.target !== null) {
+      this.scrollIt(this.props.target);
+    }
+  }
+
+  scrollIt = (id) => {
+    this.setState({ selectedOption: id });
+    document.getElementById(id).scrollIntoView(true);
     window.scrollBy({ top: -120, behavior: 'smooth' });
+  }
+
+  handleChange = (e) => {
+    this.scrollIt(e.target.value);
   };
+
 
   render() {
     return (
@@ -46,7 +57,7 @@ class HeaderTitle extends Component {
                 </nav>
               </div>
               <div className="col">
-                <select className="form-control" onChange={this.handleChange} value={this.state.selectedOption}>
+                <select className={`form-control ${classes.Select}`} onChange={this.handleChange} value={this.state.selectedOption}>
                   <option value="country">Connaitre le pays</option>
                   <option value="" disabled>Sa politique ESRI</option>
                   <option value="paysageEs">Le paysage de son enseignement supérieur (ES)</option>
@@ -84,4 +95,5 @@ HeaderTitle.propTypes = {
   language: PropTypes.string.isRequired,
   countryName: PropTypes.string.isRequired,
   isFull: PropTypes.bool.isRequired,
+  target: PropTypes.string,
 };
