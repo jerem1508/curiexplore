@@ -14,6 +14,7 @@ import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
 import Scimago from './Scimago/Scimago';
 import BlocText from './BlocText/BlocText';
+import ButtonToPage from '../Shared/Ui/Buttons/ButtonToPage';
 
 import CounterCard from './Actors/CounterCard';
 import SubTitleActors from './SubTitle/SubTitleActors';
@@ -31,6 +32,7 @@ import classes from './Fiche.scss';
  * Accessible : .
  * Tests unitaires : .
 */
+
 class Fiche extends Component {
   constructor(props) {
     super(props);
@@ -305,14 +307,14 @@ class Fiche extends Component {
                 id="acteursES"
                 icon="fas fa-microscope fa-2x"
                 label="acteurs ES"
-                anchor={`/fiche/${this.props.match.params.id}#ES`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursES`}
               />
               <CounterCard
                 data={actors}
                 id="acteursRI"
                 icon="fas fa-lightbulb fa-2x"
                 label="acteurs RI"
-                anchor={`/fiche/${this.props.match.params.id}#RI`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursRI`}
               />
             </div>
             <div className="row">
@@ -321,21 +323,21 @@ class Fiche extends Component {
                 id="analyses"
                 icon="fas fa-square-root-alt fa-2x"
                 label="acteurs analyses"
-                anchor={`/fiche/${this.props.match.params.id}#analyse`}
+                anchor={`/fiche/${this.props.match.params.id}#analyses`}
               />
               <CounterCard
                 data={actors}
                 id="acteursFrES"
                 icon="fas fa-money-bill-wave fa-2x"
                 label="acteurs français ES sur place"
-                anchor={`/fiche/${this.props.match.params.id}#implantationES`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursFrES`}
               />
               <CounterCard
                 data={actors}
                 id="acteursFrRI"
                 icon="fas fa-star fa-2x"
                 label="acteurs français RI sur place"
-                anchor={`/fiche/${this.props.match.params.id}#implantationRI`}
+                anchor={`/fiche/${this.props.match.params.id}#acteursFrRI`}
               />
             </div>
           </div>
@@ -371,6 +373,22 @@ class Fiche extends Component {
                           ))
                         }
                       </div>
+                    </div>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-lg-9">
+                          test
+                        </div>
+                        <div className={`col-lg-3 ${classes.ContainerButton}`}>
+                          <div className={classes.Button}>
+                            <ButtonToPage
+                              url={`/fiche/${this.props.match.params.id}#acteursES`}
+                              target=""
+                             />
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 );
