@@ -7,17 +7,12 @@
 .Selector {
   display: inline-block;
   position: relative;
-  DIV:first-child {
-    background-color: $blueColor;
-    position: absolute;
-    z-index: 1000;
-    width: 440px;
-    height:440px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+
+}
+
+.NoData {
+  font-style: italic;
+  color: darkgrey;
 }
 
 .BtnCountry {
@@ -78,6 +73,16 @@
 .CtryList {
   overflow-y: auto;
   height: 280px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.BtnInList {
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(9,62,108);
+  }
 }
 
 .Dot {
@@ -97,16 +102,18 @@
   font-style: italic;
 }
 
-.BtnInList {
-  color: white;
-  cursor: pointer;
-}
+
 
 .Search {
   margin-left: 10px;
 }
 
 .ListSearch {
+  background-color: $blueColor;
+  position: absolute;
+  z-index: 1000;
+  border-radius: 10px;
+
   color: white;
   // font-style: italic;
   input {

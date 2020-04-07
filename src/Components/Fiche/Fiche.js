@@ -51,6 +51,7 @@ class Fiche extends Component {
         },
         odsContacts: {},
         odsInstitutions: {},
+        odsQuantitatives: {},
       },
     };
 
@@ -83,6 +84,23 @@ class Fiche extends Component {
       this.setState((prevState) => {
         const data = { ...prevState.data };
         data.restCountries = response.data;
+        return { data };
+      });
+    });
+  }
+
+  getOdsQuantitativesData = () => {
+    const url = `https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?apikey=${ODS_API_KEY}&dataset=curiexplore-donnees-quantitatives&rows=1000&sort=country_code&refine.country_code=${this.props.match.params.id}`;
+    Axios.get(url).then((response) => {
+      this.setState((prevState) => {
+        const data = { ...prevState.data };
+        if (response.data.nhits) {
+          const tabData = [];
+          for (let i = 0; i < response.data.records.length; i += 1) {
+            tabData.push(response.data.records[i].fields);
+          }
+          data.odsQuantitatives = tabData;
+        }
         return { data };
       });
     });
@@ -200,6 +218,7 @@ class Fiche extends Component {
     this.getOdsScimagoData();
     this.getOdsEsData();
     this.getOdsRiData();
+    this.getOdsQuantitativesData();
   }
 
   scimagoOnYearChangeHandler = (e) => {
@@ -384,7 +403,7 @@ class Fiche extends Component {
                             <ButtonToPage
                               url={`/fiche/${this.props.match.params.id}#acteursES`}
                               target=""
-                             />
+                            />
                           </div>
                         </div>
                       </div>
@@ -456,12 +475,8 @@ class Fiche extends Component {
 
   renderFiche = () => (
     <main className={classes.Fiche}>
-      <Header
-        language={this.props.language}
-        switchLanguage={this.props.switchLanguage}
-      />
+      <Header />
       <HeaderTitle
-        language={this.props.language}
         countryName={this.state.data.restCountries.translations.fr}
         isFull={this.state.headerFull}
         target={this.state.target}
@@ -477,7 +492,7 @@ class Fiche extends Component {
         />
 
         <div className={`row ${classes.ResumeAndSituation}`}>
-          <div className="col pr-1">
+          <div className="col-lg pr-1">
             <div className={`${classes.Resume}`}>
               <div className={classes.Text}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue sagittis aliquet. Pellentesque nec ornare sapien, in lobortis nisl. Ut euismod massa nec ultrices pretium. Donec in sem luctus, sodales felis id, dignissim tellus. Curabitur ornare posuere massa eu efficitur. Phasellus faucibus tempor nisl, quis venenatis lorem pulvinar vitae. Curabitur facilisis, leo porta fringilla accumsan, est risus rutrum ex, vel faucibus augue erat at leo. Fusce elementum elit non justo commodo molestie.
@@ -488,7 +503,7 @@ class Fiche extends Component {
               <div
                 className={`row ${classes.AllContactsLink}`}
                 onClick={() => this.handleTarget('contacts')}
-                onKeypress={() => this.handleTarget('contacts')}
+                onKeyPress={() => this.handleTarget('contacts')}
                 tabIndex={0}
                 role="button"
               >
@@ -502,7 +517,7 @@ class Fiche extends Component {
               </div>
             </div>
           </div>
-          <div className="col pl-1 pr-0">
+          <div className="col-lg pl-1 pr-0">
             <div className={`${classes.CountryMap}`}>
               <CountryMap capital={this.state.data.restCountries.capital} height="552px" isoCode={this.props.match.params.id} />
             </div>
@@ -574,9 +589,7 @@ class Fiche extends Component {
                   callbackLabel="Paysage de sa ri"
                   label="Paysage RI"
                 />
-                {
-                  <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
-                }
+                <BlocText data={this.state.data.odsRI.PaysageRiLocal} />
                 <GraphCurie
                   graphType="Paysage RI"
                   countryCode={this.props.match.params.id}
@@ -590,7 +603,6 @@ class Fiche extends Component {
             ? (
               <div className={`container-fluid ${classes.Scimago}`}>
                 <Scimago
-                  language={this.props.language}
                   data={this.state.data.odsScimago}
                   onYearChangeHandler={this.scimagoOnYearChangeHandler}
                   isoAlpha3={this.props.match.params.id}
@@ -626,7 +638,7 @@ class Fiche extends Component {
           ) : null
         }
 
-      <Footer language={this.props.language} />
+      <Footer />
     </main>
   );
 
@@ -645,7 +657,5 @@ class Fiche extends Component {
 export default Fiche;
 
 Fiche.propTypes = {
-  language: PropTypes.string.isRequired,
-  switchLanguage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
 };

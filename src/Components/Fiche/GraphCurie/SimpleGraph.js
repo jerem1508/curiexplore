@@ -52,11 +52,11 @@ class SimpleGraph extends Component {
   getSource(str = false) {
     const srcList = [];
     for (let i = 0; i < this.props.data.length; i += 1) {
-      for (let j = 0; j < this.props.data[i].data.length; j += 1) {
-        if (!srcList.includes(this.props.data[i].data[j].source)) {
-          srcList.push(this.props.data[i].data[j].source);
+      for (let j = 0; j < this.props.data[i].length; j += 1) {
+        if (!srcList.includes(this.props.data[i][j].fields.source)) {
+          srcList.push(this.props.data[i][j].fields.source);
         } else if (srcList.length > 1) {
-          srcList.push(`, ${this.props.data[i].data[j].source}`);
+          srcList.push(`, ${this.props.data[i][j].fields.source}`);
         }
       }
     }
@@ -92,7 +92,7 @@ class SimpleGraph extends Component {
         </Row>
         <Row style={{ backgroundColor: 'white' }}>
           <Col>
-            {(this.props.data[0].data.length === 0)
+            {(this.props.data.length === 0)
               ? <div>Désolé, ces données ne sont pas disponibles pour ce pays.</div>
               : (
                 <HighChartsGraph

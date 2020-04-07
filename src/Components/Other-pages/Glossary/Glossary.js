@@ -41,7 +41,7 @@ const Glossary = props => (
       <section style={sectionStyle} className={classes.Content}>
         <div className="container">
           <div className="row">
-          bla bla
+            bla bla
           </div>
         </div>
       </section>

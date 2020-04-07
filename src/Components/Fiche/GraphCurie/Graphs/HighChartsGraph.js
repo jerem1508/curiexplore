@@ -41,82 +41,51 @@ export default class HighChartsBar extends Component {
 
   componentDidMount() {
     const allData = [];
-    let series = [];
+    const series = [];
     let name = '';
 
-    // for (let i = 0; i < this.data.length * 2; i += 1) {
-    //   for (let j = 0; j < this.data.length; j += 1) {
-    //     if (this.data[j].data.length === 0) {
-    //       // push l'index dans color array ?
-    //       this.data.splice(j, 1);
-    //     }
-    //   }
-    // }
-
-    const dl = this.data.length;
-    let j = 0;
-    let year = 0;
-    let max = 0;
-    // alert(dl);
     try {
-      name = this.data[0].data[0].label_long;
-      year = this.data[0].data[0].year;
+      name = this.data[0][0].fields.label_long;
       this.filename = name;
     } catch (error) {
       name = '';
     }
-    for (let i = 0; i < dl; i += 1) {
-      const data = [];
-      this.data[i].data.sort((a, b) => (a.year - b.year));
-      try {
-        year = this.data[0].data[0].year;
-      } catch (error) {
-        name = '';
-      }
-      for (j = 0; j < this.data[i].data.length; j += 1) {
-        const tmp = [];
-        tmp.push(this.data[i].data[j].year);
-        tmp.push(this.data[i].data[j].value);
-        data.push(tmp);
-      }
-      if (j > 0) {
-        max = j;
-        allData.push(data);
-      } else {
-        for (j = 0; j < max; j += 1) {
-          // if (this.data[0].data[0].label_long === 'Population active, total')
-          //   console.log(year+j);
-          const tmp = [];
-          tmp.push(year + j);
-          tmp.push(0);
-          data.push(tmp);
-        }
-        allData.push(data);
-      }
-    }
 
-    try {
-      for (let i = 0; i < dl; i += 1) {
+    this.props.data.forEach((country) => {
+      const data = [];
+
+      // Tri
+      country.sort((a, b) => a.fields.year - b.fields.year);
+
+      country.forEach((dataByYear) => {
+        data.push([dataByYear.fields.year, dataByYear.fields.value]);
+      });
+
+      allData.push(data);
+    });
+
+    // Ajout de chaque pays à l'objet SERIES
+    this.props.data.forEach((country, i) => {
+      if (allData[i].length > 0) {
         let ctryName = '';
-        // Penser à ajouter un country_label pour l'UE, l'OCDE et le Monde afin d'enlever cette forêt de if
-        if (this.data[i].data.length > 0 && this.data[i].data[0].country_label != null) {
-          ctryName = this.data[i].data[0].country_label;
-        } else if (this.data[i].data.length > 0 && this.data[i].data[0].country_code != null) {
-          if (this.data[i].data[0].country_code === 'EUU') {
+        if (country[0].fields.country_label != null) {
+          ctryName = country[0].fields.country_label;
+        } else if (country[0].fields.country_code != null) {
+          if (country[0].fields.country_code === 'EUU') {
             ctryName = 'Union européenne';
-          } else if (this.data[i].data[0].country_code === 'WLD') {
+          } else if (country[0].fields.country_code === 'WLD') {
             ctryName = 'Monde';
-          } else if (this.data[i].data[0].country_code === 'OED') {
+          } else if (country[0].fields.country_code === 'OED') {
             ctryName = 'OCDE';
           }
         } else {
           ctryName = 'Pas de données disponibles';
         }
+
+        // Ajout à la serie
         series.push({ name: ctryName, data: allData[i], color: this.props.colors[i] });
       }
-    } catch (error) {
-      series = [];
-    }
+    });
 
     const options = {
       chart: {
@@ -128,15 +97,6 @@ export default class HighChartsBar extends Component {
       legend: {
         enabled: false,
       },
-      // title: {
-      //   text: this.filename,
-      // },
-      // legend: {
-      //   enabled: true,
-      // },
-      // subtitle: {
-      //   text: this.props.sourceStr,
-      // },
       buttons: {
         contextButton: {
           enabled: false,
@@ -159,67 +119,10 @@ export default class HighChartsBar extends Component {
         title: {
           text: name,
         },
-        // labels: {
-        //   formatter() {
-        //     if (this.value >= 1E9) {
-        //       // alert('toto');
-        //       return `${(this.value / 1E12)} Md`;
-        //     } if (this.value >= 1E6) {
-        //       return `${(this.value / 1E6)} M`;
-        //     }
-        //     return this.value;
-        //   },
-        // },
       },
       tooltip: {
         shared: true,
         crosshairs: true,
-        // formatter() {
-        //   const points = this.points;
-        //   const len = points.length;
-        //   const tooltipMarkup = [];
-        //
-        //   tooltipMarkup.push(`${points[0].x}<br />`);
-        //   for (let i = 0; i < len; i += 1) {
-        //     // if (this.y >= 1E9) {
-        //     //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E12).toFixed(1)} Md`);
-        //     // } else if (this.y >= 1E6) {
-        //     //   tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)} M`);
-        //     // }
-        //     tooltipMarkup.push(`<br />${points[i].series.name} : ${(points[i].y / 1E6).toFixed(1)}`);
-        //   }
-        //   return tooltipMarkup;
-        // },
-        // formatter() {
-        //   if (this.y >= 1E9) {
-        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E12).toFixed(1)} Md`;
-        //   } if (this.y >= 1E6) {
-        //     return `${this.x}<br />${this.series.name}<br />${(this.y / 1E6).toFixed(1)} M`;
-        //   }
-        //   return this.y.toFixed(1);
-        // },
-
-        // formatter() {
-        //   const points = this.points;
-        //   const len = points.length;
-        //   const tooltipMarkup = [];
-        //
-        //   tooltipMarkup.push(`${points[0].x}<br />`);
-        //   for (let i = 0; i < len; i += 1) {
-        //     const labelValue = points[i].y;
-        //     let value = Math.abs(Number(labelValue)) >= 1.0e+9
-        //     ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
-        //     // Six Zeroes for Millions
-        //     : Math.abs(Number(labelValue)) >= 1.0e+6
-        //     ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
-        //     // Three Zeroes for Thousands
-        //     : Math.abs(Number(labelValue)) >= 1.0e+3
-        //     ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
-        //     : Math.abs(Number(labelValue));
-        //     tooltipMarkup.push(`<br />${points[i].series.name} : ${labelValue}`);
-        //   }
-        //   return tooltipMarkup;
-        // },
       },
       plotOptions: {
         line: {
@@ -227,9 +130,6 @@ export default class HighChartsBar extends Component {
             symbol: 'circle',
           },
         },
-        // series: {
-        //   stacking: 'normal',
-        // },
       },
       series,
       exporting: {

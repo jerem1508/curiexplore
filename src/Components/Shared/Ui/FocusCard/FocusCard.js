@@ -11,12 +11,12 @@ import TreemapSVG from '../../svg/icon-focus-treemap';
 import ButtonToPage from '../Buttons/ButtonToPage';
 
 /* COULEURS */
-import {
-  ENTITY_COLOR,
-  PERSON_COLOR,
-  PROJECT_COLOR,
-  PUBLICATION_COLOR,
-} from '../../../../config/config';
+// import {
+//   ENTITY_COLOR,
+//   PERSON_COLOR,
+//   PROJECT_COLOR,
+//   PUBLICATION_COLOR,
+// } from '../../../../config/config';
 
 /* SCSS */
 import classes from './FocusCard.scss';
@@ -25,16 +25,16 @@ const FocusCard = (props) => {
   let color = '#ff0000';
   switch (props.schema) {
     case 'entity':
-      color = ENTITY_COLOR;
+      color = 'ENTITY_COLOR';
       break;
     case 'person':
-      color = PERSON_COLOR;
+      color = 'PERSON_COLOR';
       break;
     case 'project':
-      color = PROJECT_COLOR;
+      color = 'PROJECT_COLOR';
       break;
     case 'publication':
-      color = PUBLICATION_COLOR;
+      color = 'PUBLICATION_COLOR';
       break;
     default:
       color = '#000000';

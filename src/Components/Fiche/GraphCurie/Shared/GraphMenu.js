@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
-
+import { ODS_API_KEY, API_ODS_ENDPOINT } from '../../../../config/config';
 import classes from './GraphMenu.scss';
 
 /**
@@ -14,6 +15,7 @@ import classes from './GraphMenu.scss';
 */
 
 const isoList = require('../../../Homepage/CountriesList/countriesList.json');
+const params = require('../GraphCurie-data/indicateurs.json');
 
 export default class GraphMenu extends Component {
   constructor(props) {
@@ -32,6 +34,7 @@ export default class GraphMenu extends Component {
       secondVis: { display: 'none' },
       firstCountry: 'Choisir un pays',
       secondCountry: 'Choisir un pays',
+      countriesWithData: [],
     };
     this.changeStyle = this.changeStyle.bind(this);
     this.toggleList = this.toggleList.bind(this);
@@ -50,41 +53,63 @@ export default class GraphMenu extends Component {
       tempColor.push('#ccc');
     }
     this.setState({ colors: tempColor });
+
+    // Récupération des pays concernés par cet indicateur
+    const indicateurCode = params[this.props.graphType][this.props.indic].unit[this.props.graphIndex].code;
+    const url = `${API_ODS_ENDPOINT}/?apikey=${ODS_API_KEY}&dataset=curiexplore-donnees-quantitatives&q=code%3D%27${indicateurCode}%27&rows=1&facet=country_code`;
+    Axios.get(url).then((response) => {
+      this.setState({ countriesWithData: response.data.facet_groups[0].facets.map(el => el.name) });
+    }).catch((error) => {
+      // eslint-disable-next-line
+      console.log(error);
+    });
   }
 
   getCountryList(id) {
-    const ctryList = [];
+    return this.state.countries.map((country, index) => {
+      // On ne veut pas afficher le pays de la fiche
+      if (country.ISO_alpha3 === this.props.countryCode) {
+        return null;
+      }
 
-    for (let i = 0; i < this.state.countries.length; i += 1) {
-      ctryList.push((
-        <div
-          key={`graphMenu_${this.props.countryCode}_${i}`}
-          className={classes.BtnInList}
-          id={this.state.countries[i].ISO_alpha3}
-          value={this.state.countries.Pays}
-          onClick={e => this.setCountry(e, id, this.state.countries[i].Pays)}
-          onKeyPress={e => this.setCountry(e, id, this.state.countries[i].Pays)}
-          role="button"
-          tabIndex={0}
-        >
-          {this.state.countries[i].Pays}
+      if (this.state.countriesWithData.includes(country.ISO_alpha3)) {
+        return (
+          <div
+            // eslint-disable-next-line react/no-array-index-key
+            key={`getCountryList_${this.props.countryCode}_${index}`}
+            className={classes.BtnInList}
+            id={country.ISO_alpha3}
+            value={this.state.countries.Pays}
+            onClick={e => this.setCountry(e, id, country.Pays)}
+            onKeyPress={e => this.setCountry(e, id, country.Pays)}
+            role="button"
+            tabIndex={0}
+          >
+            {country.Pays}
+          </div>
+        );
+      }
+
+      return (
+        // eslint-disable-next-line react/no-array-index-key
+        <div className={classes.NoData} key={`getCountryList_${this.props.countryCode}_${index}`}>
+          {country.Pays}
         </div>
-      ));
-    }
-    return (
-      <div className={classes.CtryList}>
-        {ctryList}
-      </div>
-    );
+      );
+    });
   }
 
   setCountry(e, id, country) {
     if (id === 0) {
-      // this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountryOn });
-      this.setState({ firstVis: { display: 'none' }, firstBtnclass: classes.BtnCountry });
+      this.setState({
+        firstVis: { display: 'none' },
+        firstBtnclass: classes.BtnCountry,
+      });
     } else {
-      // this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountryOn });
-      this.setState({ secondVis: { display: 'none' }, secondBtnclass: classes.BtnCountry });
+      this.setState({
+        secondVis: { display: 'none' },
+        secondBtnclass: classes.BtnCountry,
+      });
     }
     this.changeStyle(e, id + 1, country);
   }
@@ -140,8 +165,8 @@ export default class GraphMenu extends Component {
   }
 
   changeStyle(e, id, country) {
-    // eslint-disable-next-line
-    const colors = this.state.colors;
+    const { colors } = this.state;
+
     if (this.countryList.includes(e.target.id)) {
       const index = this.countryList.indexOf(e.target.id);
       if (index < 2) {
@@ -149,6 +174,7 @@ export default class GraphMenu extends Component {
         return;
       }
     }
+
     if (id < 3) {
       if (this.countryList.includes(e.target.id)) {
         this.handleShow();
@@ -165,11 +191,13 @@ export default class GraphMenu extends Component {
         colors[id] = '#ccc';
       }
     }
+
     if (id === 1) {
       this.setState({ firstCountry: country, firstValue: '' });
     } else if (id === 2) {
       this.setState({ secondCountry: country, secondValue: '' });
     }
+
     this.setState({ colors, countries: isoList });
     this.props.toggleCountry(e.target.id, this.state.colors, this.countryList);
   }
@@ -236,21 +264,17 @@ export default class GraphMenu extends Component {
           </button>
           <div style={this.state.firstVis}>
             <div className={classes.ListSearch}>
-              <br />
+              <i className={`fas fa-search pr-1 pt-2 ${classes.Search}`} />
               <span>Chercher un pays</span>
-              <br />
-              <span>
-                <input
-                  type="text"
-                  // A changer -> passer type graph en props + id ?
-                  name="fname"
-                  value={this.state.firstValue}
-                  onChange={e => this.filterCountries(e.target.value, 0)}
-                  placeholder="Ex: France"
-                />
-                <i className={`fas fa-search ${classes.Search}`} />
-              </span>
-              <br />
+              <input
+                type="text"
+                // A changer -> passer type graph en props + id ?
+                name="fname"
+                value={this.state.firstValue}
+                onChange={e => this.filterCountries(e.target.value, 0)}
+                placeholder="Ex: France"
+                className="m-2"
+              />
               <div
                 id="FRA"
                 value="France"
@@ -258,15 +282,22 @@ export default class GraphMenu extends Component {
                 onKeyPress={e => this.setCountry(e, 0, 'France')}
                 role="button"
                 tabIndex={0}
+                className={`${classes.BtnInList} pl-2`}
               >
-              France
+                France
               </div>
               <hr />
-              {this.getCountryList(0)}
+              <div className={`${classes.CtryList} pl-2`}>
+                {this.getCountryList(0)}
+              </div>
             </div>
           </div>
         </div>
-        <span className={classes.Text}> et </span>
+
+        <span className={classes.Text}>
+          et
+        </span>
+
         <div className={classes.Selector}>
           <button type="button" className={this.state.secondBtnclass} onClick={() => this.toggleList(1)}>
             <span className={classes.Dot} style={{ backgroundColor: this.state.colors[2] }} />
@@ -275,21 +306,18 @@ export default class GraphMenu extends Component {
           </button>
           <div style={this.state.secondVis}>
             <div className={classes.ListSearch}>
-              <br />
+              <i className={`fas fa-search pr-1 pt-2 ${classes.Search}`} />
               <span>Chercher un pays</span>
-              <br />
-              <span>
-                <input
-                  type="text"
-                  // A changer -> passer type graph en props + id ?
-                  name="fname"
-                  value={this.state.secondValue}
-                  onChange={e => this.filterCountries(e.target.value, 1)}
-                  placeholder="Ex: France"
-                />
-                <i className={`fas fa-search ${classes.Search}`} />
-              </span>
-              <br />
+              <input
+                type="text"
+                // A changer -> passer type graph en props + id ?
+                name="fname"
+                value={this.state.secondValue}
+                onChange={e => this.filterCountries(e.target.value, 1)}
+                placeholder="Ex: France"
+                className="m-2"
+              />
+
               <div
                 id="FRA"
                 value="France"
@@ -297,26 +325,29 @@ export default class GraphMenu extends Component {
                 onKeyPress={e => this.setCountry(e, 1, 'France')}
                 role="button"
                 tabIndex={0}
+                className={`${classes.BtnInList} pl-2`}
               >
-              France
+                France
               </div>
               <hr />
-              {this.getCountryList(1)}
+              <div className={`${classes.CtryList} pl-2`}>
+                {this.getCountryList(1)}
+              </div>
             </div>
           </div>
         </div>
         <span className={classes.Text}> et avec </span>
         <button type="button" id="WLD" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 3)}>
           <span id="WLD" className={classes.Dot} style={{ backgroundColor: this.state.colors[3] }} />
-            Monde
+          Monde
         </button>
         <button type="button" id="OED" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 4)}>
           <span id="OED" className={classes.Dot} style={{ backgroundColor: this.state.colors[4] }} />
-            OCDE
+          OCDE
         </button>
         <button type="button" id="EUU" className={classes.BtnDefaultCountry} onClick={e => this.changeStyle(e, 5)}>
           <span id="EUU" className={classes.Dot} style={{ backgroundColor: this.state.colors[5] }} />
-            UE
+          UE
         </button>
         {((this.countryList[1] !== '')
           || (this.countryList[3] !== '')
@@ -355,4 +386,7 @@ GraphMenu.propTypes = {
   toggleCountry: PropTypes.func.isRequired,
   colors: PropTypes.array.isRequired,
   countryCode: PropTypes.string.isRequired,
+  graphType: PropTypes.string.isRequired,
+  graphIndex: PropTypes.number.isRequired,
+  indic: PropTypes.number.isRequired,
 };

@@ -33,8 +33,7 @@ class Maps extends Component {
       <section className={`container-fluid ${classes.Maps}`}>
         <div className="container">
           <h1>
-            Curie
-            <strong>Discover</strong>
+            CurieXplore
           </h1>
           <h2>
             La plateforme d&#39;exploration des&nbsp;

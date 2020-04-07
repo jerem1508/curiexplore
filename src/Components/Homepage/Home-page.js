@@ -42,9 +42,8 @@ class HomePage extends Component {
     if (window.scrollY) {
       if (this.state.isSearchFull) { this.setState({ isSearchFull: false }); }
     } else {
-      /* eslint-disable */
+      // eslint-disable-next-line
       if (!this.state.isSearchFull && window.scrollY === 0) { this.setState({ isSearchFull: true }); }
-      /* eslint-enable */
     }
   }
 
