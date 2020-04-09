@@ -12,17 +12,25 @@ import classes from './BlocText.scss';
  * Accessible : .
  * Tests unitaires : .
 */
-const BlocText = props => (
-  <div className={classes.BlocText} style={props.cssStyle}>
-    <div className={classes.Text}>
-      {Parser(props.data)}
+const BlocText = (props) => {
+  if (!props.data) { return null; }
+
+  return (
+    <div className={`${classes.BlocText} ${(props.hasDarkShadow) ? classes.ShadowDark : classes.ShadowLight}`}>
+      <div className={classes.Text}>
+        {Parser(props.data)}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default BlocText;
 
+BlocText.defaultProps = {
+  hasDarkShadow: false,
+};
+
 BlocText.propTypes = {
   data: PropTypes.string.isRequired,
-  cssStyle: PropTypes.object,
+  hasDarkShadow: PropTypes.bool,
 };

@@ -14,7 +14,6 @@ import SubTitle from './SubTitle/SubTitle';
 import Contacts from '../Shared/Contacts/Contacts';
 import Scimago from './Scimago/Scimago';
 import BlocText from './BlocText/BlocText';
-import ButtonToPage from '../Shared/Ui/Buttons/ButtonToPage';
 
 import CounterCard from './Actors/CounterCard';
 import SubTitleActors from './SubTitle/SubTitleActors';
@@ -272,16 +271,13 @@ class Fiche extends Component {
         />
         <div className={classes.Actors}>
           <div className="row">
-            <div className="col">
+            <div className={`col ${classes.ActorsMap}`}>
               <Map
                 className={classes.Map}
                 {...mapProps}
                 scrollWheelZoom={false}
               >
-                <TileLayer
-                  attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                  url="https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
-                />
+                <TileLayer url="https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png" />
                 {
                   // markers.map(marker => marker)
                 }
@@ -393,22 +389,6 @@ class Fiche extends Component {
                         }
                       </div>
                     </div>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-lg-9">
-                          test
-                        </div>
-                        <div className={`col-lg-3 ${classes.ContainerButton}`}>
-                          <div className={classes.Button}>
-                            <ButtonToPage
-                              url={`/fiche/${this.props.match.params.id}#acteursES`}
-                              target=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
                   </div>
                 );
               }
@@ -441,11 +421,11 @@ class Fiche extends Component {
                 <SubTitle
                   callbackLabel="Ses liens avec la France"
                   label="Nature des relations ES avec la France"
-                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                  hasDarkShadow
                 />
                 <BlocText
                   data={this.state.data.odsES.RelationEs}
-                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                  hasDarkShadow
                 />
               </Fragment>
             )
@@ -458,11 +438,11 @@ class Fiche extends Component {
                 <SubTitle
                   callbackLabel="Ses liens avec la France"
                   label="Nature des relations RI avec la France"
-                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                  hasDarkShadow
                 />
                 <BlocText
                   data={this.state.data.odsRI.RelationRi}
-                  cssStyle={{ boxShadow: `10px 20px 30px ${classes.shadowColorDark}` }}
+                  hasDarkShadow
                 />
               </Fragment>
             )
@@ -536,24 +516,6 @@ class Fiche extends Component {
           graphType="Connaitre le pays"
           countryCode={this.props.match.params.id}
         />
-
-        {
-          /*
-            <GraphCurie
-              graphType="mobilite-etudiante"
-              countryCode={this.props.match.params.id}
-            />
-            <GraphCurie
-              graphType="paysage-ES"
-              countryCode={this.props.match.params.id}
-            />
-            <GraphCurie
-              graphType="politique-ESRI"
-              countryCode={this.props.match.params.id}
-            />
-          */
-        }
-
       </section>
 
       <section className="container-fluid" id="paysageEs">
@@ -650,6 +612,11 @@ class Fiche extends Component {
         }
       }
     }
+
+    // if (this.state.data?.restCountries?.length !== 0) {
+    //   return this.renderFiche();
+    // }
+
     return this.renderNoData();
   }
 }

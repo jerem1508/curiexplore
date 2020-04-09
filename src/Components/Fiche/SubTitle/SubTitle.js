@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classes from './SubTitle.scss';
 
 const SubTitle = props => (
-  <div className={`row ${classes.SubTitle}`} style={props.cssStyle}>
+  <div className={`row ${classes.SubTitle} ${(props.hasDarkShadow) ? classes.ShadowDark : classes.ShadowLight}`}>
     <div className="col">
       <div>
         {props.callbackLabel}
@@ -19,8 +19,12 @@ const SubTitle = props => (
 
 export default SubTitle;
 
+SubTitle.defaultProps = {
+  hasDarkShadow: false,
+};
+
 SubTitle.propTypes = {
   callbackLabel: PropTypes.string,
   label: PropTypes.string,
-  cssStyle: PropTypes.object,
+  hasDarkShadow: PropTypes.bool,
 };

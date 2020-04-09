@@ -1,7 +1,7 @@
 @import '../../../style.scss';
 
 .Header {
-  box-shadow: 0px 15px 15px 0px #062947 !important;
+  box-shadow: $boxShadowDark;
   z-index: 1010;
   position: fixed;
   top: 0;
@@ -66,7 +66,7 @@
 
   .Header {
     background-color: white;
-    box-shadow: 0px 15px 15px 0px $lightBlueColor !important;
+    box-shadow: $boxShadowLight;
     z-index: 1010;
     position: fixed;
     width: 100%;

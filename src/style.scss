@@ -18,7 +18,6 @@ $greyBColor: #9DB3C7;
 $shadowColorLight: #9DB3C7;
 $shadowColorDark: #002d54;
 
-
 /* hommePage map */
 $mapBgColor: #FFB200;
 $mapCountryColor: #ffeec9;
@@ -113,6 +112,16 @@ $lightOrange: #FFD980;
   quatrePalliersColor2: $quatrePalliersColor2 ;
   quatrePalliersColor3: $quatrePalliersColor3 ;
   quatrePalliersColor4: $quatrePalliersColor4 ;
+}
+
+/* OMBRES*/
+$boxShadowLight: 0px 10px 10px 0px $shadowColorLight !important;
+$boxShadowDark: 0px 10px 10px 0px $shadowColorDark !important;
+.ShadowLight {
+  box-shadow: $boxShadowLight;
+}
+.ShadowDark {
+  box-shadow: $boxShadowDark;
 }
 
 /* BANNIERES*/

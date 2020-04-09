@@ -3,7 +3,7 @@
  .Banner {
   padding: 20px 0;
   font-size: 1.4rem;
-  box-shadow: 0px 15px 25px 0px;
+  box-shadow: $boxShadowLight;
     .ContainerButton{
       display: flex;
       align-items: center;

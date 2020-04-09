@@ -4,7 +4,7 @@
   margin-bottom: 32px;
 
   .MapContainer {
-    box-shadow: 0px 15px 25px 0px $shadowColorLight;
+    box-shadow: $boxShadowLight;
     height: 250px;
     background-color: #a1dce2;
     padding: 0;
@@ -14,7 +14,7 @@
     width: 100%;
   }
   .Cards {
-    box-shadow: 0px 15px 25px 0px $shadowColorLight;
+    box-shadow: $boxShadowLight;
     background-color: #D2D4D5;
 
     div:first-child {
