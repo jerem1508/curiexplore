@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 
 /* SCSS */
@@ -99,27 +99,29 @@ class CountriesList extends Component {
               }
             </div>
           </div>
-          <button
-            className={`btn ${classes.btnDeploy}`}
-            type="button"
-            onClick={this.btnDeployHandler}
-          >
-            {
-              (this.state.deployed)
-                ? (
-                  <div>
-                    Réduire la liste
-                    <i className="fas fa-arrow-up" />
-                  </div>
-                )
-                : (
-                  <div>
-                    Voir toute la liste
-                    <i className="fas fa-arrow-down" />
-                  </div>
-                )
-            }
-          </button>
+          <div className={classes.btnDeployContainer}>
+            <button
+              className={`btn ${classes.btnDeploy}`}
+              type="button"
+              onClick={this.btnDeployHandler}
+            >
+              {
+                (this.state.deployed)
+                  ? (
+                    <Fragment>
+                      Réduire la liste de pays
+                      <i className="fas fa-arrow-up" />
+                    </Fragment>
+                  )
+                  : (
+                    <Fragment>
+                      Voir tous les pays
+                      <i className="fas fa-arrow-down" />
+                    </Fragment>
+                  )
+              }
+            </button>
+          </div>
         </div>
       );
     }
@@ -169,7 +171,3 @@ class CountriesList extends Component {
 }
 
 export default CountriesList;
-
-// CountriesList.propTypes = {
-//   // language: PropTypes.string.isRequired,
-// };

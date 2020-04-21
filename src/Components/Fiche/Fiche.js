@@ -470,7 +470,6 @@ class Fiche extends Component {
           callbackLabel="Connaitre le pays"
           label="Résumé et situation"
         />
-
         <div className={`row ${classes.ResumeAndSituation}`}>
           <div className="col-lg pr-1">
             <div className={`${classes.Resume}`}>

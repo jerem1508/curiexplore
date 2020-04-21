@@ -1,56 +1,884 @@
 [
-  { "value": "pib",
-    "label": "Produit intérieur brut en $PPA",
-    "label_en" : "TODO",
-    "code" : "NY.GDP.MKTP.PP.CD",
-    "years" : [2008, 2017],
-    "steps" : [
-      { "unit" : "M",
-        "limits" : [
-          [0, 1591997000],
-          [1591997000, 23047118000],
-          [23047118000, 50511356000],
-          [50511356000, 61565054000],
-          [61565054000, 891565054000],
-          [891565054000, 100000000000000]
-        ]
-      }
-    ]
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Croissance de la population",
+    "code": "SP.POP.GROW",
+    "label": "% annuel",
+    "type": "line"
   },
-  { "value": "eff_sco_es",
-    "label": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
-    "label_en" : "TODO",
-    "code" : "25053",
-    "years" : [2009, 2017],
-    "steps" : [
-      { "unit" : "M",
-        "limits" : [
-          [0, 2000000],
-          [2000000, 4000000],
-          [4000000, 6000000],
-          [6000000, 8000000],
-          [8000000, 10000000],
-          [10000000, 100000000]
-        ]
-      }
-    ]
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Densité de la population",
+    "code": "EN.POP.DNST",
+    "label": "personnes par kilomètre carré de superficie des terres",
+    "type": "line"
   },
-  { "value": "dens_pop",
-    "label": "Densité de la population",
-    "label_en" : "TODO",
-    "code" : "EN.POP.DNST",
-    "years" : [2008, 2017],
-    "steps" : [
-      { "unit" : "%",
-        "limits" : [
-          [300, 500],
-          [200, 300],
-          [90, 200],
-          [30, 90],
-          [15, 30],
-          [0, 15]
-        ]
-      }
-    ]
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Parité de pouvoir d'achat",
+    "code": "PPP-C",
+    "label": "Monnaie nationale par dollar des É-U",
+    "type": "line"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "PIB",
+    "code": "NY.GDP.MKTP.PP.CD",
+    "label": "$ PPA internationaux courants",
+    "type": "line"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "PIB aux prix du marché",
+    "code": "NY.GDP.MKTP.CN.AD",
+    "label": "monnaies locales courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population",
+    "code": "SP.POP.TOTL.FE.IN",
+    "label": "femmes",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population",
+    "code": "SP.POP.TOTL.MA.IN",
+    "label": "hommes",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population",
+    "code": "SP.POP.TOTL",
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population active",
+    "code": "SL.TLF.TOTL.FE.ZS",
+    "label": "dont femmes (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population active",
+    "code": "SL.TLF.TOTL.IN",
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Population rurale",
+    "code": "SP.RUR.TOTL",
+    "label": "personnes",
+    "type": "column"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Produit intérieur brut",
+    "code": "GDP_PPP",
+    "label": "$ PPA courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Connaitre le pays",
+    "name": "Produit intérieur brut",
+    "code": "GDP",
+    "label": "monnaie nationale",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Afrique subsaharienne",
+    "code": "OE_5T8_40540",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Amerique du Nord et Europe occidentale",
+    "code": "OE_5T8_40500",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Amérique latine et les Caraïbes",
+    "code": "OE_5T8_40520",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Asie centrale",
+    "code": "OE_5T8_40505",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Asie du Sud et de l'Ouest",
+    "code": "OE_5T8_40535",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Asie orientale et Pacifique",
+    "code": "OE_5T8_40515",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'étranger, toutes les régions",
+    "code": "OE_5T8_40510",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits à l'Europe centrale et orientale",
+    "code": "OE_5T8_40530",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Etudiants nationaux inscrits aux Etats arabes",
+    "code": "OE_5T8_40525",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Flux net des étudiants en mobilité internationale (étudiants provenant de l'étranger dans le pays d'accueil - étudiants du pays à l'étranger), les deux sexes (nombre)",
+    "code": "MENF_5T8",
+    "label": "total",
+    "type": "line"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Taux de mobilité vers le pays d'accueil",
+    "code": "MSEP_5T8_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Taux de mobilité vers le pays d'accueil",
+    "code": "MSEP_5T8",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Taux de mobilité vers le pays d'accueil",
+    "code": "MSEP_5T8_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "mobilite-etudiante",
+    "name": "Taux net de flux des étudiants en mobilité internationale (étudiants provenant de l'étranger dans le pays d'accueil - étudiants du pays à l'étranger)",
+    "code": "MENFR_5T8",
+    "label": "total (%)",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 5 de la CITE",
+    "code": 25055,
+    "label": "féminin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 5 de la CITE",
+    "code": 42614,
+    "label": "masculin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 8 de la CITE",
+    "code": 25052,
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 5 de la CITE",
+    "code": 25051,
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE",
+    "code": 42635,
+    "label": "féminin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE",
+    "code": 42654,
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE",
+    "code": 42615,
+    "label": "masculin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE",
+    "code": 42637,
+    "label": "féminin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE",
+    "code": 42656,
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE",
+    "code": 42617,
+    "label": "masculin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 8 de la CITE",
+    "code": 25056,
+    "label": "féminin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 8 de la CITE",
+    "code": 42619,
+    "label": "masculin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
+    "code": 25057,
+    "label": "féminin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
+    "code": 25053,
+    "label": "total",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Effectifs scolarisés dans l'enseignement supérieur, tous les programmes",
+    "code": 42620,
+    "label": "masculin",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences",
+    "code": "FOSGP_5T8_FNON500600700",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences",
+    "code": "FOSGP_5T8_FNON500600700_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences",
+    "code": "FOSGP_5T8_FNON500600700_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en  Ingénierie, industries de transformation et construction",
+    "code": "FOSGP_5T8_F700",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire",
+    "code": "FOSGP_5T8_F800",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire",
+    "code": "FOSGP_5T8_F800_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire",
+    "code": "FOSGP_5T8_F800_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit",
+    "code": "FOSGP_5T8_F400",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit",
+    "code": "FOSGP_5T8_F400_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit",
+    "code": "FOSGP_5T8_F400_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés",
+    "code": "FOSGP_5T8_FUK",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés",
+    "code": "FOSGP_5T8_FUK_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés",
+    "code": "FOSGP_5T8_FUK_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Education",
+    "code": "FOSGP_5T8_F110",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Education",
+    "code": "FOSGP_5T8_F110_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Education",
+    "code": "FOSGP_5T8_F110_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Ingénierie, industries de transformation et construction",
+    "code": "FOSGP_5T8_F700_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Ingénierie, industries de transformation et construction",
+    "code": "FOSGP_5T8_F700_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts",
+    "code": "FOSGP_5T8_F200",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts",
+    "code": "FOSGP_5T8_F200_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts",
+    "code": "FOSGP_5T8_F200_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociale",
+    "code": "FOSGP_5T8_F900",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociales",
+    "code": "FOSGP_5T8_F900_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociales",
+    "code": "FOSGP_5T8_F900_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques",
+    "code": "FOSGP_5T8_F500",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques",
+    "code": "FOSGP_5T8_F500_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques",
+    "code": "FOSGP_5T8_F500_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information",
+    "code": "FOSGP_5T8_F300",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information",
+    "code": "FOSGP_5T8_F300_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information",
+    "code": "FOSGP_5T8_F300_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques",
+    "code": "FOSGP_5T8_F500600700",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques",
+    "code": "FOSGP_5T8_F500600700_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques",
+    "code": "FOSGP_5T8_F500600700_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Services",
+    "code": "FOSGP_5T8_F1000",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Services",
+    "code": "FOSGP_5T8_F1000_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Services",
+    "code": "FOSGP_5T8_F1000_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication",
+    "code": "FOSGP_5T8_F600",
+    "label": "total (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication",
+    "code": "FOSGP_5T8_F600_F",
+    "label": "féminin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage ES",
+    "name": "Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication",
+    "code": "FOSGP_5T8_F600_M",
+    "label": "masculin (%)",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs de l'enseignement supérieur (EPT)",
+    "code": "HP_RS",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs de l'enseignement supérieur en pourcentage du total national",
+    "code": "HP_RSXRS",
+    "label": "Pourcentage",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs des entreprises (EPT)",
+    "code": "BP_RS",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs des entreprises en pourcentage du total national",
+    "code": "BP_RSXRS",
+    "label": "Pourcentage",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs du secteur de l'Etat (EPT)",
+    "code": "GP_RS",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Chercheurs du secteur de l'Etat en pourcentage du total national",
+    "code": "GP_RSXRS",
+    "label": "Pourcentage",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Crédits budgétaires publics de R-D -- CBPRD -- Total",
+    "code": "C_PPP",
+    "label": "$ PPA courantes",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Dépenses en recherche fondamentale en pourcentage du PIB",
+    "code": "G_BRXGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Dépenses intramuros de R-D du secteur de l'enseignement supérieur -- DIRDES",
+    "code": "H_PPP",
+    "label": "$ PPA courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Dépenses intramuros de R-D du secteur de l'Etat -- DIRDET",
+    "code": "GV_PPP",
+    "label": "$ PPA courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Dépenses intramuros de R-D du secteur des entreprises -- DIRDE",
+    "code": "B_PPP",
+    "label": "$ PPA courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRD en pourcentage du PIB",
+    "code": "G_XGDP",
+    "label": "% du PIB",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRD financée par les entreprises en pourcentage du PIB",
+    "code": "G_FBXGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRD financée par l'Etat en pourcentage du PIB",
+    "code": "G_FGXGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRD par habitant",
+    "code": "G_XPOP",
+    "label": "$ PPA courantes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRDE en pourcentage du PIB",
+    "code": "B_XGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRDE financée par les entreprises en pourcentage de la valeur ajoutée dans l'industrie",
+    "code": "B_FBXVA",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRDES en pourcentage du PIB",
+    "code": "H_XGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "DIRDET en pourcentage du PIB",
+    "code": "GV_XGDP",
+    "label": "Pourcentage",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRD",
+    "code": "G_XEH",
+    "label": "% de la DIRD exécutée par le secteur de l'enseignement supérieur",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRD",
+    "code": "G_XEG",
+    "label": "% de la DIRD exécutée par le secteur de l'Etat",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRD",
+    "code": "G_XEB",
+    "label": "% de la DIRD exécutée par le secteur des entreprises",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRD",
+    "code": "G_XEI",
+    "label": "% de la DIRD exécutée par le secteur des institutions sans but lucratif",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRDE",
+    "code": "B_XSERV",
+    "label": "% de la DIRDE exécutée dans les services",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRDE",
+    "code": "B_XAERO",
+    "label": "% de la DIRDE exécutée dans l'industrie aérospatiale",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRDE",
+    "code": "B_XCOMP",
+    "label": "% de la DIRDE exécutée dans l'industrie des ordinateurs, articles électroniques et optiques",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Exécution DIRDE",
+    "code": "B_XDRUG",
+    "label": "% de la DIRDE exécutée dans l'industrie pharmaceutique",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Femmes chercheurs (personnes physiques)",
+    "code": "TH_WRS",
+    "label": "Personnes",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Femmes chercheurs en pourcentage du total des chercheurs (personnes physiques)",
+    "code": "TH_WRXRS",
+    "label": "Pourcentage",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRD",
+    "code": "G_XFON",
+    "label": "% de la DIRD financée par d'autres sources nationales",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRD",
+    "code": "G_XFA",
+    "label": "% de la DIRD financée par le reste du monde",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRD",
+    "code": "G_XFB",
+    "label": "% de la DIRD financée par les entreprises",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRD",
+    "code": "G_XFG",
+    "label": "% de la DIRD financée par l'Etat",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRDE",
+    "code": "B_XFON",
+    "label": "% de la DIRDE financée par d'autres sources nationales",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRDE",
+    "code": "B_XFA",
+    "label": "% de la DIRDE financée par le reste du monde",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRDE",
+    "code": "B_XFB",
+    "label": "% de la DIRDE financée par les entreprises",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Financement DIRDE",
+    "code": "B_XFG",
+    "label": "% de la DIRDE financée par l'Etat",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Personnel total de R-D (EPT)",
+    "code": "TP_TT",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Personnel total de R-D de l'enseignement supérieur (EPT)",
+    "code": "HP_TT",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Personnel total de R-D des entreprises (EPT)",
+    "code": "BP_TT",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Personnel total de R-D des entreprises en pourcentage du total national",
+    "code": "BP_TTXTT",
+    "label": "Pourcentage",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Personnel total de R-D du secteur de l'Etat (EPT)",
+    "code": "GP_TT",
+    "label": "Équivalent temps plein",
+    "type": "line"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Pourcentage de la DIRDES financée par les entreprises",
+    "code": "H_XFB",
+    "label": "% de la DIRDES financée par les entreprises",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Pourcentage de la DIRDET financée par les entreprises",
+    "code": "GV_XFB",
+    "label": "% de la DIRDET financée par les entreprises",
+    "type": "column"
+  },
+  {
+    "chapitre": "Paysage RI",
+    "name": "Total chercheurs (EPT)",
+    "code": "TP_RS",
+    "label": "Équivalent temps plein",
+    "type": "line"
   }
 ]

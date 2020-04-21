@@ -67,6 +67,7 @@ class Annuaire extends Component {
         const isSelected = (letter === this.state.selectedLetter) ? classes.SelectedLetter : null;
         return (
           <span
+            key={`letter${letter}`}
             className={`${classes.LetterClickable} ${isSelected}`}
             onClick={() => this.setSelectedLetter(letter)}
             onKeyPress={() => this.setSelectedLetter(letter)}
@@ -79,7 +80,7 @@ class Annuaire extends Component {
       }
 
       return (
-        <span className={classes.Letter}>
+        <span className={classes.Letter} key={`disabledLetter${letter}`}>
           {letter}
         </span>
       );
@@ -148,6 +149,7 @@ class Annuaire extends Component {
                 <Title
                   label={country.namefr}
                   icon="fas fa-address-card"
+                  code={country.isoalpha3}
                 />
                 <Contacts
                   language="fr"

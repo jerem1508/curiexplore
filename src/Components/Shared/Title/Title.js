@@ -8,9 +8,18 @@ const Title = props => (
   <div className={`row ${classes.Title}`}>
     <div className="col">
       <i className={props.icon} />
-      <span>
-        {props.label}
-      </span>
+      {
+        (props.code) ? (
+          <a href={`/Fiche/${props.code}`}>
+            {props.label}
+          </a>
+        )
+          : (
+            <span>
+              {props.label}
+            </span>
+          )
+      }
     </div>
   </div>
 );
@@ -20,4 +29,5 @@ export default Title;
 Title.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.string,
+  code: PropTypes.bool,
 };

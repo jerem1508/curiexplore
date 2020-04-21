@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import { Container, Row, Col } from 'react-bootstrap';
 
 import classes from './Cartographie.scss';
 
@@ -33,7 +32,6 @@ const AirbnbSlider = withStyles({
       boxShadow: '#ccc 0px 2px 3px 1px',
     },
     '& .bar': {
-      // display: inline-block !important;
       height: 9,
       width: 1,
       backgroundColor: 'currentColor',
@@ -44,6 +42,10 @@ const AirbnbSlider = withStyles({
   active: {},
   valueLabel: {
     left: 'calc(-50% + 4px)',
+  },
+  markLabel: {
+    color: '#fff',
+    paddingTop: '12px',
   },
   track: {
     height: 3,
@@ -137,14 +139,15 @@ export default class MapSlider extends Component {
       // console.log('changement');
     }
     return (
-      <Container>
-        <Row>
-          <Col sm={1} />
-          <Col sm={3}>
+      <div className={`Container ${classes.MapSlider}`}>
+        <div className="row">
+          <div className="col-3 text-right">
             <span style={{ marginRight: '20px' }}>Voir l&apos;évolution</span>
-            <button className={classes.dot} type="button" onClick={this.toggleButton}><i className={`fas fa-${this.state.icon}`} /></button>
-          </Col>
-          <Col sm={7}>
+            <button className={classes.dot} type="button" onClick={this.toggleButton}>
+              <i className={`fas fa-${this.state.icon}`} />
+            </button>
+          </div>
+          <div className="col-7">
             <AirbnbSlider
               defaultValue={this.props.defaultYear}
               aria-labelledby="discrete-slider-restrict"
@@ -158,9 +161,9 @@ export default class MapSlider extends Component {
               ThumbComponent={AirbnbThumbComponent}
               aria-label="Airbnb slider"
             />
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     );
   }
 }

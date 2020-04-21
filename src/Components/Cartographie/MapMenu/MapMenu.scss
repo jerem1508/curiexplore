@@ -1,0 +1,11 @@
+@import '../../../style.scss';
+
+.MapMenu {
+  padding: 16px 0;
+  background-color: $lightBlueColor;
+
+  .SubTitle {
+    font-style: italic;
+    color: $blueColor;
+  }
+}

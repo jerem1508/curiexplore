@@ -49,7 +49,7 @@ a {
 }
 .btnDeploy {
   position: absolute;
-  bottom: 16px;
+  bottom: 8px;
   background-color: $blueColor;
   color: white;
   border-radius: 25px;
@@ -57,4 +57,11 @@ a {
     display: inline-block;
     padding-left: 16px;
   }
+}
+.btnDeployContainer {
+  position: absolute;
+  bottom: 0px;
+  background-color: White;
+  width: 100%;
+  height: 50px;
 }

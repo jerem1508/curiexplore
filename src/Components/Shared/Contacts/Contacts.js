@@ -33,12 +33,6 @@ class Contacts extends Component {
     this.setMarkers();
   }
 
-  // componentDidUpdate() {
-  //   if (this.props.data !== this.state.data) {
-  //     this.setMarkers();
-  //   }
-  // }
-
   setMarkers = () => {
     if (this.props.data.adresseambassade && this.props.data.villeambassade) {
       let completAddress = `${this.props.data.adresseambassade} ${this.props.data.villeambassade}`;
@@ -63,10 +57,14 @@ class Contacts extends Component {
   }
 
   getCoordinates = (address, type) => {
-    const prefixeUrl = 'http://10.243.98.74/geocoder/address/';
+    console.log('getCoordinates', address, type);
+
+    const prefixeUrl = 'http://185.161.45.213/geocoder/address/';
     const suffixeUrl = '?provider=openstreetmap';
     const url = `${prefixeUrl}${address}${suffixeUrl}`;
     Axios.get(url).then((response) => {
+      console.log('response', response);
+
       if (response.data) {
         if (response.data.coordinates) {
           if (response.data.coordinates.coordinates) {
@@ -78,7 +76,11 @@ class Contacts extends Component {
           }
         }
       }
-    });
+    })
+      .catch((e) => {
+        // eslint-disable-next-line
+        console.log('e=>', e);
+      });
   }
 
   clickOnCardHandler = (selected) => {
