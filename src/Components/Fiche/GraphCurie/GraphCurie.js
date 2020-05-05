@@ -18,7 +18,7 @@ HCExporting(Highcharts);
 HCOfflineExporting(Highcharts);
 
 const params = require('./GraphCurie-data/indicateurs.json');
-const isoList = require('../../Homepage/CountriesList/countriesList.json');
+const isoList = require('../../Homepage/Components/CountriesList/countriesList.json');
 
 // CODE WORDL : WLD
 // CODE OCDE : OED

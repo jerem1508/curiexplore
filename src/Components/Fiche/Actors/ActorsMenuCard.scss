@@ -1,0 +1,166 @@
+@import '../../../style.scss';
+
+.Modal80w{
+  max-width: 80%;
+}
+
+.ModalTitle {
+  color: $blueColor;
+  font-size: 1rem;
+  text-transform: uppercase;
+  line-height: 24px;
+}
+
+.List {
+  overflow-y: auto;
+}
+LI {
+  list-style: none;
+  margin-right: 16px;
+}
+
+.Icon {
+  color: $lightBlueColor;
+  padding: 10px;
+  border-bottom: 1.5px solid $lightBlueColor;
+}
+
+.SubTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 1.5px solid $lightBlueColor;
+
+  .Icon {
+    font-size: 2rem;
+    border-bottom: 0;
+    color: $darkBlueColor;
+  }
+  .Counter {
+    color: $blueColor;
+    font-family: 'Bitter', serif;
+  }
+  .Label {
+    font-family: 'Bitter', serif;
+    color: $darkBlueColor;
+  }
+}
+.InstitutionName1 {
+  margin-top: 16px;
+  font-family: 'Bitter', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: $darkBlueColor;
+}
+.InstitutionName2 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $greyAColor;
+}
+.Description {
+  border-left: 4px solid $greyBColor;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+.WebSite {
+  text-align: right;
+  
+  .LinkToWebsite {
+    padding: 5px 12px;
+    border-radius: 16px;
+    background-color: $blueColor;
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .LinkToWebsite:hover {
+    color: white;
+    background-color: $darkBlueColor;
+  }
+
+}
+
+
+.CounterCard {
+    box-shadow: $boxShadowLight;
+    background-color: white;
+    margin-top: 5px;
+    text-align: center;
+    height: 140px;
+    // padding: 15px;
+    color: $darkBlueColor;
+    font-family: 'Bitter', serif;
+
+    span {
+      color: $blueColor;
+      font-weight: bold;
+      font-family: 'Bitter', serif;
+    }
+
+    .Button {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 16px;
+      background-color: $blueColor;
+      color: white;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .Button:hover {
+      color: white;
+      background-color: $darkBlueColor;
+    }
+  }
+
+  .CounterCardEmpty {
+    // background-color: white;
+    margin-top: 5px;
+    text-align: center;
+    height: 153px;
+    // padding: 15px;
+    color: $darkBlueColor;
+
+    div:first-child {
+      color: $blueColor;
+      font-weight: bold;
+      font-family: 'Bitter', serif;
+
+      .label {
+        color: $darkBlueColor;
+        font-weight: lighter;
+      }
+    }
+
+    i {
+      color: $lightBlueColor;
+      padding: 10px;
+      border-bottom: 1.5px solid $lightBlueColor;
+    }
+
+    .Buttons {
+      padding-top: 16px;
+      padding-left: 32px;
+      padding-right: 32px;
+
+      .Button {
+        display: inline-block;
+        padding: 5px;
+        border-radius: 16px;
+        background-color: $blueColor;
+        color: white;
+        font-size: 0.9em;
+        font-weight: bold;
+        span:first-child {
+          display: inline-block;
+          width: 80%;
+          padding-left: 16px;
+        }
+        span:last-child {
+          display: inline-block;
+          width: 20%;
+          text-align: center;
+        }
+      }
+    }
+  }

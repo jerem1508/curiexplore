@@ -11,32 +11,21 @@
 .Title {
   color: grey;
   font-style: italic;
+  text-transform: uppercase;
 }
 .Content {
   margin-top: 36px;
 
 }
 .ButtonWithModal {
-
   .Button {
-    color: $colorCardButton;
-    background-color: $bgColorCardButton;
+    color: white;
+    background-color: $blueColor;
+    border-radius: 16px;
     font-weight: bold;
-    I {
-      display: inline-block;
-      padding-left: 16px;
-    }
   }
-
 }
 
-UL {
-  margin-top: 10px;
-  text-align: left;
-  font-size: 0.9rem;
-  color: $scanrdeepblueColor;
-
-  I {
-    color: $scanrblueColor
-  }
+.Modal80w{
+  max-width: 80%;
 }

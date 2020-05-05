@@ -90,6 +90,9 @@
     "label": "monnaie nationale",
     "type": "line"
   },
+
+
+  
   {
     "chapitre": "mobilite-etudiante",
     "name": "Etudiants nationaux inscrits à l'Afrique subsaharienne",

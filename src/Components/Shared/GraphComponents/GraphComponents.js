@@ -43,9 +43,6 @@ export default class DisplayComponent extends Component {
         case 'pie':
           GraphComponent = loadable(() => import('./Graphs/HighChartsDonut'));
           break;
-        case 'other':
-          GraphComponent = loadable(() => import('./Graphs/TeamPie'));
-          break;
         default:
           GraphComponent = () => (
             <p>{txt}</p>

@@ -1,0 +1,67 @@
+@import '../../../../style.scss';
+
+.country {
+  list-style-type: none;
+  color : $darkBlueColor;
+  font-family: 'Bitter', serif;
+}
+
+dt {
+  border-bottom: 1px solid $darkBlueColor;
+  color: $darkBlueColor;
+}
+
+ul {
+  padding-left: 0px;
+}
+
+a {
+  color: $darkBlueColor;
+}
+
+.countryList {
+  border-top: 2px solid $darkBlueColor;
+}
+
+.noData {
+  color: $greyBColor;
+}
+
+.searchRow {
+  padding: 8px;
+
+  .searchText {
+    color: $darkBlueColor;
+    font-style: italic;
+  }
+}
+
+.countryList{
+  height: 250px;
+  overflow-y: hidden;
+  position: relative;
+  padding-bottom: 50px;
+  .Content{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+}
+.btnDeploy {
+  position: absolute;
+  bottom: 8px;
+  background-color: $blueColor;
+  color: white;
+  border-radius: 25px;
+  i {
+    display: inline-block;
+    padding-left: 16px;
+  }
+}
+.btnDeployContainer {
+  position: absolute;
+  bottom: 0px;
+  background-color: White;
+  width: 100%;
+  height: 50px;
+}

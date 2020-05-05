@@ -14,8 +14,6 @@ import AccessibilityPage from './Components/Other-pages/Accessibility/Accessibil
 import ContactPage from './Components/Other-pages/Contact/Contact';
 import GlossaryPage from './Components/Other-pages/Glossary/Glossary';
 import LegalNoticePage from './Components/Other-pages/Legal-notice/Legal-notice';
-import Ressources from './Components/Other-pages/Ressources/Ressources';
-import TeamAndProjectPage from './Components/Other-pages/Team-and-project/Team-and-project';
 
 const App = () => (
   <Router>
@@ -66,17 +64,6 @@ const App = () => (
         exact
         path="/Mentions-legales"
         component={props => (<LegalNoticePage {...props} />)}
-      />
-
-      <Route
-        exact
-        path="/L-equipe-et-son-projet"
-        component={props => (<TeamAndProjectPage {...props} />)}
-      />
-
-      <Route
-        path={['/Ressources/:id', '/Ressources']}
-        component={props => (<Ressources {...props} />)}
       />
 
       <Route

@@ -1,0 +1,66 @@
+@import '../../../../style.scss';
+
+.Maps {
+  padding: 120px 0 36px 0;
+  background-color: $darkBlueColor;
+
+  H1 {
+    color: $skyBlueColor;
+    font-size: 3rem;
+    font-weight: normal;
+    STRONG {
+      font-weight: bold;
+    }
+  }
+  H2 {
+    font-size: 1.5rem;
+    font-family: 'Bitter', serif;
+    color: $lightBlueColor;
+    .HighLight {
+      color: $skyBlueColor;
+    }
+  }
+  HR {
+    border: 1px solid #335d82;
+  }
+  .Label1 {
+    div:first-child {
+      font-family: 'Bitter', serif;
+      color: $skyBlueColor;
+      font-size: 1.8rem;
+      line-height: 80%;
+    }
+    div:last-child {
+      font-family: 'Bitter', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: $lightBlueColor;
+    }
+  }
+  .Label2 {
+    font-family: 'Bitter', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: $lightBlueColor;
+    display: inline-block;
+    padding-right: 8px;
+  }
+}
+.MapContainer {
+  margin-top: 16px;
+  .Map{
+    height: 710px;
+  }
+}
+/*
+.Map {
+  margin-top: 16px;
+  width: 100%;
+  text-align: center;
+
+  .MapSVG {
+    background-color: $orangeColor;
+    display: block;
+  }
+}
+*/

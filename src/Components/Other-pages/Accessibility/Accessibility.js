@@ -1,40 +1,27 @@
 import React from 'react';
-import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import Footer from '../../Shared/Footer/Footer';
 import Header from '../../Shared/Header/Header';
 import HeaderTitle from '../../Shared/HeaderTitle/HeaderTitle';
 
-/* Gestion des langues */
-import messagesFr from './translations/fr.json';
-import messagesEn from './translations/en.json';
-
 /* SCSS */
 import classes from './Accessibility.scss';
 
-const messages = {
-  fr: messagesFr,
-  en: messagesEn,
-};
-
 const Accessibility = props => (
-  <IntlProvider locale={props.language} messages={messages[props.language]}>
-    <div className={`container-fluid ${classes.Accessibility}`}>
-      <Header
+  <div className={`container-fluid ${classes.Accessibility}`}>
+    <Header
+      language={props.language}
+      switchLanguage={props.switchLanguage}
+    />
+    <section>
+      <HeaderTitle
         language={props.language}
-        switchLanguage={props.switchLanguage}
+        label="accessibility"
       />
-      <section>
-        <HeaderTitle
-          language={props.language}
-          label="accessibility"
-        />
-
-      </section>
-      <Footer language={props.language} />
-    </div>
-  </IntlProvider>
+    </section>
+    <Footer language={props.language} />
+  </div>
 );
 
 export default Accessibility;

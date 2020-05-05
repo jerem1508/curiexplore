@@ -7,7 +7,7 @@ import {
 
 
 import classes from './CountryMap.scss';
-import worldGeoJSON from '../../Homepage/Maps/custom.geo.json';
+import worldGeoJSON from '../../../Data/custom.geo.json';
 import capitalsList from './capitalsList.json';
 
 export default class Carto extends Component {

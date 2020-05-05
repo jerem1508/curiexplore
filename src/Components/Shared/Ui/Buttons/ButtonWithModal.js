@@ -17,10 +17,6 @@ class ButtonWithModal extends Component {
     this.setState({ showModal: true });
   }
 
-  logoFunction = logo => (
-    (logo) ? <div className={classes.Logo}><i className={logo} /></div> : null
-  );
-
   titleFunction = title => (
     (title) ? <div className={classes.Title}>{title}</div> : null
   );
@@ -28,23 +24,27 @@ class ButtonWithModal extends Component {
   render() {
     return (
       <div className={classes.ButtonWithModal}>
-        <Modal show={this.state.showModal} onHide={this.handleCloseModal}>
-          <Modal.Header closeButton />
-
-          <Modal.Body>
+        <Modal
+          show={this.state.showModal}
+          onHide={this.handleCloseModal}
+          dialogClassName={classes.Modal80w}
+        >
+          <Modal.Header closeButton>
             <div className={classes.Header}>
-              {this.logoFunction(this.props.logo)}
               {this.titleFunction(this.props.title)}
             </div>
+          </Modal.Header>
+
+          <Modal.Body>
             <div className={`container ${classes.Content}`}>
               {this.props.dataHtml}
             </div>
           </Modal.Body>
         </Modal>
 
-        <button className={`btn ${classes.Button}`} onClick={this.handleShowModal} onKeypress={this.handleShowModal} type="button" tabIndex={0}>
+        <button className={`btn mt-3 p-0 pl-2 pr-2 ${classes.Button}`} onClick={this.handleShowModal} onKeypress={this.handleShowModal} type="button" tabIndex={0}>
           {this.props.buttonLabel}
-          <i className="fas fa-expand" />
+          <i className={`${this.props.logo} ml-2`} />
         </button>
       </div>
     );

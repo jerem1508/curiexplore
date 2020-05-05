@@ -80,7 +80,7 @@
 
     .Map {
       box-shadow: $boxShadowLight;
-      height: 250px;
+      height: 300px;
       background-color: #a1dce2;
       margin-left: 17px;
     }
@@ -106,104 +106,4 @@
       padding-left: 16px;
     }
 
-    .CounterCard {
-      box-shadow: $boxShadowLight;
-      background-color: white;
-      margin-top: 5px;
-      text-align: center;
-      height: 153px;
-      // padding: 15px;
-      color: $darkBlueColor;
-      font-family: 'Bitter', serif;
-
-      span {
-        color: $blueColor;
-        font-weight: bold;
-        font-family: 'Bitter', serif;
-      }
-
-      i {
-        color: $lightBlueColor;
-        padding: 10px;
-        border-bottom: 1.5px solid $lightBlueColor;
-      }
-
-      .Buttons {
-        padding-top: 16px;
-        padding-left: 32px;
-        padding-right: 32px;
-
-        .Button {
-          display: inline-block;
-          padding: 5px;
-          border-radius: 16px;
-          background-color: $blueColor;
-          color: white;
-          font-size: 0.9em;
-          font-weight: bold;
-          span:first-child {
-            display: inline-block;
-            width: 80%;
-            padding-left: 16px;
-          }
-          span:last-child {
-            display: inline-block;
-            width: 20%;
-            text-align: center;
-          }
-        }
-      }
-    }
-
-    .CounterCardEmpty {
-      // background-color: white;
-      margin-top: 5px;
-      text-align: center;
-      height: 153px;
-      // padding: 15px;
-      color: $darkBlueColor;
-
-      div:first-child {
-        color: $blueColor;
-        font-weight: bold;
-        font-family: 'Bitter', serif;
-
-        .label {
-          color: $darkBlueColor;
-          font-weight: lighter;
-        }
-      }
-
-      i {
-        color: $lightBlueColor;
-        padding: 10px;
-        border-bottom: 1.5px solid $lightBlueColor;
-      }
-
-      .Buttons {
-        padding-top: 16px;
-        padding-left: 32px;
-        padding-right: 32px;
-
-        .Button {
-          display: inline-block;
-          padding: 5px;
-          border-radius: 16px;
-          background-color: $blueColor;
-          color: white;
-          font-size: 0.9em;
-          font-weight: bold;
-          span:first-child {
-            display: inline-block;
-            width: 80%;
-            padding-left: 16px;
-          }
-          span:last-child {
-            display: inline-block;
-            width: 20%;
-            text-align: center;
-          }
-        }
-      }
-    }
   }

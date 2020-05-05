@@ -1,0 +1,127 @@
+chapitre;name;unit.code;unit.label;type
+Connaitre le pays;Croissance de la population ;SP.POP.GROW;% annuel;line
+Connaitre le pays;Densité de la population ;EN.POP.DNST;personnes par kilomètre carré de superficie des terres;line
+Connaitre le pays;Parité de pouvoir d'achat;PPP-C;Monnaie nationale par dollar des É-U;line
+Connaitre le pays;PIB ;NY.GDP.MKTP.PP.CD;$ PPA internationaux courants;line
+Connaitre le pays;PIB aux prix du marché  ;NY.GDP.MKTP.CN.AD;monnaies locales courantes;line
+Connaitre le pays;Population;SP.POP.TOTL.FE.IN;femmes;column
+Connaitre le pays;Population;SP.POP.TOTL.MA.IN;hommes;column
+Connaitre le pays;Population;SP.POP.TOTL;total;column
+Connaitre le pays;Population active;SL.TLF.TOTL.FE.ZS;dont femmes (%);column
+Connaitre le pays;Population active;SL.TLF.TOTL.IN;total;column
+Connaitre le pays;Population rurale;SP.RUR.TOTL;personnes;column
+Connaitre le pays;Produit intérieur brut;GDP_PPP;$ PPA courantes;line
+Connaitre le pays;Produit intérieur brut;GDP;monnaie nationale;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Afrique subsaharienne;OE_5T8_40540;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Amerique du Nord et Europe occidentale;OE_5T8_40500;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Amérique latine et les Caraïbes;OE_5T8_40520;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Asie centrale;OE_5T8_40505;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Asie du Sud et de l'Ouest;OE_5T8_40535;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Asie orientale et Pacifique;OE_5T8_40515;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'étranger, toutes les régions;OE_5T8_40510;total;line
+mobilite-etudiante;Etudiants nationaux inscrits à l'Europe centrale et orientale;OE_5T8_40530;total;line
+mobilite-etudiante;Etudiants nationaux inscrits aux Etats arabes;OE_5T8_40525;total;line
+mobilite-etudiante;Flux net des étudiants en mobilité internationale (étudiants provenant de l'étranger dans le pays d'accueil - étudiants du pays à l'étranger), les deux sexes (nombre);MENF_5T8;total;line
+mobilite-etudiante;Taux de mobilité vers le pays d'accueil;MSEP_5T8_F;féminin (%);column
+mobilite-etudiante;Taux de mobilité vers le pays d'accueil;MSEP_5T8;total (%);column
+mobilite-etudiante;Taux de mobilité vers le pays d'accueil;MSEP_5T8_M;masculin (%);column
+mobilite-etudiante;Taux net de flux des étudiants en mobilité internationale (étudiants provenant de l'étranger dans le pays d'accueil - étudiants du pays à l'étranger);MENFR_5T8;total (%);line
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 5 de la CITE;25055;féminin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 5 de la CITE;42614;masculin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur,  programmes du niveau 8 de la CITE;25052;total;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 5 de la CITE;25051;total;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE;42635;féminin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE;42654;total;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 6 de la CITE;42615;masculin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE;42637;féminin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE;42656;total;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 7 de la CITE;42617;masculin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 8 de la CITE;25056;féminin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, programmes du niveau 8 de la CITE;42619;masculin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, tous les programmes;25057;féminin;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, tous les programmes;25053;total;column
+Paysage ES;Effectifs scolarisés dans l'enseignement supérieur, tous les programmes;42620;masculin;column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences;FOSGP_5T8_FNON500600700;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences;FOSGP_5T8_FNON500600700_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur dans d'autres domaines d'études que les Sciences;FOSGP_5T8_FNON500600700_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en  Ingénierie, industries de transformation et construction;FOSGP_5T8_F700;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire;FOSGP_5T8_F800;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire;FOSGP_5T8_F800_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Agriculture, sylviculture, halieutique et sciences vétérinaire;FOSGP_5T8_F800_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit;FOSGP_5T8_F400;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit;FOSGP_5T8_F400_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Commerce, administration et droit;FOSGP_5T8_F400_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés;FOSGP_5T8_FUK;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés;FOSGP_5T8_FUK_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en domaines d'études non-spécifiés;FOSGP_5T8_FUK_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Education;FOSGP_5T8_F110;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Education;FOSGP_5T8_F110_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Education;FOSGP_5T8_F110_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Ingénierie, industries de transformation et construction;FOSGP_5T8_F700_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Ingénierie, industries de transformation et construction;FOSGP_5T8_F700_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts;FOSGP_5T8_F200;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts;FOSGP_5T8_F200_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Lettres et Arts;FOSGP_5T8_F200_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociale;FOSGP_5T8_F900;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociales;FOSGP_5T8_F900_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Santé et Protection sociales;FOSGP_5T8_F900_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques;FOSGP_5T8_F500;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques;FOSGP_5T8_F500_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences naturelles, mathématiques et statistiques;FOSGP_5T8_F500_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information;FOSGP_5T8_F300;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information;FOSGP_5T8_F300_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences sociales, journalisme et information;FOSGP_5T8_F300_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques;FOSGP_5T8_F500600700;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques;FOSGP_5T8_F500600700_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Sciences, Technologies, Ingénierie et Mathématiques;FOSGP_5T8_F500600700_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Services;FOSGP_5T8_F1000;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Services;FOSGP_5T8_F1000_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Services;FOSGP_5T8_F1000_M;masculin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication;FOSGP_5T8_F600;total (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication;FOSGP_5T8_F600_F;féminin (%);column
+Paysage ES;Pourcentage de diplômés de l'enseignement supérieur en Technologies de l’information et de la communication;FOSGP_5T8_F600_M;masculin (%);column
+Paysage RI;Chercheurs de l'enseignement supérieur (EPT);HP_RS;Équivalent temps plein;line
+Paysage RI;Chercheurs de l'enseignement supérieur en pourcentage du total national;HP_RSXRS;Pourcentage;line
+Paysage RI;Chercheurs des entreprises (EPT);BP_RS;Équivalent temps plein;line
+Paysage RI;Chercheurs des entreprises en pourcentage du total national;BP_RSXRS;Pourcentage;line
+Paysage RI;Chercheurs du secteur de l'Etat (EPT);GP_RS;Équivalent temps plein;line
+Paysage RI;Chercheurs du secteur de l'Etat en pourcentage du total national;GP_RSXRS;Pourcentage;line
+Paysage RI;Crédits budgétaires publics de R-D -- CBPRD -- Total ;C_PPP;$ PPA courantes;column
+Paysage RI;Dépenses en recherche fondamentale en pourcentage du PIB;G_BRXGDP;Pourcentage;column
+Paysage RI;Dépenses intramuros de R-D du secteur de l'enseignement supérieur -- DIRDES ;H_PPP;$ PPA courantes;line
+Paysage RI;Dépenses intramuros de R-D du secteur de l'Etat -- DIRDET ;GV_PPP;$ PPA courantes;line
+Paysage RI;Dépenses intramuros de R-D du secteur des entreprises -- DIRDE ;B_PPP;$ PPA courantes;line
+Paysage RI;DIRD en pourcentage du PIB;G_XGDP;% du PIB;column
+Paysage RI;DIRD financée par les entreprises en pourcentage du PIB;G_FBXGDP;Pourcentage;column
+Paysage RI;DIRD financée par l'Etat en pourcentage du PIB;G_FGXGDP;Pourcentage;column
+Paysage RI;DIRD par habitant ;G_XPOP;$ PPA courantes;line
+Paysage RI;DIRDE en pourcentage du PIB;B_XGDP;Pourcentage;column
+Paysage RI;DIRDE financée par les entreprises en pourcentage de la valeur ajoutée dans l'industrie;B_FBXVA;Pourcentage;column
+Paysage RI;DIRDES en pourcentage du PIB;H_XGDP;Pourcentage;column
+Paysage RI;DIRDET en pourcentage du PIB;GV_XGDP;Pourcentage;column
+Paysage RI;Exécution DIRD;G_XEH;% de la DIRD exécutée par le secteur de l'enseignement supérieur;column
+Paysage RI;Exécution DIRD;G_XEG;% de la DIRD exécutée par le secteur de l'Etat;column
+Paysage RI;Exécution DIRD;G_XEB;% de la DIRD exécutée par le secteur des entreprises;column
+Paysage RI;Exécution DIRD;G_XEI;% de la DIRD exécutée par le secteur des institutions sans but lucratif;column
+Paysage RI;Exécution DIRDE;B_XSERV;% de la DIRDE exécutée dans les services;column
+Paysage RI;Exécution DIRDE;B_XAERO;% de la DIRDE exécutée dans l'industrie aérospatiale;column
+Paysage RI;Exécution DIRDE;B_XCOMP;% de la DIRDE exécutée dans l'industrie des ordinateurs, articles électroniques et optiques;column
+Paysage RI;Exécution DIRDE;B_XDRUG;% de la DIRDE exécutée dans l'industrie pharmaceutique;column
+Paysage RI;Femmes chercheurs (personnes physiques);TH_WRS;Personnes;line
+Paysage RI;Femmes chercheurs en pourcentage du total des chercheurs (personnes physiques);TH_WRXRS;Pourcentage;line
+Paysage RI;Financement DIRD;G_XFON;% de la DIRD financée par d'autres sources nationales;column
+Paysage RI;Financement DIRD;G_XFA;% de la DIRD financée par le reste du monde;column
+Paysage RI;Financement DIRD;G_XFB;% de la DIRD financée par les entreprises;column
+Paysage RI;Financement DIRD;G_XFG;% de la DIRD financée par l'Etat;column
+Paysage RI;Financement DIRDE;B_XFON;% de la DIRDE financée par d'autres sources nationales;column
+Paysage RI;Financement DIRDE;B_XFA;% de la DIRDE financée par le reste du monde;column
+Paysage RI;Financement DIRDE;B_XFB;% de la DIRDE financée par les entreprises;column
+Paysage RI;Financement DIRDE;B_XFG;% de la DIRDE financée par l'Etat;column
+Paysage RI;Personnel total de R-D (EPT);TP_TT;Équivalent temps plein;line
+Paysage RI;Personnel total de R-D de l'enseignement supérieur (EPT);HP_TT;Équivalent temps plein;line
+Paysage RI;Personnel total de R-D des entreprises (EPT);BP_TT;Équivalent temps plein;line
+Paysage RI;Personnel total de R-D des entreprises en pourcentage du total national;BP_TTXTT;Pourcentage;line
+Paysage RI;Personnel total de R-D du secteur de l'Etat (EPT);GP_TT;Équivalent temps plein;line
+Paysage RI;Pourcentage de la DIRDES financée par les entreprises;H_XFB;% de la DIRDES financée par les entreprises;column
+Paysage RI;Pourcentage de la DIRDET financée par les entreprises;GV_XFB;% de la DIRDET financée par les entreprises;column
+Paysage RI;Total chercheurs (EPT);TP_RS;Équivalent temps plein;line

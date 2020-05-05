@@ -14,7 +14,7 @@ import classes from './GraphMenu.scss';
  * Tests unitaires : . <br/>.
 */
 
-const isoList = require('../../../Homepage/CountriesList/countriesList.json');
+const isoList = require('../../../Homepage/Components/CountriesList/countriesList.json');
 const params = require('../GraphCurie-data/indicateurs.json');
 
 export default class GraphMenu extends Component {

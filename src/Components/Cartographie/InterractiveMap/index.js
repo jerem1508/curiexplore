@@ -6,7 +6,7 @@ import {
   GeoJSON,
 } from 'react-leaflet';
 
-import worldGeoJSON from '../../Homepage/Maps/custom.geo.json';
+import worldGeoJSON from '../../../Data/custom.geo.json';
 
 import classes from './InterractiveMap.scss';
 

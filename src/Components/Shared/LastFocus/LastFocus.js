@@ -1,10 +1,5 @@
 import React from 'react';
-import { IntlProvider, FormattedHTMLMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-
-/* Gestion des langues */
-import messagesFr from './translations/fr.json';
-import messagesEn from './translations/en.json';
 
 import ButtonToPage from '../Ui/Buttons/ButtonToPage';
 import FocusCard from '../Ui/FocusCard/FocusCard';
@@ -12,61 +7,45 @@ import FocusCard from '../Ui/FocusCard/FocusCard';
 /* SCSS */
 import classes from './LastFocus.scss';
 
-const LastFocus = (props) => {
-  const messages = {
-    fr: messagesFr,
-    en: messagesEn,
-  };
+const LastFocus = props => (
+  <section className={classes.LastFocus}>
+    <div className="container">
+      <div className="row">
+        <div className={`col-lg-10 ${classes.Title}`}>
+          Titre
+        </div>
+        <div className={`col-lg-2 ${classes.Button}`}>
+          <ButtonToPage
+            className={classes.MarginTop}
+            url="/focus"
+          >
+            Tous
+          </ButtonToPage>
+        </div>
+      </div>
 
-  return (
-    <IntlProvider locale={props.language} messages={messages[props.language]}>
-      <section className={classes.LastFocus}>
-        <div className="container">
-          <div className="row">
-            <div className={`col-lg-10 ${classes.Title}`}>
-              <FormattedHTMLMessage
-                id="LastFocus.Title"
-                defaultMessage="LastFocus.Title"
+      <div className="row">
+        {
+          props.focusList.map(oneFocus => (
+            <div className="col-lg-4" key={oneFocus.title}>
+              <FocusCard
+                schema={oneFocus.schema}
+                tags={oneFocus.tags}
+                title={oneFocus.title}
+                type={oneFocus.type}
+                url={oneFocus.url}
               />
             </div>
-            <div className={`col-lg-2 ${classes.Button}`}>
-              <ButtonToPage
-                className={classes.MarginTop}
-                url="/focus"
-              >
-                <FormattedHTMLMessage
-                  id="LastFocus.AllFocus"
-                  defaultMessage="LastFocus.AllFocus"
-                />
-              </ButtonToPage>
-            </div>
-          </div>
-
-          <div className="row">
-            {
-              props.focusList.map(oneFocus => (
-                <div className="col-lg-4" key={oneFocus.title}>
-                  <FocusCard
-                    schema={oneFocus.schema}
-                    tags={oneFocus.tags}
-                    title={oneFocus.title}
-                    type={oneFocus.type}
-                    url={oneFocus.url}
-                  />
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </section>
-    </IntlProvider>
-  );
-};
+          ))
+        }
+      </div>
+    </div>
+  </section>
+);
 
 export default LastFocus;
 
 LastFocus.propTypes = {
-  language: PropTypes.string.isRequired,
   focusList: PropTypes.array,
 };
 LastFocus.defaultProps = {
